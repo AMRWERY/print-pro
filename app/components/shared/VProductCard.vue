@@ -43,7 +43,7 @@
               ? `Remove ${product.name} from wishlist`
               : `Add ${product.name} to wishlist`
           "
-          @click="wished = !wished"
+          @click="wishlist.toggle(product.id)"
         >
           <Icon
             :key="`heart-${wished}`"
@@ -157,7 +157,8 @@ const props = defineProps<{ product: Product }>();
 const money = useMoney();
 const cart = useCartStore();
 
-const wished = ref(false);
+const wishlist = useWishlistStore();
+const wished = computed(() => wishlist.has(props.product.id));
 const compare = useCompareStore();
 const compared = computed(() => compare.has(props.product.id));
 const added = ref(false);

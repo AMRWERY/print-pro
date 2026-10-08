@@ -39,6 +39,20 @@
         <LazyVThemeToggle class="hidden lg:inline-flex" />
 
         <nuxt-link-locale
+          to="/wishlist"
+          class="btn-icon relative hidden lg:inline-flex"
+          :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
+          active-class="!border-accent !text-accent"
+        >
+          <Icon name="lucide:bookmark" size="18" class="icon-lift" aria-hidden="true" />
+          <span
+            v-if="wishlist.ids.length"
+            class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
+            >{{ wishlist.ids.length }}</span
+          >
+        </nuxt-link-locale>
+
+        <nuxt-link-locale
           to="/"
           class="btn-icon hidden lg:inline-flex"
           aria-label="Account"
@@ -93,6 +107,7 @@
 
 <script lang="ts" setup>
 const cart = useCartStore();
+const wishlist = useWishlistStore();
 const money = useMoney();
 
 const menuOpen = ref(false);

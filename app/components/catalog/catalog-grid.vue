@@ -4,7 +4,9 @@
       {{ catalog.total }} {{ catalog.total === 1 ? "item" : "items" }} found
     </p>
 
-    <LazyVEmptyState v-if="!catalog.total" />
+    <LazyVEmptyState v-if="!catalog.total">
+      <button type="button" class="btn-accent" @click="catalog.reset()">Reset all filters</button>
+    </LazyVEmptyState>
 
     <TransitionGroup
       v-else

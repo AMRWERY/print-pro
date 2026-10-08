@@ -48,6 +48,19 @@
               >
             </nuxt-link-locale>
             <nuxt-link-locale
+              to="/wishlist"
+              class="btn-icon relative"
+              :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
+              @click="emit('close')"
+            >
+              <Icon name="lucide:bookmark" size="18" class="icon-lift" aria-hidden="true" />
+              <span
+                v-if="wishlist.ids.length"
+                class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
+                >{{ wishlist.ids.length }}</span
+              >
+            </nuxt-link-locale>
+            <nuxt-link-locale
               to="/"
               class="btn-icon"
               aria-label="Account"
@@ -114,6 +127,7 @@ import { categories } from "~/data/home";
 const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
 const cart = useCartStore();
+const wishlist = useWishlistStore();
 const matchesSearch = useCategorySearchMatch();
 const money = useMoney();
 

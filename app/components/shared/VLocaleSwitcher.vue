@@ -1,5 +1,6 @@
 <template>
-  <nuxt-link-locale
+  <!-- Plain nuxt-link: switchLocalePath() already returns the prefixed path, nuxt-link-locale would add it twice (/en/ar). -->
+  <nuxt-link
     v-if="target"
     :to="switchLocalePath(target.code)"
     :hreflang="target.code"
@@ -10,7 +11,7 @@
   >
     <Icon name="lucide:globe" size="18" class="icon-spin" aria-hidden="true" />
     <span :class="compact && 'sr-only'">{{ target.name }}</span>
-  </nuxt-link-locale>
+  </nuxt-link>
 </template>
 
 <script lang="ts" setup>
