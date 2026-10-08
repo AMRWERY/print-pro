@@ -96,7 +96,7 @@
             </li>
           </TransitionGroup>
 
-          <v-pagination
+          <LazyVPagination
             v-model:page="inventory.page"
             :total="inventory.total"
             :per-page="inventory.perPage"

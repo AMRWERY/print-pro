@@ -42,7 +42,7 @@
 
         <catalog-grid />
 
-        <v-pagination
+        <LazyVPagination
           v-model:page="catalog.page"
           v-model:per-page="catalog.perPage"
           :total="catalog.total"

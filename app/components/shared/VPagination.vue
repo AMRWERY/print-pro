@@ -97,7 +97,7 @@
 <script lang="ts" setup>
 // Generic, v-model driven pagination:
 //
-//   <v-pagination v-model:page="page" v-model:per-page="perPage" :total="84"
+//   <LazyVPagination v-model:page="page" v-model:per-page="perPage" :total="84"
 //                 show-per-page scroll-to="#results" />
 //
 // It owns no data. Page numbers collapse to "1 … 4 5 6 … 9" for long ranges.
