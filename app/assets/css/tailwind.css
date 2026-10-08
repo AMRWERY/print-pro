@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Dark is the default theme (design.md). Values are space-separated RGB channels. */
+  :root {
+    --c-ink: 14 17 24;
+    --c-surface: 21 26 36;
+    --c-raised: 29 35 48;
+    --c-line: 43 51 69;
+    --c-paper: 233 230 223;
+    --c-mute: 139 148 168;
+    --c-cyan: 46 196 214;
+    --c-magenta: 224 64 127;
+    --c-yellow: 245 200 66;
+    --c-onprimary: 14 17 24;
+    --c-accent: 240 78 52;
+    --c-onaccent: 14 17 24;
+    --c-success: 52 199 130;
+    --c-sheet: 233 230 223;
+    --c-sheet-ink: 14 17 24;
+    color-scheme: dark;
+  }
+
+  /* Light theme: same roles, darker accents so text keeps AA contrast on white. */
+  :root[data-theme='light'] {
+    --c-ink: 244 242 237;
+    --c-surface: 255 255 255;
+    --c-raised: 237 234 227;
+    --c-line: 217 213 203;
+    --c-paper: 20 24 31;
+    --c-mute: 88 97 116;
+    --c-cyan: 8 126 143;
+    --c-magenta: 190 33 98;
+    --c-yellow: 166 120 0;
+    --c-onprimary: 255 255 255;
+    --c-accent: 196 36 18;
+    --c-onaccent: 255 255 255;
+    --c-success: 14 124 74;
+    --c-sheet: 255 255 255;
+    --c-sheet-ink: 14 17 24;
+    color-scheme: light;
+  }
+
+  html { @apply bg-ink text-paper font-sans antialiased scroll-smooth; }
+  body { @apply transition-colors duration-200; }
+  h1, h2, h3, h4 { @apply font-display font-semibold; }
+  :focus-visible { @apply outline-none ring-2 ring-cyan ring-offset-2 ring-offset-ink; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-[1280px] px-4 md:px-6; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-control px-5 py-2.5 text-sm font-medium transition duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40; }
+  .btn-primary { @apply btn bg-cyan text-onprimary hover:brightness-110; }
+  .btn-ghost { @apply btn border border-line text-paper hover:border-cyan hover:text-cyan; }
+  .btn-icon { @apply inline-flex h-10 w-10 items-center justify-center rounded-control border border-line text-paper transition duration-200 hover:border-cyan hover:text-cyan active:scale-95; }
+  .field { @apply w-full rounded-control border border-line bg-surface px-3 py-2.5 text-sm text-paper placeholder:text-mute transition duration-200 focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/60 disabled:opacity-40; }
+  .card { @apply rounded-card border border-line bg-surface; }
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium; }
+  .section { @apply py-16 md:py-24; }
+}
+
+@layer components {
+  .btn-accent { @apply btn bg-accent text-onaccent hover:brightness-110; }
+  .eyebrow { @apply font-mono text-xs uppercase tracking-widest text-mute; }
+  .chip { @apply inline-flex items-center rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-xs text-mute; }
+  .link-quiet { @apply text-mute transition duration-200 hover:text-paper; }
+}
+
+.page-enter-active,.page-leave-active { transition: opacity .25s ease-out, transform .25s ease-out; }
+.page-enter-from { opacity: 0; transform: translateY(8px); }
+.page-leave-to { opacity: 0; }
+
+/* View Transitions: theme reveals as a circle (clip-path driven from JS), locale cross-fades. */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+:root[data-vt='theme']::view-transition-old(root) { z-index: 1; }
+:root[data-vt='theme']::view-transition-new(root) { z-index: 2; }
+:root[data-vt='locale']::view-transition-old(root) { animation: vt-out .3s ease-out both; }
+:root[data-vt='locale']::view-transition-new(root) { animation: vt-in .35s ease-out both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

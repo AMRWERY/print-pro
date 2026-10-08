@@ -1,0 +1,94 @@
+<template>
+  <header
+    class="sticky top-0 z-40 border-b border-line bg-ink/90 backdrop-blur"
+  >
+    <div class="container-page flex items-center gap-3 py-3 lg:gap-6">
+      <button
+        type="button"
+        class="btn-icon lg:hidden"
+        aria-label="Open menu"
+        aria-haspopup="dialog"
+        @click="menuOpen = true"
+      >
+        <Icon name="lucide:menu" size="20" aria-hidden="true" />
+      </button>
+
+      <LazyVBrandMark />
+
+      <div class="hidden max-w-xl flex-1 md:block lg:mx-6">
+        <LazyVSearchInput />
+      </div>
+
+      <div class="ms-auto flex items-center gap-2">
+        <nuxt-link-locale
+          to="/"
+          class="link-quiet hidden items-center gap-1.5 px-2 font-mono text-xs uppercase tracking-wider xl:inline-flex"
+        >
+          <Icon name="lucide:sliders-horizontal" size="16" class="icon-wiggle" aria-hidden="true" />
+          Calibration services
+        </nuxt-link-locale>
+
+        <LazyVLocaleSwitcher class="hidden lg:inline-flex" />
+
+        <LazyVThemeToggle class="hidden lg:inline-flex" />
+
+        <nuxt-link-locale
+          to="/"
+          class="btn-icon hidden lg:inline-flex"
+          aria-label="Account"
+        >
+          <Icon name="lucide:user" size="18" class="icon-wiggle" aria-hidden="true" />
+        </nuxt-link-locale>
+
+        <nuxt-link-locale
+          to="/"
+          class="btn-ghost hidden h-10 !px-3 lg:inline-flex"
+          :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
+        >
+          <span class="relative">
+            <Icon name="lucide:shopping-cart" size="18" class="icon-bob" aria-hidden="true" />
+            <Transition name="pop" mode="out-in">
+              <span
+                v-if="cart.count"
+                :key="cart.count"
+                class="absolute -end-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
+                >{{ cart.count }}</span
+              >
+            </Transition>
+          </span>
+          <span class="hidden font-mono sm:inline">{{
+            money.format(cart.total)
+          }}</span>
+        </nuxt-link-locale>
+      </div>
+    </div>
+
+    <div class="container-page pb-3 md:hidden">
+      <LazyVSearchInput />
+    </div>
+
+    <category-nav />
+
+    <mobile-menu :open="menuOpen" @close="menuOpen = false" />
+  </header>
+</template>
+
+<script lang="ts" setup>
+const cart = useCartStore();
+const money = useMoney();
+
+const menuOpen = ref(false);
+</script>
+
+<style scoped>
+.pop-enter-active {
+  transition:
+    transform 0.2s ease-out,
+    opacity 0.2s ease-out;
+}
+
+.pop-enter-from {
+  transform: scale(0.4);
+  opacity: 0;
+}
+</style>
