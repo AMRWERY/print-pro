@@ -403,6 +403,23 @@ const baseProducts: CatalogProduct[] = [
     lease: 350,
     icon: "lucide:aperture",
   },
+  {
+    id: "p7570",
+    sku: "LP-EP-7570",
+    category: "printers",
+    dispatch: "in-stock",
+    group: "print",
+    badge: inStock,
+    brand: "Epson",
+    name: 'SureColor P7570 24" Proofing Engine',
+    blurb: "Compact 10-colour pigment engine with the same droplet kinetics as the 44-inch flagship.",
+    specs: ['24" roll', "10 inks", "Spectro-ready"],
+    rating: 4.9,
+    reviews: 19,
+    price: 4695,
+    lease: 155,
+    icon: "lucide:printer",
+  },
 ];
 
 // Every card gets a photo. Products without their own picture borrow one from

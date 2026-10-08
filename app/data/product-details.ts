@@ -3,7 +3,7 @@ import { catalogProducts, categoryOptions } from "~/data/catalog";
 import { featured } from "~/data/home";
 import type { DetailedProduct, ProductDetail } from "~/types/product";
 
-const allProducts: DetailedProduct[] = [
+export const allProducts: DetailedProduct[] = [
   ...catalogProducts,
   ...cameraProducts,
   ...featured,

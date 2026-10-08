@@ -57,8 +57,15 @@
           type="button"
           class="btn-icon h-9 w-9 bg-ink/70 backdrop-blur"
           :aria-pressed="compared"
-          :aria-label="`Compare ${product.name}`"
-          @click="compared = !compared"
+          :aria-label="
+            compared
+              ? `Remove ${product.name} from comparison`
+              : compare.full
+                ? 'Comparison is full (4 products)'
+                : `Compare ${product.name}`
+          "
+          :disabled="!compared && compare.full"
+          @click="compare.toggle(product.id)"
         >
           <Icon
             :key="`compare-${compared}`"
@@ -151,7 +158,8 @@ const money = useMoney();
 const cart = useCartStore();
 
 const wished = ref(false);
-const compared = ref(false);
+const compare = useCompareStore();
+const compared = computed(() => compare.has(props.product.id));
 const added = ref(false);
 
 const { start } = useTimeoutFn(
