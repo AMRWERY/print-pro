@@ -179,14 +179,39 @@
     @apply h-4 w-4 shrink-0 cursor-pointer rounded-[4px] border-line bg-surface text-accent transition duration-200 focus:ring-2 focus:ring-accent/60 focus:ring-offset-0;
   }
 }
+
 /* Scrollbars (page + every scrollable panel). Accent thumb on the surface tone, per theme. */
-* { scrollbar-width: thin; scrollbar-color: rgb(var(--c-accent) / .65) transparent; }
-html { scrollbar-width: auto; scrollbar-color: rgb(var(--c-accent) / .75) rgb(var(--c-ink)); }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--c-accent) / 0.65) transparent;
+}
+
+html {
+  scrollbar-width: auto;
+  scrollbar-color: rgb(var(--c-accent) / 0.75) rgb(var(--c-ink));
+}
 
 @supports not (scrollbar-color: auto) {
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: rgb(var(--c-ink)); }
-  ::-webkit-scrollbar-thumb { background: rgb(var(--c-accent) / .65); border-radius: 9999px; border: 2px solid rgb(var(--c-ink)); }
-  ::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-accent)); }
-  ::-webkit-scrollbar-button { display: none; }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--c-ink));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--c-accent) / 0.65);
+    border-radius: 9999px;
+    border: 2px solid rgb(var(--c-ink));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--c-accent));
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
 }
