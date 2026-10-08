@@ -67,6 +67,7 @@
                 <nuxt-link-locale
                   :to="c.to"
                   active-class="!text-accent bg-raised"
+                  :class="matchesSearch(c) && '!text-accent bg-raised'"
                   class="flex min-h-12 items-center gap-3 rounded-control px-3 text-sm transition duration-200 hover:bg-raised"
                   @click="emit('close')"
                 >
@@ -113,6 +114,7 @@ import { categories } from "~/data/home";
 const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
 const cart = useCartStore();
+const matchesSearch = useCategorySearchMatch();
 const money = useMoney();
 
 onKeyStroke("Escape", () => {

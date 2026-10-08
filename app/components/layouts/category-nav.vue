@@ -9,6 +9,7 @@
           <nuxt-link-locale
             :to="c.to"
             active-class="!text-accent"
+            :class="matchesSearch(c) && '!text-accent'"
             class="inline-flex h-11 items-center px-3 font-mono text-xs uppercase tracking-wider text-mute transition duration-200 hover:text-paper"
           >
             {{ c.label }}
@@ -51,4 +52,6 @@
 
 <script lang="ts" setup>
 import { categories } from "~/data/home";
+
+const matchesSearch = useCategorySearchMatch();
 </script>

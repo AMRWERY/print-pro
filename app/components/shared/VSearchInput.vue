@@ -22,7 +22,10 @@
 
 <script lang="ts" setup>
 const query = ref("");
+const localePath = useLocalePath();
+
 const submit = () => {
-  // Search results page is not built yet.
+  const q = query.value.trim();
+  if (q) navigateTo(localePath({ path: "/search", query: { q } }));
 };
 </script>

@@ -10,6 +10,7 @@ export const categories = [
   {
     label: "Cameras",
     to: "/products/cameras",
+    terms: ["camera","cameras"],
     icon: "lucide:camera",
     blurb: "Medium-format, cine, mirrorless and film bodies.",
     meta: "240 instruments",
@@ -17,6 +18,7 @@ export const categories = [
   {
     label: "Lenses",
     to: "/products/lenses",
+    terms: ["lens","lenses"],
     icon: "lucide:aperture",
     blurb: "Cine primes, anamorphic, ultra-fast glass.",
     meta: "312 objectives",
@@ -24,6 +26,7 @@ export const categories = [
   {
     label: "Lighting",
     to: "/products/lighting",
+    terms: ["light","lights","lighting"],
     icon: "lucide:lightbulb",
     blurb: "Strobe generators, bi-color monolights.",
     meta: "96 fixtures",
@@ -31,6 +34,7 @@ export const categories = [
   {
     label: "Audio",
     to: "/products/audio",
+    terms: ["audio","microphone","microphones","mic"],
     icon: "lucide:mic",
     blurb: "Shotgun, lavalier, wireless and field recorders.",
     meta: "84 capsules",
@@ -38,6 +42,7 @@ export const categories = [
   {
     label: "Tripods & Rigging",
     to: "/products/tripods",
+    terms: ["tripod","tripods","rigging"],
     icon: "lucide:move-3d",
     blurb: "Carbon-fibre legs, fluid heads, gimbals.",
     meta: "58 supports",
@@ -45,6 +50,7 @@ export const categories = [
   {
     label: "Printers",
     to: "/products/printers",
+    terms: ["printer","printers"],
     icon: "lucide:printer",
     blurb: 'Fine-art 24" to 64" pigment printers.',
     meta: "32 platforms",
@@ -52,6 +58,7 @@ export const categories = [
   {
     label: "Paper & Ink",
     to: "/products/paper-ink",
+    terms: ["paper","papers","ink","inks"],
     icon: "lucide:scroll-text",
     blurb: "Cotton rag, baryta, UltraChrome pigment sets.",
     meta: "410 media",
@@ -59,6 +66,7 @@ export const categories = [
   {
     label: "Accessories",
     to: "/products/accessories",
+    terms: ["accessory","accessories"],
     icon: "lucide:cable",
     blurb: "Spectros, hard cases, filters and mounts.",
     meta: "690 parts",

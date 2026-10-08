@@ -7,6 +7,7 @@ import type {
   SortKey,
 } from "~/types/catalog";
 import {
+  categoryKeywords,
   categoryOptions,
   dispatchOptions,
   perPageOptions,
@@ -34,6 +35,20 @@ const toggle = <T>(list: T[], value: T) => {
 
 const money = (n: number) => `$${n.toLocaleString("en-US")}`;
 
+// Every word must appear somewhere in the product text ("canon printer").
+const matchesQuery = (p: CatalogProduct, query: string) => {
+  const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return true;
+  const category = categoryOptions.find((o) => o.key === p.category)?.label ?? "";
+  const haystack = [p.name, p.brand, p.blurb, p.sku, category, categoryKeywords[p.category], ...p.specs]
+    .join(" ")
+    .toLowerCase();
+  // "cameras" should also find "camera": try the singular of plural-looking words.
+  return words.every(
+    (w) => haystack.includes(w) || (w.length > 3 && w.endsWith("s") && haystack.includes(w.slice(0, -1))),
+  );
+};
+
 const createCatalog = (products: CatalogProduct[]) => {
   const filters = reactive<CatalogFilters>(emptyFilters());
   const sort = ref<SortKey>("featured");
@@ -41,13 +56,7 @@ const createCatalog = (products: CatalogProduct[]) => {
   const page = ref(1);
 
   const matches = (p: CatalogProduct) => {
-    const q = filters.query.trim().toLowerCase();
-    if (q) {
-      const haystack = [p.name, p.brand, p.blurb, p.sku, ...p.specs]
-        .join(" ")
-        .toLowerCase();
-      if (!haystack.includes(q)) return false;
-    }
+    if (!matchesQuery(p, filters.query)) return false;
     if (filters.categories.length && !filters.categories.includes(p.category))
       return false;
     if (filters.brands.length && !filters.brands.includes(p.brand))
@@ -167,7 +176,15 @@ const createCatalog = (products: CatalogProduct[]) => {
     if (page.value > n) page.value = n;
   });
 
+  /** Quick matches for the search box. Empty input suggests the top-rated items. */
+  const suggest = (query: string, limit = 4) =>
+    products
+      .filter((p) => matchesQuery(p, query))
+      .sort((a, b) => b.rating - a.rating || b.reviews - a.reviews)
+      .slice(0, limit);
+
   return reactive({
+    suggest,
     filters,
     sort,
     perPage,

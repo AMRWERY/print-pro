@@ -438,3 +438,13 @@ export const categoryPages: Record<
   "paper-ink": { label: "Paper & Ink", description: "Archival cotton rag, baryta substrates and pigment inks.", scope: ["substrates"] },
   accessories: { label: "Accessories", description: "Colorimeters, spectrophotometers and calibration tools.", scope: ["colorimeters"] },
 };
+
+/** Extra words people search for that don't appear in product text. */
+export const categoryKeywords: Record<CatalogCategory, string> = {
+  digital: "camera cameras digital back backs medium format body mirrorless",
+  lenses: "lens lenses optic optics glass prime",
+  printers: "printer printers print printing inkjet scanner copier",
+  substrates: "paper papers rag baryta media roll sheet ink inks substrate",
+  lighting: "light lights lighting strobe flash studio generator",
+  colorimeters: "colorimeter spectrophotometer calibration profile accessory accessories",
+};

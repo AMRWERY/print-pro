@@ -25,7 +25,12 @@
           to="/"
           class="link-quiet hidden items-center gap-1.5 px-2 font-mono text-xs uppercase tracking-wider xl:inline-flex"
         >
-          <Icon name="lucide:sliders-horizontal" size="16" class="icon-wiggle" aria-hidden="true" />
+          <Icon
+            name="lucide:sliders-horizontal"
+            size="16"
+            class="icon-wiggle"
+            aria-hidden="true"
+          />
           Calibration services
         </nuxt-link-locale>
 
@@ -38,7 +43,12 @@
           class="btn-icon hidden lg:inline-flex"
           aria-label="Account"
         >
-          <Icon name="lucide:user" size="18" class="icon-wiggle" aria-hidden="true" />
+          <Icon
+            name="lucide:user"
+            size="18"
+            class="icon-wiggle"
+            aria-hidden="true"
+          />
         </nuxt-link-locale>
 
         <nuxt-link-locale
@@ -47,7 +57,12 @@
           :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
         >
           <span class="relative">
-            <Icon name="lucide:shopping-cart" size="18" class="icon-bob" aria-hidden="true" />
+            <Icon
+              name="lucide:shopping-cart"
+              size="18"
+              class="icon-bob"
+              aria-hidden="true"
+            />
             <Transition name="pop" mode="out-in">
               <span
                 v-if="cart.count"
@@ -70,7 +85,7 @@
 
     <category-nav />
 
-    <scroll-progress />
+    <LazyVScrollProgress />
 
     <mobile-menu :open="menuOpen" @close="menuOpen = false" />
   </header>

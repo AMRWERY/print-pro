@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <div class="pb-4">
+    <div v-if="!hideQuery" class="pb-4">
       <div class="relative">
         <label :for="`${uid}-q`" class="sr-only"
           >Filter by name, spec or SKU</label
@@ -130,6 +130,8 @@
 
 <script lang="ts" setup>
 import { ratingOptions } from "~/data/catalog";
+
+defineProps<{ hideQuery?: boolean }>();
 
 const catalog = useCatalog();
 const uid = useId();
