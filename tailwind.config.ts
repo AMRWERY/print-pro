@@ -101,6 +101,12 @@ export default {
         "reveal-fade": { from: { opacity: "0" }, to: { opacity: "1" } },
         "reveal-scale": { from: { opacity: "0", scale: "0.95" }, to: { opacity: "1", scale: "1" } },
         "reveal-start": { from: { opacity: "0", translate: "calc(var(--icon-dir) * -32px) 0" }, to: { opacity: "1", translate: "0 0" } },
+        // Infinite carousel: the track holds two identical halves, so sliding by
+        // exactly 50% loops seamlessly. Direction follows the reading direction.
+        marquee: {
+          from: { translate: "0 0" },
+          to: { translate: "calc(var(--icon-dir) * -50%) 0" },
+        },
         "icon-pop": {
           "0%": { scale: "0.4", opacity: "0" },
           "60%": { scale: "1.25", opacity: "1" },
@@ -114,6 +120,7 @@ export default {
         "icon-bob": "icon-bob .45s ease-out",
         "icon-spin": "icon-spin .7s cubic-bezier(.22,.8,.3,1)",
         "icon-pop": "icon-pop .3s cubic-bezier(.22,.8,.3,1) both",
+        marquee: "marquee 40s linear infinite",
         "reveal-up": "reveal-up .6s cubic-bezier(.22,.8,.3,1) both",
         "reveal-fade": "reveal-fade .6s ease-out both",
         "reveal-scale": "reveal-scale .6s cubic-bezier(.22,.8,.3,1) both",
