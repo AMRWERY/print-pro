@@ -9,9 +9,10 @@
       </section-heading>
 
       <ul class="grid gap-4 md:grid-cols-3">
-        <li v-for="a in arrivals" :key="a.id">
+        <li v-for="(a, i) in arrivals" :key="a.id" v-reveal="{ delay: i * 90 }">
           <article class="group card flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:border-mute/50">
             <media-placeholder :icon="a.icon" :src="a.image" :alt="a.imageAlt" :label="`${a.name} image`" size="56" class="aspect-[16/9]" />
+          
             <div class="flex flex-1 flex-col gap-2 p-4">
               <p class="eyebrow text-accent">{{ a.tag }}</p>
               <h3 class="text-xl">{{ a.name }}</h3>

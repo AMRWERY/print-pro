@@ -34,7 +34,7 @@
         name="list"
         class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
       >
-        <li v-for="p in visible" :key="p.id" class="flex">
+        <li v-for="(p, i) in visible" :key="p.id" v-reveal="{ delay: (i % 3) * 80 }" class="flex">
           <LazyVProductCard :product="p" class="w-full" />
         </li>
       </TransitionGroup>

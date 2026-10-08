@@ -1,6 +1,7 @@
 <template>
   <footer class="border-t border-line bg-surface">
     <div
+      v-reveal:fade
       class="container-page grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)_1fr]"
     >
       <div class="space-y-4">

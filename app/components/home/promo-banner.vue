@@ -1,6 +1,6 @@
 <template>
   <section aria-labelledby="promo-title" class="border-y border-accent/30 bg-accent-soft">
-    <div class="container-page flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between">
+    <div v-reveal:fade class="container-page flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between">
       <div class="flex items-start gap-4">
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-control border border-accent/50 text-accent" aria-hidden="true">
           <Icon name="lucide:badge-percent" size="22" />

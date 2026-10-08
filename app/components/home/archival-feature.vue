@@ -1,9 +1,9 @@
 <template>
   <section class="border-y border-line bg-surface" aria-labelledby="archival-title">
     <div class="container-page grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
-      <media-placeholder icon="lucide:printer" label="Large-format archival printer in a cleanroom" size="120" class="aspect-[4/3] rounded-panel border border-line" />
-
-      <div class="space-y-6">
+      <media-placeholder v-reveal:start src="/img/hero-img.png" fit="cover" label="Hasselblad medium-format camera on a calibration bench" size="140" class="aspect-[1697/927] w-full rounded-panel border border-line" />
+      
+      <div v-reveal class="space-y-6">
         <div class="space-y-3">
           <p class="eyebrow text-accent">Modern archival discipline</p>
           <h2 id="archival-title" class="text-3xl lg:text-5xl">Archival Chemistry &amp; Cleanroom Colorimetry.</h2>

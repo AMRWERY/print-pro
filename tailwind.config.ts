@@ -96,6 +96,11 @@ export default {
           "70%": { translate: "0 1px" },
         },
         "icon-spin": { from: { rotate: "0deg" }, to: { rotate: "360deg" } },
+        // Scroll reveal (see app/plugins/reveal.ts)
+        "reveal-up": { from: { opacity: "0", translate: "0 24px" }, to: { opacity: "1", translate: "0 0" } },
+        "reveal-fade": { from: { opacity: "0" }, to: { opacity: "1" } },
+        "reveal-scale": { from: { opacity: "0", scale: "0.95" }, to: { opacity: "1", scale: "1" } },
+        "reveal-start": { from: { opacity: "0", translate: "calc(var(--icon-dir) * -32px) 0" }, to: { opacity: "1", translate: "0 0" } },
         "icon-pop": {
           "0%": { scale: "0.4", opacity: "0" },
           "60%": { scale: "1.25", opacity: "1" },
@@ -109,6 +114,10 @@ export default {
         "icon-bob": "icon-bob .45s ease-out",
         "icon-spin": "icon-spin .7s cubic-bezier(.22,.8,.3,1)",
         "icon-pop": "icon-pop .3s cubic-bezier(.22,.8,.3,1) both",
+        "reveal-up": "reveal-up .6s cubic-bezier(.22,.8,.3,1) both",
+        "reveal-fade": "reveal-fade .6s ease-out both",
+        "reveal-scale": "reveal-scale .6s cubic-bezier(.22,.8,.3,1) both",
+        "reveal-start": "reveal-start .6s cubic-bezier(.22,.8,.3,1) both",
       },
     },
   },
@@ -147,6 +156,19 @@ export default {
         [`${host} .icon-wiggle`]: { animation: theme("animation.icon-wiggle") },
         [`${host} .icon-bob`]: { animation: theme("animation.icon-bob") },
         [`${host} .icon-spin`]: { animation: theme("animation.icon-spin") },
+      });
+      // Scroll reveal: .reveal is added by v-reveal; .is-visible starts the animation.
+      // Animations (not transitions) so cards keep their own hover transitions.
+      const play = (name: string) => ({
+        animation: theme(`animation.${name}`),
+        animationDelay: "var(--reveal-delay, 0ms)",
+      });
+      addComponents({
+        ".reveal:not(.is-visible)": { opacity: "0" },
+        ".reveal.is-visible": play("reveal-up"),
+        '.reveal[data-reveal="fade"].is-visible': play("reveal-fade"),
+        '.reveal[data-reveal="scale"].is-visible': play("reveal-scale"),
+        '.reveal[data-reveal="start"].is-visible': play("reveal-start"),
       });
     }),
   ],

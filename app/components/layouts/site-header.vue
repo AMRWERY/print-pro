@@ -1,6 +1,7 @@
 <template>
   <header
-    class="sticky top-0 z-40 border-b border-line bg-ink/90 backdrop-blur"
+    class="sticky top-0 z-40 border-b border-line bg-ink/90 backdrop-blur transition-shadow duration-300"
+    :class="scrolled && 'shadow-lg shadow-black/20'"
   >
     <div class="container-page flex items-center gap-3 py-3 lg:gap-6">
       <button
@@ -69,6 +70,8 @@
 
     <category-nav />
 
+    <scroll-progress />
+
     <mobile-menu :open="menuOpen" @close="menuOpen = false" />
   </header>
 </template>
@@ -78,6 +81,8 @@ const cart = useCartStore();
 const money = useMoney();
 
 const menuOpen = ref(false);
+const { y } = useWindowScroll();
+const scrolled = computed(() => y.value > 8);
 </script>
 
 <style scoped>

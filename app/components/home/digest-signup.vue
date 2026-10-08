@@ -1,6 +1,6 @@
 <template>
   <section class="section" aria-labelledby="digest-title">
-    <div class="container-page max-w-2xl space-y-5 text-center">
+    <div v-reveal class="container-page max-w-2xl space-y-5 text-center">
       <p class="eyebrow text-accent">Bi-weekly technical dispatch</p>
       <h2 id="digest-title" class="text-3xl">The Lens &amp; Sheet Digest</h2>
       <p class="text-sm text-mute">Curated bench teardowns, custom ICC profiles for rare Japanese washi papers and priority notifications for limited Hasselblad and Leica allocations.</p>

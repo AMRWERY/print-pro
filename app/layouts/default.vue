@@ -10,6 +10,8 @@
     </main>
 
     <site-footer />
+
+    <back-to-top />
   </div>
 </template>
 

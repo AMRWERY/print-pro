@@ -1,12 +1,13 @@
 <template>
   <!-- Real photo on white (reads the same in both themes) -->
-  <div v-if="src" class="overflow-hidden bg-white">
+  <div v-if="src" class="overflow-hidden" :class="fit === 'cover' ? 'bg-raised' : 'bg-white'">
     <img
       :src="src"
       :alt="alt ?? label"
       loading="lazy"
       decoding="async"
-      class="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-105"
+      class="h-full w-full transition duration-500 group-hover:scale-105"
+      :class="fit === 'cover' ? 'object-cover' : 'object-contain p-2'"
     />
   </div>
   <div
@@ -30,14 +31,19 @@
 // Shows `src` when provided, otherwise an icon stand-in (design.md §32).
 withDefaults(
   defineProps<{
-    icon: string;
+    /** Stand-in icon shown when there is no `src`. */
+    icon?: string;
     label: string;
     src?: string;
     alt?: string;
     size?: string;
+    /** contain: product shot on white (default). cover: full-bleed photo. */
+    fit?: "contain" | "cover";
   }>(),
   {
+    icon: "lucide:image",
     size: "72",
+    fit: "contain",
   },
 );
 </script>

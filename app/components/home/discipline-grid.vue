@@ -3,7 +3,7 @@
     <div class="container-page space-y-8">
       <section-heading id="disciplines-title" eyebrow="Architecture of creation" title="Instrument disciplines" body="Precision-bench tested categories for large-format and fine-art output, from camera body to finished print." />
       <ul class="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-4">
-        <li v-for="(c, i) in categories" :key="c.label">
+        <li v-for="(c, i) in categories" :key="c.label" v-reveal="{ delay: (i % 4) * 70 }">
           <nuxt-link-locale to="/" class="group card flex h-full flex-col gap-3 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent">
             <span class="flex items-center justify-between font-mono text-xs text-mute">
               0{{ i + 1 }} / {{ c.label.split(' ')[0]!.toUpperCase().slice(0, 7) }}

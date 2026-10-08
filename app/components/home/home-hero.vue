@@ -25,14 +25,7 @@
       </div>
 
       <div class="relative animate-rise [animation-delay:.1s]">
-        <media-placeholder icon="lucide:camera" label="Hasselblad medium-format camera on a calibration bench" size="140" class="aspect-[4/5] rounded-panel border border-line sm:aspect-[5/4] lg:aspect-[4/5]" />
-        <div class="card absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 bg-surface/90 p-3 backdrop-blur">
-          <div class="min-w-0">
-            <p class="eyebrow flex items-center gap-1.5 !text-success"><span class="h-2 w-2 rounded-full bg-success" />Special profiling active</p>
-            <p class="truncate text-sm">Delta-E &lt; 0.4 reference target</p>
-          </div>
-          <button type="button" class="btn-ghost shrink-0 !px-3 !py-1.5">Inspect spec</button>
-        </div>
+        <media-placeholder src="/img/hero-img.png" fit="cover" label="Hasselblad medium-format camera on a calibration bench" size="140" class="aspect-[1697/927] w-full rounded-panel border border-line" />
       </div>
     </div>
   </section>
