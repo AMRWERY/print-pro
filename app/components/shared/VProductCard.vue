@@ -1,6 +1,6 @@
 <template>
   <article
-    class="group card flex flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:border-mute/50 hover:shadow-lg hover:shadow-black/20"
+    class="group card relative flex flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:border-mute/50 hover:shadow-lg hover:shadow-black/20"
   >
     <div class="relative">
       <!-- Product shots sit on white so they read the same in both themes. -->
@@ -33,7 +33,7 @@
         class="absolute start-3 top-3 backdrop-blur"
       />
 
-      <div class="absolute end-3 top-3 flex flex-col gap-2">
+      <div class="absolute end-3 top-3 z-10 flex flex-col gap-2">
         <button
           type="button"
           class="btn-icon h-9 w-9 bg-ink/70 backdrop-blur"
@@ -89,7 +89,14 @@
         </p>
       </div>
 
-      <h3 class="font-display text-xl leading-snug">{{ product.name }}</h3>
+      <h3 class="font-display text-xl leading-snug">
+        <!-- Stretched link: the whole card opens the details page; the buttons sit above it (z-10). -->
+        <nuxt-link-locale
+          :to="`/product/${product.id}`"
+          class="after:absolute after:inset-0 after:z-[1] hover:text-accent focus-visible:text-accent"
+          >{{ product.name }}</nuxt-link-locale
+        >
+      </h3>
       <p class="text-sm text-mute">{{ product.blurb }}</p>
 
       <ul class="flex flex-wrap gap-1.5" aria-label="Key specifications">
@@ -107,7 +114,7 @@
             {{ money.format(product.price) }}
           </p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="relative z-10 flex items-center gap-2">
           <button
             type="button"
             class="btn-icon"
