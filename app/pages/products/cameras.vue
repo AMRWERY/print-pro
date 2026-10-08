@@ -1,7 +1,5 @@
 <template>
   <div>
-    <category-subnav :tabs="categoryTabs" />
-
     <nav class="container-page pt-4" aria-label="Breadcrumb">
       <ol class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-mute">
         <li><nuxt-link-locale to="/" class="hover:text-paper">Index</nuxt-link-locale></li>
@@ -23,7 +21,9 @@
           Explore {{ inventory.total }} systems
           <Icon name="lucide:arrow-down" size="16" class="icon-bob" aria-hidden="true" />
         </button>
+
         <button type="button" class="btn-ghost">Camera system guide 2026</button>
+      
         <nuxt-link-locale to="/" class="link-quiet inline-flex items-center gap-1.5 px-1 text-sm">
           <Icon name="lucide:calendar-clock" size="16" class="icon-wiggle" aria-hidden="true" />
           Book a consultation
@@ -32,7 +32,9 @@
     </category-hero>
 
     <subcategory-grid :items="subcategories" @select="pickSub" />
+  
     <brand-strip label="Authorized system brands" :brands="authorizedBrands" />
+  
     <flagship-showcase :items="flagships" />
 
     <trade-in-banner
@@ -49,6 +51,7 @@
     <section class="pb-12 md:pb-16" aria-labelledby="usecase-title">
       <div class="container-page space-y-8">
         <section-heading id="usecase-title" eyebrow="Workflow fit" title="Which system for which job" />
+       
         <use-case-grid :items="useCases" />
       </div>
     </section>
@@ -56,6 +59,7 @@
     <section class="border-t border-line py-12 md:py-16" aria-labelledby="faq-title">
       <div class="container-page max-w-3xl space-y-8">
         <section-heading id="faq-title" eyebrow="Laboratory dispatch standards" title="Technical clarifications & protocols" />
+      
         <faq-accordion :items="faqs" />
       </div>
     </section>
