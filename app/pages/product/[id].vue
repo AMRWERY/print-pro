@@ -24,7 +24,7 @@
 
     <section class="border-t border-line py-12 md:py-16" aria-labelledby="qa-title">
       <div class="container-page max-w-3xl space-y-8">
-        <section-heading id="qa-title" eyebrow="Pre-sale support" title="Technical inquiries & lab Q&A" />
+        <LazyVAccordion id="qa-title" eyebrow="Pre-sale support" title="Technical inquiries & lab Q&A" />
      
         <faq-accordion :items="detail.qa" />
       </div>

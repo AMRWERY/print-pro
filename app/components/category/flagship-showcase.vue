@@ -6,6 +6,7 @@
         eyebrow="Optical bench spotlight"
         title="Curated studio flagships"
       />
+      
       <div class="grid gap-4 lg:grid-cols-2">
         <article
           v-for="(f, i) in items"
