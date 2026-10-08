@@ -6,7 +6,7 @@
       <!-- Product shots sit on white so they read the same in both themes. -->
       <div
         v-if="product.image"
-        class="h-40 overflow-hidden bg-white sm:h-44"
+        class="relative h-40 overflow-hidden bg-white sm:h-44"
       >
         <img
           :src="product.image"
@@ -14,6 +14,11 @@
           loading="lazy"
           decoding="async"
           class="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-105"
+        />
+        <!-- Tint that lifts on hover/focus. Only on devices that can hover, so touch screens never stay dimmed. -->
+        <div
+          class="pointer-events-none absolute inset-0 hidden bg-ink/45 transition-opacity duration-300 [@media(hover:hover)]:block group-hover:opacity-0 group-focus-within:opacity-0"
+          aria-hidden="true"
         />
       </div>
       <media-placeholder
