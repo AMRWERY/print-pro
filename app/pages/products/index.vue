@@ -38,7 +38,12 @@
 
         <catalog-grid />
 
-        <catalog-pagination />
+        <v-pagination
+          v-model:page="catalog.page"
+          v-model:per-page="catalog.perPage"
+          :total="catalog.total"
+          scroll-to="#catalog-results"
+        />
       </section>
     </div>
 
@@ -49,7 +54,7 @@
 <script lang="ts" setup>
 import { catalogProducts } from "~/data/catalog";
 
-provideCatalog(catalogProducts);
+const catalog = provideCatalog(catalogProducts);
 const filtersOpen = ref(false);
 
 useSeoMeta({

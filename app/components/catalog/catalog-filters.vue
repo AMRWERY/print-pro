@@ -12,24 +12,26 @@
       </button>
     </div>
 
-    <div class="relative pb-4">
-      <label :for="`${uid}-q`" class="sr-only"
-        >Filter by name, spec or SKU</label
-      >
-      <Icon
-        name="lucide:search"
-        size="16"
-        class="pointer-events-none absolute inset-y-0 start-3 my-auto text-mute"
-        aria-hidden="true"
-      />
-      <input
-        :id="`${uid}-q`"
-        v-model="catalog.filters.query"
-        type="search"
-        autocomplete="off"
-        placeholder="Filter specs, mounts, SKUs…"
-        class="field ps-9"
-      />
+    <div class="pb-4">
+      <div class="relative">
+        <label :for="`${uid}-q`" class="sr-only"
+          >Filter by name, spec or SKU</label
+        >
+        <Icon
+          name="lucide:search"
+          size="16"
+          class="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-mute"
+          aria-hidden="true"
+        />
+        <input
+          :id="`${uid}-q`"
+          v-model="catalog.filters.query"
+          type="search"
+          autocomplete="off"
+          placeholder="Filter specs, mounts, SKUs"
+          class="field !ps-10 !pe-3 truncate"
+        />
+      </div>
     </div>
 
     <filter-group title="Categories">
@@ -134,6 +136,7 @@ const uid = useId();
 
 const brandLimit = 6;
 const showAllBrands = ref(false);
+
 const visibleBrands = computed(() =>
   showAllBrands.value ? catalog.brands : catalog.brands.slice(0, brandLimit),
 );

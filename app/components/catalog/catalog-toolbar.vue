@@ -34,11 +34,7 @@
         </select>
       </div>
 
-      <div
-        class="hidden items-center gap-2 sm:flex"
-        role="group"
-        aria-label="Items per page"
-      >
+      <div class="hidden items-center gap-2 sm:flex" role="group" aria-label="Items per page">
         <span class="eyebrow">Show</span>
         <button
           v-for="n in perPageOptions"

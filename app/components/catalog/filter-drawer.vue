@@ -68,6 +68,7 @@ watch(
     if (import.meta.client) document.body.style.overflow = v ? "hidden" : "";
   },
 );
+
 onBeforeUnmount(() => {
   if (import.meta.client) document.body.style.overflow = "";
 });

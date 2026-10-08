@@ -6,7 +6,7 @@
     <Icon
       name="lucide:search"
       size="18"
-      class="pointer-events-none absolute inset-y-0 start-3 my-auto text-mute"
+      class="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-mute"
       aria-hidden="true"
     />
     <input
