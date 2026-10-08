@@ -15,16 +15,6 @@
         model? Our bench team can source it.
       </p>
     </div>
-
-    <div class="flex flex-wrap justify-center gap-3">
-      <button type="button" class="btn-accent" @click="catalog.reset()">
-        Reset all filters
-      </button>
-
-      <nuxt-link-locale to="/" class="btn-ghost"
-        >Request a sourcing quote</nuxt-link-locale
-      >
-    </div>
   </div>
 </template>
 

@@ -66,6 +66,7 @@
               <li v-for="c in categories" :key="c.label">
                 <nuxt-link-locale
                   :to="c.to"
+                  active-class="!text-accent bg-raised"
                   class="flex min-h-12 items-center gap-3 rounded-control px-3 text-sm transition duration-200 hover:bg-raised"
                   @click="emit('close')"
                 >

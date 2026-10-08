@@ -22,7 +22,6 @@
 
     <div class="ms-auto flex flex-wrap items-center gap-4">
       <div class="flex items-center gap-2">
-        <label :for="`${uid}-sort`" class="eyebrow">Sort</label>
         <select
           :id="`${uid}-sort`"
           v-model="catalog.sort"
@@ -32,25 +31,6 @@
             {{ s.label }}
           </option>
         </select>
-      </div>
-
-      <div class="hidden items-center gap-2 sm:flex" role="group" aria-label="Items per page">
-        <span class="eyebrow">Show</span>
-        <button
-          v-for="n in perPageOptions"
-          :key="n"
-          type="button"
-          class="h-9 min-w-9 rounded-control border px-2 font-mono text-xs transition duration-200"
-          :class="
-            catalog.perPage === n
-              ? 'border-accent text-accent'
-              : 'border-line text-mute hover:border-mute hover:text-paper'
-          "
-          :aria-pressed="catalog.perPage === n"
-          @click="catalog.perPage = n"
-        >
-          {{ n }}
-        </button>
       </div>
     </div>
   </div>

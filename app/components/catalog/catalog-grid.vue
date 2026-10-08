@@ -4,7 +4,7 @@
       {{ catalog.total }} {{ catalog.total === 1 ? "item" : "items" }} found
     </p>
 
-    <catalog-empty v-if="!catalog.total" />
+    <LazyVEmptyState v-if="!catalog.total" />
 
     <TransitionGroup
       v-else
@@ -13,7 +13,7 @@
       class="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3"
     >
       <li v-for="p in catalog.paged" :key="p.id" class="flex">
-        <VProductCard :product="p" class="w-full" />
+        <LazyVProductCard :product="p" class="w-full" />
       </li>
     </TransitionGroup>
   </div>

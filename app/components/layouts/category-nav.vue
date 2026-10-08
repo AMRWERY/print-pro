@@ -8,6 +8,7 @@
         <li v-for="c in categories" :key="c.label">
           <nuxt-link-locale
             :to="c.to"
+            active-class="!text-accent"
             class="inline-flex h-11 items-center px-3 font-mono text-xs uppercase tracking-wider text-mute transition duration-200 hover:text-paper"
           >
             {{ c.label }}
@@ -34,7 +35,8 @@
           <nuxt-link-locale
             to="/"
             class="link-quiet inline-flex items-center gap-1.5"
-            ><Icon
+          >
+            <Icon
               name="lucide:swatch-book"
               size="14"
               class="icon-wiggle"

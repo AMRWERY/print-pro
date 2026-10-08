@@ -6,15 +6,14 @@ import type {
 } from "~/types/cameras";
 
 export const categoryTabs = [
-  { label: "Cameras & Backs", to: "/products/cameras", active: true },
-  { label: "Lenses", to: "/products" },
-  { label: "Lighting", to: "/products" },
-  { label: "Audio", to: "/products" },
-  { label: "Tripods", to: "/products" },
-  { label: "Printers", to: "/products" },
-  { label: "Scanners", to: "/products" },
-  { label: "Paper & Ink", to: "/products" },
-  { label: "Accessories", to: "/products" },
+  { label: "Cameras & Backs", to: "/products/cameras" },
+  { label: "Lenses", to: "/products/lenses" },
+  { label: "Lighting", to: "/products/lighting" },
+  { label: "Audio", to: "/products/audio" },
+  { label: "Tripods", to: "/products/tripods" },
+  { label: "Printers", to: "/products/printers" },
+  { label: "Paper & Ink", to: "/products/paper-ink" },
+  { label: "Accessories", to: "/products/accessories" },
 ];
 
 export const cameraStats = [

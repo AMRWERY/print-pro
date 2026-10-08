@@ -1,5 +1,6 @@
 <template>
   <nav
+    v-if="total > 0"
     :aria-label="label"
     class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-6"
   >

@@ -424,3 +424,17 @@ export const catalogProducts: CatalogProduct[] = baseProducts.map((p) =>
         imageAlt: `${p.brand} ${p.name}`,
       },
 );
+
+/** Generic category pages: /products/<slug>. "scope" limits which products are listed. */
+export const categoryPages: Record<
+  string,
+  { label: string; description: string; scope: CatalogCategory[] }
+> = {
+  lenses: { label: "Lenses", description: "Cine primes, large-format and rangefinder optics, bench-verified before dispatch.", scope: ["lenses"] },
+  lighting: { label: "Lighting", description: "Studio generators, monolights and power packs for controlled, repeatable light.", scope: ["lighting"] },
+  audio: { label: "Audio", description: "Shotgun, lavalier and field recording equipment for production sound.", scope: [] },
+  tripods: { label: "Tripods & Rigging", description: "Carbon-fibre supports, fluid heads and rigging for steady capture.", scope: [] },
+  printers: { label: "Printers", description: "Fine-art pigment printers and desktop systems with custom ICC profiles.", scope: ["printers"] },
+  "paper-ink": { label: "Paper & Ink", description: "Archival cotton rag, baryta substrates and pigment inks.", scope: ["substrates"] },
+  accessories: { label: "Accessories", description: "Colorimeters, spectrophotometers and calibration tools.", scope: ["colorimeters"] },
+};

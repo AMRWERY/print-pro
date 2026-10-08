@@ -97,10 +97,9 @@ const createCatalog = (products: CatalogProduct[]) => {
   const dispatchCounts = countBy((p) => p.dispatch);
   const brandCounts = countBy((p) => p.brand);
 
-  const categories = categoryOptions.map((o) => ({
-    ...o,
-    count: categoryCounts.get(o.key) ?? 0,
-  }));
+  const categories = categoryOptions
+    .map((o) => ({ ...o, count: categoryCounts.get(o.key) ?? 0 }))
+    .filter((o) => o.count > 0);
   const dispatches = dispatchOptions.map((o) => ({
     ...o,
     count: dispatchCounts.get(o.key) ?? 0,

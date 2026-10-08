@@ -4,13 +4,8 @@
       <span class="h-2 w-2 bg-accent" aria-hidden="true" />
       Division of registered optics &amp; colour engines
     </p>
-    <h1 class="text-3xl sm:text-5xl">
-      All Instruments &amp; Archival Substrates
-    </h1>
-    <p class="max-w-3xl text-sm text-mute sm:text-base">
-      Calibrated medium-format digital systems, cinema primes, pigment printers
-      and 100% cotton rag media. Every unit is bench-verified before dispatch.
-    </p>
+    <h1 class="text-3xl sm:text-5xl">{{ title }}</h1>
+    <p class="max-w-3xl text-sm text-mute sm:text-base">{{ description }}</p>
     <p
       class="flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-xs text-mute"
       aria-live="polite"
@@ -39,6 +34,12 @@
 </template>
 
 <script lang="ts" setup>
+withDefaults(defineProps<{ title?: string; description?: string }>(), {
+  title: "All Instruments & Archival Substrates",
+  description:
+    "Calibrated medium-format digital systems, cinema primes, pigment printers and 100% cotton rag media. Every unit is bench-verified before dispatch.",
+});
+
 const catalog = useCatalog();
 
 const shipsToday = computed(
