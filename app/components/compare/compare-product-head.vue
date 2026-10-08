@@ -140,7 +140,7 @@ const { start } = useTimeoutFn(() => (added.value = false), 1800, {
 });
 
 const acquire = () => {
-  cart.add(props.product.price);
+  cart.add(props.product.id, props.product.price);
   added.value = true;
   start();
 };

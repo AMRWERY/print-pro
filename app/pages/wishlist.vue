@@ -172,7 +172,7 @@ const announcement = ref("");
 const say = (m: string) => (announcement.value = m);
 
 const moveOne = (p: DetailedProduct) => {
-  cart.add(p.price);
+  cart.add(p.id, p.price);
   if (!shared.value) {
     wl.remove([p.id]);
     say(`${p.name} moved to cart.`);
@@ -185,7 +185,7 @@ const removeOne = (p: DetailedProduct) => {
 const moveSelected = () => {
   const picked = selectedItems.value;
   if (!picked.length) return;
-  for (const p of picked) cart.add(p.price);
+  for (const p of picked) cart.add(p.id, p.price);
   if (!shared.value) wl.remove(picked.map((p) => p.id));
   say(`${picked.length} ${picked.length === 1 ? "item" : "items"} moved to cart.`);
 };

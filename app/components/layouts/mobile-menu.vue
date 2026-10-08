@@ -35,7 +35,7 @@
             aria-label="Account and preferences"
           >
             <nuxt-link-locale
-              to="/"
+              to="/cart"
               class="btn-icon relative"
               :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
               @click="emit('close')"

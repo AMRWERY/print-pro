@@ -66,7 +66,7 @@
         </nuxt-link-locale>
 
         <nuxt-link-locale
-          to="/"
+          to="/cart"
           class="btn-ghost hidden h-10 !px-3 lg:inline-flex"
           :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
         >

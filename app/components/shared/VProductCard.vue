@@ -171,7 +171,7 @@ const { start } = useTimeoutFn(
   { immediate: false },
 );
 const acquire = () => {
-  cart.add(props.product.price);
+  cart.add(props.product.id, props.product.price);
   added.value = true;
   start();
 };

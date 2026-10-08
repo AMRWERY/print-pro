@@ -196,7 +196,9 @@ const { start } = useTimeoutFn(() => (added.value = false), 1800, {
 });
 
 const acquire = () => {
-  cart.add(total.value);
+  cart.add(props.product.id, total.value, {
+    option: selected.value.delta ? selected.value.label : undefined,
+  });
   added.value = true;
   start();
 };
