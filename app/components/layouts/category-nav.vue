@@ -21,16 +21,25 @@
           <nuxt-link-locale
             to="/"
             class="inline-flex items-center gap-1.5 text-accent hover:underline"
-            ><Icon name="lucide:repeat" size="14" class="icon-spin" aria-hidden="true" />Trade-in
-            evaluation</nuxt-link-locale
+            ><Icon
+              name="lucide:repeat"
+              size="14"
+              class="icon-spin"
+              aria-hidden="true"
+            />Trade-in evaluation</nuxt-link-locale
           >
         </li>
+
         <li>
           <nuxt-link-locale
             to="/"
             class="link-quiet inline-flex items-center gap-1.5"
-            ><Icon name="lucide:swatch-book" size="14" class="icon-wiggle" aria-hidden="true" />ICC
-            custom profile</nuxt-link-locale
+            ><Icon
+              name="lucide:swatch-book"
+              size="14"
+              class="icon-wiggle"
+              aria-hidden="true"
+            />ICC custom profile</nuxt-link-locale
           >
         </li>
       </ul>
