@@ -24,7 +24,7 @@
   }
 
   /* Light theme: same roles, darker accents so text keeps AA contrast on white. */
-  :root[data-theme='light'] {
+  :root[data-theme="light"] {
     --c-ink: 244 242 237;
     --c-surface: 255 255 255;
     --c-raised: 237 234 227;
@@ -43,46 +43,150 @@
     color-scheme: light;
   }
 
-  html { @apply bg-ink text-paper font-sans antialiased scroll-smooth; }
-  body { @apply transition-colors duration-200; }
-  h1, h2, h3, h4 { @apply font-display font-semibold; }
-  :focus-visible { @apply outline-none ring-2 ring-cyan ring-offset-2 ring-offset-ink; }
+  html {
+    @apply bg-ink text-paper font-sans antialiased scroll-smooth;
+  }
+
+  body {
+    @apply transition-colors duration-200;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-cyan ring-offset-2 ring-offset-ink;
+  }
 }
 
 @layer components {
-  .container-page { @apply mx-auto w-full max-w-[1280px] px-4 md:px-6; }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-control px-5 py-2.5 text-sm font-medium transition duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40; }
-  .btn-primary { @apply btn bg-cyan text-onprimary hover:brightness-110; }
-  .btn-ghost { @apply btn border border-line text-paper hover:border-cyan hover:text-cyan; }
-  .btn-icon { @apply inline-flex h-10 w-10 items-center justify-center rounded-control border border-line text-paper transition duration-200 hover:border-cyan hover:text-cyan active:scale-95; }
-  .field { @apply w-full rounded-control border border-line bg-surface px-3 py-2.5 text-sm text-paper placeholder:text-mute transition duration-200 focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/60 disabled:opacity-40; }
-  .card { @apply rounded-card border border-line bg-surface; }
-  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium; }
-  .section { @apply py-16 md:py-24; }
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] px-4 md:px-6;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-control px-5 py-2.5 text-sm font-medium transition duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-cyan text-onprimary hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-line text-paper hover:border-cyan hover:text-cyan;
+  }
+  .btn-icon {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-control border border-line text-paper transition duration-200 hover:border-cyan hover:text-cyan active:scale-95;
+  }
+  .field {
+    @apply w-full rounded-control border border-line bg-surface px-3 py-2.5 text-sm text-paper placeholder:text-mute transition duration-200 focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/60 disabled:opacity-40;
+  }
+  .card {
+    @apply rounded-card border border-line bg-surface;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+  .section {
+    @apply py-16 md:py-24;
+  }
 }
 
 @layer components {
-  .btn-accent { @apply btn bg-accent text-onaccent hover:brightness-110; }
-  .eyebrow { @apply font-mono text-xs uppercase tracking-widest text-mute; }
-  .chip { @apply inline-flex items-center rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-xs text-mute; }
-  .link-quiet { @apply text-mute transition duration-200 hover:text-paper; }
+  .btn-accent {
+    @apply btn bg-accent text-onaccent hover:brightness-110;
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-widest text-mute;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-xs text-mute;
+  }
+  .link-quiet {
+    @apply text-mute transition duration-200 hover:text-paper;
+  }
 }
 
-.page-enter-active,.page-leave-active { transition: opacity .25s ease-out, transform .25s ease-out; }
-.page-enter-from { opacity: 0; transform: translateY(8px); }
-.page-leave-to { opacity: 0; }
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-leave-to {
+  opacity: 0;
+}
 
 /* View Transitions: theme reveals as a circle (clip-path driven from JS), locale cross-fades. */
 ::view-transition-old(root),
-::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-:root[data-vt='theme']::view-transition-old(root) { z-index: 1; }
-:root[data-vt='theme']::view-transition-new(root) { z-index: 2; }
-:root[data-vt='locale']::view-transition-old(root) { animation: vt-out .3s ease-out both; }
-:root[data-vt='locale']::view-transition-new(root) { animation: vt-in .35s ease-out both; }
-@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
-@keyframes vt-in { from { opacity: 0; transform: translateY(6px); } }
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root[data-vt="theme"]::view-transition-old(root) {
+  z-index: 1;
+}
+
+:root[data-vt="theme"]::view-transition-new(root) {
+  z-index: 2;
+}
+
+:root[data-vt="locale"]::view-transition-old(root) {
+  animation: vt-out 0.3s ease-out both;
+}
+
+:root[data-vt="locale"]::view-transition-new(root) {
+  animation: vt-in 0.35s ease-out both;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  .check {
+    @apply h-4 w-4 shrink-0 cursor-pointer rounded-[4px] border-line bg-surface text-accent transition duration-200 focus:ring-2 focus:ring-accent/60 focus:ring-offset-0;
+  }
+}
+/* Scrollbars (page + every scrollable panel). Accent thumb on the surface tone, per theme. */
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--c-accent) / .65) transparent; }
+html { scrollbar-width: auto; scrollbar-color: rgb(var(--c-accent) / .75) rgb(var(--c-ink)); }
+
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--c-ink)); }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--c-accent) / .65); border-radius: 9999px; border: 2px solid rgb(var(--c-ink)); }
+  ::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-accent)); }
+  ::-webkit-scrollbar-button { display: none; }
 }

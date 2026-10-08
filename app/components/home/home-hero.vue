@@ -9,7 +9,7 @@
         </h1>
         <p class="max-w-xl text-base text-mute">Equipping world-class studios, master printmakers and visionaries with medium-format cameras, cinema glass and 64-inch pigment print labs engineered for zero-defect output.</p>
         <div class="flex flex-wrap gap-3">
-          <nuxt-link-locale to="/" class="btn-accent">
+          <nuxt-link-locale to="/products" class="btn-accent">
             Explore studio catalog
             <Icon name="lucide:arrow-right" size="16" class="icon-nudge rtl:-scale-x-100" aria-hidden="true" />
           </nuxt-link-locale>
