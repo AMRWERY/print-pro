@@ -7,7 +7,7 @@
       <ul class="flex items-center">
         <li v-for="c in categories" :key="c.label">
           <nuxt-link-locale
-            to="/products"
+            :to="c.to"
             class="inline-flex h-11 items-center px-3 font-mono text-xs uppercase tracking-wider text-mute transition duration-200 hover:text-paper"
           >
             {{ c.label }}

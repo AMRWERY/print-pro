@@ -1,0 +1,126 @@
+<template>
+  <div>
+    <div class="flex items-center justify-between pb-2">
+      <h3 class="eyebrow !text-paper">Filter parameters</h3>
+      <button
+        v-if="inventory.activeCount"
+        type="button"
+        class="font-mono text-xs uppercase tracking-wider text-accent hover:underline"
+        @click="inventory.reset()"
+      >
+        Reset
+      </button>
+    </div>
+
+    <filter-group title="Subcategory">
+      <filter-option
+        v-for="o in inventory.subOptions"
+        :key="o.value"
+        :label="o.label"
+        :count="o.count"
+        :checked="inventory.facets.sub.includes(o.value as CameraSub)"
+        @change="inventory.toggle('sub', o.value)"
+      />
+    </filter-group>
+
+    <filter-group title="Sensor format">
+      <filter-option
+        v-for="o in inventory.sensorOptions"
+        :key="o.value"
+        :label="o.value"
+        :count="o.count"
+        :checked="inventory.facets.sensor.includes(o.value)"
+        @change="inventory.toggle('sensor', o.value)"
+      />
+    </filter-group>
+
+    <filter-group title="Effective resolution">
+      <div class="flex flex-wrap gap-2">
+        <button
+          v-for="t in resolutionTiers"
+          :key="t.min"
+          type="button"
+          class="rounded-control border px-2.5 py-1.5 font-mono text-xs transition duration-200"
+          :class="
+            inventory.facets.minMegapixels === t.min
+              ? 'border-accent text-accent'
+              : 'border-line text-mute hover:border-mute hover:text-paper'
+          "
+          :aria-pressed="inventory.facets.minMegapixels === t.min"
+          @click="
+            inventory.facets.minMegapixels =
+              inventory.facets.minMegapixels === t.min ? null : t.min
+          "
+        >
+          {{ t.label }}
+        </button>
+      </div>
+    </filter-group>
+
+    <filter-group title="Mount standard">
+      <filter-option
+        v-for="o in inventory.mountOptions"
+        :key="o.value"
+        :label="o.value"
+        :count="o.count"
+        :checked="inventory.facets.mount.includes(o.value)"
+        @change="inventory.toggle('mount', o.value)"
+      />
+    </filter-group>
+
+    <filter-group title="Investment range (USD)">
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label :for="`${uid}-min`" class="eyebrow mb-1 block">Min</label>
+          <input
+            :id="`${uid}-min`"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            placeholder="0"
+            class="field font-mono"
+            :value="inventory.facets.priceMin ?? ''"
+            @input="inventory.facets.priceMin = parse($event)"
+          />
+        </div>
+        <div>
+          <label :for="`${uid}-max`" class="eyebrow mb-1 block">Max</label>
+          <input
+            :id="`${uid}-max`"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            placeholder="Any"
+            class="field font-mono"
+            :value="inventory.facets.priceMax ?? ''"
+            @input="inventory.facets.priceMax = parse($event)"
+          />
+        </div>
+      </div>
+    </filter-group>
+
+    <filter-group title="Studio availability">
+      <filter-option
+        v-for="o in availabilityOptions"
+        :key="o.key"
+        :label="o.label"
+        :checked="inventory.facets.availability.includes(o.key)"
+        @change="inventory.toggle('availability', o.key)"
+      />
+    </filter-group>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import type { CameraSub } from "~/types/cameras";
+import { availabilityOptions, resolutionTiers } from "~/data/cameras";
+
+const inventory = useCameraInventory();
+const uid = useId();
+
+const parse = (e: Event) => {
+  const raw = (e.target as HTMLInputElement).value;
+  const n = Number(raw);
+  return raw === "" || Number.isNaN(n) ? null : Math.max(0, n);
+};
+</script>
