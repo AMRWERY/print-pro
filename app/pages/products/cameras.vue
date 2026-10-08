@@ -1,14 +1,6 @@
 <template>
   <div>
-    <nav class="container-page pt-4" aria-label="Breadcrumb">
-      <ol class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-mute">
-        <li><nuxt-link-locale to="/" class="hover:text-paper">Index</nuxt-link-locale></li>
-        <li aria-hidden="true">/</li>
-        <li><nuxt-link-locale to="/products" class="hover:text-paper">Optical systems</nuxt-link-locale></li>
-        <li aria-hidden="true">/</li>
-        <li aria-current="page" class="text-accent">Cameras &amp; digital backs</li>
-      </ol>
-    </nav>
+    <LazyVBreadcrumb class="container-page pt-4" :items="crumbs" />
 
     <category-hero
       eyebrow="100 MP+ · 16-bit natural colour"
@@ -81,6 +73,12 @@ import {
   subcategories,
   useCases,
 } from "~/data/cameras";
+
+const crumbs = [
+  { label: "Index", to: "/" },
+  { label: "Optical systems", to: "/products" },
+  { label: "Cameras & digital backs" },
+];
 
 const inventory = provideCameraInventory(cameraProducts);
 

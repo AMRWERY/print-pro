@@ -1,24 +1,6 @@
 <template>
   <div class="container-page space-y-6 py-6 lg:py-8">
-    <nav aria-label="Breadcrumb">
-      <ol
-        class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-mute"
-      >
-        <li>
-          <nuxt-link-locale to="/" class="hover:text-paper"
-            >Index</nuxt-link-locale
-          >
-        </li>
-        <li aria-hidden="true">/</li>
-        <li>
-          <nuxt-link-locale to="/products" class="hover:text-paper"
-            >Optical &amp; print apparatus</nuxt-link-locale
-          >
-        </li>
-        <li aria-hidden="true">/</li>
-        <li aria-current="page" class="text-accent">{{ crumb }}</li>
-      </ol>
-    </nav>
+    <LazyVBreadcrumb :items="crumbs" />
 
     <catalog-header :title="title" :description="description" />
 
@@ -71,6 +53,12 @@ const props = withDefaults(
     description: undefined,
   },
 );
+
+const crumbs = computed(() => [
+  { label: "Index", to: "/" },
+  { label: "Optical & print apparatus", to: "/products" },
+  { label: props.crumb },
+]);
 
 const catalog = provideCatalog(props.products);
 

@@ -1,15 +1,7 @@
 <template>
   <div>
     <div class="container-page space-y-6 py-6 lg:py-8">
-      <nav aria-label="Breadcrumb">
-        <ol class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-mute">
-          <li><nuxt-link-locale to="/" class="hover:text-paper">Catalog</nuxt-link-locale></li>
-          <li aria-hidden="true">/</li>
-          <li><nuxt-link-locale to="/products" class="hover:text-paper">Fine-art substrates</nuxt-link-locale></li>
-          <li aria-hidden="true">/</li>
-          <li aria-current="page" class="text-accent">Search archive (active)</li>
-        </ol>
-      </nav>
+      <LazyVBreadcrumb :items="crumbs" />
 
       <search-bar />
 
@@ -58,6 +50,12 @@
 
 <script lang="ts" setup>
 import { catalogProducts } from "~/data/catalog";
+
+const crumbs = [
+  { label: "Catalog", to: "/" },
+  { label: "Fine-art substrates", to: "/products" },
+  { label: "Search archive (active)" },
+];
 
 const route = useRoute();
 const router = useRouter();

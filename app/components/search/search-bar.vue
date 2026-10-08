@@ -31,6 +31,7 @@
       <button v-if="draft" type="button" class="btn-icon h-9 w-9 border-transparent" aria-label="Clear search" @click="clear">
         <Icon name="lucide:x" size="16" aria-hidden="true" />
       </button>
+   
       <button type="submit" class="btn-accent shrink-0">
         <span class="hidden sm:inline">Search</span>
         <Icon name="lucide:arrow-right" size="16" class="icon-nudge rtl:-scale-x-100 sm:hidden" aria-hidden="true" />
@@ -110,6 +111,7 @@ const clear = () => {
 };
 
 onClickOutside(root, () => (open.value = false));
+
 onKeyStroke("Escape", () => {
   if (open.value) {
     open.value = false;
@@ -125,6 +127,7 @@ onKeyStroke("Escape", () => {
     opacity 0.2s ease-out,
     transform 0.2s ease-out;
 }
+
 .drop-enter-from,
 .drop-leave-to {
   opacity: 0;
