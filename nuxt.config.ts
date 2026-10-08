@@ -1,13 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    "@pinia/nuxt", 
+    "@pinia/nuxt",
     "@vee-validate/nuxt",
     "@nuxtjs/i18n",
     "@vueuse/nuxt",
-    "@nuxt/icon"
+    "@nuxt/icon",
   ],
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   postcss: {
     plugins: {
@@ -27,10 +27,10 @@ export default defineNuxtConfig({
         code: "en",
         iso: "en-US",
         file: "en.json",
-        name: "English",
+        name: "EN",
         dir: "ltr",
       },
-      { code: "ar", iso: "ar-EG", file: "ar.json", name: "عربي", dir: "rtl" },
+      { code: "ar", iso: "ar-EG", file: "ar.json", name: "ع", dir: "rtl" },
     ],
     defaultLocale: "ar",
     strategy: "prefix",
@@ -58,7 +58,7 @@ export default defineNuxtConfig({
       include: ["vue", "vue-router", "pinia", "@vueuse/core", "vee-validate"],
     },
   },
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
   components: [
     {
       path: "components",
@@ -71,7 +71,11 @@ export default defineNuxtConfig({
       title: "PrintPro",
       link: [
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "",
+        },
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Reem+Kufi:wght@600;700&display=swap",
@@ -89,4 +93,4 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
-})
+});

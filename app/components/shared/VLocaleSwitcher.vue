@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link
+  <nuxt-link-locale
     v-if="target"
     :to="switchLocalePath(target.code)"
     :hreflang="target.code"
@@ -10,13 +10,14 @@
   >
     <Icon name="lucide:globe" size="18" class="icon-spin" aria-hidden="true" />
     <span :class="compact && 'sr-only'">{{ target.name }}</span>
-  </nuxt-link>
+  </nuxt-link-locale>
 </template>
 
 <script lang="ts" setup>
-defineProps<{ compact?: boolean }>();
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
+
+defineProps<{ compact?: boolean }>();
 
 const { run } = useViewTransition();
 
@@ -24,7 +25,12 @@ const { run } = useViewTransition();
 const switchTo = () => {
   if (!target.value) return;
   const path = switchLocalePath(target.value.code);
-  return run(async () => { await navigateTo(path); }, { kind: "locale" });
+  return run(
+    async () => {
+      await navigateTo(path);
+    },
+    { kind: "locale" },
+  );
 };
 
 const target = computed(() =>
