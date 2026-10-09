@@ -24,10 +24,7 @@
       >
     </label>
 
-    <label class="flex cursor-pointer items-center gap-2 text-sm">
-      <input v-model="cmp.hideIdentical" type="checkbox" class="check" />
-      Hide identical specs
-    </label>
+    <LazyVInput v-model="cmp.hideIdentical" type="checkbox" label-class="items-center">Hide identical specs</LazyVInput>
 
     <button
       type="button"
@@ -56,19 +53,15 @@
         v-if="options.length && cmp.products.length < max"
         class="flex items-center gap-2"
       >
-        <label :for="`${uid}-add`" class="sr-only"
-          >Add a product to compare</label
-        >
-        <select
-          :id="`${uid}-add`"
-          class="field !w-auto py-1.5 pe-8 text-xs"
-          @change="add"
-        >
-          <option value="">+ Add product…</option>
-          <option v-for="p in options" :key="p.id" :value="p.id">
-            {{ p.brand }} {{ p.name }}
-          </option>
-        </select>
+        <LazyVSelectInput
+          :model-value="''"
+          name="addProduct"
+          label="Add a product to compare"
+          hide-label
+          :options="addOptions"
+          input-class="!w-auto py-1.5 pe-8 text-xs"
+          @update:model-value="(v) => v && emit('add', String(v))"
+        />
       </div>
 
       <button type="button" class="btn-ghost h-9 !px-3 text-xs" @click="print">
@@ -114,11 +107,10 @@ const options = computed(() => {
   );
 });
 
-const add = (e: Event) => {
-  const el = e.target as HTMLSelectElement;
-  if (el.value) emit("add", el.value);
-  el.value = "";
-};
+const addOptions = computed(() => [
+  { value: "", label: "+ Add product…" },
+  ...options.value.map((p) => ({ value: p.id, label: p.brand + " " + p.name })),
+]);
 
 const print = () => window.print();
 

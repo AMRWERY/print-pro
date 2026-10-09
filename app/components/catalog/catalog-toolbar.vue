@@ -21,17 +21,14 @@
     </button>
 
     <div class="ms-auto flex flex-wrap items-center gap-4">
-      <div class="flex items-center gap-2">
-        <select
-          :id="`${uid}-sort`"
-          v-model="catalog.sort"
-          class="field !w-auto py-2 pe-8"
-        >
-          <option v-for="s in catalog.sortOptions" :key="s.key" :value="s.key">
-            {{ s.label }}
-          </option>
-        </select>
-      </div>
+      <LazyVSelectInput
+        v-model="catalog.sort"
+        name="catalogSort"
+        label="Sort products"
+        hide-label
+        :options="sortOptions"
+        input-class="!w-auto py-2 pe-8"
+      />
     </div>
   </div>
 </template>
@@ -42,5 +39,6 @@ import { perPageOptions } from "~/data/catalog";
 const emit = defineEmits<{ "open-filters": [] }>();
 
 const catalog = useCatalog();
+const sortOptions = computed(() => catalog.sortOptions.map((s) => ({ value: s.key, label: s.label })));
 const uid = useId();
 </script>

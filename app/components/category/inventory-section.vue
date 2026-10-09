@@ -31,20 +31,15 @@
               >{{ inventory.activeCount }}</span
             >
           </button>
-          <label :for="`${uid}-sort`" class="eyebrow">Sort</label>
-          <select
-            :id="`${uid}-sort`"
+          <LazyVSelectInput
             v-model="inventory.sort"
-            class="field !w-auto py-2 pe-8"
-          >
-            <option
-              v-for="s in inventorySortOptions"
-              :key="s.key"
-              :value="s.key"
-            >
-              {{ s.label }}
-            </option>
-          </select>
+            name="inventorySort"
+            label="Sort"
+            inline
+            label-class="eyebrow"
+            :options="sortOptions"
+            input-class="!w-auto py-2 pe-8"
+          />
         </div>
       </section-heading>
 
@@ -113,6 +108,7 @@
 import { inventorySortOptions } from "~/data/cameras";
 
 const inventory = useCameraInventory();
+const sortOptions = inventorySortOptions.map((s) => ({ value: s.key, label: s.label }));
 const uid = useId();
 const showFilters = ref(false);
 </script>

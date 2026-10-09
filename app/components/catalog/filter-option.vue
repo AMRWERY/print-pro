@@ -1,22 +1,19 @@
 <template>
-  <label
-    class="group flex cursor-pointer items-center gap-2.5 rounded-control py-1.5 text-sm"
+  <LazyVInput
+    type="checkbox"
+    :model-value="checked"
+    label-class="group items-center rounded-control py-1.5"
+    @update:model-value="emit('change')"
   >
-    <input
-      type="checkbox"
-      class="check"
-      :checked="checked"
-      @change="emit('change')"
-    />
-    <span
-      class="flex-1 transition-colors duration-200"
-      :class="checked ? 'text-paper' : 'text-mute group-hover:text-paper'"
-      >{{ label }}</span
-    >
-    <span v-if="count !== undefined" class="font-mono text-xs text-mute">{{
-      count
-    }}</span>
-  </label>
+    <span class="flex items-center justify-between gap-2">
+      <span
+        class="transition-colors duration-200"
+        :class="checked ? 'text-paper' : 'text-mute group-hover:text-paper'"
+        >{{ label }}</span
+      >
+      <span v-if="count !== undefined" class="font-mono text-xs text-mute">{{ count }}</span>
+    </span>
+  </LazyVInput>
 </template>
 
 <script lang="ts" setup>

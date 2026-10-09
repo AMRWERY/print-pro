@@ -52,31 +52,26 @@
 
     <fieldset v-if="detail.packages.length > 1" class="space-y-2">
       <legend class="eyebrow mb-2">Configuration package</legend>
-      <label
+      <LazyVInput
         v-for="p in detail.packages"
         :key="p.id"
-        class="flex cursor-pointer items-start gap-3 rounded-card border p-3 transition duration-200"
-        :class="
-          choice === p.id
-            ? 'border-accent bg-accent-soft'
-            : 'border-line hover:border-mute'
-        "
+        v-model="choice"
+        type="radio"
+        name="package"
+        :value="p.id"
+        :label-class="[
+          'rounded-card border p-3 transition duration-200',
+          choice === p.id ? 'border-accent bg-accent-soft' : 'border-line hover:border-mute',
+        ]"
       >
-        <input
-          v-model="choice"
-          type="radio"
-          :value="p.id"
-          name="package"
-          class="check mt-1 !rounded-full"
-        />
-        <span class="flex-1">
-          <span class="block text-sm font-medium">{{ p.label }}</span>
-          <span class="block text-xs text-mute">{{ p.note }}</span>
+        <span class="flex items-start gap-3">
+          <span class="flex-1">
+            <span class="block text-sm font-medium">{{ p.label }}</span>
+            <span class="block text-xs text-mute">{{ p.note }}</span>
+          </span>
+          <span class="shrink-0 font-mono text-sm">{{ money.format(product.price + p.delta) }}</span>
         </span>
-        <span class="shrink-0 font-mono text-sm">{{
-          money.format(product.price + p.delta)
-        }}</span>
-      </label>
+      </LazyVInput>
     </fieldset>
 
     <div class="space-y-3">

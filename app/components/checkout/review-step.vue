@@ -64,29 +64,18 @@
       </dl>
 
       <LazyVInput
-        label="Terms"
-        :error="state.errors.terms"
-        :required="false"
-        v-slot="{ id, aria }"
+        v-model="f.terms"
+        name="terms"
+        type="checkbox"
+        :rules="mustAccept('Accept the terms to place your order.')"
       >
-        <label class="flex cursor-pointer items-start gap-3 text-sm">
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.terms"
-            type="checkbox"
-            class="check mt-0.5"
-          />
-          <span
-            >I agree to the
-            <nuxt-link-locale
-              to="/"
-              class="text-accent underline-offset-4 hover:underline"
-              >terms of sale</nuxt-link-locale
-            >
-            and understand large-format equipment ships by appointment.</span
-          >
-        </label>
+        I agree to the
+        <nuxt-link-locale
+          to="/"
+          class="text-accent underline-offset-4 hover:underline"
+          >terms of sale</nuxt-link-locale
+        >
+        and understand large-format equipment ships by appointment.
       </LazyVInput>
 
       <button

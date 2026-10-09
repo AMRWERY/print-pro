@@ -1,32 +1,28 @@
 <template>
   <div class="space-y-3">
     <div class="grid grid-cols-2 gap-2">
-      <div>
-        <label :for="`${uid}-min`" class="eyebrow mb-1 block">Min ($)</label>
-        <input
-          :id="`${uid}-min`"
+      <LazyVInput
+          v-model="catalog.filters.priceMin"
           type="number"
+          name="priceMin"
+          label="Min ($)"
+          label-class="eyebrow mb-1 block"
           inputmode="numeric"
           min="0"
           placeholder="0"
-          class="field font-mono"
-          :value="catalog.filters.priceMin ?? ''"
-          @input="catalog.filters.priceMin = parse($event)"
+          input-class="font-mono"
         />
-      </div>
-      <div>
-        <label :for="`${uid}-max`" class="eyebrow mb-1 block">Max ($)</label>
-        <input
-          :id="`${uid}-max`"
+      <LazyVInput
+          v-model="catalog.filters.priceMax"
           type="number"
+          name="priceMax"
+          label="Max ($)"
+          label-class="eyebrow mb-1 block"
           inputmode="numeric"
           min="0"
           placeholder="Any"
-          class="field font-mono"
-          :value="catalog.filters.priceMax ?? ''"
-          @input="catalog.filters.priceMax = parse($event)"
+          input-class="font-mono"
         />
-      </div>
     </div>
     <div class="grid grid-cols-2 gap-2">
       <button

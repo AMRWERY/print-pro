@@ -38,20 +38,15 @@
         class="absolute start-3 top-3 backdrop-blur"
       />
 
-      <label
+      <LazyVInput
         v-if="!readonly"
-        class="absolute end-3 top-3 grid h-8 w-8 cursor-pointer place-items-center rounded-control bg-ink/70 backdrop-blur"
-      >
-        <input
-          type="checkbox"
-          class="check"
-          :checked="selected"
-          :aria-label="`Select ${product.name}`"
-          @change="
-            emit('update:selected', ($event.target as HTMLInputElement).checked)
-          "
-        />
-      </label>
+        type="checkbox"
+        :model-value="selected"
+        :label="'Select ' + product.name"
+        hide-label
+        class="absolute end-3 top-3 grid h-8 w-8 place-items-center rounded-control bg-ink/70 backdrop-blur"
+        @update:model-value="(v) => emit('update:selected', !!v)"
+      />
     </div>
 
     <!-- Body -->
@@ -132,15 +127,17 @@
             class="shrink-0 text-mute"
             aria-hidden="true"
           />
-          <label :for="`${uid}-tag`" class="eyebrow shrink-0">Studio tag</label>
-          <select
-            :id="`${uid}-tag`"
-            class="field !py-1.5 text-xs"
-            :value="tag"
-            @change="emit('tag', ($event.target as HTMLSelectElement).value)"
-          >
-            <option v-for="t in studioTags" :key="t" :value="t">{{ t }}</option>
-          </select>
+          <LazyVSelectInput
+            :model-value="tag"
+            name="studioTag"
+            label="Studio tag"
+            inline
+            label-class="eyebrow shrink-0"
+            class="min-w-0 flex-1"
+            :options="tagOptions"
+            input-class="!py-1.5 text-xs"
+            @update:model-value="(v) => emit('tag', String(v))"
+          />
         </div>
       </div>
     </div>
@@ -179,4 +176,6 @@ const move = () => {
     start();
   }
 };
+
+const tagOptions = studioTags.map((t) => ({ value: t, label: t }));
 </script>

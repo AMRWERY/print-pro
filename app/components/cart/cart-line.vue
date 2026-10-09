@@ -4,19 +4,14 @@
     :class="!selected && 'opacity-70'"
   >
     <div class="flex items-start gap-3 sm:contents">
-      <label
-        class="grid h-8 w-8 shrink-0 cursor-pointer place-items-center sm:order-1"
-      >
-        <input
-          type="checkbox"
-          class="check"
-          :checked="selected"
-          :aria-label="`Select ${product.name}`"
-          @change="
-            emit('update:selected', ($event.target as HTMLInputElement).checked)
-          "
-        />
-      </label>
+      <LazyVInput
+        type="checkbox"
+        :model-value="selected"
+        :label="'Select ' + product.name"
+        hide-label
+        class="grid h-8 w-8 shrink-0 place-items-center sm:order-1"
+        @update:model-value="(v) => emit('update:selected', !!v)"
+      />
 
       <div
         class="relative h-24 w-28 shrink-0 overflow-hidden rounded-control border border-line sm:order-2 sm:h-28 sm:w-32"

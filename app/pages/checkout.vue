@@ -126,7 +126,7 @@ const order = ref<null | {
 }>(null);
 
 const place = async () => {
-  const bad = state.firstInvalidStep();
+  const bad = await state.firstInvalidStep();
   if (bad) {
     state.step = bad;
     state.focusFirstError();

@@ -13,15 +13,18 @@
     >
       <Icon name="lucide:minus" size="14" aria-hidden="true" />
     </button>
-    <input
-      :value="modelValue"
+    <LazyVInput
+      :model-value="modelValue"
       type="number"
+      lazy
+      variant="bare"
+      :label="label"
+      hide-label
       inputmode="numeric"
       :min="min"
       :max="max"
-      :aria-label="label"
-      class="h-9 w-12 border-x border-line bg-transparent text-center font-mono text-sm [appearance:textfield] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-      @change="set(Number(($event.target as HTMLInputElement).value), $event)"
+      input-class="h-9 w-12 border-x border-line bg-transparent text-center font-mono text-sm [appearance:textfield] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+      @update:model-value="(n) => set(Number(n))"
     />
     <button
       type="button"

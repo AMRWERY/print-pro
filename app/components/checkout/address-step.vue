@@ -1,167 +1,99 @@
 <template>
   <LazyVStepper :n="1" title="Contact & delivery address" :summary="summary">
-
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <fieldset class="grid gap-4 sm:grid-cols-2">
         <legend class="eyebrow mb-3 sm:col-span-2">Contact</legend>
         <LazyVInput
+          v-model="f.email"
+          name="email"
           label="Email"
-          :error="state.errors.email"
+          type="email"
+          required
+          :rules="emailRule"
           hint="Your order confirmation is sent here."
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.email"
-            type="email"
-            autocomplete="email"
-            inputmode="email"
-            class="field"
-            :class="state.errors.email && '!border-accent'"
-            @blur="state.validate('email')"
-          />
-        </LazyVInput>
+          autocomplete="email"
+          inputmode="email"
+        />
         <LazyVInput
+          v-model="f.phone"
+          name="phone"
           label="Phone"
-          :error="state.errors.phone"
+          type="tel"
+          required
+          :rules="phoneRule"
           hint="Used by the carrier for delivery."
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.phone"
-            type="tel"
-            autocomplete="tel"
-            inputmode="tel"
-            class="field"
-            :class="state.errors.phone && '!border-accent'"
-            @blur="state.validate('phone')"
-          />
-        </LazyVInput>
+          autocomplete="tel"
+          inputmode="tel"
+        />
       </fieldset>
 
       <fieldset class="grid gap-4 sm:grid-cols-2">
         <legend class="eyebrow mb-3 sm:col-span-2">Delivery address</legend>
         <LazyVInput
+          v-model="f.fullName"
+          name="fullName"
           label="Full name"
-          :error="state.errors.fullName"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.fullName"
-            type="text"
-            autocomplete="name"
-            class="field"
-            :class="state.errors.fullName && '!border-accent'"
-            @blur="state.validate('fullName')"
-          />
-        </LazyVInput>
-        <LazyVInput label="Company or studio" :required="false" v-slot="{ id }">
-          <input
-            :id="id"
-            v-model="f.company"
-            type="text"
-            autocomplete="organization"
-            class="field"
-          />
-        </LazyVInput>
+          required
+          :rules="requiredText('Enter the recipient\'s full name.')"
+          autocomplete="name"
+        />
         <LazyVInput
+          v-model="f.company"
+          name="company"
+          label="Company or studio"
+          optional
+          autocomplete="organization"
+        />
+        <LazyVInput
+          v-model="f.line1"
           class="sm:col-span-2"
+          name="line1"
           label="Street address"
-          :error="state.errors.line1"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.line1"
-            type="text"
-            autocomplete="address-line1"
-            class="field"
-            :class="state.errors.line1 && '!border-accent'"
-            @blur="state.validate('line1')"
-          />
-        </LazyVInput>
+          required
+          :rules="requiredText('Enter the street address for delivery.')"
+          autocomplete="address-line1"
+        />
         <LazyVInput
+          v-model="f.line2"
           class="sm:col-span-2"
+          name="line2"
           label="Apartment, suite, loading dock"
-          :required="false"
-          v-slot="{ id }"
-        >
-          <input
-            :id="id"
-            v-model="f.line2"
-            type="text"
-            autocomplete="address-line2"
-            class="field"
-          />
-        </LazyVInput>
-        <LazyVInput label="City" :error="state.errors.city" v-slot="{ id, aria }">
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.city"
-            type="text"
-            autocomplete="address-level2"
-            class="field"
-            :class="state.errors.city && '!border-accent'"
-            @blur="state.validate('city')"
-          />
-        </LazyVInput>
+          optional
+          autocomplete="address-line2"
+        />
         <LazyVInput
+          v-model="f.city"
+          name="city"
+          label="City"
+          required
+          :rules="requiredText('Enter the city.')"
+          autocomplete="address-level2"
+        />
+        <LazyVInput
+          v-model="f.region"
+          name="region"
           label="State / region"
-          :error="state.errors.region"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.region"
-            type="text"
-            autocomplete="address-level1"
-            class="field"
-            :class="state.errors.region && '!border-accent'"
-            @blur="state.validate('region')"
-          />
-        </LazyVInput>
+          required
+          :rules="requiredText('Enter the state, province or region.')"
+          autocomplete="address-level1"
+        />
         <LazyVInput
+          v-model="f.postal"
+          name="postal"
           label="Postal / ZIP code"
-          :error="state.errors.postal"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.postal"
-            type="text"
-            autocomplete="postal-code"
-            class="field"
-            :class="state.errors.postal && '!border-accent'"
-            @blur="state.validate('postal')"
-          />
-        </LazyVInput>
-        <LazyVInput
+          required
+          :rules="minLengthText(3, 'Enter the postal or ZIP code.')"
+          autocomplete="postal-code"
+        />
+        <LazyVSelectInput
+          v-model="f.country"
+          name="country"
           label="Country"
-          :error="state.errors.country"
-          v-slot="{ id, aria }"
-        >
-          <select
-            :id="id"
-            v-bind="aria"
-            v-model="f.country"
-            autocomplete="country"
-            class="field"
-            @blur="state.validate('country')"
-          >
-            <option v-for="c in countries" :key="c.code" :value="c.code">
-              {{ c.name }}
-            </option>
-          </select>
-        </LazyVInput>
+          required
+          :rules="requiredText('Choose the delivery country.')"
+          :options="countryOptions"
+          autocomplete="country"
+        />
       </fieldset>
 
       <button
@@ -185,6 +117,8 @@ import { countries } from "~/data/checkout";
 
 const state = useCheckoutState();
 const f = state.form;
+
+const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
 const summary = computed(() => {
   const country =

@@ -47,23 +47,16 @@
           </button>
         </div>
         <div class="flex items-center gap-2">
-          <label :for="`${uid}-sort`" class="eyebrow">Sort</label>
-          <select
-            :id="`${uid}-sort`"
-            class="field !w-auto py-1.5 pe-8 text-xs"
-            :value="sort"
-            @change="
-              emit('update:sort', ($event.target as HTMLSelectElement).value)
-            "
-          >
-            <option
-              v-for="s in wishlistSortOptions"
-              :key="s.key"
-              :value="s.key"
-            >
-              {{ s.label }}
-            </option>
-          </select>
+          <LazyVSelectInput
+            :model-value="sort"
+            name="wishlistSort"
+            label="Sort"
+            inline
+            label-class="eyebrow"
+            :options="sortOptions"
+            input-class="!w-auto py-1.5 pe-8 text-xs"
+            @update:model-value="(v) => emit('update:sort', String(v))"
+          />
         </div>
       </div>
     </div>
@@ -72,18 +65,15 @@
       v-if="!readonly"
       class="flex flex-wrap items-center justify-between gap-3 border-y border-line py-2"
     >
-      <label class="flex cursor-pointer items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          class="check"
-          :checked="allSelected"
-          :indeterminate.prop="someSelected && !allSelected"
-          @change="
-            emit('select-all', ($event.target as HTMLInputElement).checked)
-          "
-        />
+      <LazyVInput
+        type="checkbox"
+        :model-value="allSelected"
+        :indeterminate="someSelected && !allSelected"
+        label-class="items-center"
+        @update:model-value="(v) => emit('select-all', !!v)"
+      >
         Select all ({{ shown }})
-      </label>
+      </LazyVInput>
       <button
         type="button"
         class="link-quiet inline-flex items-center gap-1.5 text-sm disabled:opacity-40"
@@ -121,6 +111,7 @@ const emit = defineEmits<{
 }>();
 
 const uid = useId();
+const sortOptions = wishlistSortOptions.map((s) => ({ value: s.key, label: s.label }));
 
 const views = [
   { key: "grid" as const, label: "Grid view", icon: "lucide:layout-grid" },

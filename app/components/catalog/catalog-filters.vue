@@ -12,27 +12,19 @@
       </button>
     </div>
 
-    <div v-if="!hideQuery" class="pb-4">
-      <div class="relative">
-        <label :for="`${uid}-q`" class="sr-only"
-          >Filter by name, spec or SKU</label
-        >
-        <Icon
-          name="lucide:search"
-          size="16"
-          class="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-mute"
-          aria-hidden="true"
-        />
-        <input
-          :id="`${uid}-q`"
-          v-model="catalog.filters.query"
-          type="search"
-          autocomplete="off"
-          placeholder="Filter specs, mounts, SKUs"
-          class="field !ps-10 !pe-3 truncate"
-        />
-      </div>
-    </div>
+    <LazyVInput
+      v-if="!hideQuery"
+      v-model="catalog.filters.query"
+      class="pb-4"
+      type="search"
+      name="catalogQuery"
+      label="Filter by name, spec or SKU"
+      hide-label
+      icon="lucide:search"
+      autocomplete="off"
+      placeholder="Filter specs, mounts, SKUs"
+      input-class="truncate"
+    />
 
     <filter-group title="Categories">
       <filter-option
@@ -82,26 +74,21 @@
 
     <filter-group title="Customer rating">
       <div class="space-y-1">
-        <label
+        <LazyVInput
           v-for="r in ratingOptions"
           :key="r"
-          class="flex cursor-pointer items-center gap-2.5 py-1.5 text-sm"
+          :model-value="catalog.filters.minRating"
+          type="radio"
+          :value="r"
+          :name="uid + '-rating'"
+          label-class="items-center py-1.5"
+          @update:model-value="catalog.filters.minRating = r"
         >
-          <input
-            type="radio"
-            class="check !rounded-full"
-            :name="`${uid}-rating`"
-            :checked="catalog.filters.minRating === r"
-            @change="catalog.filters.minRating = r"
-          />
-          <Icon
-            name="lucide:star"
-            size="14"
-            class="fill-yellow text-yellow"
-            aria-hidden="true"
-          />
-          <span>{{ r }} &amp; up</span>
-        </label>
+          <span class="flex items-center gap-2.5">
+            <Icon name="lucide:star" size="14" class="fill-yellow text-yellow" aria-hidden="true" />
+            <span>{{ r }} &amp; up</span>
+          </span>
+        </LazyVInput>
         <button
           v-if="catalog.filters.minRating !== null"
           type="button"

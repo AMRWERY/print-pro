@@ -80,44 +80,24 @@
 
     <!-- Voucher -->
     <div class="space-y-2">
-      <label for="voucher" class="eyebrow"
-        >Studio voucher or consortium code</label
-      >
-      <form
-        v-if="!applied"
-        class="flex gap-2"
-        novalidate
-        @submit.prevent="apply"
-      >
-        <input
-          id="voucher"
+      <p class="eyebrow">Studio voucher or consortium code</p>
+      <form v-if="!applied" class="flex items-start gap-2" novalidate @submit.prevent="apply">
+        <LazyVInput
+          ref="voucherInput"
           v-model="draft"
-          type="text"
+          class="flex-1"
+          name="voucher"
+          label="Voucher code"
+          hide-label
+          :rules="voucherRule"
           autocomplete="off"
           autocapitalize="characters"
           placeholder="BIENNIAL-PRINT-2025"
-          class="field font-mono"
-          :aria-invalid="!!error"
-          :aria-describedby="error ? 'voucher-error' : undefined"
+          input-class="font-mono"
         />
-        <button
-          type="submit"
-          class="btn-ghost shrink-0"
-          :disabled="!draft.trim()"
-        >
-          Apply
-        </button>
+        <button type="submit" class="btn-ghost shrink-0" :disabled="!draft.trim()">Apply</button>
       </form>
-      <p
-        v-if="error"
-        id="voucher-error"
-        class="flex items-center gap-1.5 text-sm text-accent"
-        role="alert"
-      >
-        <Icon name="lucide:circle-alert" size="14" aria-hidden="true" />{{
-          error
-        }}
-      </p>
+      
       <div
         v-if="applied"
         class="flex items-center justify-between gap-3 rounded-control border border-accent/40 bg-accent-soft px-3 py-2 text-sm"
@@ -217,23 +197,25 @@ const emit = defineEmits<{ voucher: [code: string]; checkout: [] }>();
 
 const money = useMoney();
 const draft = ref("");
-const error = ref("");
 
 const applied = computed(
   () => !!props.code && !!vouchers[props.code.toUpperCase()],
 );
 
-const apply = () => {
+const voucherInput = ref<{ validate: () => Promise<{ valid: boolean }> }>();
+
+// vee-validate rule: empty is fine (Apply stays disabled); unknown codes explain themselves.
+const voucherRule = (v: unknown) =>
+  !v || vouchers[String(v).trim().toUpperCase()]
+    ? true
+    : "That code isn't recognised. Check it for typos, or try BIENNIAL-PRINT-2025.";
+
+const apply = async () => {
+  const result = await voucherInput.value?.validate();
+  if (!result?.valid) return;
   const c = draft.value.trim().toUpperCase();
-  if (!vouchers[c]) {
-    error.value =
-      "That code isn't recognised. Check it for typos, or try BIENNIAL-PRINT-2025.";
-    return;
-  }
-  error.value = "";
   draft.value = "";
   emit("voucher", c);
 };
 
-watch(draft, () => (error.value = ""));
 </script>

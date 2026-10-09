@@ -70,32 +70,28 @@
 
     <filter-group title="Investment range (USD)">
       <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label :for="`${uid}-min`" class="eyebrow mb-1 block">Min</label>
-          <input
-            :id="`${uid}-min`"
-            type="number"
-            min="0"
-            inputmode="numeric"
-            placeholder="0"
-            class="field font-mono"
-            :value="inventory.facets.priceMin ?? ''"
-            @input="inventory.facets.priceMin = parse($event)"
-          />
-        </div>
-        <div>
-          <label :for="`${uid}-max`" class="eyebrow mb-1 block">Max</label>
-          <input
-            :id="`${uid}-max`"
-            type="number"
-            min="0"
-            inputmode="numeric"
-            placeholder="Any"
-            class="field font-mono"
-            :value="inventory.facets.priceMax ?? ''"
-            @input="inventory.facets.priceMax = parse($event)"
-          />
-        </div>
+        <LazyVInput
+          v-model="inventory.facets.priceMin"
+          type="number"
+          name="invPriceMin"
+          label="Min"
+          label-class="eyebrow mb-1 block"
+          inputmode="numeric"
+          min="0"
+          placeholder="0"
+          input-class="font-mono"
+        />
+        <LazyVInput
+          v-model="inventory.facets.priceMax"
+          type="number"
+          name="invPriceMax"
+          label="Max"
+          label-class="eyebrow mb-1 block"
+          inputmode="numeric"
+          min="0"
+          placeholder="Any"
+          input-class="font-mono"
+        />
       </div>
     </filter-group>
 

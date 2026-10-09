@@ -36,10 +36,9 @@
         <div class="space-y-4">
           <!-- Bulk actions -->
           <div class="flex flex-wrap items-center justify-between gap-3 rounded-card border border-line bg-surface p-3">
-            <label class="flex cursor-pointer items-center gap-2 text-sm">
-              <input type="checkbox" class="check" :checked="allSelected" :indeterminate.prop="selectedEntries.length > 0 && !allSelected" @change="selectAll(($event.target as HTMLInputElement).checked)" />
+            <LazyVInput type="checkbox" :model-value="allSelected" :indeterminate="selectedEntries.length > 0 && !allSelected" label-class="items-center" @update:model-value="(v) => selectAll(!!v)">
               Select all ({{ entries.length }} {{ entries.length === 1 ? "item" : "items" }})
-            </label>
+            </LazyVInput>
             <div class="flex flex-wrap items-center gap-4 text-sm">
               <button type="button" class="link-quiet inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchLater"><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch save</button>
               <button type="button" class="link-quiet inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchClear"><Icon name="lucide:trash-2" size="14" aria-hidden="true" />Batch clear</button>

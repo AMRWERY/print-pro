@@ -12,15 +12,15 @@
           machinery and archival media for working studios.
         </p>
         <form class="flex max-w-xs gap-2" @submit.prevent>
-          <label for="footer-email" class="sr-only"
-            >Email for studio bulletins</label
-          >
-          <input
-            id="footer-email"
+          <LazyVInput
+            name="footerEmail"
             type="email"
+            label="Email for studio bulletins"
+            hide-label
+            rules="email"
             autocomplete="email"
             placeholder="Join optical dispatch"
-            class="field"
+            class="flex-1"
           />
           <button type="submit" class="btn-accent shrink-0">Subscribe</button>
         </form>

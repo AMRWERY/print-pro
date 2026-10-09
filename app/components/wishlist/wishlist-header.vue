@@ -55,16 +55,15 @@
           <Icon name="lucide:folder-open" size="14" aria-hidden="true" />
         </dt>
         <dd class="mt-1">
-          <label for="registry-name" class="sr-only">Registry name</label>
-          <input
-            id="registry-name"
-            :value="name"
-            type="text"
+          <LazyVInput
+            :model-value="name"
+            name="registryName"
+            label="Registry name"
+            hide-label
+            variant="bare"
             maxlength="40"
-            class="w-full bg-transparent font-display text-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
-            @input="
-              emit('update:name', ($event.target as HTMLInputElement).value)
-            "
+            input-class="w-full bg-transparent font-display text-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            @update:model-value="(v) => emit('update:name', String(v ?? ''))"
           />
         </dd>
         <dd class="font-mono text-xs text-mute">ID: REG-{{ registryId }}</dd>

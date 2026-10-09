@@ -3,60 +3,55 @@
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <fieldset class="space-y-2">
         <legend class="sr-only">Choose a delivery method</legend>
-        <label
+        <LazyVInput
           v-for="o in deliveryOptions"
           :key="o.id"
-          class="flex cursor-pointer items-start gap-3 rounded-card border p-4 transition duration-200"
-          :class="
+          v-model="state.form.delivery"
+          type="radio"
+          name="delivery"
+          :value="o.id"
+          :label-class="[
+            'rounded-card border p-4 transition duration-200',
             state.form.delivery === o.id
               ? 'border-accent bg-accent-soft'
-              : 'border-line hover:border-mute'
-          "
+              : 'border-line hover:border-mute',
+          ]"
         >
-          <input
-            v-model="state.form.delivery"
-            type="radio"
-            name="delivery"
-            :value="o.id"
-            class="check mt-1 !rounded-full"
-          />
-          <Icon
-            :name="o.icon"
-            size="20"
-            class="mt-0.5 shrink-0 text-accent"
-            aria-hidden="true"
-          />
-          <span class="min-w-0 flex-1">
-            <span class="block text-sm font-medium">{{ o.label }}</span>
-            <span class="block text-xs text-mute">{{ o.note }}</span>
-            <span class="mt-1 block font-mono text-xs text-mute">{{
-              eta(o.days)
-            }}</span>
+          <span class="flex items-start gap-3">
+            <Icon
+              :name="o.icon"
+              size="20"
+              class="mt-0.5 shrink-0 text-accent"
+              aria-hidden="true"
+            />
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium">{{ o.label }}</span>
+              <span class="block text-xs text-mute">{{ o.note }}</span>
+              <span class="mt-1 block font-mono text-xs text-mute">{{
+                eta(o.days)
+              }}</span>
+            </span>
+            <span
+              class="shrink-0 font-mono text-sm"
+              :class="prices[o.id] === 0 && 'text-success'"
+              >{{
+                prices[o.id] === 0 ? "Free" : money.format(prices[o.id])
+              }}</span
+            >
           </span>
-          <span
-            class="shrink-0 font-mono text-sm"
-            :class="prices[o.id] === 0 && 'text-success'"
-            >{{
-              prices[o.id] === 0 ? "Free" : money.format(prices[o.id])
-            }}</span
-          >
-        </label>
+        </LazyVInput>
       </fieldset>
 
-      <LazyVInput
+      <LazyVTextarea
+        v-model="state.form.notes"
+        name="notes"
         label="Delivery notes"
-        :required="false"
+        optional
         hint="Dock hours, access codes or handling instructions."
-        v-slot="{ id }"
-      >
-        <textarea
-          :id="id"
-          v-model="state.form.notes"
-          rows="2"
-          maxlength="300"
-          class="field resize-y"
-        />
-      </LazyVInput>
+        rows="2"
+        maxlength="300"
+        input-class="resize-y"
+      />
 
       <button
         type="submit"

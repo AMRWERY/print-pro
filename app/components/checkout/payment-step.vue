@@ -17,34 +17,33 @@
 
       <fieldset class="grid gap-2 sm:grid-cols-2">
         <legend class="sr-only">Payment method</legend>
-        <label
+        <LazyVInput
           v-for="m in paymentMethods"
           :key="m.id"
-          class="flex cursor-pointer items-center gap-3 rounded-card border p-4 transition duration-200"
-          :class="
+          v-model="state.form.payment"
+          type="radio"
+          name="payment"
+          :value="m.id"
+          :label-class="[
+            'items-center rounded-card border p-4 transition duration-200',
             state.form.payment === m.id
               ? 'border-accent bg-accent-soft'
-              : 'border-line hover:border-mute'
-          "
+              : 'border-line hover:border-mute',
+          ]"
         >
-          <input
-            v-model="state.form.payment"
-            type="radio"
-            name="payment"
-            :value="m.id"
-            class="check !rounded-full"
-          />
-          <Icon
-            :name="m.icon"
-            size="20"
-            class="text-accent"
-            aria-hidden="true"
-          />
-          <span>
-            <span class="block text-sm font-medium">{{ m.label }}</span>
-            <span class="block text-xs text-mute">{{ m.note }}</span>
+          <span class="flex items-center gap-3">
+            <Icon
+              :name="m.icon"
+              size="20"
+              class="text-accent"
+              aria-hidden="true"
+            />
+            <span>
+              <span class="block text-sm font-medium">{{ m.label }}</span>
+              <span class="block text-xs text-mute">{{ m.note }}</span>
+            </span>
           </span>
-        </label>
+        </LazyVInput>
       </fieldset>
 
       <fieldset
@@ -53,89 +52,53 @@
       >
         <legend class="sr-only">Card details</legend>
         <LazyVInput
+          v-model="f.cardName"
           class="sm:col-span-2"
+          name="cardName"
           label="Name on card"
-          :error="state.errors.cardName"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.cardName"
-            type="text"
-            autocomplete="cc-name"
-            class="field"
-            :class="state.errors.cardName && '!border-accent'"
-            @blur="state.validate('cardName')"
-          />
-        </LazyVInput>
+          required
+          :rules="requiredText('Enter the name exactly as printed on the card.')"
+          autocomplete="cc-name"
+        />
         <LazyVInput
+          v-model="f.cardNumber"
           class="sm:col-span-2"
+          name="cardNumber"
           label="Card number"
-          :error="state.errors.cardNumber"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            :value="f.cardNumber"
-            type="text"
-            inputmode="numeric"
-            autocomplete="cc-number"
-            placeholder="1234 5678 9012 3456"
-            class="field font-mono"
-            :class="state.errors.cardNumber && '!border-accent'"
-            @input="
-              f.cardNumber = formatCardNumber(
-                ($event.target as HTMLInputElement).value,
-              )
-            "
-            @blur="state.validate('cardNumber')"
-          />
-        </LazyVInput>
+          required
+          :rules="cardNumberRule"
+          :format="formatCardNumber"
+          inputmode="numeric"
+          autocomplete="cc-number"
+          placeholder="1234 5678 9012 3456"
+          input-class="font-mono"
+        />
         <LazyVInput
+          v-model="f.cardExpiry"
+          name="cardExpiry"
           label="Expiry"
-          :error="state.errors.cardExpiry"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            :value="f.cardExpiry"
-            type="text"
-            inputmode="numeric"
-            autocomplete="cc-exp"
-            placeholder="MM/YY"
-            maxlength="5"
-            class="field font-mono"
-            :class="state.errors.cardExpiry && '!border-accent'"
-            @input="
-              f.cardExpiry = formatExpiry(
-                ($event.target as HTMLInputElement).value,
-              )
-            "
-            @blur="state.validate('cardExpiry')"
-          />
-        </LazyVInput>
+          required
+          :rules="cardExpiryRule"
+          :format="formatExpiry"
+          inputmode="numeric"
+          autocomplete="cc-exp"
+          placeholder="MM/YY"
+          maxlength="5"
+          input-class="font-mono"
+        />
         <LazyVInput
+          v-model="f.cardCvc"
+          name="cardCvc"
+          type="password"
           label="Security code"
-          :error="state.errors.cardCvc"
-          v-slot="{ id, aria }"
-        >
-          <input
-            :id="id"
-            v-bind="aria"
-            v-model="f.cardCvc"
-            type="password"
-            inputmode="numeric"
-            autocomplete="cc-csc"
-            maxlength="4"
-            placeholder="•••"
-            class="field font-mono"
-            :class="state.errors.cardCvc && '!border-accent'"
-            @blur="state.validate('cardCvc')"
-          />
-        </LazyVInput>
+          required
+          :rules="cardCvcRule"
+          inputmode="numeric"
+          autocomplete="cc-csc"
+          maxlength="4"
+          placeholder="•••"
+          input-class="font-mono"
+        />
       </fieldset>
 
       <div

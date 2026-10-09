@@ -7,21 +7,23 @@
       @submit.prevent="submit()"
     >
       <Icon name="lucide:search" size="22" class="ms-2 shrink-0 text-accent" aria-hidden="true" />
-      <label :for="`${uid}-q`" class="sr-only">Search the catalog</label>
-      <input
-        :id="`${uid}-q`"
+      <LazyVInput
         ref="input"
         v-model="draft"
-        type="text"
+        class="min-w-0 flex-1"
+        name="siteSearch"
+        label="Search the catalog"
+        hide-label
+        variant="bare"
+        input-class="w-full bg-transparent px-1 py-2 text-base text-paper placeholder:text-mute focus:outline-none sm:text-lg"
         role="combobox"
         autocomplete="off"
         enterkeyhint="search"
         placeholder="Search cameras, lenses, printers, paper…"
-        class="min-w-0 flex-1 bg-transparent px-1 py-2 text-base text-paper placeholder:text-mute focus:outline-none sm:text-lg"
         aria-autocomplete="list"
         :aria-expanded="open"
-        :aria-controls="`${uid}-panel`"
-        :aria-activedescendant="activeIndex >= 0 ? `${uid}-panel-opt-${activeIndex}` : undefined"
+        :aria-controls="uid + '-panel'"
+        :aria-activedescendant="activeIndex >= 0 ? uid + '-panel-opt-' + activeIndex : undefined"
         @focus="open = true"
         @input="onInput"
         @keydown.down.prevent="move(1)"
@@ -59,7 +61,7 @@ const history = useSearchHistory();
 const uid = useId();
 
 const root = ref<HTMLElement>();
-const input = ref<HTMLInputElement>();
+const input = ref<{ focus: () => void; blur: () => void }>();
 const open = ref(false);
 const draft = ref(catalog.filters.query);
 const activeIndex = ref(-1);
