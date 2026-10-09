@@ -44,7 +44,12 @@
           :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
           active-class="!border-accent !text-accent"
         >
-          <Icon name="lucide:bookmark" size="18" class="icon-lift" aria-hidden="true" />
+          <Icon
+            name="lucide:bookmark"
+            size="18"
+            class="icon-lift"
+            aria-hidden="true"
+          />
           <span
             v-if="wishlist.ids.length"
             class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
@@ -120,6 +125,7 @@ const openCart = () => {
 };
 
 const menuOpen = ref(false);
+
 const { y } = useWindowScroll();
 const scrolled = computed(() => y.value > 8);
 </script>

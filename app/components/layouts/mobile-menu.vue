@@ -62,6 +62,7 @@
                 >{{ wishlist.ids.length }}</span
               >
             </nuxt-link-locale>
+            
             <nuxt-link-locale
               to="/"
               class="btn-icon"

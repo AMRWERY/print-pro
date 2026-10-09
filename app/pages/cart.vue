@@ -91,6 +91,7 @@ import type { CartEntry } from "~/composables/useCartTotals";
 import type { DetailedProduct } from "~/types/product";
 
 const cart = useCartStore();
+const localePath = useLocalePath();
 const wishlist = useWishlistStore();
 
 const crumbs = [
@@ -156,7 +157,9 @@ const restore = (p: DetailedProduct) => {
 
 const notice = ref("");
 const checkout = () => {
-  notice.value = "Secure checkout opens here once the payment flow is connected.";
+  // Check out only the lines that are ticked.
+  cart.checkoutKeys = selectedEntries.value.map((e) => e.line.key);
+  navigateTo(localePath("/checkout"));
 };
 
 const exportInvoice = () => window.print();

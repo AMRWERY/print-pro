@@ -20,6 +20,10 @@ export const useCartStore = defineStore("cart", () => {
     initOnMounted: true,
   });
   const voucher = useLocalStorage("cart-voucher", "", { initOnMounted: true });
+  /** Lines ticked on the cart page for checkout. Empty means "everything". */
+  const checkoutKeys = useLocalStorage<string[]>("cart-checkout-keys", [], {
+    initOnMounted: true,
+  });
 
   /** Mini-cart drawer (opens from the end side). Not persisted. */
   const drawerOpen = ref(false);
@@ -78,6 +82,7 @@ export const useCartStore = defineStore("cart", () => {
     lines,
     saved,
     voucher,
+    checkoutKeys,
     drawerOpen,
     openDrawer,
     closeDrawer,

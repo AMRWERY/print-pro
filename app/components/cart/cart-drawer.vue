@@ -118,6 +118,7 @@ const MAX_VISIBLE = 4;
 
 const cart = useCartStore();
 const money = useMoney();
+const localePath = useLocalePath();
 const route = useRoute();
 
 // The cart page already shows everything, so the drawer stays closed there.
@@ -138,7 +139,9 @@ const progress = computed(() => Math.min(100, (cart.total / pricing.freeFreightF
 
 const notice = ref("");
 const checkout = () => {
-  notice.value = "Secure checkout opens here once the payment flow is connected.";
+  cart.checkoutKeys = []; // everything in the cart
+  cart.closeDrawer();
+  navigateTo(localePath("/checkout"));
 };
 
 const close = () => cart.closeDrawer();
