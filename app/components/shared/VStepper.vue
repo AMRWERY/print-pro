@@ -33,15 +33,14 @@
         </p>
       </div>
 
-      <button
+      <LazyVButton variant="tertiary"
         v-if="done && !current"
-        type="button"
-        class="link-quiet text-sm underline-offset-4 hover:underline"
+        class="text-sm underline-offset-4 hover:underline"
         :aria-label="`Edit ${title}`"
         @click="state.edit(n)"
       >
         Edit
-      </button>
+      </LazyVButton>
     </header>
 
     <!-- Only the current step is open; the others keep their summary. -->

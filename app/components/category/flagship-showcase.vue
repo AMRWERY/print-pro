@@ -55,17 +55,17 @@
               </div>
             </dl>
             <div class="mt-auto flex flex-wrap gap-3 pt-1">
-              <button type="button" class="btn-accent flex-1">
+              <LazyVButton variant="primary" class="flex-1">
                 <Icon
                   name="lucide:shopping-bag"
                   size="16"
                   class="icon-bob"
                   aria-hidden="true"
                 />{{ f.action }}
-              </button>
-              <button v-if="f.secondary" type="button" class="btn-ghost">
+              </LazyVButton>
+              <LazyVButton variant="secondary" v-if="f.secondary">
                 {{ f.secondary }}
-              </button>
+              </LazyVButton>
             </div>
           </div>
         </article>

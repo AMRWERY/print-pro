@@ -14,19 +14,17 @@
       <p class="text-sm">
         <span class="font-medium">{{ store.ids.length }}</span> to compare
       </p>
-      <nuxt-link-locale
+      <LazyVButton variant="primary"
         :to="{ path: '/compare', query: { ids: store.ids.join(',') } }"
-        class="btn-accent h-9 !px-3 text-xs"
-        >Compare now</nuxt-link-locale
-      >
-      <button
-        type="button"
-        class="btn-icon h-9 w-9"
+        class="h-9 !px-3 text-xs"
+        >Compare now</LazyVButton>
+      <LazyVButton variant="icon" size="sm"
+       
         aria-label="Clear comparison list"
         @click="store.clear()"
       >
         <Icon name="lucide:x" size="14" aria-hidden="true" />
-      </button>
+      </LazyVButton>
     </div>
   </Transition>
 </template>

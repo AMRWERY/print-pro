@@ -19,31 +19,29 @@
             class="flex items-center justify-between border-b border-line px-4 py-3"
           >
             <h2 class="font-display text-xl">Filters</h2>
-            <button
-              type="button"
-              class="btn-icon"
+            <LazyVButton variant="icon"
+             
               aria-label="Close filters"
               @click="emit('close')"
             >
               <Icon name="lucide:x" size="18" aria-hidden="true" />
-            </button>
+            </LazyVButton>
           </div>
           <div class="flex-1 overflow-y-auto px-4 py-4">
             <catalog-filters />
           </div>
           <div class="grid grid-cols-[auto_1fr] gap-2 border-t border-line p-4">
-            <button
-              type="button"
-              class="btn-ghost"
+            <LazyVButton variant="secondary"
+             
               :disabled="!catalog.chips.length"
               @click="catalog.reset()"
             >
               Reset
-            </button>
-            <button type="button" class="btn-accent" @click="emit('close')">
+            </LazyVButton>
+            <LazyVButton variant="primary" @click="emit('close')">
               Show {{ catalog.total }}
               {{ catalog.total === 1 ? "result" : "results" }}
-            </button>
+            </LazyVButton>
           </div>
         </div>
       </div>

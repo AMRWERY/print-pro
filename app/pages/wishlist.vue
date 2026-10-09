@@ -7,8 +7,8 @@
       <div v-if="shared" class="flex flex-wrap items-center justify-between gap-3 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm" role="status">
         <p class="flex items-center gap-2"><Icon name="lucide:share-2" size="16" aria-hidden="true" />You're viewing a shared registry manifest ({{ items.length }} items).</p>
         <div class="flex gap-2">
-          <button type="button" class="btn-accent !px-3 !py-1.5 text-xs" @click="saveShared">Save to my registry</button>
-          <button type="button" class="btn-ghost !px-3 !py-1.5 text-xs" @click="closeShared">Close</button>
+          <LazyVButton variant="primary" size="sm" @click="saveShared">Save to my registry</LazyVButton>
+          <LazyVButton variant="secondary" size="sm" @click="closeShared">Close</LazyVButton>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
         title="Your registry is empty"
         description="Tap the heart on any product to save it here. Group items by studio, share the manifest with your team and move everything to the cart when you are ready."
       >
-        <nuxt-link-locale to="/products" class="btn-accent">Browse the catalog</nuxt-link-locale>
+        <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
       </LazyVEmptyState>
 
       <template v-else>
@@ -70,7 +70,7 @@
         </TransitionGroup>
 
         <p v-if="!shown.length" class="rounded-card border border-line bg-raised p-4 text-sm text-mute">
-          Nothing in this category. <button type="button" class="text-accent hover:underline" @click="category = 'all'">Show all items</button>
+          Nothing in this category. <LazyVButton variant="plain" class="text-accent hover:underline" @click="category = 'all'">Show all items</LazyVButton>
         </p>
       </template>
     </div>

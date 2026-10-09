@@ -6,10 +6,9 @@
         role="group"
         aria-label="Filter by category"
       >
-        <button
+        <LazyVButton variant="plain"
           v-for="c in categories"
           :key="c.key"
-          type="button"
           class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
           :class="
             active === c.key
@@ -20,7 +19,7 @@
           @click="emit('update:active', c.key)"
         >
           {{ c.label }} ({{ c.count }})
-        </button>
+        </LazyVButton>
       </div>
 
       <div class="flex flex-wrap items-center gap-3">
@@ -29,10 +28,9 @@
           role="group"
           aria-label="Layout"
         >
-          <button
+          <LazyVButton variant="plain"
             v-for="v in views"
             :key="v.key"
-            type="button"
             class="grid h-8 w-8 place-items-center rounded-[4px] transition-colors duration-200"
             :class="
               view === v.key
@@ -44,7 +42,7 @@
             @click="emit('update:view', v.key)"
           >
             <Icon :name="v.icon" size="16" aria-hidden="true" />
-          </button>
+          </LazyVButton>
         </div>
         <div class="flex items-center gap-2">
           <LazyVSelectInput
@@ -74,15 +72,14 @@
       >
         Select all ({{ shown }})
       </LazyVInput>
-      <button
-        type="button"
-        class="link-quiet inline-flex items-center gap-1.5 text-sm disabled:opacity-40"
+      <LazyVButton variant="tertiary"
+        class="inline-flex items-center gap-1.5 text-sm disabled:opacity-40"
         :disabled="!selectedCount"
         @click="emit('batch-remove')"
       >
         <Icon name="lucide:trash-2" size="14" aria-hidden="true" />Batch remove
         ({{ selectedCount }})
-      </button>
+      </LazyVButton>
     </div>
   </div>
 </template>

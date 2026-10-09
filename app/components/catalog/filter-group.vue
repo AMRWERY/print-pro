@@ -1,9 +1,8 @@
 <template>
   <section class="border-b border-line py-4 last:border-b-0">
     <h3>
-      <button
-        type="button"
-        class="eyebrow flex w-full items-center justify-between gap-2 !text-paper"
+      <LazyVButton variant="plain" block
+        class="eyebrow flex items-center justify-between gap-2 !text-paper"
         :aria-expanded="open"
         :aria-controls="id"
         @click="open = !open"
@@ -16,7 +15,7 @@
           :class="open && 'rotate-180'"
           aria-hidden="true"
         />
-      </button>
+      </LazyVButton>
     </h3>
     <div
       :id="id"

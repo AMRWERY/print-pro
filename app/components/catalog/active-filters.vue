@@ -7,26 +7,24 @@
   >
     <span class="eyebrow">Active</span>
     <TransitionGroup name="chip">
-      <button
+      <VButton variant="plain"
         v-for="c in catalog.chips"
         :key="c.key"
-        type="button"
         class="inline-flex items-center gap-1.5 rounded-control border border-accent/40 bg-accent-soft px-2.5 py-1 text-xs transition duration-200 hover:border-accent"
         :aria-label="`Remove filter ${c.label}`"
         @click="c.remove()"
       >
         {{ c.label }}
         <Icon name="lucide:x" size="12" aria-hidden="true" />
-      </button>
+      </VButton>
     </TransitionGroup>
 
-    <button
-      type="button"
+    <VButton variant="plain"
       class="font-mono text-xs uppercase tracking-wider text-accent hover:underline"
       @click="catalog.reset()"
     >
       Reset all
-    </button>
+    </VButton>
   </div>
 </template>
 

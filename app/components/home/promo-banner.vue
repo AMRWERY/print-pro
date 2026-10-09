@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="flex flex-wrap gap-3">
-        <button type="button" class="btn-ghost">Calculate rebate</button>
-        <button type="button" class="btn-accent">Claim print rebate</button>
+        <LazyVButton variant="secondary">Calculate rebate</LazyVButton>
+        <LazyVButton variant="primary">Claim print rebate</LazyVButton>
       </div>
     </div>
   </section>

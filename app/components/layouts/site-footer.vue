@@ -22,7 +22,7 @@
             placeholder="Join optical dispatch"
             class="flex-1"
           />
-          <button type="submit" class="btn-accent shrink-0">Subscribe</button>
+          <LazyVButton variant="primary" type="submit" class="shrink-0">Subscribe</LazyVButton>
         </form>
       </div>
 
@@ -34,9 +34,9 @@
         <h2 class="eyebrow mb-4 !font-sans !font-semibold">{{ col.title }}</h2>
         <ul class="space-y-2.5 text-sm">
           <li v-for="l in col.links" :key="l">
-            <nuxt-link-locale to="/" class="link-quiet">{{
+            <LazyVButton variant="tertiary" to="/">{{
               l
-            }}</nuxt-link-locale>
+            }}</LazyVButton>
           </li>
         </ul>
       </nav>

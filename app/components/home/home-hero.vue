@@ -9,11 +9,11 @@
         </h1>
         <p class="max-w-xl text-base text-mute">Equipping world-class studios, master printmakers and visionaries with medium-format cameras, cinema glass and 64-inch pigment print labs engineered for zero-defect output.</p>
         <div class="flex flex-wrap gap-3">
-          <nuxt-link-locale to="/products" class="btn-accent">
+          <LazyVButton variant="primary" to="/products">
             Explore studio catalog
             <Icon name="lucide:arrow-right" size="16" class="icon-nudge rtl:-scale-x-100" aria-hidden="true" />
-          </nuxt-link-locale>
-          <nuxt-link-locale to="/" class="btn-ghost">Book 1-on-1 tech concierge</nuxt-link-locale>
+          </LazyVButton>
+          <LazyVButton variant="secondary" to="/">Book 1-on-1 tech concierge</LazyVButton>
         </div>
         <dl class="grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">
           <div v-for="s in heroStats" :key="s.label">

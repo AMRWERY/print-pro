@@ -2,13 +2,13 @@ import type {
   CameraFacets,
   CameraProduct,
   CameraSub,
+  InventorySort,
+  Facet,
 } from "~/types/cameras";
 import { inventorySortOptions, subLabel } from "~/data/cameras";
 
-type InventorySort = (typeof inventorySortOptions)[number]["key"];
-type Facet = "sub" | "sensor" | "mount" | "availability";
-
-const KEY: InjectionKey<ReturnType<typeof createInventory>> = Symbol("camera-inventory");
+const KEY: InjectionKey<ReturnType<typeof createInventory>> =
+  Symbol("camera-inventory");
 
 const emptyFacets = (): CameraFacets => ({
   sub: [],
@@ -46,13 +46,17 @@ const createInventory = (products: CameraProduct[]) => {
     );
     if (sort.value === "price-asc") list.sort((a, b) => a.price - b.price);
     if (sort.value === "price-desc") list.sort((a, b) => b.price - a.price);
-    if (sort.value === "resolution") list.sort((a, b) => b.megapixels - a.megapixels);
+    if (sort.value === "resolution")
+      list.sort((a, b) => b.megapixels - a.megapixels);
     return list;
   });
 
   const total = computed(() => results.value.length);
   const paged = computed(() =>
-    results.value.slice((page.value - 1) * perPage.value, page.value * perPage.value),
+    results.value.slice(
+      (page.value - 1) * perPage.value,
+      page.value * perPage.value,
+    ),
   );
 
   const options = (pick: (p: CameraProduct) => string) => {
@@ -108,6 +112,9 @@ export const provideCameraInventory = (products: CameraProduct[]) => {
 
 export const useCameraInventory = () => {
   const inventory = inject(KEY);
-  if (!inventory) throw new Error("useCameraInventory() needs provideCameraInventory() above it.");
+  if (!inventory)
+    throw new Error(
+      "useCameraInventory() needs provideCameraInventory() above it.",
+    );
   return inventory;
 };

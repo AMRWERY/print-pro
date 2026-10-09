@@ -21,10 +21,9 @@
           role="group"
           aria-label="Comparison presets"
         >
-          <button
+          <LazyVButton variant="plain"
             v-for="p in comparePresets"
             :key="p.key"
-            type="button"
             class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
             :class="
               isActivePreset(p.ids)
@@ -35,7 +34,7 @@
             @click="setIds(p.ids)"
           >
             {{ p.label }} <span class="opacity-80">({{ p.ids.length }})</span>
-          </button>
+          </LazyVButton>
         </div>
       </header>
 
@@ -77,9 +76,8 @@
             presets below.
           </p>
         </div>
-        <nuxt-link-locale to="/products" class="btn-accent"
-          >Browse the catalog</nuxt-link-locale
-        >
+        <LazyVButton variant="primary" to="/products"
+          >Browse the catalog</LazyVButton>
       </div>
     </div>
 

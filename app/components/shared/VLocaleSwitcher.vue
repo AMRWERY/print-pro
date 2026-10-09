@@ -1,17 +1,19 @@
 <template>
-  <!-- Plain nuxt-link: switchLocalePath() already returns the prefixed path, nuxt-link-locale would add it twice (/en/ar). -->
-  <nuxt-link
+  <!-- :localize="false": switchLocalePath() already returns the prefixed path (/ar); adding the locale again would give /en/ar. -->
+  <LazyVButton
     v-if="target"
     :to="switchLocalePath(target.code)"
+    :localize="false"
+    :variant="compact ? 'icon' : 'secondary'"
+    :class="!compact && 'h-10 !px-3'"
     :hreflang="target.code"
     :lang="target.code"
-    :class="compact ? 'btn-icon' : 'btn-ghost h-10 !px-3'"
     :aria-label="`Switch language to ${target.name}`"
     @click.prevent="switchTo"
   >
     <Icon name="lucide:globe" size="18" class="icon-spin" aria-hidden="true" />
     <span :class="compact && 'sr-only'">{{ target.name }}</span>
-  </nuxt-link>
+  </LazyVButton>
 </template>
 
 <script lang="ts" setup>

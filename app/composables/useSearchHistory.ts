@@ -1,7 +1,4 @@
-export interface SavedSearch {
-  q: string;
-  at: string;
-}
+import type { SavedSearch } from "~/types/search-history";
 
 const MAX_RECENT = 5;
 

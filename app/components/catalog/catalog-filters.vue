@@ -2,14 +2,13 @@
   <div>
     <div class="flex items-center justify-between pb-3">
       <h2 class="eyebrow !text-paper">Filter parameters</h2>
-      <button
+      <LazyVButton variant="plain"
         v-if="catalog.chips.length"
-        type="button"
         class="font-mono text-xs uppercase tracking-wider text-accent hover:underline"
         @click="catalog.reset()"
       >
         Reset
-      </button>
+      </LazyVButton>
     </div>
 
     <LazyVInput
@@ -46,15 +45,14 @@
         :checked="catalog.filters.brands.includes(b.name)"
         @change="catalog.toggleBrand(b.name)"
       />
-      <button
+      <LazyVButton variant="plain"
         v-if="catalog.brands.length > brandLimit"
-        type="button"
         class="mt-1 font-mono text-xs uppercase tracking-wider text-mute hover:text-paper"
         :aria-expanded="showAllBrands"
         @click="showAllBrands = !showAllBrands"
       >
         {{ showAllBrands ? "Show fewer" : `Show all ${catalog.brands.length}` }}
-      </button>
+      </LazyVButton>
     </filter-group>
 
     <filter-group title="Acquisition value (USD)">
@@ -89,14 +87,13 @@
             <span>{{ r }} &amp; up</span>
           </span>
         </LazyVInput>
-        <button
+        <LazyVButton variant="plain"
           v-if="catalog.filters.minRating !== null"
-          type="button"
           class="font-mono text-xs uppercase tracking-wider text-mute hover:text-paper"
           @click="catalog.filters.minRating = null"
         >
           Any rating
-        </button>
+        </LazyVButton>
       </div>
     </filter-group>
 

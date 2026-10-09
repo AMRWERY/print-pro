@@ -2,10 +2,11 @@
   <aside class="card space-y-4 p-5" aria-labelledby="co-summary-title">
     <div class="flex items-center justify-between gap-3">
       <h2 id="co-summary-title" class="font-display text-xl">Order summary</h2>
-      <nuxt-link-locale
+      <LazyVButton
+        variant="tertiary"
         to="/cart"
-        class="link-quiet text-sm underline-offset-4 hover:underline"
-        >Edit cart</nuxt-link-locale
+        class="text-sm underline-offset-4 hover:underline"
+        >Edit cart</LazyVButton
       >
     </div>
 
@@ -109,22 +110,12 @@
 
 <script lang="ts" setup>
 import type { CartEntry } from "~/composables/useCartTotals";
-
-export interface CheckoutAmounts {
-  units: number;
-  subtotal: number;
-  volume: number;
-  voucher: number;
-  voucherLabel?: string;
-  wire: number;
-  shipping: number;
-  tax: number;
-  total: number;
-}
+import type { CheckoutAmounts } from "~/types/checkout";
 
 defineProps<{ entries: CartEntry[]; amounts: CheckoutAmounts }>();
 
 const money = useMoney();
+
 const trust = [
   {
     icon: "lucide:shield-check",

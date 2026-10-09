@@ -6,9 +6,9 @@
         eyebrow="Recommended pairings"
         title="Certified media, substrates & consumables"
       >
-        <nuxt-link-locale
+        <LazyVButton variant="tertiary"
           to="/products"
-          class="link-quiet inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider"
+          class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider"
         >
           View all
           <Icon
@@ -17,7 +17,7 @@
             class="icon-nudge rtl:-scale-x-100"
             aria-hidden="true"
           />
-        </nuxt-link-locale>
+        </LazyVButton>
       </section-heading>
 
       <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

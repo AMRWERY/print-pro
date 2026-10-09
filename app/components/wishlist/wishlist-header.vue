@@ -21,8 +21,7 @@
         role="group"
         aria-label="Registry view mode"
       >
-        <button
-          type="button"
+        <LazyVButton variant="plain"
           class="rounded-[4px] px-3 py-1.5 transition-colors duration-200"
           :class="
             !preview ? 'bg-raised text-paper' : 'text-mute hover:text-paper'
@@ -31,9 +30,8 @@
           @click="emit('update:preview', false)"
         >
           Active ({{ count }})
-        </button>
-        <button
-          type="button"
+        </LazyVButton>
+        <LazyVButton variant="plain"
           class="rounded-[4px] px-3 py-1.5 transition-colors duration-200"
           :class="
             preview ? 'bg-raised text-paper' : 'text-mute hover:text-paper'
@@ -42,7 +40,7 @@
           @click="emit('update:preview', true)"
         >
           Empty state preview
-        </button>
+        </LazyVButton>
       </div>
     </div>
 
@@ -96,9 +94,8 @@
     </dl>
 
     <div class="flex flex-wrap items-center gap-3">
-      <button
-        type="button"
-        class="btn-accent"
+      <LazyVButton variant="primary"
+       
         :disabled="!selectedCount"
         @click="emit('move-selected')"
       >
@@ -109,10 +106,9 @@
           aria-hidden="true"
         />
         Move selected to cart ({{ selectedCount }})
-      </button>
-      <button
-        type="button"
-        class="btn-ghost"
+      </LazyVButton>
+      <LazyVButton variant="secondary"
+       
         :disabled="!count"
         @click="emit('share')"
       >
@@ -124,36 +120,33 @@
           aria-hidden="true"
         />
         {{ copied ? "Link copied" : "Share registry manifest" }}
-      </button>
-      <button
+      </LazyVButton>
+      <LazyVButton variant="secondary"
         v-if="!confirmNew"
-        type="button"
-        class="btn-ghost"
+       
         :disabled="!count"
         @click="confirmNew = true"
       >
         <Icon name="lucide:plus" size="16" aria-hidden="true" />New registry
-      </button>
+      </LazyVButton>
       <span
         v-else
         class="flex items-center gap-2 rounded-control border border-accent/40 bg-accent-soft py-1 pe-1 ps-3 text-sm"
         role="alert"
       >
         Clear this registry and start over?
-        <button
-          type="button"
-          class="btn-accent !px-3 !py-1.5 text-xs"
+        <LazyVButton variant="primary" size="sm"
+         
           @click="startNew"
         >
           Yes, clear
-        </button>
-        <button
-          type="button"
-          class="btn-ghost !px-3 !py-1.5 text-xs"
+        </LazyVButton>
+        <LazyVButton variant="secondary" size="sm"
+         
           @click="confirmNew = false"
         >
           Cancel
-        </button>
+        </LazyVButton>
       </span>
     </div>
   </header>

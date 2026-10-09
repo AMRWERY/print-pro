@@ -3,8 +3,7 @@
     class="flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-line py-3"
   >
     <label class="flex cursor-pointer items-center gap-2 text-sm">
-      <button
-        type="button"
+      <LazyVButton variant="plain"
         role="switch"
         :aria-checked="cmp.highlight"
         class="relative h-6 w-11 shrink-0 rounded-full border border-line transition-colors duration-200"
@@ -16,7 +15,7 @@
           :class="cmp.highlight && 'translate-x-5 rtl:-translate-x-5'"
         />
         <span class="sr-only">Highlight differences</span>
-      </button>
+      </LazyVButton>
       <span>Highlight differences only</span>
       <span
         class="rounded-control bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent"
@@ -26,9 +25,8 @@
 
     <LazyVInput v-model="cmp.hideIdentical" type="checkbox" label-class="items-center">Hide identical specs</LazyVInput>
 
-    <button
-      type="button"
-      class="link-quiet inline-flex items-center gap-1.5 text-sm"
+    <LazyVButton variant="tertiary"
+      class="inline-flex items-center gap-1.5 text-sm"
       @click="cmp.toggleAll()"
     >
       <Icon
@@ -41,7 +39,7 @@
         aria-hidden="true"
       />
       {{ cmp.allCollapsed ? "Expand specs" : "Collapse specs" }}
-    </button>
+    </LazyVButton>
 
     <div class="ms-auto flex flex-wrap items-center gap-3">
       <p class="font-mono text-xs text-mute">
@@ -64,10 +62,10 @@
         />
       </div>
 
-      <button type="button" class="btn-ghost h-9 !px-3 text-xs" @click="print">
+      <LazyVButton variant="secondary" class="h-9 !px-3 text-xs" @click="print">
         <Icon name="lucide:file-down" size="14" aria-hidden="true" />Export PDF
-      </button>
-      <button type="button" class="btn-ghost h-9 !px-3 text-xs" @click="share">
+      </LazyVButton>
+      <LazyVButton variant="secondary" class="h-9 !px-3 text-xs" @click="share">
         <Icon
           :key="`s-${copied}`"
           :name="copied ? 'lucide:check' : 'lucide:share-2'"
@@ -76,14 +74,13 @@
           aria-hidden="true"
         />
         {{ copied ? "Link copied" : "Share" }}
-      </button>
-      <button
-        type="button"
-        class="btn-ghost h-9 !px-3 text-xs"
+      </LazyVButton>
+      <LazyVButton variant="secondary"
+        class="h-9 !px-3 text-xs"
         @click="emit('clear')"
       >
         <Icon name="lucide:trash-2" size="14" aria-hidden="true" />Clear
-      </button>
+      </LazyVButton>
     </div>
   </div>
 </template>

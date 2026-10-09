@@ -25,10 +25,9 @@
         />
     </div>
     <div class="grid grid-cols-2 gap-2">
-      <button
+      <LazyVButton variant="plain"
         v-for="p in pricePresets"
         :key="p.label"
-        type="button"
         class="rounded-control border px-2 py-1.5 font-mono text-xs transition duration-200"
         :class="
           isActive(p)
@@ -39,7 +38,7 @@
         @click="apply(p)"
       >
         {{ p.label }}
-      </button>
+      </LazyVButton>
     </div>
   </div>
 </template>

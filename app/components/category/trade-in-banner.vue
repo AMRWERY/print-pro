@@ -20,8 +20,8 @@
         </div>
       </div>
       <div class="flex flex-wrap gap-3">
-        <button type="button" class="btn-accent">{{ primary }}</button>
-        <button type="button" class="btn-ghost">{{ secondary }}</button>
+        <LazyVButton variant="primary">{{ primary }}</LazyVButton>
+        <LazyVButton variant="secondary">{{ secondary }}</LazyVButton>
       </div>
     </div>
   </section>

@@ -1,14 +1,13 @@
-export interface Voucher {
-  label: string;
-  /** "flat" is dollars off, "percent" is a share of the discounted subtotal. */
-  type: "flat" | "percent";
-  amount: number;
-  minSubtotal?: number;
-}
+import type { Voucher } from "~/types/cart";
 
 /** Demo codes. Real validation belongs on the server. */
 export const vouchers: Record<string, Voucher> = {
-  "BIENNIAL-PRINT-2025": { label: "Biennial print rebate", type: "flat", amount: 500, minSubtotal: 2000 },
+  "BIENNIAL-PRINT-2025": {
+    label: "Biennial print rebate",
+    type: "flat",
+    amount: 500,
+    minSubtotal: 2000,
+  },
   STUDIO5: { label: "Studio welcome", type: "percent", amount: 5 },
 };
 
@@ -23,11 +22,24 @@ export const pricing = {
 };
 
 export const cartAssurances = [
-  { icon: "lucide:shield-check", label: "3-year zero-deductible mechanical warranty" },
-  { icon: "lucide:flask-conical", label: "Pre-flight bench QA & collimation verified" },
+  {
+    icon: "lucide:shield-check",
+    label: "3-year zero-deductible mechanical warranty",
+  },
+  {
+    icon: "lucide:flask-conical",
+    label: "Pre-flight bench QA & collimation verified",
+  },
   { icon: "lucide:truck", label: "Free cleanroom crated dispatch over $2,500" },
   { icon: "lucide:headset", label: "Concierge hotline: +1 (800) 492-LUMN" },
 ];
 
 /** Suggested pairings for the "complementary" section (skips anything in the cart). */
-export const companionIds = ["colorchecker", "canson-platine", "hahnemuhle-308", "b10x", "summilux", "pro4100"];
+export const companionIds = [
+  "colorchecker",
+  "canson-platine",
+  "hahnemuhle-308",
+  "b10x",
+  "summilux",
+  "pro4100",
+];

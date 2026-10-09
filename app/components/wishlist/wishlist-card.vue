@@ -94,9 +94,8 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <button
-            type="button"
-            class="btn-accent flex-1"
+          <LazyVButton variant="primary"
+            class="flex-1"
             :disabled="moved"
             @click="move"
           >
@@ -108,16 +107,15 @@
               aria-hidden="true"
             />
             {{ moved ? "Added" : readonly ? "Add to cart" : "Move to cart" }}
-          </button>
-          <button
+          </LazyVButton>
+          <LazyVButton variant="icon"
             v-if="!readonly"
-            type="button"
-            class="btn-icon"
+           
             :aria-label="`Remove ${product.name} from registry`"
             @click="emit('remove')"
           >
             <Icon name="lucide:trash-2" size="16" aria-hidden="true" />
-          </button>
+          </LazyVButton>
         </div>
 
         <div v-if="!readonly" class="flex items-center gap-2">

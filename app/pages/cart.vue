@@ -13,8 +13,8 @@
         </div>
         <div class="flex flex-col items-end gap-3">
           <div class="inline-flex rounded-control border border-line p-0.5 font-mono text-xs uppercase tracking-wider" role="group" aria-label="Cart view mode">
-            <button type="button" class="rounded-[4px] px-3 py-1.5 transition-colors duration-200" :class="!preview ? 'bg-accent text-onaccent' : 'text-mute hover:text-paper'" :aria-pressed="!preview" @click="preview = false">Active cart ({{ entries.length }} {{ entries.length === 1 ? "item" : "items" }})</button>
-            <button type="button" class="rounded-[4px] px-3 py-1.5 transition-colors duration-200" :class="preview ? 'bg-accent text-onaccent' : 'text-mute hover:text-paper'" :aria-pressed="preview" @click="preview = true">Empty preview</button>
+            <LazyVButton variant="plain" class="rounded-[4px] px-3 py-1.5 transition-colors duration-200" :class="!preview ? 'bg-accent text-onaccent' : 'text-mute hover:text-paper'" :aria-pressed="!preview" @click="preview = false">Active cart ({{ entries.length }} {{ entries.length === 1 ? "item" : "items" }})</LazyVButton>
+            <LazyVButton variant="plain" class="rounded-[4px] px-3 py-1.5 transition-colors duration-200" :class="preview ? 'bg-accent text-onaccent' : 'text-mute hover:text-paper'" :aria-pressed="preview" @click="preview = true">Empty preview</LazyVButton>
           </div>
           <p class="flex items-center gap-1.5 font-mono text-xs text-mute"><Icon name="lucide:truck" size="14" aria-hidden="true" />Dispatch cutoff: 17:00 CET</p>
         </div>
@@ -28,8 +28,8 @@
         title="Your procurement cart is empty"
         description="Add instruments from the catalog, or move saved apparatus from your studio registry."
       >
-        <nuxt-link-locale to="/products" class="btn-accent">Browse the catalog</nuxt-link-locale>
-        <nuxt-link-locale to="/wishlist" class="btn-ghost">Open studio registry</nuxt-link-locale>
+        <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
+        <LazyVButton variant="secondary" to="/wishlist">Open studio registry</LazyVButton>
       </v-empty-state>
 
       <div v-else class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
@@ -40,9 +40,9 @@
               Select all ({{ entries.length }} {{ entries.length === 1 ? "item" : "items" }})
             </LazyVInput>
             <div class="flex flex-wrap items-center gap-4 text-sm">
-              <button type="button" class="link-quiet inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchLater"><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch save</button>
-              <button type="button" class="link-quiet inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchClear"><Icon name="lucide:trash-2" size="14" aria-hidden="true" />Batch clear</button>
-              <button type="button" class="link-quiet inline-flex items-center gap-1.5" @click="exportInvoice"><Icon name="lucide:file-down" size="14" aria-hidden="true" />Export pro-forma invoice (PDF)</button>
+              <LazyVButton variant="tertiary" class="inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchLater"><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch save</LazyVButton>
+              <LazyVButton variant="tertiary" class="inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchClear"><Icon name="lucide:trash-2" size="14" aria-hidden="true" />Batch clear</LazyVButton>
+              <LazyVButton variant="tertiary" class="inline-flex items-center gap-1.5" @click="exportInvoice"><Icon name="lucide:file-down" size="14" aria-hidden="true" />Export pro-forma invoice (PDF)</LazyVButton>
             </div>
           </div>
 

@@ -9,7 +9,7 @@
         eyebrow="Digital lab assets"
         title="Calibrated ICC profiles & technical manuals"
       >
-        <button type="button" class="btn-ghost">
+        <LazyVButton variant="secondary">
           <Icon
             name="lucide:download"
             size="16"
@@ -17,7 +17,7 @@
             aria-hidden="true"
           />
           Download all certified archives
-        </button>
+        </LazyVButton>
       </section-heading>
 
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

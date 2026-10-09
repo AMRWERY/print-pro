@@ -19,11 +19,11 @@
           placeholder="Enter your studio email"
           :disabled="status === 'loading' || status === 'done'"
         />
-        <button type="submit" class="btn-accent h-[42px]" :disabled="status === 'loading' || status === 'done'">
+        <LazyVButton variant="primary" type="submit" class="h-[42px]" :disabled="status === 'loading' || status === 'done'">
           <Icon v-if="status === 'loading'" name="lucide:loader-circle" size="16" class="animate-spin" aria-hidden="true" />
           <Icon v-else-if="status === 'done'" name="lucide:check" size="16" class="animate-icon-pop" aria-hidden="true" />
           {{ status === 'done' ? 'Subscribed' : 'Join dispatch' }}
-        </button>
+        </LazyVButton>
       </form>
 
       <p v-if="status === 'done'" class="text-sm text-success" role="status">You're on the list. Watch your inbox for the next dispatch.</p>

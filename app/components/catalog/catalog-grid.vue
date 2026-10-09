@@ -5,7 +5,7 @@
     </p>
 
     <LazyVEmptyState v-if="!catalog.total">
-      <button type="button" class="btn-accent" @click="catalog.reset()">Reset all filters</button>
+      <LazyVButton variant="primary" @click="catalog.reset()">Reset all filters</LazyVButton>
     </LazyVEmptyState>
 
     <TransitionGroup

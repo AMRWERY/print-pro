@@ -38,12 +38,11 @@
       aria-label="Product views"
     >
       <li v-for="(g, i) in items" :key="g.label" role="presentation">
-        <button
-          type="button"
+        <LazyVButton variant="plain" block
           role="tab"
           :aria-selected="active === i"
           :aria-label="`Show ${g.label} view`"
-          class="block aspect-[4/3] w-full overflow-hidden rounded-control border transition duration-200"
+          class="block aspect-[4/3] overflow-hidden rounded-control border transition duration-200"
           :class="
             active === i
               ? 'border-accent'
@@ -66,7 +65,7 @@
               size="22"
               aria-hidden="true"
           /></span>
-        </button>
+        </LazyVButton>
       </li>
     </ul>
   </div>

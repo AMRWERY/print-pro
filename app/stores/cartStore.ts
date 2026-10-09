@@ -1,12 +1,4 @@
-export interface CartLine {
-  /** Product id plus the chosen option, so two configurations stay separate lines. */
-  key: string;
-  id: string;
-  qty: number;
-  /** Price per unit at the time it was added (includes any package option). */
-  unitPrice: number;
-  option?: string;
-}
+import type { CartLine } from "~/types/cart";
 
 export const MAX_QTY = 99;
 
@@ -64,7 +56,9 @@ export const useCartStore = defineStore("cart", () => {
   };
 
   const saveForLater = (keys: string[]) => {
-    const ids = lines.value.filter((l) => keys.includes(l.key)).map((l) => l.id);
+    const ids = lines.value
+      .filter((l) => keys.includes(l.key))
+      .map((l) => l.id);
     remove(keys);
     saved.value = [...new Set([...saved.value, ...ids])];
   };

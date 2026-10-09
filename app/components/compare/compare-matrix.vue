@@ -46,9 +46,8 @@
         :aria-label="s.title"
       >
         <h2 class="border-b border-line bg-raised">
-          <button
-            type="button"
-            class="flex w-full items-center justify-between gap-3 px-4 py-3 text-start"
+          <LazyVButton variant="plain" block
+            class="flex items-center justify-between gap-3 px-4 py-3 text-start"
             :aria-expanded="!cmp.isCollapsed(s.key)"
             :aria-controls="`${uid}-${s.key}`"
             @click="cmp.toggleSection(s.key)"
@@ -74,7 +73,7 @@
               :class="!cmp.isCollapsed(s.key) && 'rotate-180'"
               aria-hidden="true"
             />
-          </button>
+          </LazyVButton>
         </h2>
 
         <div

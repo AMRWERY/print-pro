@@ -2,14 +2,13 @@
   <div>
     <div class="flex items-center justify-between pb-2">
       <h3 class="eyebrow !text-paper">Filter parameters</h3>
-      <button
+      <LazyVButton variant="plain"
         v-if="inventory.activeCount"
-        type="button"
         class="font-mono text-xs uppercase tracking-wider text-accent hover:underline"
         @click="inventory.reset()"
       >
         Reset
-      </button>
+      </LazyVButton>
     </div>
 
     <filter-group title="Subcategory">
@@ -36,10 +35,9 @@
 
     <filter-group title="Effective resolution">
       <div class="flex flex-wrap gap-2">
-        <button
+        <LazyVButton variant="plain"
           v-for="t in resolutionTiers"
           :key="t.min"
-          type="button"
           class="rounded-control border px-2.5 py-1.5 font-mono text-xs transition duration-200"
           :class="
             inventory.facets.minMegapixels === t.min
@@ -53,7 +51,7 @@
           "
         >
           {{ t.label }}
-        </button>
+        </LazyVButton>
       </div>
     </filter-group>
 

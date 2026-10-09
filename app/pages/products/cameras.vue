@@ -9,17 +9,17 @@
       :stats="cameraStats"
     >
       <template #actions>
-        <button type="button" class="btn-accent" @click="scrollToInventory">
+        <LazyVButton variant="primary" @click="scrollToInventory">
           Explore {{ inventory.total }} systems
           <Icon name="lucide:arrow-down" size="16" class="icon-bob" aria-hidden="true" />
-        </button>
+        </LazyVButton>
 
-        <button type="button" class="btn-ghost">Camera system guide 2026</button>
+        <LazyVButton variant="secondary">Camera system guide 2026</LazyVButton>
       
-        <nuxt-link-locale to="/" class="link-quiet inline-flex items-center gap-1.5 px-1 text-sm">
+        <LazyVButton variant="tertiary" to="/" class="inline-flex items-center gap-1.5 px-1 text-sm">
           <Icon name="lucide:calendar-clock" size="16" class="icon-wiggle" aria-hidden="true" />
           Book a consultation
-        </nuxt-link-locale>
+        </LazyVButton>
       </template>
     </category-hero>
 

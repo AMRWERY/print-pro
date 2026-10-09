@@ -20,7 +20,7 @@
 // Generic empty state: icon, headline, short explanation and optional actions.
 //
 //   <LazyVEmptyState icon="lucide:bookmark-plus" title="…" description="…">
-//     <button class="btn-accent">Primary action</button>
+//     <LazyVButton>Primary action</LazyVButton>
 //   </LazyVEmptyState>
 //
 // With no props it shows the catalog "no results" message.

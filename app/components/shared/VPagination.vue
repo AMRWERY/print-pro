@@ -17,10 +17,9 @@
         aria-label="Items per page"
       >
         <span class="eyebrow">Show</span>
-        <button
+        <LazyVButton variant="plain"
           v-for="n in perPageOptions"
           :key="n"
-          type="button"
           class="h-9 min-w-9 rounded-control border px-2 font-mono text-xs transition duration-200"
           :class="
             perPage === n
@@ -31,14 +30,13 @@
           @click="setPerPage(n)"
         >
           {{ n }}
-        </button>
+        </LazyVButton>
       </div>
 
       <ul class="flex items-center gap-1.5">
         <li>
-          <button
-            type="button"
-            class="btn-ghost h-9 !px-3 !py-0 font-mono text-xs uppercase"
+          <LazyVButton variant="secondary"
+            class="h-9 !px-3 !py-0 font-mono text-xs uppercase"
             :disabled="page <= 1"
             @click="go(page - 1)"
           >
@@ -49,16 +47,15 @@
               aria-hidden="true"
             />
             Prev
-          </button>
+          </LazyVButton>
         </li>
 
         <li v-for="(p, i) in pages" :key="`${p}-${i}`">
           <span v-if="p === '…'" class="px-1 text-mute" aria-hidden="true"
             >…</span
           >
-          <button
+          <LazyVButton variant="plain"
             v-else
-            type="button"
             class="h-9 min-w-9 rounded-control border px-2 font-mono text-xs transition duration-200"
             :class="
               p === page
@@ -70,13 +67,12 @@
             @click="go(p)"
           >
             {{ p }}
-          </button>
+          </LazyVButton>
         </li>
 
         <li>
-          <button
-            type="button"
-            class="btn-ghost h-9 !px-3 !py-0 font-mono text-xs uppercase"
+          <LazyVButton variant="secondary"
+            class="h-9 !px-3 !py-0 font-mono text-xs uppercase"
             :disabled="page >= pageCount"
             @click="go(page + 1)"
           >
@@ -87,7 +83,7 @@
               class="icon-nudge rtl:-scale-x-100"
               aria-hidden="true"
             />
-          </button>
+          </LazyVButton>
         </li>
       </ul>
     </div>

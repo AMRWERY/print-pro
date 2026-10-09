@@ -7,13 +7,12 @@
         <div class="space-y-1 bg-surface p-4">
           <dt class="eyebrow flex items-center justify-between">
             Ship to
-            <button
-              type="button"
-              class="link-quiet normal-case tracking-normal"
+            <LazyVButton variant="tertiary"
+              class="normal-case tracking-normal"
               @click="state.edit(1)"
             >
               Edit
-            </button>
+            </LazyVButton>
           </dt>
           <dd>
             {{ f.fullName }}<span v-if="f.company"><br />{{ f.company }}</span
@@ -26,13 +25,12 @@
         <div class="space-y-1 bg-surface p-4">
           <dt class="eyebrow flex items-center justify-between">
             Delivery
-            <button
-              type="button"
-              class="link-quiet normal-case tracking-normal"
+            <LazyVButton variant="tertiary"
+              class="normal-case tracking-normal"
               @click="state.edit(2)"
             >
               Edit
-            </button>
+            </LazyVButton>
           </dt>
           <dd>
             {{ delivery.label }}<br /><span class="text-mute">{{
@@ -45,13 +43,12 @@
         <div class="space-y-1 bg-surface p-4">
           <dt class="eyebrow flex items-center justify-between">
             Payment
-            <button
-              type="button"
-              class="link-quiet normal-case tracking-normal"
+            <LazyVButton variant="tertiary"
+              class="normal-case tracking-normal"
               @click="state.edit(3)"
             >
               Edit
-            </button>
+            </LazyVButton>
           </dt>
           <dd>
             {{
@@ -78,9 +75,9 @@
         and understand large-format equipment ships by appointment.
       </LazyVInput>
 
-      <button
+      <LazyVButton variant="primary" size="xl" block
         type="submit"
-        class="btn-accent h-14 w-full text-base"
+       
         :disabled="placing"
       >
         <Icon
@@ -96,7 +93,7 @@
             ? "Placing your order…"
             : `Place order · ${money.format(total)}`
         }}
-      </button>
+      </LazyVButton>
       <p class="text-center text-xs text-mute">
         You won't be charged again after this step. A confirmation is sent to
         {{ f.email }}.

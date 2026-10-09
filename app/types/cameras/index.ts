@@ -44,3 +44,7 @@ export interface Flagship {
   icon: string;
   image?: string;
 }
+
+export type InventorySort = (typeof inventorySortOptions)[number]["key"];
+
+export type Facet = "sub" | "sensor" | "mount" | "availability";

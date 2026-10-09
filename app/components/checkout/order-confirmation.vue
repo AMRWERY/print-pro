@@ -55,12 +55,11 @@
     </ul>
 
     <div class="flex flex-wrap justify-center gap-3">
-      <nuxt-link-locale to="/products" class="btn-accent"
-        >Continue shopping</nuxt-link-locale
-      >
-      <button type="button" class="btn-ghost" @click="print">
+      <LazyVButton variant="primary" to="/products"
+        >Continue shopping</LazyVButton>
+      <LazyVButton variant="secondary" @click="print">
         <Icon name="lucide:printer" size="16" aria-hidden="true" />Print receipt
-      </button>
+      </LazyVButton>
     </div>
   </div>
 </template>

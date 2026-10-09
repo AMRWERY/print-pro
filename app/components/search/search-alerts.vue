@@ -9,9 +9,8 @@
         eyebrow="Active studio session"
         title="Substrate history & monitored search alerts"
       >
-        <button
-          type="button"
-          class="btn-ghost"
+        <LazyVButton variant="secondary"
+         
           :disabled="!query.trim() || history.isSaved(query)"
           @click="history.save(query)"
         >
@@ -24,7 +23,7 @@
             aria-hidden="true"
           />
           {{ history.isSaved(query) ? "Search saved" : "Save current search" }}
-        </button>
+        </LazyVButton>
       </section-heading>
 
       <ul class="grid gap-4 md:grid-cols-3">
@@ -32,14 +31,13 @@
           <article class="card flex h-full flex-col gap-2 p-5">
             <p class="eyebrow flex items-center justify-between text-accent">
               <span>Alert configured</span>
-              <button
-                type="button"
+              <LazyVButton variant="plain"
                 class="text-mute hover:text-paper"
                 :aria-label="`Remove saved search ${s.q}`"
                 @click="history.remove(s.q)"
               >
                 <Icon name="lucide:x" size="14" aria-hidden="true" />
-              </button>
+              </LazyVButton>
             </p>
             <h3 class="text-xl">“{{ s.q }}”</h3>
             <p class="text-sm text-mute">
@@ -69,8 +67,7 @@
             <h3 class="text-xl">{{ a.title }}</h3>
             <p class="text-sm text-mute">{{ a.body }}</p>
             <div class="mt-auto pt-3">
-              <button
-                type="button"
+              <LazyVButton variant="plain"
                 :class="
                   a.highlight
                     ? 'btn-accent'
@@ -78,7 +75,7 @@
                 "
               >
                 {{ a.action }}
-              </button>
+              </LazyVButton>
             </div>
           </article>
         </li>

@@ -30,7 +30,7 @@
           </div>
         </dl>
 
-        <button type="button" class="btn-accent">Request samples</button>
+        <LazyVButton variant="primary">Request samples</LazyVButton>
       </div>
     </div>
   </section>

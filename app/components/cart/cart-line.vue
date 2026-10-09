@@ -92,9 +92,8 @@
       <div
         class="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-3 text-sm"
       >
-        <button
-          type="button"
-          class="link-quiet inline-flex items-center gap-1.5"
+        <LazyVButton variant="tertiary"
+          class="inline-flex items-center gap-1.5"
           :aria-pressed="inRegistry"
           @click="emit('registry')"
         >
@@ -106,24 +105,22 @@
             aria-hidden="true"
           />
           {{ inRegistry ? "In registry" : "Save for registry" }}
-        </button>
+        </LazyVButton>
 
-        <button
-          type="button"
-          class="link-quiet inline-flex items-center gap-1.5"
+        <LazyVButton variant="tertiary"
+          class="inline-flex items-center gap-1.5"
           @click="emit('later')"
         >
           <Icon name="lucide:clock" size="14" aria-hidden="true" />Save for
           later
-        </button>
+        </LazyVButton>
 
-        <button
-          type="button"
-          class="link-quiet inline-flex items-center gap-1.5 hover:!text-accent"
+        <LazyVButton variant="tertiary"
+          class="inline-flex items-center gap-1.5 hover:!text-accent"
           @click="emit('remove')"
         >
           <Icon name="lucide:trash-2" size="14" aria-hidden="true" />De-allocate
-        </button>
+        </LazyVButton>
       </div>
     </div>
   </article>

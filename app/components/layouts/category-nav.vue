@@ -33,17 +33,16 @@
         </li>
 
         <li>
-          <nuxt-link-locale
+          <LazyVButton variant="tertiary"
             to="/"
-            class="link-quiet inline-flex items-center gap-1.5"
+            class="inline-flex items-center gap-1.5"
           >
             <Icon
               name="lucide:swatch-book"
               size="14"
               class="icon-wiggle"
               aria-hidden="true"
-            />ICC custom profile</nuxt-link-locale
-          >
+            />ICC custom profile</LazyVButton>
         </li>
       </ul>
     </div>

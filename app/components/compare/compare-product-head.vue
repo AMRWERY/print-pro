@@ -3,14 +3,13 @@
     class="relative flex flex-col gap-3 border-s border-line p-4"
     role="columnheader"
   >
-    <button
-      type="button"
-      class="btn-icon absolute end-3 top-3 z-10 h-8 w-8 bg-ink/70 backdrop-blur"
+    <LazyVButton variant="icon"
+      class="absolute end-3 top-3 z-10 h-8 w-8 bg-ink/70 backdrop-blur"
       :aria-label="`Remove ${product.name} from comparison`"
       @click="emit('remove')"
     >
       <Icon name="lucide:x" size="14" aria-hidden="true" />
-    </button>
+    </LazyVButton>
 
     <div class="relative overflow-hidden rounded-control border border-line">
       <div v-if="product.image" class="h-32 bg-white">
@@ -87,9 +86,8 @@
     </ul>
 
     <div class="mt-auto space-y-2 pt-1">
-      <button
-        type="button"
-        class="btn-accent w-full"
+      <LazyVButton variant="primary" block
+       
         :disabled="added"
         @click="acquire"
       >
@@ -101,12 +99,11 @@
           aria-hidden="true"
         />
         {{ added ? "Added" : profile.primary }}
-      </button>
-      <nuxt-link-locale
+      </LazyVButton>
+      <LazyVButton variant="secondary" block
         :to="`/product/${product.id}`"
-        class="btn-ghost w-full"
-        >{{ profile.secondary }}</nuxt-link-locale
-      >
+       
+        >{{ profile.secondary }}</LazyVButton>
     </div>
   </div>
 </template>

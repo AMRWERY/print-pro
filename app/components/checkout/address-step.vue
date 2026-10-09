@@ -96,9 +96,9 @@
         />
       </fieldset>
 
-      <button
+      <LazyVButton variant="primary" size="lg" block
         type="submit"
-        class="btn-accent h-12 w-full sm:w-auto sm:min-w-56"
+        class="sm:w-auto sm:min-w-56"
       >
         Continue to delivery
         <Icon
@@ -107,7 +107,7 @@
           class="icon-nudge rtl:-scale-x-100"
           aria-hidden="true"
         />
-      </button>
+      </LazyVButton>
     </form>
   </LazyVStepper>
 </template>

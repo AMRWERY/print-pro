@@ -1,3 +1,5 @@
+import type { DeliveryOption } from "~/types/checkout";
+
 export const countries = [
   { code: "US", name: "United States" },
   { code: "CA", name: "Canada" },
@@ -10,27 +12,46 @@ export const countries = [
   { code: "EG", name: "Egypt" },
 ];
 
-export interface DeliveryOption {
-  id: "crated" | "express" | "pickup";
-  label: string;
-  note: string;
-  /** Working days until delivery or pickup. */
-  days: number;
-  icon: string;
-}
-
 export const deliveryOptions: DeliveryOption[] = [
-  { id: "crated", label: "Climate-crated freight (insured)", note: "Cleanroom crate with white-glove delivery and unboxing.", days: 5, icon: "lucide:truck" },
-  { id: "express", label: "Bonded vault dispatch (express)", note: "Temperature-controlled transport, signature on delivery.", days: 2, icon: "lucide:zap" },
-  { id: "pickup", label: "Studio pickup (NYC lab)", note: "Collect from our bench after quality sign-off.", days: 1, icon: "lucide:store" },
+  {
+    id: "crated",
+    label: "Climate-crated freight (insured)",
+    note: "Cleanroom crate with white-glove delivery and unboxing.",
+    days: 5,
+    icon: "lucide:truck",
+  },
+  {
+    id: "express",
+    label: "Bonded vault dispatch (express)",
+    note: "Temperature-controlled transport, signature on delivery.",
+    days: 2,
+    icon: "lucide:zap",
+  },
+  {
+    id: "pickup",
+    label: "Studio pickup (NYC lab)",
+    note: "Collect from our bench after quality sign-off.",
+    days: 1,
+    icon: "lucide:store",
+  },
 ];
 
 /** Flat price for options that don't follow the free-freight rule. */
 export const deliveryPrices = { express: 349, pickup: 0 } as const;
 
 export const paymentMethods = [
-  { id: "card", label: "Credit or debit card", note: "Visa, Mastercard, Amex", icon: "lucide:credit-card" },
-  { id: "wire", label: "Wire transfer / escrow", note: "Save 2% on the order", icon: "lucide:landmark" },
+  {
+    id: "card",
+    label: "Credit or debit card",
+    note: "Visa, Mastercard, Amex",
+    icon: "lucide:credit-card",
+  },
+  {
+    id: "wire",
+    label: "Wire transfer / escrow",
+    note: "Save 2% on the order",
+    icon: "lucide:landmark",
+  },
 ] as const;
 
 export const WIRE_DISCOUNT = 0.02;

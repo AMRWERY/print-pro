@@ -13,9 +13,8 @@
           :key="s.key"
           v-reveal="{ delay: (i % 6) * 60 }"
         >
-          <button
-            type="button"
-            class="group card flex h-full w-full flex-col gap-3 p-4 text-start transition duration-200 hover:-translate-y-0.5 hover:border-accent"
+          <LazyVButton variant="plain" block
+            class="group card flex h-full flex-col gap-3 p-4 text-start transition duration-200 hover:-translate-y-0.5 hover:border-accent"
             @click="emit('select', s.key)"
           >
             <span class="flex items-center justify-between text-mute">
@@ -42,7 +41,7 @@
                 aria-hidden="true"
               />
             </span>
-          </button>
+          </LazyVButton>
         </li>
       </ul>
     </div>

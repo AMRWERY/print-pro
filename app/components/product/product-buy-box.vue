@@ -76,9 +76,8 @@
 
     <div class="space-y-3">
       <div ref="cta" class="flex gap-2">
-        <button
-          type="button"
-          class="btn-accent h-12 flex-1"
+        <LazyVButton variant="primary" size="lg"
+          class="flex-1"
           :disabled="added"
           @click="acquire"
         >
@@ -90,10 +89,9 @@
             aria-hidden="true"
           />
           {{ added ? "Added to order" : "Acquire engine" }}
-        </button>
-        <button
-          type="button"
-          class="btn-icon h-12 w-12"
+        </LazyVButton>
+        <LazyVButton variant="icon"
+          class="h-12 w-12"
           :aria-pressed="wished"
           :aria-label="wished ? 'Remove from wishlist' : 'Add to wishlist'"
           @click="wished = !wished"
@@ -105,9 +103,9 @@
             :class="wished && 'animate-icon-pop fill-accent text-accent'"
             aria-hidden="true"
           />
-        </button>
+        </LazyVButton>
       </div>
-      <button type="button" class="btn-ghost w-full">
+      <LazyVButton variant="secondary" block>
         <Icon
           name="lucide:calendar-clock"
           size="16"
@@ -115,7 +113,7 @@
           aria-hidden="true"
         />
         Request a studio print test
-      </button>
+      </LazyVButton>
     </div>
 
     <aside
@@ -152,14 +150,13 @@
         <p class="truncate text-sm font-medium">{{ product.name }}</p>
         <p class="font-mono text-xs text-mute">{{ money.format(total) }}</p>
       </div>
-      <button
-        type="button"
-        class="btn-accent shrink-0"
+      <LazyVButton variant="primary"
+        class="shrink-0"
         :disabled="added"
         @click="acquire"
       >
         {{ added ? "Added" : "Acquire" }}
-      </button>
+      </LazyVButton>
     </div>
   </Transition>
 </template>

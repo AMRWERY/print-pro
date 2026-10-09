@@ -27,9 +27,8 @@
           role="option"
           :aria-selected="activeIndex === i"
         >
-          <button
-            type="button"
-            class="flex w-full items-baseline justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm transition-colors duration-200 hover:bg-raised"
+          <LazyVButton variant="plain" block
+            class="flex items-baseline justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm transition-colors duration-200 hover:bg-raised"
             :class="activeIndex === i ? 'bg-raised text-accent' : 'text-paper'"
             @mousedown.prevent
             @click="emit('pick', p.name)"
@@ -38,7 +37,7 @@
             <span class="shrink-0 font-mono text-xs text-mute">{{
               money.format(p.price)
             }}</span>
-          </button>
+          </LazyVButton>
         </li>
       </ul>
       <p v-else class="px-2 text-sm text-mute">
@@ -53,9 +52,8 @@
       </h3>
       <ul v-if="recent.length" class="space-y-1">
         <li v-for="r in recent" :key="r">
-          <button
-            type="button"
-            class="flex w-full items-center justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm text-mute transition-colors duration-200 hover:bg-raised hover:text-paper"
+          <LazyVButton variant="plain" block
+            class="flex items-center justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm text-mute transition-colors duration-200 hover:bg-raised hover:text-paper"
             @mousedown.prevent
             @click="emit('pick', r)"
           >
@@ -66,7 +64,7 @@
               class="icon-nudge shrink-0 rtl:-scale-x-100"
               aria-hidden="true"
             />
-          </button>
+          </LazyVButton>
         </li>
       </ul>
       <p v-else class="px-2 text-sm text-mute">
@@ -81,9 +79,8 @@
       </h3>
       <ul class="space-y-1">
         <li v-for="t in trending" :key="t.term">
-          <button
-            type="button"
-            class="flex w-full items-center justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm text-mute transition-colors duration-200 hover:bg-raised hover:text-paper"
+          <LazyVButton variant="plain" block
+            class="flex items-center justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm text-mute transition-colors duration-200 hover:bg-raised hover:text-paper"
             @mousedown.prevent
             @click="emit('pick', t.term)"
           >
@@ -91,7 +88,7 @@
             <span class="shrink-0 font-mono text-xs uppercase text-accent">{{
               t.tag
             }}</span>
-          </button>
+          </LazyVButton>
         </li>
       </ul>
     </section>
@@ -103,15 +100,14 @@
         >Press <kbd class="rounded border border-line px-1">Esc</kbd> to
         dismiss</span
       >
-      <button
+      <LazyVButton variant="plain"
         v-if="recent.length"
-        type="button"
         class="text-accent hover:underline"
         @mousedown.prevent
         @click="emit('clear-recent')"
       >
         Clear search history
-      </button>
+      </LazyVButton>
     </div>
   </div>
 </template>

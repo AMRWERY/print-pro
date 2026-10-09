@@ -11,9 +11,8 @@
         :title="`Verified system inventory (${inventory.total})`"
       >
         <div class="flex items-center gap-3">
-          <button
-            type="button"
-            class="btn-ghost h-10 !px-3 lg:hidden"
+          <LazyVButton variant="secondary"
+            class="h-10 !px-3 lg:hidden"
             :aria-expanded="showFilters"
             aria-controls="inventory-filters"
             @click="showFilters = !showFilters"
@@ -30,7 +29,7 @@
               class="grid h-5 min-w-5 place-items-center rounded-full bg-accent px-1 font-mono text-xs font-bold text-onaccent"
               >{{ inventory.activeCount }}</span
             >
-          </button>
+          </LazyVButton>
           <LazyVSelectInput
             v-model="inventory.sort"
             name="inventorySort"
@@ -75,9 +74,9 @@
               Widen the resolution or price range, or reset the filters to see
               the full inventory.
             </p>
-            <button type="button" class="btn-accent" @click="inventory.reset()">
+            <LazyVButton variant="primary" @click="inventory.reset()">
               Reset filters
-            </button>
+            </LazyVButton>
           </div>
 
           <TransitionGroup

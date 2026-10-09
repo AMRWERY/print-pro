@@ -20,25 +20,23 @@
           >
             <LazyVBrandMark />
 
-            <button
-              type="button"
-              class="btn-icon"
+            <LazyVButton variant="icon"
+             
               aria-label="Close menu"
               @click="emit('close')"
             >
               <Icon name="lucide:x" size="18" aria-hidden="true" />
-            </button>
+            </LazyVButton>
           </div>
           <div
             class="flex items-center justify-around gap-2 border-b border-line p-3"
             role="group"
             aria-label="Account and preferences"
           >
-            <button
-              type="button"
+            <LazyVButton variant="icon"
               aria-haspopup="dialog"
               @click="openCart"
-              class="btn-icon relative"
+              class="relative"
               :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
               
             >
@@ -48,10 +46,10 @@
                 class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
                 >{{ cart.count }}</span
               >
-            </button>
-            <nuxt-link-locale
+            </LazyVButton>
+            <LazyVButton variant="icon"
               to="/wishlist"
-              class="btn-icon relative"
+              class="relative"
               :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
               @click="emit('close')"
             >
@@ -61,16 +59,16 @@
                 class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
                 >{{ wishlist.ids.length }}</span
               >
-            </nuxt-link-locale>
+            </LazyVButton>
             
-            <nuxt-link-locale
+            <LazyVButton variant="icon"
               to="/"
-              class="btn-icon"
+             
               aria-label="Account"
               @click="emit('close')"
             >
               <Icon name="lucide:user" size="18" class="icon-wiggle" aria-hidden="true" />
-            </nuxt-link-locale>
+            </LazyVButton>
             <LazyVThemeToggle />
             <LazyVLocaleSwitcher compact />
           </div>
@@ -105,18 +103,16 @@
             </ul>
           </nav>
           <div class="grid gap-2 border-t border-line p-4">
-            <nuxt-link-locale
+            <LazyVButton variant="primary"
               to="/"
-              class="btn-accent"
+             
               @click="emit('close')"
-              >Trade-in evaluation</nuxt-link-locale
-            >
-            <nuxt-link-locale
+              >Trade-in evaluation</LazyVButton>
+            <LazyVButton variant="secondary"
               to="/"
-              class="btn-ghost"
+             
               @click="emit('close')"
-              >ICC custom profile</nuxt-link-locale
-            >
+              >ICC custom profile</LazyVButton>
           </div>
         </div>
       </div>

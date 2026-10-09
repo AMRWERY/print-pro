@@ -1,9 +1,8 @@
 <template>
   <section class="card" aria-labelledby="saved-title">
     <h2 id="saved-title">
-      <button
-        type="button"
-        class="flex w-full items-center justify-between gap-3 p-4 text-start"
+      <LazyVButton variant="plain" block
+        class="flex items-center justify-between gap-3 p-4 text-start"
         :aria-expanded="open"
         :aria-controls="`${uid}-list`"
         @click="open = !open"
@@ -19,7 +18,7 @@
           :class="open && 'rotate-180'"
           aria-hidden="true"
         />
-      </button>
+      </LazyVButton>
     </h2>
     <div
       :id="`${uid}-list`"
@@ -59,9 +58,8 @@
                 {{ money.format(p.price) }}
               </p>
             </div>
-            <button
-              type="button"
-              class="btn-ghost !px-3 !py-1.5 text-xs"
+            <LazyVButton variant="secondary" size="sm"
+             
               @click="emit('restore', p)"
             >
               <Icon
@@ -69,15 +67,14 @@
                 size="14"
                 aria-hidden="true"
               />Move to manifest
-            </button>
-            <button
-              type="button"
-              class="btn-icon h-9 w-9"
+            </LazyVButton>
+            <LazyVButton variant="icon" size="sm"
+             
               :aria-label="`Remove ${p.name} from saved items`"
               @click="emit('remove', p.id)"
             >
               <Icon name="lucide:x" size="14" aria-hidden="true" />
-            </button>
+            </LazyVButton>
           </li>
         </ul>
       </div>

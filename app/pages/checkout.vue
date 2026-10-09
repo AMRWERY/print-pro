@@ -9,27 +9,27 @@
       title="There's nothing to check out"
       description="Your cart is empty. Add instruments from the catalog, then come back here to place the order."
     >
-      <nuxt-link-locale to="/products" class="btn-accent">Browse the catalog</nuxt-link-locale>
-      <nuxt-link-locale to="/cart" class="btn-ghost">Back to cart</nuxt-link-locale>
+      <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
+      <LazyVButton variant="secondary" to="/cart">Back to cart</LazyVButton>
     </v-empty-state>
 
     <template v-else>
       <div class="mb-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <h1 class="font-display text-3xl">Checkout</h1>
-          <nuxt-link-locale to="/cart" class="link-quiet inline-flex items-center gap-1.5 text-sm">
+          <LazyVButton variant="tertiary" to="/cart" class="inline-flex items-center gap-1.5 text-sm">
             <Icon name="lucide:arrow-left" size="14" class="rtl:-scale-x-100" aria-hidden="true" />Back to cart
-          </nuxt-link-locale>
+          </LazyVButton>
         </div>
         <checkout-progress />
       </div>
 
       <!-- Phones: the order total stays one tap away -->
       <div class="mb-4 lg:hidden">
-        <button type="button" class="card flex w-full items-center justify-between gap-3 p-4 text-start" :aria-expanded="showSummary" aria-controls="co-summary-mobile" @click="showSummary = !showSummary">
+        <LazyVButton variant="plain" block class="card flex items-center justify-between gap-3 p-4 text-start" :aria-expanded="showSummary" aria-controls="co-summary-mobile" @click="showSummary = !showSummary">
           <span class="flex items-center gap-2 text-sm"><Icon name="lucide:shopping-bag" size="16" class="text-accent" aria-hidden="true" />{{ showSummary ? "Hide" : "Show" }} order summary</span>
           <span class="flex items-center gap-2 font-display text-lg">{{ money.format(amounts.total) }}<Icon name="lucide:chevron-down" size="16" class="text-mute transition-transform duration-200" :class="showSummary && 'rotate-180'" aria-hidden="true" /></span>
-        </button>
+        </LazyVButton>
         <div id="co-summary-mobile" class="grid transition-[grid-template-rows] duration-300 ease-out" :class="showSummary ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" :inert="!showSummary">
           <div class="overflow-hidden"><div class="pt-3"><checkout-summary :entries="entries" :amounts="amounts" /></div></div>
         </div>

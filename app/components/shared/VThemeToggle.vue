@@ -1,7 +1,6 @@
 <template>
-  <button
-    type="button"
-    class="btn-icon overflow-hidden"
+  <LazyVButton variant="icon"
+    class="overflow-hidden"
     :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
     @click="toggle"
   >
@@ -13,7 +12,7 @@
         aria-hidden="true"
       />
     </Transition>
-  </button>
+  </LazyVButton>
 </template>
 
 <script lang="ts" setup>

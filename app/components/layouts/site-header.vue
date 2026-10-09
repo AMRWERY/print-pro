@@ -4,15 +4,14 @@
     :class="scrolled && 'shadow-lg shadow-black/20'"
   >
     <div class="container-page flex items-center gap-3 py-3 lg:gap-6">
-      <button
-        type="button"
-        class="btn-icon lg:hidden"
+      <LazyVButton variant="icon"
+        class="lg:hidden"
         aria-label="Open menu"
         aria-haspopup="dialog"
         @click="menuOpen = true"
       >
         <Icon name="lucide:menu" size="20" aria-hidden="true" />
-      </button>
+      </LazyVButton>
 
       <LazyVBrandMark />
 
@@ -21,9 +20,9 @@
       </div>
 
       <div class="ms-auto flex items-center gap-2">
-        <nuxt-link-locale
+        <LazyVButton variant="tertiary"
           to="/"
-          class="link-quiet hidden items-center gap-1.5 px-2 font-mono text-xs uppercase tracking-wider xl:inline-flex"
+          class="hidden items-center gap-1.5 px-2 font-mono text-xs uppercase tracking-wider xl:inline-flex"
         >
           <Icon
             name="lucide:sliders-horizontal"
@@ -32,15 +31,15 @@
             aria-hidden="true"
           />
           Calibration services
-        </nuxt-link-locale>
+        </LazyVButton>
 
         <LazyVLocaleSwitcher class="hidden lg:inline-flex" />
 
         <LazyVThemeToggle class="hidden lg:inline-flex" />
 
-        <nuxt-link-locale
+        <LazyVButton variant="icon"
           to="/wishlist"
-          class="btn-icon relative hidden lg:inline-flex"
+          class="relative hidden lg:inline-flex"
           :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
           active-class="!border-accent !text-accent"
         >
@@ -55,11 +54,11 @@
             class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
             >{{ wishlist.ids.length }}</span
           >
-        </nuxt-link-locale>
+        </LazyVButton>
 
-        <nuxt-link-locale
+        <LazyVButton variant="icon"
           to="/"
-          class="btn-icon hidden lg:inline-flex"
+          class="hidden lg:inline-flex"
           aria-label="Account"
         >
           <Icon
@@ -68,13 +67,12 @@
             class="icon-wiggle"
             aria-hidden="true"
           />
-        </nuxt-link-locale>
+        </LazyVButton>
 
-        <button
-          type="button"
+        <LazyVButton variant="secondary"
           aria-haspopup="dialog"
           @click="openCart"
-          class="btn-ghost hidden h-10 !px-3 lg:inline-flex"
+          class="hidden h-10 !px-3 lg:inline-flex"
           :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
         >
           <span class="relative">
@@ -96,7 +94,7 @@
           <span class="hidden font-mono sm:inline">{{
             money.format(cart.total)
           }}</span>
-        </button>
+        </LazyVButton>
       </div>
     </div>
 

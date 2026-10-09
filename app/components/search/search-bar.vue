@@ -30,14 +30,14 @@
         @keydown.up.prevent="move(-1)"
         @keydown.enter="onEnter"
       />
-      <button v-if="draft" type="button" class="btn-icon h-9 w-9 border-transparent" aria-label="Clear search" @click="clear">
+      <LazyVButton variant="icon" size="sm" v-if="draft" class="border-transparent" aria-label="Clear search" @click="clear">
         <Icon name="lucide:x" size="16" aria-hidden="true" />
-      </button>
+      </LazyVButton>
    
-      <button type="submit" class="btn-accent shrink-0">
+      <LazyVButton variant="primary" type="submit" class="shrink-0">
         <span class="hidden sm:inline">Search</span>
         <Icon name="lucide:arrow-right" size="16" class="icon-nudge rtl:-scale-x-100 sm:hidden" aria-hidden="true" />
-      </button>
+      </LazyVButton>
     </form>
 
     <Transition name="drop">

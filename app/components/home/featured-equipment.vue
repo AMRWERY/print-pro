@@ -11,10 +11,9 @@
           aria-label="Filter featured equipment"
           class="flex flex-wrap gap-2"
         >
-          <button
+          <LazyVButton variant="plain"
             v-for="f in featuredFilters"
             :key="f.key"
-            type="button"
             :aria-pressed="active === f.key"
             class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
             :class="
@@ -25,7 +24,7 @@
             @click="active = f.key"
           >
             {{ f.label }}
-          </button>
+          </LazyVButton>
         </div>
       </section-heading>
 

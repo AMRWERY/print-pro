@@ -2,10 +2,10 @@
   <section class="section" aria-labelledby="arrivals-title">
     <div class="container-page space-y-8">
       <section-heading id="arrivals-title" eyebrow="Verified consignment & fresh drops" title="Bench-certified arrivals">
-        <nuxt-link-locale to="/" class="link-quiet inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider">
+        <LazyVButton variant="tertiary" to="/" class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider">
           View all consignments
           <Icon name="lucide:arrow-right" size="14" class="icon-nudge rtl:-scale-x-100" aria-hidden="true" />
-        </nuxt-link-locale>
+        </LazyVButton>
       </section-heading>
 
       <ul class="grid gap-4 md:grid-cols-3">
@@ -19,7 +19,7 @@
               <p class="text-sm text-mute">{{ a.note }}</p>
               <div class="mt-auto flex items-center justify-between gap-3 pt-3">
                 <p class="font-display text-2xl font-semibold">{{ money.format(a.price) }}</p>
-                <button type="button" class="btn-ghost">{{ a.action }}</button>
+                <LazyVButton variant="secondary">{{ a.action }}</LazyVButton>
               </div>
             </div>
           </article>

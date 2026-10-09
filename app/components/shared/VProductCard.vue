@@ -34,9 +34,8 @@
       />
 
       <div class="absolute end-3 top-3 z-10 flex flex-col gap-2">
-        <button
-          type="button"
-          class="btn-icon h-9 w-9 bg-ink/70 backdrop-blur"
+        <LazyVButton variant="icon" size="sm"
+          class="bg-ink/70 backdrop-blur"
           :aria-pressed="wished"
           :aria-label="
             wished
@@ -52,10 +51,9 @@
             :class="wished && 'animate-icon-pop fill-accent text-accent'"
             aria-hidden="true"
           />
-        </button>
-        <button
-          type="button"
-          class="btn-icon h-9 w-9 bg-ink/70 backdrop-blur"
+        </LazyVButton>
+        <LazyVButton variant="icon" size="sm"
+          class="bg-ink/70 backdrop-blur"
           :aria-pressed="compared"
           :aria-label="
             compared
@@ -74,7 +72,7 @@
             :class="compared && 'animate-icon-pop'"
             aria-hidden="true"
           />
-        </button>
+        </LazyVButton>
       </div>
     </div>
 
@@ -122,16 +120,14 @@
           </p>
         </div>
         <div class="relative z-10 flex items-center gap-2">
-          <button
-            type="button"
-            class="btn-icon"
+          <LazyVButton variant="icon"
+           
             :aria-label="`Quick view ${product.name}`"
           >
             <Icon name="lucide:eye" size="16" class="icon-lift" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            class="btn-accent min-w-[6.5rem]"
+          </LazyVButton>
+          <LazyVButton variant="primary"
+            class="min-w-[6.5rem]"
             :disabled="added"
             @click="acquire"
           >
@@ -143,7 +139,7 @@
               aria-hidden="true"
             />
             <span aria-live="polite">{{ added ? "Added" : "Acquire" }}</span>
-          </button>
+          </LazyVButton>
         </div>
       </div>
     </div>

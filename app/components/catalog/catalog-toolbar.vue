@@ -1,8 +1,7 @@
 <template>
   <div class="flex flex-wrap items-center justify-between gap-3">
-    <button
-      type="button"
-      class="btn-ghost h-10 !px-3 lg:hidden"
+    <LazyVButton variant="secondary"
+      class="h-10 !px-3 lg:hidden"
       aria-haspopup="dialog"
       @click="emit('open-filters')"
     >
@@ -18,7 +17,7 @@
         class="grid h-5 min-w-5 place-items-center rounded-full bg-accent px-1 font-mono text-xs font-bold text-onaccent"
         >{{ catalog.chips.length }}</span
       >
-    </button>
+    </LazyVButton>
 
     <div class="ms-auto flex flex-wrap items-center gap-4">
       <LazyVSelectInput

@@ -20,9 +20,9 @@
               Studio cart
               <span class="font-mono text-sm text-mute">({{ cart.count }} {{ cart.count === 1 ? "unit" : "units" }})</span>
             </h2>
-            <button ref="closeBtn" type="button" class="btn-icon" aria-label="Close cart" @click="close">
+            <LazyVButton variant="icon" ref="closeBtn" aria-label="Close cart" @click="close">
               <Icon name="lucide:x" size="18" aria-hidden="true" />
-            </button>
+            </LazyVButton>
           </header>
 
           <!-- Empty -->
@@ -34,7 +34,7 @@
               <p class="font-display text-xl">Your cart is empty</p>
               <p class="text-sm text-mute">Add instruments from the catalog to start a procurement manifest.</p>
             </div>
-            <nuxt-link-locale to="/products" class="btn-accent" @click="close">Browse the catalog</nuxt-link-locale>
+            <LazyVButton variant="primary" to="/products" @click="close">Browse the catalog</LazyVButton>
           </div>
 
           <template v-else>
@@ -55,9 +55,9 @@
                       </p>
                       <p v-if="e.line.option" class="truncate text-xs text-mute">{{ e.line.option }}</p>
                     </div>
-                    <button type="button" class="btn-icon h-8 w-8 shrink-0" :aria-label="`Remove ${e.product.name} from cart`" @click="cart.remove([e.line.key])">
+                    <LazyVButton variant="icon" class="h-8 w-8 shrink-0" :aria-label="`Remove ${e.product.name} from cart`" @click="cart.remove([e.line.key])">
                       <Icon name="lucide:trash-2" size="14" aria-hidden="true" />
-                    </button>
+                    </LazyVButton>
                   </div>
 
                   <div class="mt-auto flex items-center justify-between gap-3">
@@ -89,15 +89,15 @@
                 <p class="rounded-control border border-line bg-raised p-2 text-center text-xs text-mute" role="status">
                   Showing {{ MAX_VISIBLE }} of {{ entries.length }} items. {{ hiddenCount }} more in your cart.
                 </p>
-                <nuxt-link-locale to="/cart" class="btn-accent h-12 w-full" @click="close">
+                <LazyVButton variant="primary" size="lg" block to="/cart" @click="close">
                   View all {{ entries.length }} items
                   <Icon name="lucide:arrow-right" size="16" class="icon-nudge rtl:-scale-x-100" aria-hidden="true" />
-                </nuxt-link-locale>
+                </LazyVButton>
               </template>
               <template v-else>
-                <button type="button" class="btn-accent h-12 w-full" @click="checkout">
+                <LazyVButton variant="primary" size="lg" block @click="checkout">
                   <Icon name="lucide:lock" size="16" aria-hidden="true" />Secure studio checkout
-                </button>
+                </LazyVButton>
                 <p v-if="notice" class="rounded-control border border-line bg-raised p-2 text-xs text-mute" role="status">{{ notice }}</p>
               </template>
             </footer>

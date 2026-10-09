@@ -95,7 +95,7 @@
           placeholder="BIENNIAL-PRINT-2025"
           input-class="font-mono"
         />
-        <button type="submit" class="btn-ghost shrink-0" :disabled="!draft.trim()">Apply</button>
+        <LazyVButton variant="secondary" type="submit" class="shrink-0" :disabled="!draft.trim()">Apply</LazyVButton>
       </form>
       
       <div
@@ -112,20 +112,18 @@
               : "· applied"
           }}</span
         >
-        <button
-          type="button"
-          class="link-quiet text-xs"
+        <LazyVButton variant="tertiary"
+          class="text-xs"
           @click="emit('voucher', '')"
         >
           Remove
-        </button>
+        </LazyVButton>
       </div>
     </div>
 
     <div class="space-y-2">
-      <button
-        type="button"
-        class="btn-accent h-12 w-full"
+      <LazyVButton variant="primary" size="lg" block
+       
         :disabled="!totals.units"
         @click="emit('checkout')"
       >
@@ -137,15 +135,14 @@
           class="icon-nudge rtl:-scale-x-100"
           aria-hidden="true"
         />
-      </button>
-      <button
-        type="button"
-        class="btn-ghost w-full text-xs"
+      </LazyVButton>
+      <LazyVButton variant="secondary" block
+        class="text-xs"
         :disabled="!totals.units"
       >
         <Icon name="lucide:landmark" size="14" aria-hidden="true" />Wire
         transfer / escrow (save 2%)
-      </button>
+      </LazyVButton>
       <p
         v-if="notice"
         class="rounded-control border border-line bg-raised p-2 text-xs text-mute"
@@ -153,16 +150,15 @@
       >
         {{ notice }}
       </p>
-      <nuxt-link-locale
+      <LazyVButton variant="tertiary"
         to="/products"
-        class="link-quiet flex items-center justify-center gap-1.5 text-sm"
+        class="flex items-center justify-center gap-1.5 text-sm"
         ><Icon
           name="lucide:arrow-left"
           size="14"
           class="rtl:-scale-x-100"
           aria-hidden="true"
-        />Continue exploring equipment catalog</nuxt-link-locale
-      >
+        />Continue exploring equipment catalog</LazyVButton>
     </div>
 
     <ul class="space-y-2 border-t border-line pt-4 text-xs text-mute">

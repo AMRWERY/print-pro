@@ -6,8 +6,7 @@
         :key="s.n"
         class="flex flex-1 items-center last:flex-none"
       >
-        <button
-          type="button"
+        <LazyVButton variant="plain"
           class="flex items-center gap-2 rounded-control py-1 text-start transition-colors duration-200 disabled:cursor-default"
           :disabled="!state.canOpen(s.n)"
           :aria-current="state.step === s.n ? 'step' : undefined"
@@ -40,7 +39,7 @@
             :class="state.step === s.n ? 'font-medium text-paper' : 'text-mute'"
             >{{ s.short }}</span
           >
-        </button>
+        </LazyVButton>
         <span
           v-if="i < checkoutSteps.length - 1"
           class="mx-2 h-px flex-1 transition-colors duration-300"

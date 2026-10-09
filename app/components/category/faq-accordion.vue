@@ -4,9 +4,8 @@
   >
     <li v-for="(f, i) in items" :key="f.q" v-reveal="{ delay: i * 60 }">
       <h3>
-        <button
-          type="button"
-          class="flex w-full items-center justify-between gap-4 p-4 text-start text-sm font-medium transition-colors duration-200 hover:bg-raised sm:text-base"
+        <LazyVButton variant="plain" block
+          class="flex items-center justify-between gap-4 p-4 text-start text-sm font-medium transition-colors duration-200 hover:bg-raised sm:text-base"
           :aria-expanded="openIndex === i"
           :aria-controls="`${uid}-${i}`"
           @click="openIndex = openIndex === i ? -1 : i"
@@ -19,7 +18,7 @@
             :class="openIndex === i && 'rotate-180 text-accent'"
             aria-hidden="true"
           />
-        </button>
+        </LazyVButton>
       </h3>
       <div
         :id="`${uid}-${i}`"
