@@ -20,8 +20,8 @@
           >
             <LazyVBrandMark />
 
-            <LazyVButton variant="icon"
-             
+            <LazyVButton
+              variant="icon"
               aria-label="Close menu"
               @click="emit('close')"
             >
@@ -33,43 +33,76 @@
             role="group"
             aria-label="Account and preferences"
           >
-            <LazyVButton variant="icon"
+            <LazyVButton
+              variant="icon"
               aria-haspopup="dialog"
               @click="openCart"
               class="relative"
               :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
-              
             >
-              <Icon name="lucide:shopping-cart" size="18" class="icon-bob" aria-hidden="true" />
+              <Icon
+                name="lucide:shopping-cart"
+                size="18"
+                class="icon-bob"
+                aria-hidden="true"
+              />
               <span
                 v-if="cart.count"
                 class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
                 >{{ cart.count }}</span
               >
             </LazyVButton>
-            <LazyVButton variant="icon"
+            <LazyVButton
+              variant="icon"
               to="/wishlist"
               class="relative"
               :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
               @click="emit('close')"
             >
-              <Icon name="lucide:bookmark" size="18" class="icon-lift" aria-hidden="true" />
+              <Icon
+                name="lucide:bookmark"
+                size="18"
+                class="icon-lift"
+                aria-hidden="true"
+              />
               <span
                 v-if="wishlist.ids.length"
                 class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
                 >{{ wishlist.ids.length }}</span
               >
             </LazyVButton>
-            
-            <LazyVButton variant="icon"
-              to="/"
-             
-              aria-label="Account"
+
+            <LazyVButton
+              v-if="!auth.isSignedIn"
+              variant="icon"
+              to="/auth"
+              aria-label="Sign in"
               @click="emit('close')"
             >
-              <Icon name="lucide:user" size="18" class="icon-wiggle" aria-hidden="true" />
+              <Icon
+                name="lucide:user"
+                size="18"
+                class="icon-wiggle"
+                aria-hidden="true"
+              />
             </LazyVButton>
+
+            <LazyVButton
+              v-else
+              variant="icon"
+              :aria-label="'Sign out ' + auth.user?.name"
+              @click="signOut"
+            >
+              <Icon
+                name="lucide:log-out"
+                size="18"
+                class="icon-nudge"
+                aria-hidden="true"
+              />
+            </LazyVButton>
+
             <LazyVThemeToggle />
+
             <LazyVLocaleSwitcher compact />
           </div>
           <nav
@@ -103,16 +136,12 @@
             </ul>
           </nav>
           <div class="grid gap-2 border-t border-line p-4">
-            <LazyVButton variant="primary"
-              to="/"
-             
-              @click="emit('close')"
-              >Trade-in evaluation</LazyVButton>
-            <LazyVButton variant="secondary"
-              to="/"
-             
-              @click="emit('close')"
-              >ICC custom profile</LazyVButton>
+            <LazyVButton variant="primary" to="/" @click="emit('close')"
+              >Trade-in evaluation</LazyVButton
+            >
+            <LazyVButton variant="secondary" to="/" @click="emit('close')"
+              >ICC custom profile</LazyVButton
+            >
           </div>
         </div>
       </div>
@@ -127,17 +156,25 @@ const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
 const cart = useCartStore();
 const wishlist = useWishlistStore();
+const auth = useAuthStore();
+
+const signOut = () => {
+  emit("close");
+  auth.logout();
+};
 
 const openCart = () => {
   emit("close");
   cart.openDrawer();
 };
+
 const matchesSearch = useCategorySearchMatch();
 const money = useMoney();
 
 onKeyStroke("Escape", () => {
   if (props.open) emit("close");
 });
+
 watch(
   () => props.open,
   (v) => {

@@ -26,13 +26,13 @@
         <span v-else-if="optional" class="font-normal text-mute">(optional)</span>
       </label>
 
-      <div :class="icon && 'relative'">
+      <div :class="(icon || revealable) && 'relative'">
         <Icon v-if="icon" :name="icon" size="16" class="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-mute" aria-hidden="true" />
         <input
           v-bind="controlAttrs()"
           :id="inputId"
           ref="el"
-          :type="type"
+          :type="inputType"
           :name="fieldName"
           :value="display"
           :class="controlClass"
@@ -43,6 +43,16 @@
           @change="onChange"
           @blur="onBlur"
         />
+        <VButton
+          v-if="revealable && type === 'password'"
+          variant="plain"
+          class="absolute end-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-control text-mute transition-colors duration-200 hover:text-paper"
+          :aria-label="shown ? 'Hide password' : 'Show password'"
+          :aria-pressed="shown"
+          @click="shown = !shown"
+        >
+          <Icon :name="shown ? 'lucide:eye-off' : 'lucide:eye'" size="16" aria-hidden="true" />
+        </VButton>
       </div>
     </template>
 
@@ -92,6 +102,8 @@ const props = withDefaults(
     /** Commit on change (blur / Enter) instead of on every keystroke. */
     lazy?: boolean;
     indeterminate?: boolean;
+    /** Password fields: adds a show / hide button. */
+    revealable?: boolean;
     /** Leading icon inside the field. */
     icon?: string;
     /** "field" is the standard look, "bare" brings no styling of its own. */
@@ -116,6 +128,9 @@ const {
   el, fieldName, inputId, value, errorMessage, validate, describedBy, controlAttrs, wrapperAttrs, commit, recheck, onBlur,
 } = useFormField(props, (v) => emit("update:modelValue", v));
 
+const shown = ref(false);
+const inputType = computed(() => (props.revealable && props.type === "password" && shown.value ? "text" : props.type));
+
 const isChoice = computed(() => props.type === "checkbox" || props.type === "radio");
 const display = computed(() => (value.value ?? "") as string | number);
 
@@ -127,7 +142,7 @@ const checked = computed(() => {
 const controlClass = computed(() => [
   isChoice.value
     ? ["check mt-0.5", props.type === "radio" && "!rounded-full"]
-    : props.variant === "field" && ["field", props.icon && "!ps-10", errorMessage.value && "!border-accent"],
+    : props.variant === "field" && ["field", props.icon && "!ps-10", props.revealable && "!pe-11", errorMessage.value && "!border-accent"],
   props.inputClass,
 ]);
 

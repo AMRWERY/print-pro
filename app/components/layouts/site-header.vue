@@ -56,18 +56,7 @@
           >
         </LazyVButton>
 
-        <LazyVButton variant="icon"
-          to="/"
-          class="hidden lg:inline-flex"
-          aria-label="Account"
-        >
-          <Icon
-            name="lucide:user"
-            size="18"
-            class="icon-wiggle"
-            aria-hidden="true"
-          />
-        </LazyVButton>
+        <account-menu class="hidden lg:inline-flex" />
 
         <LazyVButton variant="secondary"
           aria-haspopup="dialog"

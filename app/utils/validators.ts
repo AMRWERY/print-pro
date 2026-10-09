@@ -83,3 +83,33 @@ export const formatExpiry = (v: string) => {
   const d = digits(v).slice(0, 4);
   return d.length > 2 ? `${d.slice(0, 2)}/${d.slice(2)}` : d;
 };
+// ---- passwords ----
+
+export interface PasswordCheck {
+  key: string;
+  label: string;
+  passed: boolean;
+}
+
+/** The rules a new password has to meet. Used for both the checklist and the rule. */
+export const passwordChecks = (v: unknown): PasswordCheck[] => {
+  const s = String(v ?? "");
+  return [
+    { key: "length", label: "At least 12 characters", passed: s.length >= 12 },
+    { key: "case", label: "Upper and lower case letters", passed: /[a-z]/.test(s) && /[A-Z]/.test(s) },
+    { key: "digit", label: "At least one number", passed: /\d/.test(s) },
+    { key: "symbol", label: "At least one symbol (!@#$%^&*)", passed: /[^A-Za-z0-9]/.test(s) },
+  ];
+};
+
+export const strongPasswordRule: Rule = (v) => {
+  if (!String(v ?? "")) return "Create a password.";
+  const missing = passwordChecks(v).filter((c) => !c.passed);
+  return missing.length ? `Still needed: ${missing.map((c) => c.label.toLowerCase()).join(", ")}.` : true;
+};
+
+/** Must equal another field's value (read lazily, so it follows what the user types). */
+export const matchesRule =
+  (other: () => unknown, message = "The two passwords don't match."): Rule =>
+  (v) =>
+    !!v && v === other() ? true : message;
