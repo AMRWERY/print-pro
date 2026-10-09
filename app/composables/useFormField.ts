@@ -44,6 +44,10 @@ export const useFormField = (props: FieldProps, emit: (v: unknown) => void) => {
     return rest;
   };
 
+  // The mirror image of controlAttrs: class and style belong to the wrapper element.
+  // Bind with `v-bind="wrapperAttrs()"` (components set `inheritAttrs: false`).
+  const wrapperAttrs = () => ({ class: attrs.class, style: attrs.style });
+
   /** Writes a value: field state first, then the parent. */
   const commit = (
     v: unknown,
@@ -85,6 +89,7 @@ export const useFormField = (props: FieldProps, emit: (v: unknown) => void) => {
     validate,
     describedBy,
     controlAttrs,
+    wrapperAttrs,
     commit,
     recheck,
     onBlur,

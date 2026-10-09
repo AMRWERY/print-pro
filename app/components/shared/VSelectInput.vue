@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="[inline ? 'flex items-center gap-2' : 'space-y-1.5', $attrs.class]"
-    :style="$attrs.style as StyleValue"
-  >
+  <div :class="inline ? 'flex items-center gap-2' : 'space-y-1.5'" v-bind="wrapperAttrs()">
     <label
       v-if="label"
       :for="inputId"
@@ -59,8 +56,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { StyleValue } from "vue";
-
 /**
  * A select, with the same vee-validate behaviour as <LazyVInput>.
  *
@@ -100,6 +95,7 @@ const {
   validate,
   describedBy,
   controlAttrs,
+  wrapperAttrs,
   commit,
   recheck,
   onBlur,

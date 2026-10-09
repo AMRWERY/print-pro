@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="['space-y-1.5', $attrs.class]"
-    :style="$attrs.style as StyleValue"
-  >
+  <div class="space-y-1.5" v-bind="wrapperAttrs()">
     <label
       v-if="label"
       :for="inputId"
@@ -52,8 +49,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { StyleValue } from "vue";
-
 /**
  * Multi-line text, with the same vee-validate behaviour as <LazyVInput>.
  *
@@ -87,6 +82,7 @@ const {
   validate,
   describedBy,
   controlAttrs,
+  wrapperAttrs,
   commit,
   recheck,
   onBlur,

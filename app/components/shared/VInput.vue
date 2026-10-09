@@ -1,5 +1,5 @@
 <template>
-  <div :class="[inline ? 'flex items-center gap-2' : 'space-y-1.5', $attrs.class]" :style="($attrs.style as StyleValue)">
+  <div :class="inline ? 'flex items-center gap-2' : 'space-y-1.5'" v-bind="wrapperAttrs()">
     <!-- Checkbox / radio: control and label sit side by side -->
     <label v-if="isChoice" :for="inputId" class="flex cursor-pointer items-start gap-2.5 text-sm" :class="labelClass">
       <input
@@ -54,8 +54,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { StyleValue } from "vue";
-
 /**
  * Text-like inputs, checkboxes and radios. Selects live in <LazyVSelectInput> and
  * multi-line text in <LazyVTextarea>; all three share the same vee-validate wiring.
@@ -115,7 +113,7 @@ const props = withDefaults(
 const emit = defineEmits<{ "update:modelValue": [value: unknown] }>();
 
 const {
-  el, fieldName, inputId, value, errorMessage, validate, describedBy, controlAttrs, commit, recheck, onBlur,
+  el, fieldName, inputId, value, errorMessage, validate, describedBy, controlAttrs, wrapperAttrs, commit, recheck, onBlur,
 } = useFormField(props, (v) => emit("update:modelValue", v));
 
 const isChoice = computed(() => props.type === "checkbox" || props.type === "radio");
