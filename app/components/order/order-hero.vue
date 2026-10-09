@@ -77,7 +77,7 @@
     <div class="relative mt-6 flex flex-wrap items-center gap-3">
       <LazyVButton
         variant="primary"
-        href="#tracking"
+        :to="{ path: '/track', query: { order: order.id } }"
         icon="lucide:map-pin"
         icon-class="icon-bob"
         >Track order</LazyVButton
