@@ -65,8 +65,10 @@
           />
         </nuxt-link-locale>
 
-        <nuxt-link-locale
-          to="/cart"
+        <button
+          type="button"
+          aria-haspopup="dialog"
+          @click="openCart"
           class="btn-ghost hidden h-10 !px-3 lg:inline-flex"
           :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
         >
@@ -89,7 +91,7 @@
           <span class="hidden font-mono sm:inline">{{
             money.format(cart.total)
           }}</span>
-        </nuxt-link-locale>
+        </button>
       </div>
     </div>
 
@@ -109,6 +111,13 @@
 const cart = useCartStore();
 const wishlist = useWishlistStore();
 const money = useMoney();
+const route = useRoute();
+
+const openCart = () => {
+  // The cart page already shows the full cart.
+  if (/\/cart\/?$/.test(route.path)) return;
+  cart.openDrawer();
+};
 
 const menuOpen = ref(false);
 const { y } = useWindowScroll();

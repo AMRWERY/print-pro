@@ -21,6 +21,11 @@ export const useCartStore = defineStore("cart", () => {
   });
   const voucher = useLocalStorage("cart-voucher", "", { initOnMounted: true });
 
+  /** Mini-cart drawer (opens from the end side). Not persisted. */
+  const drawerOpen = ref(false);
+  const openDrawer = () => (drawerOpen.value = true);
+  const closeDrawer = () => (drawerOpen.value = false);
+
   const count = computed(() => lines.value.reduce((n, l) => n + l.qty, 0));
   const total = computed(() =>
     lines.value.reduce((n, l) => n + l.qty * l.unitPrice, 0),
@@ -41,6 +46,8 @@ export const useCartStore = defineStore("cart", () => {
     else lines.value.push({ key, id, qty, unitPrice, option: opts.option });
     // A product that is in the cart is no longer "saved for later".
     saved.value = saved.value.filter((s) => s !== id);
+    // Show the result right away.
+    openDrawer();
   };
 
   const setQty = (key: string, qty: number) => {
@@ -71,6 +78,9 @@ export const useCartStore = defineStore("cart", () => {
     lines,
     saved,
     voucher,
+    drawerOpen,
+    openDrawer,
+    closeDrawer,
     count,
     total,
     add,

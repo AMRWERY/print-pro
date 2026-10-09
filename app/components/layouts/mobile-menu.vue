@@ -34,11 +34,13 @@
             role="group"
             aria-label="Account and preferences"
           >
-            <nuxt-link-locale
-              to="/cart"
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              @click="openCart"
               class="btn-icon relative"
               :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
-              @click="emit('close')"
+              
             >
               <Icon name="lucide:shopping-cart" size="18" class="icon-bob" aria-hidden="true" />
               <span
@@ -46,7 +48,7 @@
                 class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
                 >{{ cart.count }}</span
               >
-            </nuxt-link-locale>
+            </button>
             <nuxt-link-locale
               to="/wishlist"
               class="btn-icon relative"
@@ -128,6 +130,11 @@ const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
 const cart = useCartStore();
 const wishlist = useWishlistStore();
+
+const openCart = () => {
+  emit("close");
+  cart.openDrawer();
+};
 const matchesSearch = useCategorySearchMatch();
 const money = useMoney();
 

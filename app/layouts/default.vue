@@ -18,6 +18,8 @@
     <LazyVBackToTop />
 
     <compare-tray />
+
+    <cart-drawer />
   </div>
 </template>
 
