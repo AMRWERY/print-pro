@@ -15,33 +15,6 @@
           cleanroom integration.
         </p>
       </div>
-
-      <div
-        class="inline-flex rounded-control border border-line p-0.5 font-mono text-xs uppercase tracking-wider"
-        role="group"
-        aria-label="Registry view mode"
-      >
-        <LazyVButton variant="plain"
-          class="rounded-[4px] px-3 py-1.5 transition-colors duration-200"
-          :class="
-            !preview ? 'bg-raised text-paper' : 'text-mute hover:text-paper'
-          "
-          :aria-pressed="!preview"
-          @click="emit('update:preview', false)"
-        >
-          Active ({{ count }})
-        </LazyVButton>
-        <LazyVButton variant="plain"
-          class="rounded-[4px] px-3 py-1.5 transition-colors duration-200"
-          :class="
-            preview ? 'bg-raised text-paper' : 'text-mute hover:text-paper'
-          "
-          :aria-pressed="preview"
-          @click="emit('update:preview', true)"
-        >
-          Empty state preview
-        </LazyVButton>
-      </div>
     </div>
 
     <dl
@@ -94,8 +67,8 @@
     </dl>
 
     <div class="flex flex-wrap items-center gap-3">
-      <LazyVButton variant="primary"
-       
+      <LazyVButton
+        variant="primary"
         :disabled="!selectedCount"
         @click="emit('move-selected')"
       >
@@ -107,8 +80,9 @@
         />
         Move selected to cart ({{ selectedCount }})
       </LazyVButton>
-      <LazyVButton variant="secondary"
-       
+
+      <LazyVButton
+        variant="secondary"
         :disabled="!count"
         @click="emit('share')"
       >
@@ -121,9 +95,10 @@
         />
         {{ copied ? "Link copied" : "Share registry manifest" }}
       </LazyVButton>
-      <LazyVButton variant="secondary"
+
+      <LazyVButton
+        variant="secondary"
         v-if="!confirmNew"
-       
         :disabled="!count"
         @click="confirmNew = true"
       >
@@ -135,16 +110,11 @@
         role="alert"
       >
         Clear this registry and start over?
-        <LazyVButton variant="primary" size="sm"
-         
-          @click="startNew"
-        >
+        <LazyVButton variant="primary" size="sm" @click="startNew">
           Yes, clear
         </LazyVButton>
-        <LazyVButton variant="secondary" size="sm"
-         
-          @click="confirmNew = false"
-        >
+
+        <LazyVButton variant="secondary" size="sm" @click="confirmNew = false">
           Cancel
         </LazyVButton>
       </span>

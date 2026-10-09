@@ -11,13 +11,6 @@
             Calibrated optical instruments, large-format fine-art print engines and certified archival substrates allocated for immediate laboratory dispatch.
           </p>
         </div>
-        <div class="flex flex-col items-end gap-3">
-          <div class="inline-flex rounded-control border border-line p-0.5 font-mono text-xs uppercase tracking-wider" role="group" aria-label="Cart view mode">
-            <LazyVButton variant="plain" class="rounded-[4px] px-3 py-1.5 transition-colors duration-200" :class="!preview ? 'bg-accent text-onaccent' : 'text-mute hover:text-paper'" :aria-pressed="!preview" @click="preview = false">Active cart ({{ entries.length }} {{ entries.length === 1 ? "item" : "items" }})</LazyVButton>
-            <LazyVButton variant="plain" class="rounded-[4px] px-3 py-1.5 transition-colors duration-200" :class="preview ? 'bg-accent text-onaccent' : 'text-mute hover:text-paper'" :aria-pressed="preview" @click="preview = true">Empty preview</LazyVButton>
-          </div>
-          <p class="flex items-center gap-1.5 font-mono text-xs text-mute"><Icon name="lucide:truck" size="14" aria-hidden="true" />Dispatch cutoff: 17:00 CET</p>
-        </div>
       </header>
 
       <p class="sr-only" role="status">{{ announcement }}</p>
