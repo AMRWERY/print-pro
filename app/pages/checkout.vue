@@ -1,17 +1,15 @@
 <template>
   <div class="container-page py-6 lg:py-10">
-    <!-- Done -->
-    <order-confirmation v-if="order" :order="order" />
-
-    <v-empty-state
-      v-else-if="!entries.length"
+    <LazyVEmptyState
+      v-if="!entries.length"
       icon="lucide:shopping-cart"
       title="There's nothing to check out"
       description="Your cart is empty. Add instruments from the catalog, then come back here to place the order."
     >
       <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
+   
       <LazyVButton variant="secondary" to="/cart">Back to cart</LazyVButton>
-    </v-empty-state>
+    </LazyVEmptyState>
 
     <template v-else>
       <div class="mb-6 space-y-4">
@@ -38,8 +36,11 @@
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem]">
         <div class="space-y-4">
           <address-step />
+
           <delivery-step :prices="prices" />
+
           <payment-step />
+
           <review-step :shipping="amounts.shipping" :total="amounts.total" :placing="placing" @place="place" />
         </div>
 
@@ -56,8 +57,7 @@ import { deliveryOptions, deliveryPrices, paymentMethods, WIRE_DISCOUNT } from "
 import { pricing } from "~/data/cart";
 import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
-
-definePageMeta({ layout: "checkout" });
+import type { Order } from "~/types/order";
 
 // Always open at the top, whatever page (or open drawer) the visitor came from.
 onMounted(() => window.scrollTo({ top: 0, left: 0, behavior: "instant" }));
@@ -115,15 +115,55 @@ const showSummary = ref(false);
 
 // ---- placing the order (simulated: there is no payment backend) ----
 const placing = ref(false);
-const order = ref<null | {
-  id: string;
-  name: string;
-  email: string;
-  total: number;
-  delivery: string;
-  payment: string;
-  items: { key: string; name: string; qty: number; price: number }[];
-}>(null);
+const orders = useOrderStore();
+const localePath = useLocalePath();
+
+const buildOrder = (): Order => {
+  const id = `LP-${Date.now().toString(36).toUpperCase()}`;
+  const delivery = deliveryOptions.find((o) => o.id === f.delivery)!;
+  const payment = paymentMethods.find((m) => m.id === f.payment)!;
+  const digits = id.replace(/\D/g, "").padEnd(8, "7").slice(0, 8);
+
+  return {
+    id,
+    createdAt: new Date().toISOString(),
+    name: f.fullName.trim(),
+    company: f.company.trim() || undefined,
+    email: f.email.trim(),
+    phone: f.phone.trim(),
+    address: {
+      line1: f.line1.trim(),
+      line2: f.line2.trim() || undefined,
+      city: f.city.trim(),
+      region: f.region.trim(),
+      postal: f.postal.trim(),
+      country: f.country,
+    },
+    delivery: { id: delivery.id, label: delivery.label, note: delivery.note, days: delivery.days },
+    payment: {
+      id: payment.id,
+      label: payment.label,
+      last4: payment.id === "card" ? f.cardNumber.replace(/\D/g, "").slice(-4) : undefined,
+    },
+    notes: f.notes.trim() || undefined,
+    items: entries.value.map((e) => ({
+      key: e.line.key,
+      id: e.product.id,
+      name: e.product.name,
+      brand: e.product.brand,
+      qty: e.line.qty,
+      unitPrice: e.line.unitPrice,
+      option: e.line.option,
+      sku: e.product.sku,
+      icon: e.product.icon,
+      image: e.product.image,
+      imageAlt: e.product.imageAlt,
+      specs: e.product.specs,
+    })),
+    amounts: { ...amounts.value },
+    pin: `${digits.slice(0, 4)}-${digits.slice(4)}`,
+  };
+};
 
 const place = async () => {
   const bad = await state.firstInvalidStep();
@@ -134,30 +174,21 @@ const place = async () => {
   }
 
   placing.value = true;
-  await new Promise((r) => setTimeout(r, 1200));
+  await new Promise((r) => setTimeout(r, 1200)); // no payment backend: simulate the request
 
-  order.value = {
-    id: `LP-${Date.now().toString(36).toUpperCase()}`,
-    name: f.fullName.trim().split(" ")[0] ?? f.fullName,
-    email: f.email.trim(),
-    total: amounts.value.total,
-    delivery: deliveryOptions.find((o) => o.id === f.delivery)!.label,
-    payment: paymentMethods.find((m) => m.id === f.payment)!.label,
-    items: entries.value.map((e) => ({
-      key: e.line.key,
-      name: e.product.name,
-      qty: e.line.qty,
-      price: e.line.unitPrice,
-    })),
-  };
+  const order = buildOrder();
+  orders.add(order);
 
-  cart.remove(entries.value.map((e) => e.line.key));
+  // Leave first, then empty the cart, so the checkout never flashes its "nothing to check out" state.
+  const purchased = entries.value.map((e) => e.line.key);
+  await navigateTo(localePath(`/order/${order.id}`));
+  cart.remove(purchased);
   cart.checkoutKeys = [];
   if (!cart.lines.length) cart.voucher = "";
-
   placing.value = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
 };
+
+definePageMeta({ layout: "checkout" });
 
 useSeoMeta({
   title: "Secure Checkout — Lumen & Press",
