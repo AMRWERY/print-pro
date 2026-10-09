@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({ layout: "checkout" });
 
 const route = useRoute();
 const orders = useOrderStore();

@@ -188,7 +188,6 @@ const place = async () => {
   placing.value = false;
 };
 
-definePageMeta({ layout: "checkout" });
 
 useSeoMeta({
   title: "Secure Checkout — Lumen & Press",
