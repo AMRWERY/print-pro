@@ -4,7 +4,8 @@
     :class="scrolled && 'shadow-lg shadow-black/20'"
   >
     <div class="container-page flex items-center gap-3 py-3 lg:gap-6">
-      <LazyVButton variant="icon"
+      <LazyVButton
+        variant="icon"
         class="lg:hidden"
         aria-label="Open menu"
         aria-haspopup="dialog"
@@ -20,24 +21,12 @@
       </div>
 
       <div class="ms-auto flex items-center gap-2">
-        <LazyVButton variant="tertiary"
-          to="/"
-          class="hidden items-center gap-1.5 px-2 font-mono text-xs uppercase tracking-wider xl:inline-flex"
-        >
-          <Icon
-            name="lucide:sliders-horizontal"
-            size="16"
-            class="icon-wiggle"
-            aria-hidden="true"
-          />
-          Calibration services
-        </LazyVButton>
-
         <LazyVLocaleSwitcher class="hidden lg:inline-flex" />
 
         <LazyVThemeToggle class="hidden lg:inline-flex" />
 
-        <LazyVButton variant="icon"
+        <LazyVButton
+          variant="icon"
           to="/wishlist"
           class="relative hidden lg:inline-flex"
           :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
@@ -58,7 +47,8 @@
 
         <account-menu class="hidden lg:inline-flex" />
 
-        <LazyVButton variant="secondary"
+        <LazyVButton
+          variant="secondary"
           aria-haspopup="dialog"
           @click="openCart"
           class="hidden h-10 !px-3 lg:inline-flex"

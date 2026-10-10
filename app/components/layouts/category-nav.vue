@@ -16,35 +16,6 @@
           </nuxt-link-locale>
         </li>
       </ul>
-      <ul
-        class="flex items-center gap-5 font-mono text-xs uppercase tracking-wider"
-      >
-        <li>
-          <nuxt-link-locale
-            to="/"
-            class="inline-flex items-center gap-1.5 text-accent hover:underline"
-            ><Icon
-              name="lucide:repeat"
-              size="14"
-              class="icon-spin"
-              aria-hidden="true"
-            />Trade-in evaluation</nuxt-link-locale
-          >
-        </li>
-
-        <li>
-          <LazyVButton variant="tertiary"
-            to="/"
-            class="inline-flex items-center gap-1.5"
-          >
-            <Icon
-              name="lucide:swatch-book"
-              size="14"
-              class="icon-wiggle"
-              aria-hidden="true"
-            />ICC custom profile</LazyVButton>
-        </li>
-      </ul>
     </div>
   </nav>
 </template>
