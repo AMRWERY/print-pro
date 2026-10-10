@@ -24,11 +24,11 @@
 
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
         <div class="min-w-0 space-y-6">
-          <order-progress :order="order" />
+          <account-order-progress :order="order" />
 
-          <order-ledger :order="order" />
+          <account-order-ledger :order="order" />
         </div>
-        <order-summary :order="order" @reorder="reorder" />
+        <account-order-summary :order="order" @reorder="reorder" />
       </div>
     </template>
 
