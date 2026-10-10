@@ -88,5 +88,5 @@ export const estimatedHandover = (o: Order) => orderTimeline(o).at(-1)!.when!;
 export const orderSupport = {
   phone: "+1 (800) 492-5866",
   phoneHref: "tel:+18004925866",
-  email: "dispatch@lumenpress.com",
+  email: "dispatch@printpro.com",
 };

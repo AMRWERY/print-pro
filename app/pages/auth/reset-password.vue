@@ -184,7 +184,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "New Password — Lumen & Press",
+  title: "New Password — PrintPro",
   description: "Set a new password for your studio account.",
   robots: "noindex",
 });

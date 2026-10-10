@@ -49,7 +49,7 @@ onMounted(async () => {
 const order = computed(() => orders.get(String(route.params.id)));
 
 useSeoMeta({
-  title: "Order Confirmed — Lumen & Press",
+  title: "Order Confirmed — PrintPro",
   description: "Your order is confirmed. Track its progress and review the details.",
   robots: "noindex",
 });

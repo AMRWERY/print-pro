@@ -166,7 +166,7 @@ const companions = computed(() => {
 });
 
 useSeoMeta({
-  title: "Procurement Cart — Lumen & Press",
+  title: "Procurement Cart — PrintPro",
   description: "Review your allocation, adjust quantities and prepare your studio order.",
   robots: "noindex",
 });

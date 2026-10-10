@@ -121,7 +121,7 @@
       aria-label="Delivery assurance"
     >
       <p class="eyebrow mb-2 !text-paper">
-        Lumen &amp; Press logistics assurance
+        PrintPro logistics assurance
       </p>
       <ul class="space-y-1.5 text-sm text-mute">
         <li

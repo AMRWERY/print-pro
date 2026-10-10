@@ -25,7 +25,7 @@ const products = computed(() =>
 );
 
 useSeoMeta({
-  title: () => `${page.value.label} — Lumen & Press`,
+  title: () => `${page.value.label} — PrintPro`,
   description: () => page.value.description,
 });
 </script>

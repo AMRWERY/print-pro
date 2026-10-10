@@ -108,7 +108,7 @@ onMounted(async () => {
 });
 
 useSeoMeta({
-  title: "Track Your Order — Lumen & Press",
+  title: "Track Your Order — PrintPro",
   description: "Check where your order is and what happens next.",
   robots: "noindex",
 });

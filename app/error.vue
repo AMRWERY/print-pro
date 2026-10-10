@@ -109,7 +109,7 @@ useHead({
 });
 
 useSeoMeta({
-  title: () => `${copy.value.eyebrow} — Lumen & Press`,
+  title: () => `${copy.value.eyebrow} — PrintPro`,
   robots: "noindex",
 });
 </script>

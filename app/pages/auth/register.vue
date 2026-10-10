@@ -2,7 +2,7 @@
   <auth-shell>
     <template #aside>
       <auth-aside
-        eyebrow="Form 1984-LUMEN"
+        eyebrow="Form 1984-PrintPro"
         tag="Archival audit"
         title="Establish your studio registry."
         body="Register your atelier, gallery or independent studio for calibrated equipment, bulk media allocations and tracked delivery."
@@ -267,7 +267,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Create Account — Lumen & Press",
+  title: "Create Account — PrintPro",
   description: "Create a studio account.",
   robots: "noindex",
 });

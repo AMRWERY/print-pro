@@ -212,7 +212,7 @@ const loadSample = () => {
 };
 
 useSeoMeta({
-  title: "Studio Registry & Wishlist — Lumen & Press",
+  title: "Studio Registry & Wishlist — PrintPro",
   description: "Your saved apparatus: share the manifest, group items by studio and move them to the cart.",
   robots: "noindex",
 });

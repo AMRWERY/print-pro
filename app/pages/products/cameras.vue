@@ -91,7 +91,7 @@ const pickSub = (key: CameraSub) => {
 };
 
 useSeoMeta({
-  title: "Cameras & Digital Backs — Lumen & Press",
+  title: "Cameras & Digital Backs — PrintPro",
   description:
     "Calibrated medium-format cameras, digital backs and cinema platforms, bench-verified before dispatch.",
 });

@@ -107,7 +107,7 @@ const defaults = [
   {
     eyebrow: "Laboratory profile guarantee",
     title: "Custom ICC profiles included",
-    body: "Every 44-inch roll purchased from Lumen & Press includes a free spectrophotometric target reading for your exact printer engine.",
+    body: "Every 44-inch roll purchased from PrintPro includes a free spectrophotometric target reading for your exact printer engine.",
     action: "Request spectro target",
     highlight: true,
   },

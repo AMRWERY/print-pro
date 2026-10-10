@@ -139,7 +139,7 @@
         </form>
 
         <p class="text-center text-sm text-mute">
-          New to Lumen &amp; Press?
+          New to PrintPro?
           <LazyVButton
             variant="tertiary"
             to="/auth/register"
@@ -234,7 +234,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Sign In — Lumen & Press",
+  title: "Sign In — PrintPro",
   description: "Sign in to your studio account.",
   robots: "noindex",
 });

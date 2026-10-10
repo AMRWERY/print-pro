@@ -146,7 +146,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Reset Password — Lumen & Press",
+  title: "Reset Password — PrintPro",
   description: "Reset your studio account password.",
   robots: "noindex",
 });

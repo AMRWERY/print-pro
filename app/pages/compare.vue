@@ -127,7 +127,7 @@ onMounted(() => {
 });
 
 useSeoMeta({
-  title: "Bench Comparison — Lumen & Press",
+  title: "Bench Comparison — PrintPro",
   description:
     "Compare bench-verified cameras, printers and archival substrates side by side.",
   robots: "noindex",

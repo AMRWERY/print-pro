@@ -190,7 +190,7 @@ const place = async () => {
 
 
 useSeoMeta({
-  title: "Secure Checkout — Lumen & Press",
+  title: "Secure Checkout — PrintPro",
   description: "Complete your studio order.",
   robots: "noindex",
 });

@@ -244,7 +244,7 @@ const baseProducts: CatalogProduct[] = [
     brand: "Profoto",
     name: "B10X Plus Duo Kit",
     blurb:
-      "500 Ws power with 3,250 lumens continuous modelling light and travel case.",
+      "500 Ws power with 3,250 continuous modelling light and travel case.",
     specs: ["500 Ws", "Bluetooth AirX", "Li-ion"],
     rating: 4.9,
     reviews: 34,

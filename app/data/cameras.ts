@@ -20,7 +20,7 @@ export const cameraStats = [
   {
     label: "Sensor tolerance",
     value: "±0.002 mm",
-    note: "Lumen-calibrated, certified",
+    note: "PrintPro-calibrated, certified",
   },
   {
     label: "Dynamic range",
@@ -448,7 +448,7 @@ export const faqs = [
     a: "Natural Colour Solution applies a consistent, measured colour profile to 16-bit capture so skin tones and product colours land close to reference without heavy correction. Standard RAW leaves those interpretation choices to your software.",
   },
   {
-    q: "How do Lumen & Press bench-test and calibrate camera systems before dispatch?",
+    q: "How do PrintPro bench-test and calibrate camera systems before dispatch?",
     a: "Each body is checked for sensor alignment, shutter accuracy and tether stability on our bench, then profiled against a reference target. You receive the calibration report with the system.",
   },
   {
