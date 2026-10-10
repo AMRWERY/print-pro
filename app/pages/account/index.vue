@@ -3,18 +3,6 @@
     <!-- Atelier Simulation Harness (Top sticky mode bar) -->
     <account-sim-harness v-model="operatingMode" />
 
-    <!-- Toast Alert Notification -->
-    <Transition name="toast">
-      <div
-        v-if="toastMessage"
-        role="alert"
-        class="fixed bottom-6 end-6 z-50 flex items-center gap-2.5 rounded-card border border-accent/40 bg-surface px-4 py-3 font-mono text-xs text-paper shadow-2xl shadow-black/60"
-      >
-        <span class="pip rounded-full animate-ping" />
-        <span>{{ toastMessage }}</span>
-      </div>
-    </Transition>
-
     <div class="space-y-6">
       <LazyVBreadcrumb :items="crumbs" />
 
@@ -204,17 +192,8 @@ const dossierTitle = ref("ARCHIVAL REQUISITION DOSSIER");
 const selectedOrder = ref<RequisitionOrder | null>(null);
 const editingDock = ref<ReceivingDock | null>(null);
 
-// Toast Notification
-const toastMessage = ref("");
-const { start: hideToast } = useTimeoutFn(
-  () => (toastMessage.value = ""),
-  3500,
-  { immediate: false },
-);
-const showToast = (msg: string) => {
-  toastMessage.value = msg;
-  hideToast();
-};
+const toast = useToast();
+const showToast = (msg: string) => toast.success(msg);
 
 const registryItems = ref<RegistryItem[]>([...defaultRegistryItems]);
 const receivingDocks = computed(() => docks.list);
@@ -400,18 +379,3 @@ useSeoMeta({
     "Curatorial studio dashboard, live armored telemetry tracking, apparatus registry, and escrow management.",
 });
 </script>
-
-<style scoped>
-.toast-enter-active,
-.toast-leave-active {
-  transition:
-    transform 0.25s ease-out,
-    opacity 0.25s ease-out;
-}
-
-.toast-enter-from,
-.toast-leave-to {
-  transform: translateY(12px);
-  opacity: 0;
-}
-</style>

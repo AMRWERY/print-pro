@@ -34,15 +34,6 @@
       @saved="onSaved"
     />
 
-    <Transition name="toast">
-      <p
-        v-if="toast"
-        role="status"
-        class="fixed bottom-20 end-4 z-50 rounded-card border border-accent/40 bg-surface px-4 py-3 font-mono text-xs shadow-2xl lg:bottom-6"
-      >
-        {{ toast }}
-      </p>
-    </Transition>
   </div>
 </template>
 
@@ -59,14 +50,8 @@ const crumbs = [
   { label: "Profile & addresses" },
 ];
 
-const toast = ref("");
-const { start: hideToast } = useTimeoutFn(() => (toast.value = ""), 3000, {
-  immediate: false,
-});
-const notify = (msg: string) => {
-  toast.value = msg;
-  hideToast();
-};
+const toast = useToast();
+const notify = (msg: string) => toast.success(msg);
 
 const openDock = (dock?: ReceivingDock) => {
   editing.value = dock ?? null;
@@ -119,18 +104,3 @@ useSeoMeta({
   robots: "noindex",
 });
 </script>
-
-<style scoped>
-.toast-enter-active,
-.toast-leave-active {
-  transition:
-    transform 0.25s ease-out,
-    opacity 0.25s ease-out;
-}
-
-.toast-enter-from,
-.toast-leave-to {
-  transform: translateY(12px);
-  opacity: 0;
-}
-</style>

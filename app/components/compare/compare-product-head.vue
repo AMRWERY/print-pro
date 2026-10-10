@@ -131,6 +131,7 @@ const profile = computed(
 );
 
 const added = ref(false);
+const toast = useToast();
 
 const { start } = useTimeoutFn(() => (added.value = false), 1800, {
   immediate: false,
@@ -138,6 +139,10 @@ const { start } = useTimeoutFn(() => (added.value = false), 1800, {
 
 const acquire = () => {
   cart.add(props.product.id, props.product.price);
+  toast.success("Added to cart", {
+    description: props.product.name,
+    action: { label: "View cart", to: "/cart" },
+  });
   added.value = true;
   start();
 };

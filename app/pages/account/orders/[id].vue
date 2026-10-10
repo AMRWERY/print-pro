@@ -51,15 +51,6 @@
       >
     </LazyVEmptyState>
 
-    <Transition name="toast">
-      <p
-        v-if="toast"
-        role="status"
-        class="fixed bottom-20 end-4 z-50 rounded-card border border-accent/40 bg-surface px-4 py-3 font-mono text-xs shadow-2xl lg:bottom-6"
-      >
-        {{ toast }}
-      </p>
-    </Transition>
   </div>
 </template>
 
@@ -78,10 +69,7 @@ const crumbs = computed(() => [
   { label: order.value?.id ?? "Order" },
 ]);
 
-const toast = ref("");
-const { start: hideToast } = useTimeoutFn(() => (toast.value = ""), 3500, {
-  immediate: false,
-});
+const toast = useToast();
 
 const reorder = () => {
   const o = order.value;
@@ -95,10 +83,11 @@ const reorder = () => {
     cart.add(product.id, product.price, { qty: item.quantity ?? 1 });
     added++;
   }
-  toast.value = added
-    ? `Added ${added} item${added === 1 ? "" : "s"} to your cart`
-    : "These items are no longer in the catalog";
-  hideToast();
+  if (added)
+    toast.success(`Added ${added} item${added === 1 ? "" : "s"} to your cart`, {
+      action: { label: "View cart", to: "/cart" },
+    });
+  else toast.warning("These items are no longer in the catalog");
 };
 
 definePageMeta({
@@ -109,18 +98,3 @@ useSeoMeta({
   title: () => `Order ${order.value?.id ?? ""} — Lumen & Press`,
 });
 </script>
-
-<style scoped>
-.toast-enter-active,
-.toast-leave-active {
-  transition:
-    transform 0.25s ease-out,
-    opacity 0.25s ease-out;
-}
-
-.toast-enter-from,
-.toast-leave-to {
-  transform: translateY(12px);
-  opacity: 0;
-}
-</style>

@@ -158,6 +158,7 @@ const wished = computed(() => wishlist.has(props.product.id));
 const compare = useCompareStore();
 const compared = computed(() => compare.has(props.product.id));
 const added = ref(false);
+const toast = useToast();
 
 const { start } = useTimeoutFn(
   () => {
@@ -168,6 +169,10 @@ const { start } = useTimeoutFn(
 );
 const acquire = () => {
   cart.add(props.product.id, props.product.price);
+  toast.success("Added to cart", {
+    description: props.product.name,
+    action: { label: "View cart", to: "/cart" },
+  });
   added.value = true;
   start();
 };
