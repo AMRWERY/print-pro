@@ -41,7 +41,7 @@
     </form>
 
     <Transition name="drop">
-      <div v-show="open" class="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden rounded-card border border-line bg-surface shadow-xl shadow-black/30">
+      <div v-show="open" class="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden card shadow-xl shadow-black/30">
         <search-suggestions
           :id="`${uid}-panel`"
           :matches="matches"

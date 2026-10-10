@@ -3,7 +3,7 @@
     <Transition name="modal">
       <div
         v-if="open"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+        class="modal-root"
         role="dialog"
         aria-modal="true"
         aria-labelledby="telemetry-modal-title"
@@ -20,12 +20,12 @@
         >
           <!-- HUD Header -->
           <div
-            class="flex items-center justify-between border-b border-line bg-ink px-5 py-3.5"
+            class="modal-head"
           >
             <div class="flex items-center gap-2.5">
               <span class="relative flex h-2.5 w-2.5">
                 <span
-                  class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"
+                  class="ping-ring"
                 />
                 <span
                   class="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"
@@ -56,10 +56,10 @@
             >
               <div>
                 <p class="eyebrow text-mute">CARRIER ROUTE</p>
-                <p class="font-display text-base font-bold text-paper">
+                <p class="title-sm">
                   Lufthansa Cargo • Flight LH-400 (FRA ✈ JFK)
                 </p>
-                <p class="text-[11px] text-mute">
+                <p class="text-1xs text-mute">
                   Waybill: <span class="text-paper">LH-CARGO-VP185-26</span> •
                   Est. Touchdown:
                   <span class="text-paper">28 OCT 14:30 EDT</span>
@@ -72,7 +72,7 @@
                 >
                   ON-SCHEDULE • IN FLIGHT
                 </span>
-                <p class="text-[11px] text-mute mt-1">
+                <p class="text-1xs text-mute mt-1">
                   Altitude: 36,000 FT (Cruising)
                 </p>
               </div>
@@ -91,7 +91,7 @@
                     class="text-success mx-auto"
                   />
                   <p class="font-bold text-paper">BER Cleared</p>
-                  <p class="text-[10px] text-mute">26 OCT 08:15</p>
+                  <p class="text-2xs text-mute">26 OCT 08:15</p>
                 </div>
                 <div
                   class="rounded-control border border-line bg-ink/30 p-2.5 text-center space-y-1"
@@ -102,7 +102,7 @@
                     class="text-success mx-auto"
                   />
                   <p class="font-bold text-paper">TXL Customs</p>
-                  <p class="text-[10px] text-mute">26 OCT 12:40</p>
+                  <p class="text-2xs text-mute">26 OCT 12:40</p>
                 </div>
                 <div
                   class="rounded-control border border-accent bg-accent/10 p-2.5 text-center space-y-1"
@@ -113,7 +113,7 @@
                     class="text-accent animate-pulse mx-auto"
                   />
                   <p class="font-bold text-accent">Mid-Atlantic</p>
-                  <p class="text-[10px] text-accent">ACTIVE CRUISE</p>
+                  <p class="text-2xs text-accent">ACTIVE CRUISE</p>
                 </div>
                 <div
                   class="rounded-control border border-line bg-ink/30 p-2.5 text-center space-y-1 opacity-60"
@@ -124,7 +124,7 @@
                     class="text-mute mx-auto"
                   />
                   <p class="font-bold text-paper">JFK Dock 4B</p>
-                  <p class="text-[10px] text-mute">ETA 28 OCT</p>
+                  <p class="text-2xs text-mute">ETA 28 OCT</p>
                 </div>
               </div>
             </div>
@@ -138,11 +138,11 @@
                 <div
                   class="rounded-control border border-line bg-surface p-3 space-y-1"
                 >
-                  <dt class="text-mute text-[10px]">INTERNAL TEMP</dt>
-                  <dd class="font-display text-xl font-bold text-paper">
+                  <dt class="text-mute text-2xs">INTERNAL TEMP</dt>
+                  <dd class="title-md">
                     19.2°C
                   </dd>
-                  <dd class="text-[10px] text-success">
+                  <dd class="text-2xs text-success">
                     Target 18°C ± 2°C (Optimal)
                   </dd>
                 </div>
@@ -150,11 +150,11 @@
                 <div
                   class="rounded-control border border-line bg-surface p-3 space-y-1"
                 >
-                  <dt class="text-mute text-[10px]">RELATIVE HUMIDITY</dt>
-                  <dd class="font-display text-xl font-bold text-paper">
+                  <dt class="text-mute text-2xs">RELATIVE HUMIDITY</dt>
+                  <dd class="title-md">
                     42% RH
                   </dd>
-                  <dd class="text-[10px] text-success">
+                  <dd class="text-2xs text-success">
                     Target 45% ± 5% (Dry)
                   </dd>
                 </div>
@@ -162,11 +162,11 @@
                 <div
                   class="rounded-control border border-line bg-surface p-3 space-y-1"
                 >
-                  <dt class="text-mute text-[10px]">IMPACT / G-FORCE</dt>
-                  <dd class="font-display text-xl font-bold text-paper">
+                  <dt class="text-mute text-2xs">IMPACT / G-FORCE</dt>
+                  <dd class="title-md">
                     0.02 G
                   </dd>
-                  <dd class="text-[10px] text-success">
+                  <dd class="text-2xs text-success">
                     &lt; 0.5 G Damped Safe
                   </dd>
                 </div>
@@ -174,11 +174,11 @@
                 <div
                   class="rounded-control border border-line bg-surface p-3 space-y-1"
                 >
-                  <dt class="text-mute text-[10px]">NITROGEN SEAL</dt>
-                  <dd class="font-display text-xl font-bold text-paper">
+                  <dt class="text-mute text-2xs">NITROGEN SEAL</dt>
+                  <dd class="title-md">
                     1.02 atm
                   </dd>
-                  <dd class="text-[10px] text-cyan">Airlock Sealed</dd>
+                  <dd class="text-2xs text-cyan">Airlock Sealed</dd>
                 </div>
               </div>
             </div>
@@ -197,7 +197,7 @@
                   PHYSICAL &amp; CRYPTOGRAPHIC TAMPER SEAL
                 </span>
                 <span
-                  class="rounded bg-success/20 px-2 py-0.5 font-bold text-success text-[10px]"
+                  class="rounded bg-success/20 px-2 py-0.5 font-bold text-success text-2xs"
                 >
                   SEAL INTACT
                 </span>
@@ -207,7 +207,7 @@
                 seconds. No unshielded decompression or mechanical breach
                 detected.
               </p>
-              <p class="text-[10px] text-mute font-mono">
+              <p class="text-2xs text-mute font-mono">
                 SIGNATURE: SHA-256:
                 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069
               </p>
@@ -216,9 +216,9 @@
 
           <!-- Modal Footer -->
           <div
-            class="flex items-center justify-between border-t border-line bg-ink px-5 py-3"
+            class="modal-foot"
           >
-            <span class="text-mute text-[11px]"
+            <span class="text-mute text-1xs"
               >Station Sync: FRA Telemetry Hub #04</span
             >
             <LazyVButton

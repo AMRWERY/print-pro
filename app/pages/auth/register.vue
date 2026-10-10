@@ -30,7 +30,7 @@
     <section class="card space-y-5 p-6 sm:p-8" aria-labelledby="register-title">
       <div class="space-y-2">
         <p class="eyebrow flex items-center gap-2">
-          <span class="h-2 w-2 bg-accent" aria-hidden="true" />Create account
+          <span class="pip" aria-hidden="true" />Create account
         </p>
         <h1 id="register-title" class="font-display text-3xl sm:text-4xl">
           Establish studio registry
@@ -100,7 +100,7 @@
             >
               <span class="block">
                 <span class="eyebrow block">{{ t.tag }}</span>
-                <span class="block text-sm font-medium">{{ t.title }}</span>
+                <span class="label">{{ t.title }}</span>
                 <span class="block text-xs text-mute">{{ t.body }}</span>
               </span>
             </LazyVInput>
@@ -159,13 +159,13 @@
 
         <p
           v-if="error"
-          class="flex items-start gap-2 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm"
+          class="callout-accent"
           role="alert"
         >
           <Icon
             name="lucide:circle-alert"
             size="16"
-            class="mt-0.5 shrink-0 text-accent"
+            class="bullet-icon"
             aria-hidden="true"
           />
           <span
@@ -200,7 +200,7 @@
       </p>
 
       <p
-        class="flex items-start gap-2 rounded-card border border-line bg-raised p-3 text-xs text-mute"
+        class="callout"
         role="note"
       >
         <Icon

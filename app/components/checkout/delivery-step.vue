@@ -21,13 +21,13 @@
             <Icon
               :name="o.icon"
               size="20"
-              class="mt-0.5 shrink-0 text-accent"
+              class="bullet-icon"
               aria-hidden="true"
             />
             <span class="min-w-0 flex-1">
-              <span class="block text-sm font-medium">{{ o.label }}</span>
+              <span class="label">{{ o.label }}</span>
               <span class="block text-xs text-mute">{{ o.note }}</span>
-              <span class="mt-1 block font-mono text-xs text-mute">{{
+              <span class="mt-1 block meta">{{
                 eta(o.days)
               }}</span>
             </span>

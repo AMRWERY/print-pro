@@ -2,7 +2,7 @@
   <Teleport to="body">
     <Transition name="drawer">
       <div v-if="open" class="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
-        <div class="absolute inset-0 bg-ink/70 backdrop-blur-sm" @click="emit('close')" />
+        <div class="modal-backdrop" @click="emit('close')" />
         <div
           class="drawer-panel absolute inset-y-0 start-0 flex w-[85%] max-w-sm flex-col border-e border-line bg-surface">
           <div class="flex items-center justify-between border-b border-line p-4">
@@ -18,14 +18,14 @@
               :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`">
               <Icon name="lucide:shopping-cart" size="18" class="icon-bob" aria-hidden="true" />
               <span v-if="cart.count"
-                class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent">{{
+                class="count-badge">{{
                 cart.count }}</span>
             </LazyVButton>
             <LazyVButton variant="icon" to="/wishlist" class="relative"
               :aria-label="`Studio registry, ${wishlist.ids.length} saved`" @click="emit('close')">
               <Icon name="lucide:bookmark" size="18" class="icon-lift" aria-hidden="true" />
               <span v-if="wishlist.ids.length"
-                class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent">{{
+                class="count-badge">{{
                   wishlist.ids.length }}</span>
             </LazyVButton>
 

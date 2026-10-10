@@ -62,6 +62,10 @@ export default {
         ],
       },
       fontSize: {
+        // Micro sizes for dense labels/badges (replaces text-[9px] / [10px] / [11px]).
+        "3xs": "9px",
+        "2xs": "10px",
+        "1xs": "11px",
         xs: ["12px", "1.6"],
         sm: ["14px", "1.7"],
         base: ["16px", "1.7"],
@@ -71,7 +75,12 @@ export default {
         "5xl": ["48px", "1.15"],
         "6xl": ["60px", "1.1"],
       },
-      borderRadius: { control: "6px", card: "8px", panel: "12px" },
+      borderRadius: {
+        tight: "4px",
+        control: "6px",
+        card: "8px",
+        panel: "12px",
+      },
       keyframes: {
         feed: {
           "0%": { transform: "translateY(-78%)" },
@@ -97,10 +106,19 @@ export default {
         },
         "icon-spin": { from: { rotate: "0deg" }, to: { rotate: "360deg" } },
         // Scroll reveal (see app/plugins/reveal.ts)
-        "reveal-up": { from: { opacity: "0", translate: "0 24px" }, to: { opacity: "1", translate: "0 0" } },
+        "reveal-up": {
+          from: { opacity: "0", translate: "0 24px" },
+          to: { opacity: "1", translate: "0 0" },
+        },
         "reveal-fade": { from: { opacity: "0" }, to: { opacity: "1" } },
-        "reveal-scale": { from: { opacity: "0", scale: "0.95" }, to: { opacity: "1", scale: "1" } },
-        "reveal-start": { from: { opacity: "0", translate: "calc(var(--icon-dir) * -32px) 0" }, to: { opacity: "1", translate: "0 0" } },
+        "reveal-scale": {
+          from: { opacity: "0", scale: "0.95" },
+          to: { opacity: "1", scale: "1" },
+        },
+        "reveal-start": {
+          from: { opacity: "0", translate: "calc(var(--icon-dir) * -32px) 0" },
+          to: { opacity: "1", translate: "0 0" },
+        },
         // Infinite carousel: the track holds two identical halves, so sliding by
         // exactly 50% loops seamlessly. Direction follows the reading direction.
         marquee: {

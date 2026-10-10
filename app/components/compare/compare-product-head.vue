@@ -44,7 +44,7 @@
         >{{ product.name }}</nuxt-link-locale
       >
     </h3>
-    <p class="flex items-center gap-1 font-mono text-xs text-mute">
+    <p class="flex items-center gap-1 meta">
       <Icon
         name="lucide:star"
         size="12"
@@ -58,7 +58,7 @@
       <p class="font-display text-3xl font-semibold">
         {{ money.format(product.price) }}
       </p>
-      <p v-if="product.lease" class="font-mono text-xs text-mute">
+      <p v-if="product.lease" class="meta">
         Lease: {{ money.format(product.lease) }} / mo
       </p>
     </div>
@@ -79,7 +79,7 @@
         <Icon
           name="lucide:check"
           size="12"
-          class="mt-0.5 shrink-0 text-accent"
+          class="bullet-icon"
           aria-hidden="true"
         />{{ h }}
       </li>

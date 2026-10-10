@@ -1,9 +1,9 @@
 <template>
-  <section class="card p-5 sm:p-6" aria-labelledby="items-title">
+  <section class="card-roomy" aria-labelledby="items-title">
     <header class="mb-4 flex flex-wrap items-center justify-between gap-3">
       <h2 id="items-title" class="font-display text-2xl">Allocated items</h2>
       <p
-        class="rounded-control border border-line px-2.5 py-1 font-mono text-xs text-mute"
+        class="rounded-control border border-line px-2.5 py-1 meta"
       >
         {{ items.length }}
         {{ items.length === 1 ? "line item" : "line items" }} verified
@@ -14,7 +14,7 @@
       <li
         v-for="i in items"
         :key="i.key"
-        class="flex gap-4 rounded-card border border-line bg-surface p-3"
+        class="flex gap-4 card p-3"
       >
         <div
           class="h-20 w-24 shrink-0 overflow-hidden rounded-control border border-line sm:h-24 sm:w-28"
@@ -23,7 +23,7 @@
             v-if="i.image"
             :src="i.image"
             :alt="i.imageAlt ?? i.name"
-            class="h-full w-full bg-white object-contain p-1"
+            class="thumb-contain"
             loading="lazy"
             decoding="async"
           />
@@ -57,7 +57,7 @@
               <p class="font-mono text-sm font-medium">
                 {{ money.format(i.qty * i.unitPrice) }}
               </p>
-              <p class="font-mono text-xs text-mute">
+              <p class="meta">
                 Qty {{ i.qty
                 }}<span v-if="i.qty > 1">
                   · {{ money.format(i.unitPrice) }} each</span

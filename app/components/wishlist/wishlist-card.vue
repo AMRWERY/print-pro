@@ -88,7 +88,7 @@
           <p class="font-display text-2xl font-semibold">
             {{ money.format(product.price) }}
           </p>
-          <p v-if="product.lease" class="text-end font-mono text-xs text-mute">
+          <p v-if="product.lease" class="text-end meta">
             Lease: {{ money.format(product.lease) }} / mo
           </p>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <section class="card p-5 sm:p-6" aria-labelledby="pipeline-title">
+  <section class="card-roomy" aria-labelledby="pipeline-title">
     <header class="mb-5 flex flex-wrap items-end justify-between gap-2">
       <div>
         <p class="eyebrow">Order journey</p>
@@ -7,7 +7,7 @@
           5-stage progress
         </h2>
       </div>
-      <p class="font-mono text-xs text-mute">
+      <p class="meta">
         Stage {{ currentN }} of {{ stages.length }}
         {{ allDone ? "complete" : "active" }}
       </p>

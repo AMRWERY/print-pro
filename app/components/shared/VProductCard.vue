@@ -112,7 +112,7 @@
         class="mt-auto flex items-end justify-between gap-3 border-t border-line pt-4"
       >
         <div>
-          <p class="font-mono text-xs text-mute">
+          <p class="meta">
             Lease from {{ money.format(product.lease) }}/mo
           </p>
           <p class="font-display text-2xl font-semibold">

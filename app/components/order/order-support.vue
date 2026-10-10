@@ -19,7 +19,7 @@
         <LazyVButton
           variant="plain"
           :href="r.href"
-          class="group flex w-full items-center gap-3 rounded-card border border-line bg-surface p-3 text-start transition-colors duration-200 hover:border-accent"
+          class="group flex w-full items-center gap-3 card p-3 text-start transition-colors duration-200 hover:border-accent"
           @click="r.action?.()"
         >
           <Icon

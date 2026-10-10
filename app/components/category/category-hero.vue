@@ -8,8 +8,8 @@
     />
     <div class="container-page relative space-y-8 py-12 lg:py-16">
       <div class="animate-rise max-w-3xl space-y-5">
-        <p class="eyebrow flex items-center gap-2 text-accent">
-          <span class="h-2 w-2 bg-accent" aria-hidden="true" />{{ eyebrow }}
+        <p class="eyebrow-accent">
+          <span class="pip" aria-hidden="true" />{{ eyebrow }}
         </p>
         <h1
           id="category-title"

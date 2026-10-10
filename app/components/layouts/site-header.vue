@@ -40,7 +40,7 @@
           />
           <span
             v-if="wishlist.ids.length"
-            class="absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
+            class="count-badge"
             >{{ wishlist.ids.length }}</span
           >
         </LazyVButton>
@@ -65,7 +65,7 @@
               <span
                 v-if="cart.count"
                 :key="cart.count"
-                class="absolute -end-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
+                class="absolute -end-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-2xs font-bold text-onaccent"
                 >{{ cart.count }}</span
               >
             </Transition>

@@ -1,5 +1,5 @@
 <template>
-  <section id="security" class="scroll-mt-28 rounded-card border border-line bg-surface p-5 sm:p-6" aria-labelledby="security-title">
+  <section id="security" class="scroll-mt-28 card-roomy" aria-labelledby="security-title">
     <header class="mb-5 border-b border-line pb-4">
       <h2 id="security-title" class="flex items-center gap-2 font-display text-lg font-bold text-paper"><Icon name="lucide:key-round" size="18" class="text-accent" aria-hidden="true" />Passkey &amp; password</h2>
       <p class="text-xs text-mute">Demo build: your password is hashed (PBKDF2) and stored only in this browser.</p>

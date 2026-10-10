@@ -23,7 +23,7 @@
             v-if="e.product.image"
             :src="e.product.image"
             :alt="e.product.imageAlt ?? e.product.name"
-            class="h-full w-full bg-white object-contain p-1"
+            class="thumb-contain"
             loading="lazy"
           />
           <media-placeholder
@@ -34,7 +34,7 @@
             class="h-full w-full"
           />
           <span
-            class="absolute -end-0 -top-0 grid h-5 min-w-5 place-items-center rounded-bl-control bg-accent px-1 font-mono text-[10px] font-bold text-onaccent"
+            class="absolute -end-0 -top-0 grid h-5 min-w-5 place-items-center rounded-bl-control bg-accent px-1 font-mono text-2xs font-bold text-onaccent"
             >{{ e.line.qty }}</span
           >
         </div>
@@ -91,7 +91,7 @@
       <span class="eyebrow !text-paper">Total</span>
       <span class="font-display text-3xl font-semibold" aria-live="polite"
         >{{ money.format(amounts.total) }}
-        <span class="font-mono text-xs text-mute">USD</span></span
+        <span class="meta">USD</span></span
       >
     </p>
 
@@ -100,7 +100,7 @@
         <Icon
           :name="t.icon"
           size="14"
-          class="mt-0.5 shrink-0 text-accent"
+          class="bullet-icon"
           aria-hidden="true"
         />{{ t.label }}
       </li>

@@ -33,7 +33,7 @@
             variant="plain"
             v-for="v in views"
             :key="v.key"
-            class="grid h-8 w-8 place-items-center rounded-[4px] transition-colors duration-200"
+            class="grid h-8 w-8 place-items-center rounded-tight transition-colors duration-200"
             :class="
               view === v.key
                 ? 'bg-raised text-accent'

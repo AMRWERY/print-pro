@@ -38,7 +38,7 @@
         <LazyVButton
           variant="plain"
           block
-          class="card flex items-center justify-between gap-3 p-4 text-start"
+          class="card-compact flex items-center justify-between gap-3 text-start"
           :aria-expanded="showSummary"
           aria-controls="co-summary-mobile"
           @click="showSummary = !showSummary"
@@ -63,7 +63,7 @@
         </LazyVButton>
         <div
           id="co-summary-mobile"
-          class="grid transition-[grid-template-rows] duration-300 ease-out"
+          class="collapse-grid"
           :class="showSummary ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
           :inert="!showSummary"
         >

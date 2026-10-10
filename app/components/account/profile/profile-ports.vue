@@ -1,7 +1,7 @@
 <template>
   <section
     id="addresses"
-    class="scroll-mt-28 rounded-card border border-line bg-surface p-5 sm:p-6"
+    class="scroll-mt-28 card-roomy"
     aria-labelledby="ports-title"
   >
     <header
@@ -53,7 +53,7 @@
         :class="dock.isPrimary ? 'border-accent/50' : 'border-line'"
       >
         <div
-          class="mb-2 flex flex-wrap items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider"
+          class="mb-2 flex flex-wrap items-center gap-1.5 font-mono text-2xs font-bold tracking-wider"
         >
           <span
             v-if="dock.isPrimary"
@@ -78,7 +78,7 @@
         <p class="mt-1 flex-1 text-xs leading-relaxed text-mute">
           {{ dock.address }}
         </p>
-        <p class="mt-2 font-mono text-[11px] text-cyan">{{ dock.telemetry }}</p>
+        <p class="mt-2 font-mono text-1xs text-cyan">{{ dock.telemetry }}</p>
 
         <div
           v-if="confirming === dock.id"

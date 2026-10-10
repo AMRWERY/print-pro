@@ -20,7 +20,7 @@
         <Icon
           name="lucide:badge-percent"
           size="16"
-          class="mt-0.5 shrink-0 text-accent"
+          class="bullet-icon"
           aria-hidden="true"
         />
         <span>

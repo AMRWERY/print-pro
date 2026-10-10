@@ -1,7 +1,7 @@
 <template>
   <section
     id="reviews"
-    class="section scroll-mt-28 !py-12 md:!py-16"
+    class="section scroll-mt-28 section-compact"
     aria-labelledby="reviews-title"
   >
     <div class="container-page space-y-8">
@@ -17,7 +17,7 @@
             <span class="font-display text-5xl font-semibold">{{
               reviews.score.toFixed(2)
             }}</span>
-            <span class="pb-1 font-mono text-xs text-mute">out of 5</span>
+            <span class="pb-1 meta">out of 5</span>
           </p>
           <p class="flex" :aria-label="`${reviews.score} out of 5 stars`">
             <Icon
@@ -29,7 +29,7 @@
               aria-hidden="true"
             />
           </p>
-          <p class="font-mono text-xs text-mute">
+          <p class="meta">
             {{ reviews.count }} certified reviews
           </p>
           <ul class="space-y-1.5" aria-label="Rating breakdown">
@@ -60,7 +60,7 @@
               <header class="flex items-start justify-between gap-3">
                 <div>
                   <p class="text-sm font-medium">{{ r.author }}</p>
-                  <p class="font-mono text-xs text-mute">
+                  <p class="meta">
                     {{ r.location }} · {{ r.date }}
                   </p>
                 </div>

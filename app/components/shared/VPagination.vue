@@ -4,7 +4,7 @@
     :aria-label="label"
     class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-6"
   >
-    <p class="font-mono text-xs text-mute" aria-live="polite">
+    <p class="meta" aria-live="polite">
       Displaying
       <span class="text-paper">{{ rangeStart }}–{{ rangeEnd }}</span> of
       <span class="text-paper">{{ total }}</span> {{ itemLabel }}

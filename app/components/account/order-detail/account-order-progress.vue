@@ -1,12 +1,12 @@
 <template>
-  <section class="rounded-card border border-line bg-surface p-5" aria-labelledby="progress-title">
+  <section class="card p-5" aria-labelledby="progress-title">
     <h2 id="progress-title" class="eyebrow mb-4 flex items-center gap-2 text-mute"><Icon name="lucide:route" size="14" aria-hidden="true" />Progress</h2>
     <ol class="space-y-4">
       <li v-for="(s, i) in steps" :key="s.key" class="relative flex gap-3">
         <span v-if="i < steps.length - 1" class="absolute start-3 top-7 h-[calc(100%-1rem)] w-px" :class="s.status === 'done' ? 'bg-accent' : 'bg-line'" aria-hidden="true" />
         <span class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-full border-2" :class="dot(s.status)">
           <Icon v-if="s.status === 'done'" name="lucide:check" size="12" aria-hidden="true" />
-          <span v-else-if="s.status === 'current'" class="h-2 w-2 animate-pulse rounded-full bg-accent motion-reduce:animate-none" />
+          <span v-else-if="s.status === 'current'" class="pip animate-pulse rounded-full motion-reduce:animate-none" />
         </span>
         <div class="min-w-0 flex-1">
           <p class="text-sm font-semibold" :class="s.status === 'queued' ? 'text-mute' : 'text-paper'">
@@ -14,7 +14,7 @@
             <span class="sr-only">— {{ s.status === 'done' ? 'completed' : s.status === 'current' ? 'in progress' : 'upcoming' }}</span>
           </p>
           <p class="text-xs text-mute">{{ s.body }}</p>
-          <p v-if="s.at" class="mt-0.5 font-mono text-[10px] text-mute">{{ s.status === 'done' ? '' : 'Est. ' }}{{ formatWhen(s.at, false) }}</p>
+          <p v-if="s.at" class="mt-0.5 font-mono text-2xs text-mute">{{ s.status === 'done' ? '' : 'Est. ' }}{{ formatWhen(s.at, false) }}</p>
         </div>
       </li>
     </ol>

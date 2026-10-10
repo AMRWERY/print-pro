@@ -1,8 +1,8 @@
 <template>
-  <section class="card p-5 sm:p-6" aria-labelledby="events-title">
+  <section class="card-roomy" aria-labelledby="events-title">
     <header class="mb-5 flex flex-wrap items-center justify-between gap-2">
       <h2 id="events-title" class="font-display text-xl">Event history</h2>
-      <p class="font-mono text-xs text-mute">
+      <p class="meta">
         {{ events.length }}
         {{ events.length === 1 ? "entry" : "entries" }} recorded
       </p>
@@ -20,7 +20,7 @@
           class="absolute start-[4px] top-5 -bottom-5 w-px bg-line"
           aria-hidden="true"
         />
-        <p class="font-mono text-xs text-mute">{{ formatWhen(e.at) }}</p>
+        <p class="meta">{{ formatWhen(e.at) }}</p>
         <h3 class="font-medium">{{ e.title }}</h3>
         <p class="text-sm text-mute">{{ e.body }}</p>
       </li>

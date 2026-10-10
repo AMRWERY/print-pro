@@ -4,7 +4,7 @@
 
     <header>
       <h1
-        class="font-display text-2xl font-bold tracking-tight text-paper sm:text-3xl"
+        class="title-lg"
       >
         Profile &amp; addresses
       </h1>

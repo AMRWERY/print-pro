@@ -2,8 +2,8 @@
   <header v-reveal class="space-y-6">
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div class="space-y-3">
-        <p class="eyebrow flex items-center gap-2 text-accent">
-          <span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio registry ·
+        <p class="eyebrow-accent">
+          <span class="pip" aria-hidden="true" />Studio registry ·
           saved apparatus
         </p>
         <h1 class="max-w-3xl text-4xl sm:text-5xl">
@@ -37,15 +37,15 @@
             @update:model-value="(v) => emit('update:name', String(v ?? ''))"
           />
         </dd>
-        <dd class="font-mono text-xs text-mute">ID: REG-{{ registryId }}</dd>
+        <dd class="meta">ID: REG-{{ registryId }}</dd>
       </div>
       <div class="bg-surface p-4">
         <dt class="eyebrow">Estimated asset total</dt>
         <dd class="mt-1 font-display text-2xl" aria-live="polite">
           {{ money.format(total) }}
-          <span class="font-mono text-xs text-mute">USD</span>
+          <span class="meta">USD</span>
         </dd>
-        <dd class="font-mono text-xs text-mute">Excl. bonded tax / VAT</dd>
+        <dd class="meta">Excl. bonded tax / VAT</dd>
       </div>
       <div class="bg-surface p-4">
         <dt class="eyebrow flex items-center justify-between">
@@ -60,7 +60,7 @@
         <dd class="mt-1 font-display text-2xl">
           {{ ready }} / {{ count }} <span class="text-base">Ready</span>
         </dd>
-        <dd class="font-mono text-xs text-mute">
+        <dd class="meta">
           {{ ready }}/{{ count }} units bench-tested
         </dd>
       </div>

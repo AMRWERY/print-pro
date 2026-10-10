@@ -9,7 +9,7 @@
       <p class="text-sm text-mute sm:text-base">{{ detail.subtitle }}</p>
       <a
         href="#reviews"
-        class="inline-flex items-center gap-1.5 font-mono text-xs text-mute hover:text-paper"
+        class="inline-flex items-center gap-1.5 meta hover:text-paper"
         :aria-label="`Rated ${product.rating} out of 5 from ${product.reviews} reviews. Jump to reviews`"
       >
         <Icon
@@ -38,7 +38,7 @@
           </span>
         </template>
       </p>
-      <p v-if="detail.leaseNote" class="font-mono text-xs text-mute">
+      <p v-if="detail.leaseNote" class="meta">
         {{ detail.leaseNote }}
       </p>
       <p class="mt-2">
@@ -66,7 +66,7 @@
       >
         <span class="flex items-start gap-3">
           <span class="flex-1">
-            <span class="block text-sm font-medium">{{ p.label }}</span>
+            <span class="label">{{ p.label }}</span>
             <span class="block text-xs text-mute">{{ p.note }}</span>
           </span>
           <span class="shrink-0 font-mono text-sm">{{ money.format(product.price + p.delta) }}</span>
@@ -148,7 +148,7 @@
     >
       <div class="min-w-0 flex-1">
         <p class="truncate text-sm font-medium">{{ product.name }}</p>
-        <p class="font-mono text-xs text-mute">{{ money.format(total) }}</p>
+        <p class="meta">{{ money.format(total) }}</p>
       </div>
       <LazyVButton variant="primary"
         class="shrink-0"

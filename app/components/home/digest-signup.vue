@@ -54,7 +54,7 @@
       <p v-if="status === 'done'" class="text-sm text-success" role="status">
         You're on the list. Watch your inbox for the next dispatch.
       </p>
-      <p v-else class="font-mono text-xs tracking-wider text-mute">
+      <p v-else class="meta tracking-wider">
         Strictly pro-spec. Unsubscribe anytime.
       </p>
     </div>

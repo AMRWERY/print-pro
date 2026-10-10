@@ -1,5 +1,5 @@
 <template>
-  <section class="card p-5 sm:p-6" aria-labelledby="ledger-title">
+  <section class="card-roomy" aria-labelledby="ledger-title">
     <h2 id="ledger-title" class="mb-4 font-display text-2xl">
       Payment summary
     </h2>
@@ -54,7 +54,7 @@
         <p class="eyebrow !text-paper">
           Total {{ payment.id === "card" ? "charged" : "due" }}
         </p>
-        <p class="mt-1 font-mono text-xs text-mute">
+        <p class="mt-1 meta">
           {{
             payment.id === "card"
               ? `${payment.label} · ending ${payment.last4}`
@@ -64,7 +64,7 @@
       </div>
       <p class="font-display text-4xl font-semibold text-accent">
         {{ money.format(amounts.total) }}
-        <span class="font-mono text-xs text-mute">USD</span>
+        <span class="meta">USD</span>
       </p>
     </div>
   </section>

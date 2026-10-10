@@ -25,7 +25,7 @@
         >{{ current.label }}</span
       >
       <span
-        class="absolute bottom-3 end-3 font-mono text-xs text-mute"
+        class="absolute bottom-3 end-3 meta"
         aria-hidden="true"
         >{{ active + 1 }} / {{ items.length }}</span
       >

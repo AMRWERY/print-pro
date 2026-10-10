@@ -1,6 +1,6 @@
 <template>
   <article
-    class="card flex flex-col gap-4 p-4 sm:flex-row"
+    class="card-compact flex flex-col gap-4 sm:flex-row"
     :class="!selected && 'opacity-70'"
   >
     <div class="flex items-start gap-3 sm:contents">
@@ -20,7 +20,7 @@
           v-if="product.image"
           :src="product.image"
           :alt="product.imageAlt ?? product.name"
-          class="h-full w-full bg-white object-contain p-1"
+          class="thumb-contain"
           loading="lazy"
           decoding="async"
         />
@@ -80,10 +80,10 @@
           <p class="font-display text-2xl font-semibold" aria-live="polite">
             {{ money.format(line.qty * line.unitPrice) }}
           </p>
-          <p v-if="line.qty > 1" class="font-mono text-xs text-mute">
+          <p v-if="line.qty > 1" class="meta">
             {{ line.qty }} × {{ money.format(line.unitPrice) }}
           </p>
-          <p v-if="product.lease" class="font-mono text-xs text-mute">
+          <p v-if="product.lease" class="meta">
             Lease: {{ money.format(product.lease * line.qty) }} / mo
           </p>
         </div>

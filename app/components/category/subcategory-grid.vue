@@ -1,5 +1,5 @@
 <template>
-  <section class="section !py-12 md:!py-16" aria-labelledby="sub-title">
+  <section class="section section-compact" aria-labelledby="sub-title">
     <div class="container-page space-y-8">
       <section-heading
         id="sub-title"
@@ -16,7 +16,7 @@
           <LazyVButton
             variant="plain"
             block
-            class="group card flex h-full flex-col gap-3 p-4 text-start transition duration-200 hover:-translate-y-0.5 hover:border-accent"
+            class="group card-compact flex h-full flex-col gap-3 text-start transition duration-200 hover:-translate-y-0.5 hover:border-accent"
             @click="emit('select', s.key)"
           >
             <span class="flex items-center justify-between text-mute">

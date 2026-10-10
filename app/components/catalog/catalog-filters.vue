@@ -5,7 +5,7 @@
       <LazyVButton
         variant="plain"
         v-if="catalog.chips.length"
-        class="font-mono text-xs tracking-wider text-accent hover:underline"
+        class="link-accent"
         @click="catalog.reset()"
       >
         Reset
@@ -49,7 +49,7 @@
       <LazyVButton
         variant="plain"
         v-if="catalog.brands.length > brandLimit"
-        class="mt-1 font-mono text-xs tracking-wider text-mute hover:text-paper"
+        class="mt-1 meta tracking-wider hover:text-paper"
         :aria-expanded="showAllBrands"
         @click="showAllBrands = !showAllBrands"
       >
@@ -98,7 +98,7 @@
         <LazyVButton
           variant="plain"
           v-if="catalog.filters.minRating !== null"
-          class="font-mono text-xs tracking-wider text-mute hover:text-paper"
+          class="meta tracking-wider hover:text-paper"
           @click="catalog.filters.minRating = null"
         >
           Any rating

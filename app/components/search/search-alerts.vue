@@ -45,7 +45,7 @@
               We’ll flag new lots and price changes that match this search.
             </p>
             <div
-              class="mt-auto flex items-center justify-between pt-3 font-mono text-xs text-mute"
+              class="mt-auto flex items-center justify-between pt-3 meta"
             >
               <span>Saved {{ formatDate(s.at) }}</span>
               <nuxt-link-locale

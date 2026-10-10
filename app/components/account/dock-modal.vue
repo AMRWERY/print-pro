@@ -3,7 +3,7 @@
     <Transition name="modal">
       <div
         v-if="open"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+        class="modal-root"
         role="dialog"
         aria-modal="true"
         aria-labelledby="dock-modal-title"
@@ -14,10 +14,10 @@
         />
 
         <div
-          class="relative max-h-full w-full max-w-lg overflow-y-auto rounded-panel border border-line bg-surface shadow-2xl shadow-black/60"
+          class="modal-panel"
         >
           <div
-            class="flex items-center justify-between border-b border-line bg-ink px-5 py-3.5"
+            class="modal-head"
           >
             <div class="flex items-center gap-2">
               <span class="h-2 w-2 rounded-full bg-cyan" aria-hidden="true" />

@@ -1,13 +1,13 @@
 <template>
   <section
     id="tracking"
-    class="card scroll-mt-6 p-5 sm:p-6"
+    class="card-roomy scroll-mt-6"
     aria-labelledby="timeline-title"
   >
     <header class="mb-6 flex flex-wrap items-end justify-between gap-3">
       <div>
         <p class="eyebrow flex items-center gap-2">
-          <span class="h-2 w-2 bg-accent" aria-hidden="true" />Mission routing
+          <span class="pip" aria-hidden="true" />Mission routing
         </p>
         <h2 id="timeline-title" class="font-display text-2xl">
           Order progress

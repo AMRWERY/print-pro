@@ -1,13 +1,13 @@
 <template>
   <div
-    class="hidden overflow-hidden rounded-card border border-line bg-surface md:block"
+    class="hidden overflow-hidden card md:block"
   >
     <table class="w-full text-start text-sm">
       <caption class="sr-only">
         Your orders
       </caption>
       <thead
-        class="border-b border-line bg-raised/50 font-mono text-[10px] tracking-wider text-mute"
+        class="border-b border-line bg-raised/50 font-mono text-2xs tracking-wider text-mute"
       >
         <tr>
           <th scope="col" class="px-4 py-3 text-start font-semibold">Order</th>
@@ -32,7 +32,7 @@
               class="font-mono text-xs font-bold text-accent hover:underline"
               >{{ o.id }}</NuxtLinkLocale
             >
-            <p v-if="o.waybill" class="font-mono text-[10px] text-mute">
+            <p v-if="o.waybill" class="font-mono text-2xs text-mute">
               {{ o.waybill }}
             </p>
           </td>
@@ -45,7 +45,7 @@
             </div>
           </td>
           <td
-            class="whitespace-nowrap px-4 py-3 align-middle font-mono text-xs text-mute"
+            class="whitespace-nowrap px-4 py-3 align-middle meta"
           >
             {{ orderDateLabel(o) }}
           </td>

@@ -110,6 +110,99 @@
   }
 }
 
+/* Shared patterns extracted from repeated utility strings across components. */
+@layer components {
+  /* Cards */
+  .card-compact {
+    @apply card p-4;
+  }
+  .card-roomy {
+    @apply card p-5 sm:p-6;
+  }
+
+  /* Text roles */
+  .meta {
+    @apply font-mono text-xs text-mute;
+  }
+  .label {
+    @apply block text-sm font-medium;
+  }
+  .title-sm {
+    @apply font-display text-base font-bold text-paper;
+  }
+  .title-md {
+    @apply font-display text-xl font-bold text-paper;
+  }
+  .title-lg {
+    @apply font-display text-2xl font-bold tracking-tight text-paper sm:text-3xl;
+  }
+  .eyebrow-accent {
+    @apply flex items-center gap-2 font-mono text-xs tracking-widest text-accent;
+  }
+  .link-accent {
+    @apply font-mono text-xs tracking-wider text-accent hover:underline;
+  }
+  .bullet-icon {
+    @apply mt-0.5 shrink-0 text-accent;
+  }
+
+  /* Callouts */
+  .callout {
+    @apply flex items-start gap-2 rounded-card border border-line bg-raised p-3 text-xs text-mute;
+  }
+  .callout-accent {
+    @apply flex items-start gap-2 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm;
+  }
+
+  /* Overlays */
+  .modal-root {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6;
+  }
+  .modal-backdrop {
+    @apply absolute inset-0 bg-ink/70 backdrop-blur-sm;
+  }
+  .modal-panel {
+    @apply relative max-h-full w-full max-w-lg overflow-y-auto rounded-panel border border-line bg-surface shadow-2xl shadow-black/60;
+  }
+  .modal-head {
+    @apply flex items-center justify-between border-b border-line bg-ink px-5 py-3.5;
+  }
+  .modal-foot {
+    @apply flex items-center justify-between border-t border-line bg-ink px-5 py-3;
+  }
+
+  /* Small pieces */
+  .pip {
+    @apply h-2 w-2 bg-accent;
+  }
+  .status-dot {
+    @apply h-1.5 w-1.5 animate-pulse rounded-full bg-success;
+  }
+  .ping-ring {
+    @apply absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75;
+  }
+  .count-badge {
+    @apply absolute -end-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 font-mono text-2xs font-bold text-onaccent;
+  }
+  .chip-link {
+    @apply inline-flex items-center gap-1.5 rounded-control border border-line bg-surface px-3 py-1.5 font-mono text-xs text-mute transition hover:border-accent hover:text-paper;
+  }
+  .thumb-contain {
+    @apply h-full w-full bg-white object-contain p-1;
+  }
+  .collapse-grid {
+    @apply grid transition-[grid-template-rows] duration-300 ease-out;
+  }
+
+  /* Page rhythm */
+  .page-stack {
+    @apply space-y-6 py-6 lg:py-8;
+  }
+  .section-compact {
+    @apply !py-12 md:!py-16;
+  }
+}
+
 .page-enter-active,
 .page-leave-active {
   transition:
@@ -181,7 +274,7 @@
 
 @layer components {
   .check {
-    @apply h-4 w-4 shrink-0 cursor-pointer rounded-[4px] border-line bg-surface text-accent transition duration-200 focus:ring-2 focus:ring-accent/60 focus:ring-offset-0;
+    @apply h-4 w-4 shrink-0 cursor-pointer rounded-tight border-line bg-surface text-accent transition duration-200 focus:ring-2 focus:ring-accent/60 focus:ring-offset-0;
   }
 }
 

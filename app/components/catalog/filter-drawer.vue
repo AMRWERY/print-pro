@@ -9,7 +9,7 @@
         aria-label="Filter products"
       >
         <div
-          class="absolute inset-0 bg-ink/70 backdrop-blur-sm"
+          class="modal-backdrop"
           @click="emit('close')"
         />
         <div

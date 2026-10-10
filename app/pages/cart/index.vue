@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="container-page space-y-6 py-6 lg:py-8">
+    <div class="container-page page-stack">
       <LazyVBreadcrumb :items="crumbs" />
 
       <header v-reveal class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-3">
-          <p class="eyebrow flex items-center gap-2 text-accent">
-            <span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio
+          <p class="eyebrow-accent">
+            <span class="pip" aria-hidden="true" />Studio
             procurement · station 04
           </p>
           <h1 class="max-w-3xl text-3xl sm:text-5xl">
@@ -43,7 +43,7 @@
         <div class="space-y-4">
           <!-- Bulk actions -->
           <div
-            class="flex flex-wrap items-center justify-between gap-3 rounded-card border border-line bg-surface p-3"
+            class="flex flex-wrap items-center justify-between gap-3 card p-3"
           >
             <LazyVInput
               type="checkbox"

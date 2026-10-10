@@ -1,10 +1,10 @@
 <template>
-  <section class="rounded-card border border-line bg-surface p-5 sm:p-6" aria-labelledby="registry-section-title">
+  <section class="card-roomy" aria-labelledby="registry-section-title">
     <header class="flex items-start justify-between gap-3 border-b border-line pb-3">
       <div>
         <div class="flex items-center gap-2">
           <span class="h-2 w-2 rounded-full bg-yellow" aria-hidden="true" />
-          <h2 id="registry-section-title" class="font-display text-base font-bold text-paper sm:text-lg">
+          <h2 id="registry-section-title" class="title-sm sm:text-lg">
             Studio Registry &amp; Reserved Apparatus
           </h2>
         </div>
@@ -13,7 +13,7 @@
         </p>
       </div>
 
-      <span class="rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-[10px] text-mute">
+      <span class="rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-2xs text-mute">
         {{ items.length }} PRESENT ITEMS
       </span>
     </header>
@@ -36,14 +36,14 @@
             <h3 class="font-display text-sm font-semibold text-paper">
               {{ item.name }}
             </h3>
-            <p class="font-mono text-[11px] text-mute">
+            <p class="font-mono text-1xs text-mute">
               {{ item.specNotes }}
             </p>
           </div>
         </div>
 
         <div class="flex items-center justify-between gap-4 border-t border-line/60 pt-2 sm:border-0 sm:pt-0">
-          <span class="font-display text-base font-bold text-paper">
+          <span class="title-sm">
             {{ money.format(item.price) }}
           </span>
 

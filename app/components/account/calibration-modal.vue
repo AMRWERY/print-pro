@@ -3,7 +3,7 @@
     <Transition name="modal">
       <div
         v-if="open"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+        class="modal-root"
         role="dialog"
         aria-modal="true"
         aria-labelledby="calibration-modal-title"
@@ -17,10 +17,10 @@
           class="relative max-h-full w-full max-w-xl overflow-y-auto rounded-panel border border-accent/40 bg-surface shadow-2xl shadow-black/60"
         >
           <div
-            class="flex items-center justify-between border-b border-line bg-ink px-5 py-3.5"
+            class="modal-head"
           >
             <div class="flex items-center gap-2">
-              <span class="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
+              <span class="pip rounded-full" aria-hidden="true" />
               <h2
                 id="calibration-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-accent"
@@ -84,7 +84,7 @@
               class="flex items-center justify-between rounded-control border border-line bg-ink/30 p-3 text-xs text-mute"
             >
               <span class="font-mono">Estimated bench cost</span>
-              <span class="font-display text-base font-bold text-paper"
+              <span class="title-sm"
                 >$1,450.00</span
               >
             </div>

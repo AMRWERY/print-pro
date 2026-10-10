@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-page space-y-6 py-6 lg:py-8">
+    <div class="container-page page-stack">
       <LazyVBreadcrumb :items="crumbs" />
 
       <search-bar />
@@ -10,14 +10,14 @@
           <template v-if="catalog.filters.query">Results for “{{ catalog.filters.query }}”</template>
           <template v-else>Search the catalog</template>
         </h1>
-        <p class="font-mono text-xs text-mute">
+        <p class="meta">
           {{ catalog.total }} {{ catalog.total === 1 ? "item" : "items" }} indexed
         </p>
       </div>
 
       <div class="gap-8 lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
         <aside class="hidden lg:block" aria-label="Filters">
-          <div class="card sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto p-4">
+          <div class="card-compact sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto">
             <catalog-filters hide-query />
           </div>
         </aside>

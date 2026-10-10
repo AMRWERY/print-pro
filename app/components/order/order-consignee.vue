@@ -13,27 +13,27 @@
     </h2>
 
     <dl class="space-y-4 text-sm">
-      <div class="space-y-1 rounded-card border border-line bg-surface p-3">
+      <div class="space-y-1 card p-3">
         <dt class="eyebrow">Recipient</dt>
         <dd class="font-medium">{{ order.name }}</dd>
         <dd v-if="order.company" class="text-mute">{{ order.company }}</dd>
-        <dd class="font-mono text-xs text-mute">
+        <dd class="meta">
           {{ order.address.line1
           }}<span v-if="order.address.line2">, {{ order.address.line2 }}</span>
         </dd>
-        <dd class="font-mono text-xs text-mute">
+        <dd class="meta">
           {{ order.address.city }}, {{ order.address.region }}
           {{ order.address.postal }}
         </dd>
-        <dd class="font-mono text-xs text-mute">
+        <dd class="meta">
           {{ countryName(order.address.country) }}
         </dd>
-        <dd class="pt-1 font-mono text-xs text-mute">
+        <dd class="pt-1 meta">
           {{ order.phone }} · {{ order.email }}
         </dd>
       </div>
 
-      <div class="space-y-1 rounded-card border border-line bg-surface p-3">
+      <div class="space-y-1 card p-3">
         <dt class="eyebrow">Delivery method</dt>
         <dd class="flex items-center gap-1.5 font-medium">
           <Icon
@@ -48,7 +48,7 @@
 
       <div
         v-if="order.notes"
-        class="space-y-1 rounded-card border border-line bg-surface p-3"
+        class="space-y-1 card p-3"
       >
         <dt class="eyebrow">Delivery notes</dt>
         <dd class="text-xs text-mute">{{ order.notes }}</dd>

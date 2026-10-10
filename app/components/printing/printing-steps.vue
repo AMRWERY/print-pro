@@ -19,7 +19,7 @@
           @click.prevent="go(s.id)"
         >
           <span
-            class="grid h-6 w-6 shrink-0 place-items-center rounded-full border font-mono text-[11px] font-bold"
+            class="grid h-6 w-6 shrink-0 place-items-center rounded-full border font-mono text-1xs font-bold"
             :class="
               done(s.id)
                 ? 'border-success bg-success text-ink'
@@ -41,7 +41,7 @@
               s.label
             }}</span>
             <span
-              class="hidden whitespace-nowrap font-mono text-[10px] text-mute xl:block"
+              class="hidden whitespace-nowrap font-mono text-2xs text-mute xl:block"
               >{{ s.hint }}</span
             >
           </span>

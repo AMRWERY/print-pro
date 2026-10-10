@@ -5,7 +5,7 @@
       <LazyVButton
         variant="plain"
         v-if="inventory.activeCount"
-        class="font-mono text-xs tracking-wider text-accent hover:underline"
+        class="link-accent"
         @click="inventory.reset()"
       >
         Reset

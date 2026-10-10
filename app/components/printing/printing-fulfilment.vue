@@ -20,7 +20,7 @@
           option.description
         }}</span>
         <span
-          class="mt-auto flex items-center justify-between pt-2 font-mono text-[11px]"
+          class="mt-auto flex items-center justify-between pt-2 font-mono text-1xs"
         >
           <span class="text-mute">{{ option.note }}</span>
           <span class="font-semibold text-paper">{{

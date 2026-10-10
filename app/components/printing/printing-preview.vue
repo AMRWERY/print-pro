@@ -1,8 +1,8 @@
 <template>
-  <section class="rounded-card border border-line bg-surface p-4" aria-labelledby="proof-title">
+  <section class="card-compact" aria-labelledby="proof-title">
     <header class="mb-3 flex items-center justify-between gap-2">
       <h2 id="proof-title" class="eyebrow text-mute">Metrological soft-proof simulator</h2>
-      <span class="rounded-control border border-accent/40 bg-accent-soft px-2 py-0.5 font-mono text-[10px] font-bold text-accent">D50 5000K</span>
+      <span class="rounded-control border border-accent/40 bg-accent-soft px-2 py-0.5 font-mono text-2xs font-bold text-accent">D50 5000K</span>
     </header>
 
     <!-- A dark mount board with the print floating in it, drawn at the chosen proportions -->
@@ -11,7 +11,7 @@
         <img :src="previewUrl || sample" :alt="previewUrl ? 'Soft-proof of your uploaded image' : 'Sample artwork, shown until you upload a file'" class="h-full w-full object-cover transition-[filter] duration-300 motion-reduce:transition-none" :style="{ filter: paper.tint }" />
       </div>
     </div>
-    <p class="mt-3 font-mono text-[11px] leading-relaxed text-mute">
+    <p class="mt-3 font-mono text-1xs leading-relaxed text-mute">
       {{ caption }}<span v-if="!previewUrl"> · sample artwork</span>
     </p>
   </section>

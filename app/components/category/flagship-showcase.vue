@@ -1,5 +1,5 @@
 <template>
-  <section class="section !py-12 md:!py-16" aria-labelledby="flagship-title">
+  <section class="section section-compact" aria-labelledby="flagship-title">
     <div class="container-page space-y-8">
       <section-heading
         id="flagship-title"
@@ -32,7 +32,7 @@
               >{{ f.tag }}</span
             >
             <span
-              class="absolute end-3 top-3 font-mono text-xs text-mute"
+              class="absolute end-3 top-3 meta"
               dir="ltr"
               >{{ f.sku }}</span
             >

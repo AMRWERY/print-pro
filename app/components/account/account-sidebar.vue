@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="rounded-card border border-line bg-surface p-4 text-sm"
+    class="card-compact text-sm"
     aria-label="Workspace navigation"
   >
     <h2 class="eyebrow mb-3 flex items-center gap-2 text-mute">
@@ -31,7 +31,7 @@
             <span class="flex-1 truncate">{{ item.label }}</span>
             <span
               v-if="item.badge !== undefined"
-              class="rounded-full px-1.5 font-mono text-[10px] font-bold"
+              class="rounded-full px-1.5 font-mono text-2xs font-bold"
               :class="
                 isActive(item.key)
                   ? 'bg-black/20 text-white'

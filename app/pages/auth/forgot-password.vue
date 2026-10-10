@@ -60,7 +60,7 @@
       <template v-else>
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2">
-            <span class="h-2 w-2 bg-accent" aria-hidden="true" />Account
+            <span class="pip" aria-hidden="true" />Account
             recovery
           </p>
           <h1 id="forgot-title" class="font-display text-3xl sm:text-4xl">

@@ -19,7 +19,7 @@
             class="group card flex h-full flex-col gap-3 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent"
           >
             <span
-              class="flex items-center justify-between font-mono text-xs text-mute"
+              class="flex items-center justify-between meta"
             >
               0{{ i + 1 }} /
               {{ c.label.split(" ")[0]!.toUpperCase().slice(0, 7) }}

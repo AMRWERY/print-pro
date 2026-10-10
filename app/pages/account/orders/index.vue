@@ -5,7 +5,7 @@
     <header class="flex flex-wrap items-end justify-between gap-3">
       <div>
         <h1
-          class="font-display text-2xl font-bold tracking-tight text-paper sm:text-3xl"
+          class="title-lg"
         >
           Orders &amp; Calibrations
         </h1>
@@ -50,7 +50,7 @@
           />
         </div>
         <div class="mt-4 space-y-2 text-center md:hidden">
-          <p class="font-mono text-xs text-mute">
+          <p class="meta">
             Displaying {{ mobileRows.length }} of {{ filtered.length }}
           </p>
           <LazyVButton

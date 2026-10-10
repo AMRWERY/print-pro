@@ -20,7 +20,7 @@
         <LazyVButton variant="plain" class="relative text-mute hover:text-paper" aria-label="Studio notifications"
           @click="showNotifications = !showNotifications">
           <Icon name="lucide:bell" size="18" />
-          <span class="absolute -top-1 -end-1 h-2 w-2 rounded-full bg-accent" />
+          <span class="absolute -top-1 -end-1 pip rounded-full" />
         </LazyVButton>
 
         <img :src="profile.avatarUrl" :alt="profile.name"
@@ -33,7 +33,7 @@
       class="grid grid-cols-3 gap-1 rounded-control border border-line bg-surface p-1 font-mono text-xs font-semibold"
       role="tablist" aria-label="Mobile sections">
       <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'overview'"
-        class="flex items-center justify-center gap-1.5 rounded-[4px] py-2 transition" :class="mobileTab === 'overview'
+        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition" :class="mobileTab === 'overview'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
           " @click="mobileTab = 'overview'">
@@ -42,7 +42,7 @@
       </LazyVButton>
 
       <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'active'"
-        class="flex items-center justify-center gap-1.5 rounded-[4px] py-2 transition" :class="mobileTab === 'active'
+        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition" :class="mobileTab === 'active'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
           " @click="mobileTab = 'active'">
@@ -50,7 +50,7 @@
       </LazyVButton>
 
       <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'registry'"
-        class="flex items-center justify-center gap-1.5 rounded-[4px] py-2 transition" :class="mobileTab === 'registry'
+        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition" :class="mobileTab === 'registry'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
           " @click="mobileTab = 'registry'">
@@ -59,7 +59,7 @@
     </div>
 
     <!-- Doctor Profile Card -->
-    <section class="rounded-card border border-line bg-surface p-4">
+    <section class="card-compact">
       <div class="flex items-start justify-between gap-3">
         <div class="flex items-center gap-3">
           <div class="relative h-14 w-14 shrink-0 overflow-hidden rounded-control border border-line">
@@ -71,10 +71,10 @@
             <h2 class="font-display text-lg font-bold text-paper">
               {{ profile.name }}
             </h2>
-            <p class="font-mono text-[11px] text-mute tracking-wider truncate max-w-[200px]">
+            <p class="font-mono text-1xs text-mute tracking-wider truncate max-w-[200px]">
               {{ profile.affiliation }}
             </p>
-            <div class="flex items-center gap-2 font-mono text-[10px]">
+            <div class="flex items-center gap-2 font-mono text-2xs">
               <span class="text-accent font-semibold">LEAD CONSERVATOR</span>
               <span class="text-mute">•</span>
               <span class="text-mute">BER ⇄ JFK OK</span>
@@ -114,57 +114,57 @@
 
     <!-- Key Metrics 3-Column Grid -->
     <div class="grid grid-cols-3 gap-2 font-mono text-xs">
-      <div class="rounded-card border border-line bg-surface p-2.5 space-y-1">
-        <div class="flex items-center justify-between text-mute text-[10px]">
+      <div class="card p-2.5 space-y-1">
+        <div class="flex items-center justify-between text-mute text-2xs">
           <span>TRANSIT</span>
           <span class="h-1.5 w-1.5 rounded-full bg-accent" />
         </div>
-        <p class="font-display text-base font-bold text-paper">$18.2K</p>
-        <p class="text-[10px] text-mute leading-tight">LH-400 • 1 SEAL</p>
+        <p class="title-sm">$18.2K</p>
+        <p class="text-2xs text-mute leading-tight">LH-400 • 1 SEAL</p>
       </div>
 
-      <div class="rounded-card border border-line bg-surface p-2.5 space-y-1">
-        <div class="flex items-center justify-between text-mute text-[10px]">
+      <div class="card p-2.5 space-y-1">
+        <div class="flex items-center justify-between text-mute text-2xs">
           <span>ESCROW</span>
           <Icon name="lucide:shield-check" size="10" class="text-cyan" />
         </div>
-        <p class="font-display text-base font-bold text-paper">$32.5K</p>
-        <p class="text-[10px] text-success leading-tight">AUTO-CLEAR ON</p>
+        <p class="title-sm">$32.5K</p>
+        <p class="text-2xs text-success leading-tight">AUTO-CLEAR ON</p>
       </div>
 
-      <div class="rounded-card border border-line bg-surface p-2.5 space-y-1">
-        <div class="flex items-center justify-between text-mute text-[10px]">
+      <div class="card p-2.5 space-y-1">
+        <div class="flex items-center justify-between text-mute text-2xs">
           <span>REGISTRY</span>
           <Icon name="lucide:bookmark" size="10" class="text-mute" />
         </div>
-        <p class="font-display text-base font-bold text-paper">8 Units</p>
-        <p class="text-[10px] text-accent leading-tight">2 ALLOCATED</p>
+        <p class="title-sm">8 Units</p>
+        <p class="text-2xs text-accent leading-tight">2 ALLOCATED</p>
       </div>
     </div>
 
     <!-- Active In-Transit Shipment Card -->
-    <article v-if="inTransitOrder" class="rounded-card border border-line bg-surface p-4 space-y-3">
+    <article v-if="inTransitOrder" class="card-compact space-y-3">
       <div class="flex items-center justify-between border-b border-line pb-2.5">
         <div class="flex items-center gap-1.5 font-mono text-xs">
           <span class="rounded-control bg-accent/20 px-2 py-0.5 font-bold text-accent">
             {{ inTransitOrder.crateId || 'CRATE #LP-948201' }}
           </span>
-          <span class="flex items-center gap-1 text-[11px] text-accent">
+          <span class="flex items-center gap-1 text-1xs text-accent">
             <span class="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
             LIVE
           </span>
         </div>
 
-        <span class="font-display text-base font-bold text-paper">
+        <span class="title-sm">
           {{ money.format(inTransitOrder.amount) }}
         </span>
       </div>
 
       <div>
-        <h3 class="font-display text-base font-bold text-paper">
+        <h3 class="title-sm">
           Medium Format Optics &amp; Print Master
         </h3>
-        <p class="font-mono text-[10px] text-mute tracking-wider mt-0.5">
+        <p class="font-mono text-2xs text-mute tracking-wider mt-0.5">
           CARRIER: LUFTHANSA CARGO FLIGHT LH-400 (PALLET #88)
         </p>
       </div>
@@ -173,11 +173,11 @@
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5">
           <img src="/img/prod-01.png" alt="Hasselblad" class="h-8 w-8 object-contain" />
-          <span class="font-mono text-[10px] text-paper">Hasselblad 907X 50C</span>
+          <span class="font-mono text-2xs text-paper">Hasselblad 907X 50C</span>
         </div>
         <div class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5">
           <img src="/img/prod-03.png" alt="Epson" class="h-8 w-8 object-contain" />
-          <span class="font-mono text-[10px] text-paper">Epson Ultra...</span>
+          <span class="font-mono text-2xs text-paper">Epson Ultra...</span>
         </div>
       </div>
 
@@ -190,7 +190,7 @@
           <div class="h-1.5 rounded-full bg-line" />
         </div>
 
-        <div class="grid grid-cols-4 text-center font-mono text-[9px]">
+        <div class="grid grid-cols-4 text-center font-mono text-3xs">
           <span class="text-mute">BER Cleared</span>
           <span class="text-mute">TXL Customs</span>
           <span class="font-bold text-accent">In Flight</span>
@@ -200,7 +200,7 @@
 
       <!-- Live Sensor telemetry strip -->
       <div class="flex items-center justify-between border-t border-line pt-2.5 font-mono text-xs">
-        <div class="flex items-center gap-3 text-[11px] text-mute">
+        <div class="flex items-center gap-3 text-1xs text-mute">
           <span>🌡 19.4°C / 42% RH</span>
           <span class="text-success font-semibold">👁 0.02G Safe</span>
         </div>
@@ -214,11 +214,11 @@
     </article>
 
     <!-- Studio Registry Horizontal Scroll Carousel -->
-    <section class="rounded-card border border-line bg-surface p-4 space-y-3">
+    <section class="card-compact space-y-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 font-mono text-xs">
           <span class="font-bold text-paper">STUDIO REGISTRY</span>
-          <span class="rounded-control bg-raised px-1.5 py-0.2 text-[10px] text-mute">
+          <span class="rounded-control bg-raised px-1.5 py-0.2 text-2xs text-mute">
             {{ registryItems.length }} RESERVED
           </span>
         </div>
@@ -234,7 +234,7 @@
           <div class="relative aspect-video w-full overflow-hidden rounded-control border border-line bg-surface">
             <img v-if="item.image" :src="item.image" :alt="item.name" class="h-full w-full object-cover" />
             <span
-              class="absolute top-1 start-1 rounded bg-black/70 px-1.5 py-0.5 font-mono text-[9px] font-bold text-yellow">
+              class="absolute top-1 start-1 rounded bg-black/70 px-1.5 py-0.5 font-mono text-3xs font-bold text-yellow">
               {{ item.category }}
             </span>
           </div>
@@ -243,7 +243,7 @@
             <h4 class="font-display text-sm font-semibold text-paper truncate">
               {{ item.name }}
             </h4>
-            <p class="font-mono text-[10px] text-mute truncate">
+            <p class="font-mono text-2xs text-mute truncate">
               {{ item.specNotes }}
             </p>
           </div>
@@ -254,7 +254,7 @@
             </span>
 
             <LazyVButton variant="plain"
-              class="inline-flex items-center gap-1 rounded-control bg-surface border border-line px-2 py-1 font-mono text-[10px] font-bold text-paper hover:border-accent hover:text-accent"
+              class="inline-flex items-center gap-1 rounded-control bg-surface border border-line px-2 py-1 font-mono text-2xs font-bold text-paper hover:border-accent hover:text-accent"
               @click="$emit('add-registry', item)">
               <Icon name="lucide:shopping-bag" size="11" />
               <span>REQUISITION</span>
@@ -265,16 +265,16 @@
     </section>
 
     <!-- Designated Receiving Dock Card -->
-    <section class="rounded-card border border-line bg-surface p-4 space-y-2">
+    <section class="card-compact space-y-2">
       <div class="flex items-center justify-between font-mono text-xs">
         <span class="flex items-center gap-1.5 text-mute">
           <Icon name="lucide:map-pin" size="13" class="text-accent" />
           DESIGNATED RECEIVING DOCK
         </span>
-        <span class="text-cyan text-[11px] font-bold">SECURITY TIER IV</span>
+        <span class="text-cyan text-1xs font-bold">SECURITY TIER IV</span>
       </div>
 
-      <h3 class="font-display text-base font-bold text-paper">
+      <h3 class="title-sm">
         Dock 4B — Archival Freight Terminal
       </h3>
       <p class="text-xs text-mute leading-relaxed">
@@ -284,7 +284,7 @@
 
       <div class="pt-2">
         <LazyVButton variant="plain"
-          class="w-full rounded-control border border-line bg-raised py-2 font-mono text-xs font-semibold text-mute transition hover:border-accent hover:text-paper"
+          class="w-full rounded-control border border-line bg-raised py-2 meta font-semibold transition hover:border-accent hover:text-paper"
           @click="$emit('change-dock')">
           CHANGE DOCK
         </LazyVButton>
@@ -292,7 +292,7 @@
     </section>
 
     <!-- Collapsible Archived Requisitions -->
-    <section class="rounded-card border border-line bg-surface p-4 space-y-3">
+    <section class="card-compact space-y-3">
       <div class="flex items-center justify-between font-mono text-xs">
         <span class="font-bold text-paper">ARCHIVED REQUISITIONS</span>
         <span class="text-mute">2024 VENDOR REGISTRY</span>
@@ -304,7 +304,7 @@
             @click="toggleArchive(arc.id)">
             <div>
               <p class="font-bold text-paper">{{ arc.id }} • {{ arc.title.split('+')[0]?.trim() }}</p>
-              <p class="text-[10px] text-mute">{{ arc.date }} • {{ arc.items.length }} ITEMS</p>
+              <p class="text-2xs text-mute">{{ arc.date }} • {{ arc.items.length }} ITEMS</p>
             </div>
             <div class="flex items-center gap-2">
               <span class="font-display font-semibold text-paper">{{ money.format(arc.amount) }}</span>
@@ -316,31 +316,31 @@
           <div v-if="openArchives[arc.id]" class="mt-2 border-t border-line/60 pt-2 text-xs text-mute space-y-1">
             <p>{{ arc.title }}</p>
             <p v-if="arc.benchVerified" class="text-success">{{ arc.benchVerified }}</p>
-            <p v-if="arc.calibrationLog" class="font-mono text-[10px]">{{ arc.calibrationLog }}</p>
+            <p v-if="arc.calibrationLog" class="font-mono text-2xs">{{ arc.calibrationLog }}</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Real-Time Activity Log Stream -->
-    <section class="rounded-card border border-line bg-surface p-4 space-y-3">
+    <section class="card-compact space-y-3">
       <div class="flex items-center justify-between font-mono text-xs">
         <span class="font-bold text-paper">REAL-TIME ACTIVITY LOG</span>
-        <span class="text-success flex items-center gap-1 text-[10px]">
-          <span class="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
+        <span class="text-success flex items-center gap-1 text-2xs">
+          <span class="status-dot" />
           LIVE SECURE STREAM
         </span>
       </div>
 
       <div class="space-y-2.5 font-mono text-xs">
         <div class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5">
-          <Icon name="lucide:activity" size="14" class="text-accent shrink-0 mt-0.5" />
+          <Icon name="lucide:activity" size="14" class="bullet-icon" />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
               <span class="font-bold text-paper">Cargo Seal Telemetry Ping</span>
-              <span class="text-mute text-[10px]">08:42 EDT</span>
+              <span class="text-mute text-2xs">08:42 EDT</span>
             </div>
-            <p class="font-sans text-[11px] text-mute">
+            <p class="font-sans text-1xs text-mute">
               Flight LH-400 automated health report passed. Sensor array indicates optimal atmosphere.
             </p>
           </div>
@@ -351,9 +351,9 @@
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
               <span class="font-bold text-paper">Escrow Allocation Verified</span>
-              <span class="text-mute text-[10px]">YESTERDAY</span>
+              <span class="text-mute text-2xs">YESTERDAY</span>
             </div>
-            <p class="font-sans text-[11px] text-mute">
+            <p class="font-sans text-1xs text-mute">
               Wire clearance $12,450.00 confirmed for Requisition #LP-948201.
             </p>
           </div>
@@ -364,9 +364,9 @@
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
               <span class="font-bold text-paper">Registry Item Reserved</span>
-              <span class="text-mute text-[10px]">NOV 02</span>
+              <span class="text-mute text-2xs">NOV 02</span>
             </div>
-            <p class="font-sans text-[11px] text-mute">
+            <p class="font-sans text-1xs text-mute">
               Calibrite ColorChecker Studio held in conservation inventory for Vance Lab.
             </p>
           </div>

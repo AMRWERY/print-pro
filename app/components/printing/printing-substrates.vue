@@ -6,9 +6,9 @@
         <span class="flex items-start justify-between gap-2 pe-6">
           <span class="text-base font-semibold text-paper">{{ option.name }}</span>
         </span>
-        <span class="font-mono text-[10px] tracking-wider text-mute">{{ option.spec }}</span>
+        <span class="font-mono text-2xs tracking-wider text-mute">{{ option.spec }}</span>
         <span class="text-xs leading-relaxed text-mute">{{ option.description }}</span>
-        <span class="mt-auto flex items-center justify-between pt-2 font-mono text-[11px]">
+        <span class="mt-auto flex items-center justify-between pt-2 font-mono text-1xs">
           <span class="text-mute">{{ option.detail }}</span>
           <span class="font-semibold text-paper">{{ option.priceLabel }}</span>
         </span>

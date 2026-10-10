@@ -48,7 +48,7 @@
       </div>
 
       <ul class="space-y-3 md:hidden">
-        <li v-for="r in table.rows" :key="r[0]" v-reveal class="card p-4">
+        <li v-for="r in table.rows" :key="r[0]" v-reveal class="card-compact">
           <p class="mb-2 font-medium">{{ r[0] }}</p>
           <dl class="space-y-1.5 text-sm">
             <div

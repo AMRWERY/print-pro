@@ -1,6 +1,6 @@
 <template>
   <aside class="space-y-4">
-    <section class="rounded-card border border-line bg-surface p-5" aria-labelledby="sum-title">
+    <section class="card p-5" aria-labelledby="sum-title">
       <h2 id="sum-title" class="eyebrow mb-4 flex items-center gap-2 text-mute"><Icon name="lucide:receipt" size="14" aria-hidden="true" />Order summary</h2>
       <dl class="space-y-2 text-sm">
         <template v-if="source">
@@ -10,11 +10,11 @@
           <div class="flex justify-between"><dt class="text-mute">Shipping</dt><dd class="font-mono">{{ source.amounts.shipping ? money.format(source.amounts.shipping) : "Free" }}</dd></div>
           <div class="flex justify-between"><dt class="text-mute">Tax</dt><dd class="font-mono">{{ money.format(source.amounts.tax) }}</dd></div>
         </template>
-        <div class="flex justify-between border-t border-line pt-3 text-base"><dt class="font-semibold">Total</dt><dd class="font-display text-xl font-bold text-paper">{{ money.format(order.amount) }}</dd></div>
+        <div class="flex justify-between border-t border-line pt-3 text-base"><dt class="font-semibold">Total</dt><dd class="title-md">{{ money.format(order.amount) }}</dd></div>
       </dl>
     </section>
 
-    <section class="rounded-card border border-line bg-surface p-5" aria-labelledby="deliv-title">
+    <section class="card p-5" aria-labelledby="deliv-title">
       <h2 id="deliv-title" class="eyebrow mb-3 flex items-center gap-2 text-mute"><Icon name="lucide:map-pin" size="14" aria-hidden="true" />Delivery</h2>
       <template v-if="source">
         <address class="text-sm not-italic leading-relaxed text-paper">
@@ -23,12 +23,12 @@
           {{ source.address.city }}, {{ source.address.region }} {{ source.address.postal }}<br />
           {{ countryName(source.address.country) }}
         </address>
-        <p class="mt-2 font-mono text-xs text-mute">{{ source.delivery.label }} · {{ source.payment.label }}<span v-if="source.payment.last4"> ···· {{ source.payment.last4 }}</span></p>
+        <p class="mt-2 meta">{{ source.delivery.label }} · {{ source.payment.label }}<span v-if="source.payment.last4"> ···· {{ source.payment.last4 }}</span></p>
       </template>
       <p v-else class="text-sm text-paper">{{ order.destination || order.dispatchedFrom || "Receiving port on file" }}</p>
     </section>
 
-    <section class="space-y-2 rounded-card border border-line bg-surface p-5">
+    <section class="space-y-2 card p-5">
       <LazyVButton v-if="source" variant="primary" block :to="{ path: '/track', query: { order: source.id } }" icon="lucide:radar">Track this order</LazyVButton>
       <LazyVButton variant="secondary" block icon="lucide:refresh-cw" @click="$emit('reorder')">Reorder these items</LazyVButton>
       <LazyVButton variant="tertiary" block :href="support.phoneHref" icon="lucide:headset">Call {{ support.phone }}</LazyVButton>

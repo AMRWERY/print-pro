@@ -1,8 +1,8 @@
 <template>
-  <section class="card space-y-4 p-5 sm:p-6" aria-labelledby="lookup-title">
+  <section class="card-roomy space-y-4" aria-labelledby="lookup-title">
     <div>
-      <p class="eyebrow flex items-center gap-2 text-accent">
-        <span class="h-2 w-2 bg-accent" aria-hidden="true" />Order tracking
+      <p class="eyebrow-accent">
+        <span class="pip" aria-hidden="true" />Order tracking
       </p>
       <h1 id="lookup-title" class="font-display text-3xl sm:text-4xl">
         Track your order
@@ -60,13 +60,13 @@
 
     <p
       v-if="error"
-      class="flex items-start gap-2 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm"
+      class="callout-accent"
       role="alert"
     >
       <Icon
         name="lucide:circle-alert"
         size="16"
-        class="mt-0.5 shrink-0 text-accent"
+        class="bullet-icon"
         aria-hidden="true"
       />{{ error }}
     </p>

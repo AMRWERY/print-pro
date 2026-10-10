@@ -1,5 +1,5 @@
 <template>
-  <header class="rounded-card border border-line bg-surface p-5 sm:p-7 shadow-sm transition-colors duration-200"
+  <header class="card p-5 sm:p-7 shadow-sm transition-colors duration-200"
     aria-labelledby="atelier-greeting">
     <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
       <!-- Left side: Identity & Greeting -->
@@ -26,7 +26,7 @@
 
         <div>
           <h1 id="atelier-greeting"
-            class="font-display text-2xl font-bold tracking-tight text-paper sm:text-3xl lg:text-4xl">
+            class="title-lg lg:text-4xl">
             Good Morning, {{ profile.name }}.
           </h1>
           <p class="mt-1 text-sm text-mute">
@@ -44,10 +44,10 @@
             <Icon name="lucide:shield-check" size="13" class="text-accent" />
             ESCROW VAULT AVAILABLE
           </p>
-          <div class="font-display text-2xl font-bold tracking-tight text-paper sm:text-3xl">
+          <div class="title-lg">
             {{ money.format(profile.escrowAvailable) }}
           </div>
-          <p class="flex items-center gap-1.5 font-mono text-[11px] text-success">
+          <p class="flex items-center gap-1.5 font-mono text-1xs text-success">
             <Icon name="lucide:zap" size="11" aria-hidden="true" />
             100% Instant Clearance
           </p>
@@ -99,7 +99,7 @@
         <dd class="font-display text-base font-semibold text-paper">
           {{ money.format(profile.escrowLimit) }} ACTIVE
         </dd>
-        <dd class="font-mono text-[11px] text-accent">
+        <dd class="font-mono text-1xs text-accent">
           Prime Tier Requisitioning
         </dd>
       </div>
@@ -112,7 +112,7 @@
         <dd class="font-display text-base font-semibold text-paper">
           {{ profile.auditSyncTime }}
         </dd>
-        <dd class="font-mono text-[11px] text-success">
+        <dd class="font-mono text-1xs text-success">
           {{ profile.proofDrift }}
         </dd>
       </div>
@@ -125,7 +125,7 @@
         <dd class="font-display text-base font-semibold text-paper truncate">
           {{ profile.cleanroomDock }}
         </dd>
-        <dd class="font-mono text-[11px] text-mute">
+        <dd class="font-mono text-1xs text-mute">
           {{ profile.cleanroomSpecs }}
         </dd>
       </div>
@@ -138,7 +138,7 @@
         <dd class="font-display text-base font-semibold text-paper truncate">
           {{ profile.securityAuth }}
         </dd>
-        <dd class="font-mono text-[11px] text-success flex items-center gap-1">
+        <dd class="font-mono text-1xs text-success flex items-center gap-1">
           <Icon name="lucide:shield-check" size="11" />
           {{ profile.securityStatus }}
         </dd>

@@ -14,7 +14,7 @@
       <!-- Bad or expired link -->
       <template v-else-if="!state.valid">
         <div class="space-y-2">
-          <p class="eyebrow flex items-center gap-2 text-accent">
+          <p class="eyebrow-accent">
             <Icon name="lucide:link-2-off" size="14" aria-hidden="true" />Link
             not valid
           </p>
@@ -37,11 +37,11 @@
         <div class="space-y-2">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <p class="eyebrow flex items-center gap-2">
-              <span class="h-2 w-2 bg-accent" aria-hidden="true" />Password
+              <span class="pip" aria-hidden="true" />Password
               reset
             </p>
             <p
-              class="rounded-control border border-line px-2 py-0.5 font-mono text-xs text-mute"
+              class="rounded-control border border-line px-2 py-0.5 meta"
               role="timer"
             >
               Link expires in {{ remaining }}
@@ -84,13 +84,13 @@
 
           <p
             v-if="error"
-            class="flex items-start gap-2 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm"
+            class="callout-accent"
             role="alert"
           >
             <Icon
               name="lucide:circle-alert"
               size="16"
-              class="mt-0.5 shrink-0 text-accent"
+              class="bullet-icon"
               aria-hidden="true"
             />{{ error }}
           </p>

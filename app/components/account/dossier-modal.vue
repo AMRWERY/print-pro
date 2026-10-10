@@ -3,7 +3,7 @@
     <Transition name="modal">
       <div
         v-if="open"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+        class="modal-root"
         role="dialog"
         aria-modal="true"
         aria-labelledby="dossier-modal-title"
@@ -17,10 +17,10 @@
           class="relative w-full max-w-2xl overflow-hidden rounded-panel border border-line bg-surface shadow-2xl shadow-black/60 font-mono text-xs"
         >
           <div
-            class="flex items-center justify-between border-b border-line bg-ink px-5 py-3.5"
+            class="modal-head"
           >
             <div class="flex items-center gap-2">
-              <span class="h-2 w-2 rounded-full bg-accent" />
+              <span class="pip rounded-full" />
               <h2
                 id="dossier-modal-title"
                 class="font-bold tracking-wider text-paper text-sm"
@@ -44,24 +44,24 @@
               class="border-b border-line pb-4 flex flex-wrap items-start justify-between gap-4"
             >
               <div>
-                <p class="font-display text-xl font-bold text-paper">
+                <p class="title-md">
                   LUMEN &amp; PRESS METROLOGY WORKS
                 </p>
-                <p class="text-[11px] text-mute mt-0.5">
+                <p class="text-1xs text-mute mt-0.5">
                   SWISS CALIBRATION ACCREDITATION // DIN EN ISO 9001:2015
                 </p>
-                <p class="text-[11px] text-accent mt-1">
+                <p class="text-1xs text-accent mt-1">
                   ISSUED TO: Amr Mohamed • Metropolitan Archival Wing
                 </p>
               </div>
 
               <div class="text-end">
                 <span
-                  class="rounded border border-line bg-ink px-2.5 py-1 text-mute text-[10px]"
+                  class="rounded border border-line bg-ink px-2.5 py-1 text-mute text-2xs"
                 >
                   ARCHIVE REGISTRY: ARCH-2024-DE-NYC
                 </span>
-                <p class="text-[11px] text-mute mt-1">Date: 28 OCT 2024</p>
+                <p class="text-1xs text-mute mt-1">Date: 28 OCT 2024</p>
               </div>
             </div>
 
@@ -82,23 +82,23 @@
                   <span>METROLOGY SPECIFICATION</span>
                   <span>RESULT</span>
                 </div>
-                <div class="flex justify-between text-[11px]">
+                <div class="flex justify-between text-1xs">
                   <span>FOGRA51 Proof Tolerance</span>
                   <span class="text-success font-semibold"
                     >PASS (ΔE = 0.186 Nom)</span
                   >
                 </div>
-                <div class="flex justify-between text-[11px]">
+                <div class="flex justify-between text-1xs">
                   <span>Spectral Collimation MTF</span>
                   <span class="text-success font-semibold"
                     >98.4% @ 50 Lp/mm</span
                   >
                 </div>
-                <div class="flex justify-between text-[11px]">
+                <div class="flex justify-between text-1xs">
                   <span>Relative Humidity Chamber Retention</span>
                   <span class="text-paper">42% (Airlock Sealed)</span>
                 </div>
-                <div class="flex justify-between text-[11px]">
+                <div class="flex justify-between text-1xs">
                   <span>G-Force Maximum Shock Record</span>
                   <span class="text-success font-semibold"
                     >0.02 G (Damped Safe)</span
@@ -108,7 +108,7 @@
 
               <p>Cryptographic authentication hash for this document:</p>
               <p
-                class="rounded-control bg-ink/70 p-2 font-mono text-[11px] text-accent break-all"
+                class="rounded-control bg-ink/70 p-2 font-mono text-1xs text-accent break-all"
               >
                 SHA-256:
                 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
@@ -117,9 +117,9 @@
           </div>
 
           <div
-            class="flex items-center justify-between border-t border-line bg-ink px-5 py-3"
+            class="modal-foot"
           >
-            <span class="text-mute text-[11px]"
+            <span class="text-mute text-1xs"
               >Authorized Signatory: Dr. Vance Lab</span
             >
             <div class="flex items-center gap-2">

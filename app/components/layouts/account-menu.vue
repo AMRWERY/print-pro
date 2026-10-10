@@ -11,11 +11,11 @@
 
     <Transition name="menu">
       <div v-if="open" role="menu" aria-label="Account"
-        class="absolute end-0 top-full z-50 mt-2 w-64 space-y-3 rounded-card border border-line bg-surface p-3 shadow-xl shadow-black/30">
+        class="absolute end-0 top-full z-50 mt-2 w-64 space-y-3 card p-3 shadow-xl shadow-black/30">
         <div class="space-y-0.5 border-b border-line pb-3">
           <p class="truncate font-medium">{{ auth.user?.name }}</p>
           <p class="truncate text-xs text-mute">{{ auth.user?.studio }}</p>
-          <p class="truncate font-mono text-xs text-mute">
+          <p class="truncate meta">
             {{ auth.user?.email }}
           </p>
         </div>

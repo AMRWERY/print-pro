@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between gap-2">
       <h2 id="summary-title" class="font-display text-2xl">Order summary</h2>
       <span
-        class="inline-flex items-center gap-1 rounded-control border border-line px-2 py-0.5 font-mono text-xs text-mute"
+        class="inline-flex items-center gap-1 rounded-control border border-line px-2 py-0.5 meta"
         ><Icon
           name="lucide:badge-check"
           size="12"
@@ -64,12 +64,12 @@
         <span class="eyebrow !text-paper">Total payable</span>
         <span class="font-display text-3xl font-semibold" aria-live="polite"
           >{{ money.format(totals.payable) }}
-          <span class="font-mono text-xs text-mute">USD</span></span
+          <span class="meta">USD</span></span
         >
       </p>
       <p
         v-if="totals.leaseMonthly"
-        class="mt-2 flex justify-between gap-3 font-mono text-xs text-mute"
+        class="mt-2 flex justify-between gap-3 meta"
       >
         <span>Commercial lease equivalent</span
         ><span>{{ money.format(totals.leaseMonthly) }} / mo</span>
@@ -189,7 +189,7 @@
         <Icon
           :name="a.icon"
           size="14"
-          class="mt-0.5 shrink-0 text-accent"
+          class="bullet-icon"
           aria-hidden="true"
         />{{ a.label }}
       </li>

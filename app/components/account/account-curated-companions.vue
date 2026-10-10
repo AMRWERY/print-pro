@@ -1,10 +1,10 @@
 <template>
-  <section class="rounded-card border border-line bg-surface p-5 sm:p-6" aria-labelledby="companions-section-title">
+  <section class="card-roomy" aria-labelledby="companions-section-title">
     <header class="flex items-start justify-between gap-3 border-b border-line pb-3">
       <div>
         <div class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-          <h2 id="companions-section-title" class="font-display text-base font-bold text-paper sm:text-lg">
+          <span class="pip rounded-full" aria-hidden="true" />
+          <h2 id="companions-section-title" class="title-sm sm:text-lg">
             Curated Companion Apparatus &amp; Consumables
           </h2>
         </div>
@@ -13,7 +13,7 @@
         </p>
       </div>
 
-      <span class="rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-[10px] text-mute">
+      <span class="rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-2xs text-mute">
         ATELIER COMPATIBLE
       </span>
     </header>
@@ -33,7 +33,7 @@
 
           <!-- Tags & title -->
           <div class="space-y-1">
-            <p class="eyebrow flex items-center gap-1.5 text-accent text-[10px]">
+            <p class="eyebrow flex items-center gap-1.5 text-accent text-2xs">
               {{ p.tag }}
             </p>
             <h3 class="font-display text-sm font-semibold text-paper leading-snug">

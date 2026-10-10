@@ -3,10 +3,10 @@
     <div
       v-for="s in stats"
       :key="s.label"
-      class="rounded-card border border-line bg-surface p-4"
+      class="card-compact"
     >
       <dt
-        class="flex items-center justify-between font-mono text-[10px] tracking-wider text-mute"
+        class="flex items-center justify-between font-mono text-2xs tracking-wider text-mute"
       >
         {{ s.label }}
         <Icon :name="s.icon" size="14" :class="s.tone" aria-hidden="true" />
@@ -14,7 +14,7 @@
       <dd class="mt-2 font-display text-2xl font-bold text-paper">
         {{ s.value }}
       </dd>
-      <p class="mt-0.5 font-mono text-[10px] text-mute">{{ s.note }}</p>
+      <p class="mt-0.5 font-mono text-2xs text-mute">{{ s.note }}</p>
     </div>
   </dl>
 </template>

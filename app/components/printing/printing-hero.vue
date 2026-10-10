@@ -2,8 +2,8 @@
   <header class="space-y-6">
     <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
       <div class="max-w-3xl space-y-3">
-        <p class="eyebrow flex items-center gap-2 text-accent">
-          <span class="h-2 w-2 bg-accent" aria-hidden="true" />Optical metrology
+        <p class="eyebrow-accent">
+          <span class="pip" aria-hidden="true" />Optical metrology
           &amp; print lab
         </p>
         <h1
@@ -33,16 +33,16 @@
       <li
         v-for="t in trust"
         :key="t.title"
-        class="flex items-start gap-3 rounded-card border border-line bg-surface p-4"
+        class="flex items-start gap-3 card-compact"
       >
         <Icon
           :name="t.icon"
           size="18"
-          class="mt-0.5 shrink-0 text-accent"
+          class="bullet-icon"
           aria-hidden="true"
         />
         <div>
-          <p class="font-mono text-[10px] tracking-wider text-mute">
+          <p class="font-mono text-2xs tracking-wider text-mute">
             {{ t.title }}
           </p>
           <p class="mt-0.5 text-sm text-paper">{{ t.body }}</p>

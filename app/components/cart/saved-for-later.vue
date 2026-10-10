@@ -22,7 +22,7 @@
     </h2>
     <div
       :id="`${uid}-list`"
-      class="grid transition-[grid-template-rows] duration-300 ease-out"
+      class="collapse-grid"
       :class="open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
       :inert="!open"
     >
@@ -40,7 +40,7 @@
                 v-if="p.image"
                 :src="p.image"
                 :alt="p.imageAlt ?? p.name"
-                class="h-full w-full bg-white object-contain p-1"
+                class="thumb-contain"
                 loading="lazy"
               />
               <media-placeholder

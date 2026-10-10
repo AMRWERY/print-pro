@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-x-auto rounded-card border border-line bg-surface"
+    class="overflow-x-auto card"
     role="region"
     aria-label="Comparison matrix (scrolls sideways on small screens)"
     tabindex="0"
@@ -64,7 +64,7 @@
                 >{{ s.deltas }}
                 {{ s.deltas === 1 ? "delta" : "deltas" }} detected</span
               >
-              <span v-else class="font-mono text-xs text-mute"
+              <span v-else class="meta"
                 >All specs identical</span
               >
             </span>
@@ -80,7 +80,7 @@
 
         <div
           :id="`${uid}-${s.key}`"
-          class="grid transition-[grid-template-rows] duration-300 ease-out"
+          class="collapse-grid"
           :class="
             cmp.isCollapsed(s.key) ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]'
           "
@@ -105,7 +105,7 @@
                 </p>
                 <p
                   v-else-if="!r.delta && cmp.products.length > 1"
-                  class="font-mono text-xs tracking-wider text-mute"
+                  class="meta tracking-wider"
                 >
                   Identical spec
                 </p>

@@ -1,11 +1,11 @@
 <template>
   <ul class="space-y-3 md:hidden">
     <li v-for="o in orders" :key="o.id">
-      <NuxtLinkLocale :to="`/account/orders/${orderSlug(o.id)}`" class="block space-y-3 rounded-card border border-line bg-surface p-4 transition-colors duration-150 hover:border-accent/50 focus-visible:outline-2 focus-visible:outline-accent">
+      <NuxtLinkLocale :to="`/account/orders/${orderSlug(o.id)}`" class="block space-y-3 card-compact transition-colors duration-150 hover:border-accent/50 focus-visible:outline-2 focus-visible:outline-accent">
         <div class="flex items-start justify-between gap-2">
           <div>
             <p class="font-mono text-xs font-bold text-accent">{{ o.id }}</p>
-            <p class="font-mono text-[10px] text-mute">{{ orderDateLabel(o) }}</p>
+            <p class="font-mono text-2xs text-mute">{{ orderDateLabel(o) }}</p>
           </div>
           <account-status-chip :status="o.status" />
         </div>

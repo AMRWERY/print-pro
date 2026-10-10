@@ -24,7 +24,7 @@
         <li v-for="(d, i) in items" :key="d.title" v-reveal="{ delay: i * 70 }">
           <a
             href="#"
-            class="group card flex h-full items-start gap-3 p-4 transition duration-200 hover:-translate-y-0.5 hover:border-accent"
+            class="group card-compact flex h-full items-start gap-3 transition duration-200 hover:-translate-y-0.5 hover:border-accent"
             @click.prevent
           >
             <span
@@ -34,8 +34,8 @@
               <Icon :name="d.icon" size="20" class="icon-lift" />
             </span>
             <span class="min-w-0">
-              <span class="block text-sm font-medium">{{ d.title }}</span>
-              <span class="block font-mono text-xs text-mute">{{
+              <span class="label">{{ d.title }}</span>
+              <span class="block meta">{{
                 d.meta
               }}</span>
               <span

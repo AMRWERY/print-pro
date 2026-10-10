@@ -1,5 +1,5 @@
 <template>
-  <div class="container-page space-y-6 py-6 lg:py-8">
+  <div class="container-page page-stack">
     <LazyVBreadcrumb :items="crumbs" />
 
     <catalog-header :title="title" :description="description" />
@@ -7,7 +7,7 @@
     <div class="gap-8 lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
       <aside class="hidden lg:block" aria-label="Filters">
         <div
-          class="card sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto p-4"
+          class="card-compact sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto"
         >
           <catalog-filters />
         </div>

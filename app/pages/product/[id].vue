@@ -1,6 +1,6 @@
 <template>
   <div class="pb-20 lg:pb-0">
-    <div class="container-page space-y-6 py-6 lg:py-8">
+    <div class="container-page page-stack">
       <LazyVBreadcrumb :items="crumbs" />
 
       <div class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">

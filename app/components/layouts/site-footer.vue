@@ -76,7 +76,7 @@
 
     <div class="border-t border-line">
       <div
-        class="container-page flex flex-col gap-2 py-5 font-mono text-xs tracking-wider text-mute sm:flex-row sm:items-center sm:justify-between"
+        class="container-page flex flex-col gap-2 py-5 meta tracking-wider sm:flex-row sm:items-center sm:justify-between"
       >
         <p>
           © 2026 PrintPro Optical Instruments &amp; Fine Art Printworks Ltd. All

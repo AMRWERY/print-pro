@@ -1,6 +1,6 @@
 <template>
   <span
-    class="inline-flex items-center gap-1.5 rounded-control border px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider"
+    class="inline-flex items-center gap-1.5 rounded-control border px-2 py-0.5 font-mono text-2xs font-semibold tracking-wider"
     :class="tone.cls"
   >
     <Icon :name="tone.icon" size="11" aria-hidden="true" />

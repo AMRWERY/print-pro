@@ -14,7 +14,7 @@
       <p class="mt-4 font-display text-lg font-semibold text-paper">Drag high-resolution TIFF, PSD or PDF files here</p>
       <p class="mx-auto mt-1 max-w-xl text-sm text-mute">or browse your workstation. Supports 16-bit ProPhoto RGB and CMYK, TIFF up to {{ MAX_FILE_MB }} MB. Calibrated baseline: 300 native optical DPI.</p>
       <LazyVButton class="mt-5" variant="secondary" icon="lucide:folder-open" @click="open()">Select local file</LazyVButton>
-      <p class="mt-3 text-[11px] text-mute">Demo build: your file is checked in this browser and isn’t uploaded anywhere.</p>
+      <p class="mt-3 text-1xs text-mute">Demo build: your file is checked in this browser and isn’t uploaded anywhere.</p>
     </div>
 
     <p v-if="fileError" role="alert" class="mt-3 flex items-start gap-2 rounded-control border border-accent/40 bg-accent-soft p-3 text-sm text-accent">
@@ -30,14 +30,14 @@
           </span>
           <div class="min-w-0 flex-1 space-y-1">
             <p class="truncate font-mono text-sm font-semibold text-paper">{{ file.name }}</p>
-            <p class="font-mono text-xs text-mute">
+            <p class="meta">
               {{ sizeText }}<template v-if="pixels"> · {{ pixels.w }} × {{ pixels.h }} px</template><template v-if="dpi"> · {{ dpi }} ppi at this size</template>
             </p>
             <p class="flex items-center gap-1.5 text-sm font-semibold" :class="tone">
               <Icon :name="preflight.state === 'pass' ? 'lucide:check-circle' : 'lucide:triangle-alert'" size="16" aria-hidden="true" />{{ preflight.title }}
             </p>
             <p class="text-xs text-mute">{{ preflight.detail }}</p>
-            <p v-if="hash" class="break-all font-mono text-[10px] text-mute">SHA-256: {{ hash }}</p>
+            <p v-if="hash" class="break-all font-mono text-2xs text-mute">SHA-256: {{ hash }}</p>
           </div>
           <div class="flex gap-2">
             <LazyVButton size="sm" variant="secondary" icon="lucide:replace" @click="open()">Replace</LazyVButton>

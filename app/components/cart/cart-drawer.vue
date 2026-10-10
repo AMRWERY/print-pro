@@ -8,7 +8,7 @@
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
       >
-        <div class="absolute inset-0 bg-ink/70 backdrop-blur-sm" @click="close" />
+        <div class="modal-backdrop" @click="close" />
 
         <aside
           ref="panel"
@@ -41,7 +41,7 @@
             <ul class="flex-1 divide-y divide-line overflow-y-auto" aria-label="Items in your cart">
               <li v-for="e in visible" :key="e.line.key" class="flex gap-3 p-4">
                 <div class="h-20 w-24 shrink-0 overflow-hidden rounded-control border border-line">
-                  <img v-if="e.product.image" :src="e.product.image" :alt="e.product.imageAlt ?? e.product.name" class="h-full w-full bg-white object-contain p-1" loading="lazy" decoding="async" />
+                  <img v-if="e.product.image" :src="e.product.image" :alt="e.product.imageAlt ?? e.product.name" class="thumb-contain" loading="lazy" decoding="async" />
                
                   <media-placeholder v-else :icon="e.product.icon" :label="`${e.product.name} image`" size="32" class="h-full w-full" />
                 </div>

@@ -22,7 +22,7 @@
       </h3>
       <div
         :id="`${uid}-${i}`"
-        class="grid transition-[grid-template-rows] duration-300 ease-out"
+        class="collapse-grid"
         :class="openIndex === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
         :inert="openIndex !== i"
       >

@@ -48,7 +48,7 @@
       <template v-else>
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2">
-            <span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio account
+            <span class="pip" aria-hidden="true" />Studio account
           </p>
           <h1 id="login-title" class="font-display text-3xl sm:text-4xl">
             Studio sign in
@@ -113,13 +113,13 @@
 
           <p
             v-if="error"
-            class="flex items-start gap-2 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm"
+            class="callout-accent"
             role="alert"
           >
             <Icon
               name="lucide:circle-alert"
               size="16"
-              class="mt-0.5 shrink-0 text-accent"
+              class="bullet-icon"
               aria-hidden="true"
             />{{ error }}
           </p>
@@ -149,7 +149,7 @@
         </p>
 
         <p
-          class="flex items-start gap-2 rounded-card border border-line bg-raised p-3 text-xs text-mute"
+          class="callout"
           role="note"
         >
           <Icon

@@ -15,7 +15,7 @@
           option.description
         }}</span>
         <span
-          class="mt-auto pt-2 font-mono text-[11px] font-semibold text-paper"
+          class="mt-auto pt-2 font-mono text-1xs font-semibold text-paper"
           >{{ option.note }}</span
         >
       </template>
@@ -37,7 +37,7 @@
           option.description
         }}</span>
         <span
-          class="mt-auto pt-2 font-mono text-[11px] font-semibold text-paper"
+          class="mt-auto pt-2 font-mono text-1xs font-semibold text-paper"
           >{{ option.note }}</span
         >
       </template>

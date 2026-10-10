@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="fixed inset-x-0 bottom-0 z-40 flex items-stretch justify-around border-t border-line bg-ink/95 py-1 font-mono text-[10px] font-semibold backdrop-blur lg:hidden"
+    class="fixed inset-x-0 bottom-0 z-40 flex items-stretch justify-around border-t border-line bg-ink/95 py-1 font-mono text-2xs font-semibold backdrop-blur lg:hidden"
     aria-label="Account navigation"
   >
     <LazyVButton

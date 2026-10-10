@@ -1,5 +1,5 @@
 <template>
-  <section class="section !py-12 md:!py-16" aria-labelledby="feature-title">
+  <section class="section section-compact" aria-labelledby="feature-title">
     <div class="container-page space-y-8">
       <section-heading
         id="feature-title"
@@ -18,7 +18,7 @@
             <h3 class="text-xl">{{ c.title }}</h3>
             <p class="text-sm text-mute">{{ c.body }}</p>
             <p
-              class="mt-auto border-t border-line pt-3 font-mono text-xs text-mute"
+              class="mt-auto border-t border-line pt-3 meta"
             >
               {{ c.metric }}
             </p>

@@ -1,7 +1,7 @@
 <template>
   <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Atelier performance metrics">
     <!-- Card 1: TOTAL REQUISITIONS YTD -->
-    <article class="rounded-card border border-line bg-surface p-4 transition duration-200 hover:border-accent/40">
+    <article class="card-compact transition duration-200 hover:border-accent/40">
       <div class="flex items-start justify-between">
         <p class="eyebrow flex items-center gap-1.5 text-mute">
           TOTAL REQUISITIONS YTD
@@ -17,7 +17,7 @@
         </span>
       </div>
 
-      <p class="font-mono text-xs text-mute mt-0.5">
+      <p class="meta mt-0.5">
         {{ money.format(settledTotal) }} Settled
       </p>
 
@@ -35,16 +35,16 @@
     </article>
 
     <!-- Card 2: ACTIVE IN-TRANSIT TELEMETRY -->
-    <article class="rounded-card border border-line bg-surface p-4 transition duration-200 hover:border-accent/40">
+    <article class="card-compact transition duration-200 hover:border-accent/40">
       <div class="flex items-start justify-between">
         <p class="eyebrow flex items-center gap-1.5 text-accent">
           <span class="relative flex h-2 w-2">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            <span class="ping-ring" />
+            <span class="relative inline-flex pip rounded-full" />
           </span>
           ACTIVE IN-TRANSIT
         </p>
-        <span class="rounded-control bg-accent/20 px-1.5 py-0.5 font-mono text-[10px] font-bold text-accent">
+        <span class="rounded-control bg-accent/20 px-1.5 py-0.5 font-mono text-2xs font-bold text-accent">
           LIVE RADAR
         </span>
       </div>
@@ -55,7 +55,7 @@
         </span>
       </div>
 
-      <p class="font-mono text-xs text-mute mt-0.5">
+      <p class="meta mt-0.5">
         {{ activeCrateCode }} • Stage 4 / 5
       </p>
 
@@ -66,7 +66,7 @@
     </article>
 
     <!-- Card 3: STUDIO APPARATUS REGISTRY -->
-    <article class="rounded-card border border-line bg-surface p-4 transition duration-200 hover:border-accent/40">
+    <article class="card-compact transition duration-200 hover:border-accent/40">
       <div class="flex items-start justify-between">
         <p class="eyebrow flex items-center gap-1.5 text-mute">
           STUDIO APPARATUS
@@ -82,7 +82,7 @@
         </span>
       </div>
 
-      <p class="font-mono text-xs text-mute mt-0.5">
+      <p class="meta mt-0.5">
         {{ money.format(registryValuation) }} Total Valuation
       </p>
 
@@ -93,7 +93,7 @@
     </article>
 
     <!-- Card 4: ESCROW VAULT & GRANTS -->
-    <article class="rounded-card border border-line bg-surface p-4 transition duration-200 hover:border-accent/40">
+    <article class="card-compact transition duration-200 hover:border-accent/40">
       <div class="flex items-start justify-between">
         <p class="eyebrow flex items-center gap-1.5 text-mute">
           ESCROW VAULT &amp; GRANTS
@@ -109,7 +109,7 @@
         </span>
       </div>
 
-      <p class="font-mono text-xs text-mute mt-0.5">
+      <p class="meta mt-0.5">
         Available Liquidity Pool
       </p>
 

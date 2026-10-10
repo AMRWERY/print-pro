@@ -1,5 +1,5 @@
 <template>
-  <section class="section !py-12 md:!py-16" aria-labelledby="spec-title">
+  <section class="section section-compact" aria-labelledby="spec-title">
     <div class="container-page space-y-8">
       <section-heading
         id="spec-title"

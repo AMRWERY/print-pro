@@ -10,7 +10,7 @@
         role="alert"
         class="fixed bottom-6 end-6 z-50 flex items-center gap-2.5 rounded-card border border-accent/40 bg-surface px-4 py-3 font-mono text-xs text-paper shadow-2xl shadow-black/60"
       >
-        <span class="h-2 w-2 rounded-full bg-accent animate-ping" />
+        <span class="pip rounded-full animate-ping" />
         <span>{{ toastMessage }}</span>
       </div>
     </Transition>
@@ -50,7 +50,7 @@
             <!-- Empty state for New Member Mode -->
             <div
               v-if="operatingMode === 'new-member'"
-              class="rounded-card border border-dashed border-line bg-surface p-8 text-center space-y-4"
+              class="card border-dashed p-8 text-center space-y-4"
             >
               <div
                 class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-raised text-accent"
@@ -58,7 +58,7 @@
                 <Icon name="lucide:sparkles" size="28" />
               </div>
               <div class="space-y-1">
-                <h3 class="font-display text-xl font-bold text-paper">
+                <h3 class="title-md">
                   Welcome to the Metrology Atelier Network
                 </h3>
                 <p class="max-w-md mx-auto text-sm text-mute">
@@ -76,7 +76,7 @@
                 </LazyVButton>
                 <NuxtLinkLocale
                   to="/products"
-                  class="rounded-control border border-line bg-surface px-4 py-2 font-mono text-xs text-mute hover:text-paper"
+                  class="rounded-control border border-line bg-surface px-4 py-2 meta hover:text-paper"
                 >
                   EXPLORE APPARATUS CATALOG
                 </NuxtLinkLocale>

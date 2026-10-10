@@ -1,5 +1,5 @@
 <template>
-  <section class="section !py-12 md:!py-16" aria-labelledby="matrix-title">
+  <section class="section section-compact" aria-labelledby="matrix-title">
     <div class="container-page space-y-6">
       <section-heading
         id="matrix-title"
@@ -51,7 +51,7 @@
 
       <!-- Mobile: one card per parameter instead of a miniature table -->
       <ul class="space-y-3 md:hidden">
-        <li v-for="r in rows" :key="r.label" v-reveal class="card p-4">
+        <li v-for="r in rows" :key="r.label" v-reveal class="card-compact">
           <p class="eyebrow mb-2">{{ r.label }}</p>
           <dl class="space-y-2 text-sm">
             <div

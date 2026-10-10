@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-page space-y-6 py-6 lg:py-8">
+    <div class="container-page page-stack">
       <v-breadcrumb :items="crumbs" />
 
       <!-- A shared manifest opened from a link -->

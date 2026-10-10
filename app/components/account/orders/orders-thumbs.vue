@@ -4,7 +4,7 @@
       <img v-if="item.thumb" :src="item.thumb" :alt="item.name" class="h-full w-full object-contain p-0.5" loading="lazy" />
       <span v-else class="grid h-full w-full place-items-center text-mute"><Icon :name="item.icon || 'lucide:box'" size="14" aria-hidden="true" /></span>
     </li>
-    <li v-if="items.length > max" class="grid h-9 w-9 place-items-center rounded-control border-2 border-surface bg-raised font-mono text-[10px] font-bold text-mute">+{{ items.length - max }}</li>
+    <li v-if="items.length > max" class="grid h-9 w-9 place-items-center rounded-control border-2 border-surface bg-raised font-mono text-2xs font-bold text-mute">+{{ items.length - max }}</li>
   </ul>
 </template>
 

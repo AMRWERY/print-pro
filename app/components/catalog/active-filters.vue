@@ -22,7 +22,7 @@
 
     <LazyVButton
       variant="plain"
-      class="font-mono text-xs tracking-wider text-accent hover:underline"
+      class="link-accent"
       @click="catalog.reset()"
     >
       Reset all

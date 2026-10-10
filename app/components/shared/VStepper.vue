@@ -45,7 +45,7 @@
 
     <!-- Only the current step is open; the others keep their summary. -->
     <div
-      class="grid transition-[grid-template-rows] duration-300 ease-out"
+      class="collapse-grid"
       :class="current ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
       :inert="!current"
     >

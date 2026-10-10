@@ -11,7 +11,7 @@
         :class="checked ? 'text-paper' : 'text-mute group-hover:text-paper'"
         >{{ label }}</span
       >
-      <span v-if="count !== undefined" class="font-mono text-xs text-mute">{{ count }}</span>
+      <span v-if="count !== undefined" class="meta">{{ count }}</span>
     </span>
   </LazyVInput>
 </template>

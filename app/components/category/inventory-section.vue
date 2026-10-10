@@ -1,7 +1,7 @@
 <template>
   <section
     id="inventory"
-    class="section scroll-mt-28 !py-12 md:!py-16"
+    class="section scroll-mt-28 section-compact"
     aria-labelledby="inventory-title"
   >
     <div class="container-page space-y-6">
@@ -49,7 +49,7 @@
           :class="showFilters ? 'block' : 'hidden lg:block'"
           aria-label="Inventory filters"
         >
-          <div class="card p-4"><inventory-filters /></div>
+          <div class="card-compact"><inventory-filters /></div>
         </aside>
 
         <div class="space-y-4">

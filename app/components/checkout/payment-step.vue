@@ -2,7 +2,7 @@
   <LazyVStepper :n="3" title="Payment" :summary="summary">
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <p
-        class="flex items-start gap-2 rounded-card border border-line bg-raised p-3 text-xs text-mute"
+        class="callout"
         role="note"
       >
         <Icon
@@ -39,7 +39,7 @@
               aria-hidden="true"
             />
             <span>
-              <span class="block text-sm font-medium">{{ m.label }}</span>
+              <span class="label">{{ m.label }}</span>
               <span class="block text-xs text-mute">{{ m.note }}</span>
             </span>
           </span>

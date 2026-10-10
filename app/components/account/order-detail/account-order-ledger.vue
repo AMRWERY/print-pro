@@ -1,5 +1,5 @@
 <template>
-  <section class="rounded-card border border-line bg-surface" aria-labelledby="ledger-title">
+  <section class="card" aria-labelledby="ledger-title">
     <h2 id="ledger-title" class="eyebrow flex items-center gap-2 border-b border-line p-5 text-mute"><Icon name="lucide:package" size="14" aria-hidden="true" />Items in this order</h2>
     <ul class="divide-y divide-line">
       <li v-for="(item, i) in lines" :key="i" class="flex items-center gap-4 p-4 sm:px-5">
@@ -9,8 +9,8 @@
         </span>
         <div class="min-w-0 flex-1">
           <p class="text-sm font-semibold text-paper">{{ item.name }}</p>
-          <p v-if="item.sku" class="font-mono text-[10px] text-mute">SKU {{ item.sku }}</p>
-          <p class="mt-0.5 font-mono text-xs text-mute">Qty {{ item.quantity ?? 1 }}</p>
+          <p v-if="item.sku" class="font-mono text-2xs text-mute">SKU {{ item.sku }}</p>
+          <p class="mt-0.5 meta">Qty {{ item.quantity ?? 1 }}</p>
         </div>
         <p v-if="item.price !== undefined" class="shrink-0 font-display font-bold text-paper">{{ money.format(item.price) }}</p>
       </li>

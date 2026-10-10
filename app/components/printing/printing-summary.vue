@@ -1,5 +1,5 @@
 <template>
-  <section class="rounded-card border border-line bg-surface p-4" aria-labelledby="cost-title">
+  <section class="card-compact" aria-labelledby="cost-title">
     <h2 id="cost-title" class="eyebrow mb-3 text-mute">Itemised cost telemetry</h2>
 
     <TransitionGroup name="row" tag="ul" class="space-y-2 text-sm">
@@ -10,10 +10,10 @@
     </TransitionGroup>
 
     <div class="mt-4 flex items-end justify-between gap-3 border-t border-line pt-4">
-      <span class="font-mono text-xs uppercase tracking-wider text-mute">Total valuation</span>
+      <span class="meta uppercase tracking-wider">Total valuation</span>
       <span class="font-display text-3xl font-bold text-paper" aria-live="polite">{{ money.format(price.total) }}</span>
     </div>
-    <p class="mt-1 text-end font-mono text-[10px] text-mute">{{ money.format(price.unit) }} per print before discounts and fees</p>
+    <p class="mt-1 text-end font-mono text-2xs text-mute">{{ money.format(price.unit) }} per print before discounts and fees</p>
 
     <p v-if="blocked" role="alert" class="mt-4 flex items-start gap-2 rounded-control border border-accent/40 bg-accent-soft p-3 text-xs text-accent">
       <Icon name="lucide:circle-alert" size="14" class="mt-0.5 shrink-0" aria-hidden="true" />{{ blocked }}
@@ -24,7 +24,7 @@
       <LazyVButton variant="secondary" block icon="lucide:zap" :disabled="!!blocked" @click="checkoutNow">Instant checkout</LazyVButton>
     </div>
 
-    <p class="mt-3 flex items-start gap-2 text-[11px] leading-relaxed text-mute">
+    <p class="mt-3 flex items-start gap-2 text-1xs leading-relaxed text-mute">
       <Icon name="lucide:badge-check" size="14" class="mt-0.5 shrink-0 text-cyan" aria-hidden="true" />
       Every print ships with a numbered certificate of authenticity and its spectro-verification report.
     </p>

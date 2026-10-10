@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="container-page space-y-6 py-6 lg:py-8">
+    <div class="container-page page-stack">
       <LazyVBreadcrumb :items="crumbs" />
 
       <header v-reveal class="space-y-4">
-        <p class="eyebrow flex items-center gap-2 text-accent">
-          <span class="h-2 w-2 bg-accent" aria-hidden="true" />Metric protocol ·
+        <p class="eyebrow-accent">
+          <span class="pip" aria-hidden="true" />Metric protocol ·
           bench certified
         </p>
         <h1 class="max-w-4xl text-3xl sm:text-5xl">

@@ -36,7 +36,7 @@
             @click="emit('pick', p.name)"
           >
             <span class="truncate">{{ p.brand }} {{ p.name }}</span>
-            <span class="shrink-0 font-mono text-xs text-mute">{{
+            <span class="shrink-0 meta">{{
               money.format(p.price)
             }}</span>
           </LazyVButton>
@@ -100,7 +100,7 @@
     </section>
 
     <div
-      class="flex items-center justify-between gap-3 border-t border-line pt-3 font-mono text-xs text-mute md:col-span-3"
+      class="flex items-center justify-between gap-3 border-t border-line pt-3 meta md:col-span-3"
     >
       <span
         >Press <kbd class="rounded border border-line px-1">Esc</kbd> to

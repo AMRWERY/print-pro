@@ -16,7 +16,7 @@
           :class="n <= score ? bar : 'bg-raised'"
         />
       </div>
-      <p class="font-mono text-xs text-mute">
+      <p class="meta">
         Strength: <span :class="text">{{ label }}</span>
       </p>
     </div>

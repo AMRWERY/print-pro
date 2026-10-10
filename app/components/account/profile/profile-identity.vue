@@ -1,5 +1,5 @@
 <template>
-  <section id="profile" class="scroll-mt-28 rounded-card border border-line bg-surface p-5 sm:p-6" aria-labelledby="identity-title">
+  <section id="profile" class="scroll-mt-28 card-roomy" aria-labelledby="identity-title">
     <header class="mb-5 flex items-center gap-3 border-b border-line pb-4">
       <span class="grid h-12 w-12 place-items-center rounded-full bg-accent-soft font-display text-lg font-bold text-accent" aria-hidden="true">{{ initials }}</span>
       <div>

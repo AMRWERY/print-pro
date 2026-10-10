@@ -11,12 +11,12 @@
         </div>
 
         <div class="grid gap-3 sm:grid-cols-2">
-          <article class="card space-y-1 bg-ink p-4">
+          <article class="card-compact space-y-1 bg-ink">
             <p class="eyebrow">Encapsulated pigment</p>
             <h3 class="text-xl">Mineral crystal core</h3>
             <p class="text-sm text-mute">Resin-encapsulated particles mechanically anchored to the fibre for deeper blacks and superior longevity.</p>
           </article>
-          <article class="card space-y-1 bg-ink p-4">
+          <article class="card-compact space-y-1 bg-ink">
             <p class="eyebrow">Custom ICC spectrum</p>
             <h3 class="text-xl">Bench Delta-E &lt; 0.4</h3>
             <p class="text-sm text-mute">Every printer is profiled against a spectrophotometer target before it ships.</p>

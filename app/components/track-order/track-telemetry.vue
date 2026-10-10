@@ -1,5 +1,5 @@
 <template>
-  <section class="card p-5 sm:p-6" aria-labelledby="telemetry-title">
+  <section class="card-roomy" aria-labelledby="telemetry-title">
     <header class="mb-4 flex flex-wrap items-center justify-between gap-2">
       <h2
         id="telemetry-title"
@@ -25,7 +25,7 @@
         <dt class="eyebrow">{{ r.label }}</dt>
         <dd class="mt-1 font-display text-2xl">
           {{ r.value
-          }}<span class="font-mono text-xs text-mute"> {{ r.unit }}</span>
+          }}<span class="meta"> {{ r.unit }}</span>
         </dd>
         <dd class="font-mono text-xs text-success">
           <Icon name="lucide:check" size="10" aria-hidden="true" /> {{ r.note }}

@@ -26,7 +26,7 @@
       <span
         class="absolute end-3 top-3 grid h-4 w-4 place-items-center border-2 transition-colors"
         :class="[
-          multiple ? 'rounded-[4px]' : 'rounded-full',
+          multiple ? 'rounded-tight' : 'rounded-full',
           isOn(o.value)
             ? 'border-accent bg-accent text-onaccent'
             : 'border-line',
@@ -36,7 +36,7 @@
         <Icon v-if="isOn(o.value)" name="lucide:check" size="10" />
       </span>
       <slot :option="o" :on="isOn(o.value)" />
-      <span v-if="o.disabled && o.reason" class="text-[11px] text-mute">{{
+      <span v-if="o.disabled && o.reason" class="text-1xs text-mute">{{
         o.reason
       }}</span>
     </LazyVButton>

@@ -42,7 +42,7 @@
     </LazyVButton>
 
     <div class="ms-auto flex flex-wrap items-center gap-3">
-      <p class="font-mono text-xs text-mute">
+      <p class="meta">
         Comparing <span class="text-paper">{{ cmp.products.length }}</span> of
         {{ max }} slots
       </p>

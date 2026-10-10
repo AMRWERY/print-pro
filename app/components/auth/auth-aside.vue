@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex h-full min-h-[32rem] flex-col justify-between overflow-hidden rounded-card border border-line bg-surface p-6"
+    class="relative flex h-full min-h-[32rem] flex-col justify-between overflow-hidden card p-6"
   >
     <div
       class="pointer-events-none absolute inset-0 [background:radial-gradient(70%_60%_at_20%_20%,rgb(var(--c-accent)/0.16),transparent_70%)]"
@@ -13,7 +13,7 @@
     />
 
     <p class="eyebrow relative flex items-center gap-2">
-      <span class="h-2 w-2 bg-accent" aria-hidden="true" />{{ eyebrow }}
+      <span class="pip" aria-hidden="true" />{{ eyebrow }}
     </p>
 
     <div class="relative space-y-5">
@@ -36,7 +36,7 @@
           <Icon
             :name="p.icon"
             size="18"
-            class="mt-0.5 shrink-0 text-accent"
+            class="bullet-icon"
             aria-hidden="true"
           />
           <span class="text-sm"

@@ -1,13 +1,13 @@
 <template>
   <header v-reveal class="space-y-4 border-b border-line pb-6">
-    <p class="eyebrow flex items-center gap-2 text-accent">
-      <span class="h-2 w-2 bg-accent" aria-hidden="true" />
+    <p class="eyebrow-accent">
+      <span class="pip" aria-hidden="true" />
       Division of registered optics &amp; colour engines
     </p>
     <h1 class="text-3xl sm:text-5xl">{{ title }}</h1>
     <p class="max-w-3xl text-sm text-mute sm:text-base">{{ description }}</p>
     <p
-      class="flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-xs text-mute"
+      class="flex flex-wrap items-center gap-x-5 gap-y-1 meta"
       aria-live="polite"
     >
       <span>

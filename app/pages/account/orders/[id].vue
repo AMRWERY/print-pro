@@ -5,11 +5,11 @@
     <template v-if="order">
       <header class="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p class="font-mono text-xs text-mute">
+          <p class="meta">
             Placed {{ orderDateLabel(order) }}
           </p>
           <h1
-            class="font-display text-2xl font-bold tracking-tight text-paper sm:text-3xl"
+            class="title-lg"
           >
             Order {{ order.id }}
           </h1>
