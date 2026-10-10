@@ -35,7 +35,10 @@
 const { config, price, addToCart, checkoutNow } = usePrintConfig();
 const money = useMoney();
 
-const add = () => addToCart();
+const add = async () => {
+  await simulateRequest();
+  addToCart();
+};
 
 // A custom size has to be a real size before anything can be ordered.
 const blocked = computed(() => {

@@ -91,7 +91,7 @@
               <LazyVButton variant="tertiary" @click="$emit('close')"
                 >Cancel</LazyVButton
               >
-              <LazyVButton type="submit" variant="primary"
+              <LazyVButton type="submit" variant="primary" :loading="submitting"
                 >Confirm reservation</LazyVButton
               >
             </div>
@@ -149,6 +149,7 @@ const slot = ref(slots[0]!.value);
 const equipmentType = ref(equipment[0]!.value);
 
 const { validate } = useForm();
+const submitting = ref(false);
 
 // A booking can't start in the past; default to tomorrow each time the dialog opens.
 const localIso = (d: Date) =>
@@ -173,6 +174,9 @@ const submitBooking = async () => {
     document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
     return;
   }
+  submitting.value = true;
+  await simulateRequest(600);
+  submitting.value = false;
   emit("booked", {
     location: location.value,
     date: bookingDate.value,

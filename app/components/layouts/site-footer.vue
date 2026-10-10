@@ -11,7 +11,7 @@
           Precision optical instruments, large-format fine-art printing
           machinery and archival media for working studios.
         </p>
-        <form class="flex max-w-xs gap-2" @submit.prevent>
+        <form class="flex max-w-xs gap-2" novalidate @submit.prevent="subscribe">
           <LazyVInput
             name="footerEmail"
             type="email"
@@ -22,7 +22,7 @@
             placeholder="Join optical dispatch"
             class="flex-1"
           />
-          <LazyVButton variant="primary" type="submit" class="shrink-0"
+          <LazyVButton variant="primary" type="submit" class="shrink-0" :loading="subscribing"
             >Subscribe</LazyVButton
           >
         </form>
@@ -106,4 +106,17 @@
 
 <script lang="ts" setup>
 import { footerColumns } from "~/data/home";
+
+const toast = useToast();
+const { validate, resetForm } = useForm();
+const subscribing = ref(false);
+
+const subscribe = async () => {
+  if (!(await validate()).valid) return;
+  subscribing.value = true;
+  await simulateRequest(600);
+  subscribing.value = false;
+  resetForm();
+  toast.success("You’re on the list", { description: "Optical dispatch bulletins will arrive by email." });
+};
 </script>

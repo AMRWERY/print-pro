@@ -167,7 +167,8 @@ const { start } = useTimeoutFn(
   1800,
   { immediate: false },
 );
-const acquire = () => {
+const acquire = async () => {
+  await simulateRequest();
   cart.add(props.product.id, props.product.price);
   toast.success("Added to cart", {
     description: props.product.name,

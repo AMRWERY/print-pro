@@ -1,13 +1,14 @@
 <template>
   <component
     :is="tag"
-    v-bind="rootAttrs"
+    v-bind="{ ...forwardedAttrs, ...rootAttrs }"
     ref="el"
-    :class="classes"
-    :aria-busy="loading || undefined"
+    :class="[attrs.class, classes]"
+    :aria-busy="isLoading || undefined"
+    @click="onClick"
   >
     <Icon
-      v-if="loading"
+      v-if="isLoading"
       name="lucide:loader-circle"
       :size="iconSize"
       class="animate-spin"
@@ -22,7 +23,7 @@
     />
     <slot />
     <Icon
-      v-if="iconEnd && !loading"
+      v-if="iconEnd && !isLoading"
       :name="iconEnd"
       :size="iconSize"
       :class="iconEndClass"
@@ -42,8 +43,14 @@
  *   <LazyVButton variant="icon" aria-label="Close" icon="lucide:x" />      icon-only
  *   <LazyVButton :loading="busy" type="submit" size="lg" block>Pay</LazyVButton>
  *
- * Anything else (aria-*, @click, v-if, class, …) falls through to the element.
+ * Anything else (aria-*, v-if, class, …) falls through to the element.
+ *
+ * Loading: pass `loading` yourself, or just make the `@click` handler async (return a
+ * Promise): the button shows a spinner and ignores clicks until it settles.
+ *
+ *   <LazyVButton @click="async () => { await save(); }">Save</LazyVButton>
  */
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<{
@@ -83,7 +90,39 @@ const tag = computed(() => {
   return "button";
 });
 
-const blocked = computed(() => props.disabled || props.loading);
+const attrs = useAttrs();
+
+// Everything but class and the click handler goes straight to the element; the click is
+// run here so a returned Promise can drive the loading state.
+const forwardedAttrs = computed(() => {
+  const { class: _c, onClick: _o, ...rest } = attrs;
+  return rest;
+});
+
+const busy = ref(false);
+const isLoading = computed(() => props.loading || busy.value);
+const blocked = computed(() => props.disabled || isLoading.value);
+
+const onClick = async (e: Event) => {
+  if (blocked.value) {
+    e.preventDefault();
+    return;
+  }
+  const handler = attrs.onClick as
+    | ((e: Event) => unknown)
+    | ((e: Event) => unknown)[]
+    | undefined;
+  const pending = (Array.isArray(handler) ? handler : handler ? [handler] : [])
+    .map((fn) => fn(e))
+    .filter((r): r is Promise<unknown> => !!r && typeof (r as Promise<unknown>).then === "function");
+  if (!pending.length) return;
+  busy.value = true;
+  try {
+    await Promise.allSettled(pending);
+  } finally {
+    busy.value = false;
+  }
+};
 
 const external = computed(
   () => !!props.href && /^https?:\/\//.test(props.href),
@@ -138,7 +177,7 @@ const classes = computed(() => [
     (props.icon || props.iconEnd) &&
     "inline-flex items-center gap-1.5",
   isLink.value && blocked.value && "pointer-events-none opacity-40",
-  props.loading && "cursor-progress",
+  isLoading.value && "cursor-progress",
 ]);
 
 const iconSize = computed(

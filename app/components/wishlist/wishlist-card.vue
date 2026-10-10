@@ -166,7 +166,8 @@ const moved = ref(false);
 const { start } = useTimeoutFn(() => (moved.value = false), 1800, {
   immediate: false,
 });
-const move = () => {
+const move = async () => {
+  await simulateRequest();
   emit("move");
   if (props.readonly) {
     moved.value = true;

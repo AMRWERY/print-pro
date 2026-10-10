@@ -185,7 +185,8 @@ const { start } = useTimeoutFn(() => (added.value = false), 1800, {
   immediate: false,
 });
 
-const acquire = () => {
+const acquire = async () => {
+  await simulateRequest();
   cart.add(props.product.id, total.value, {
     option: selected.value.delta ? selected.value.label : undefined,
   });

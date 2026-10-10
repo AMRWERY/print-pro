@@ -102,6 +102,7 @@
           variant="secondary"
           type="submit"
           class="shrink-0"
+          :loading="applying"
           :disabled="!draft.trim()"
           >Apply</LazyVButton
         >
@@ -225,10 +226,15 @@ const voucherRule = (v: unknown) =>
     ? true
     : "That code isn't recognised. Check it for typos, or try BIENNIAL-PRINT-2025.";
 
+const applying = ref(false);
+
 const apply = async () => {
   const result = await voucherInput.value?.validate();
   if (!result?.valid) return;
   const c = draft.value.trim().toUpperCase();
+  applying.value = true;
+  await simulateRequest(500);
+  applying.value = false;
   draft.value = "";
   emit("voucher", c);
 };

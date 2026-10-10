@@ -71,7 +71,8 @@ const crumbs = computed(() => [
 
 const toast = useToast();
 
-const reorder = () => {
+const reorder = async () => {
+  await simulateRequest(500);
   const o = order.value;
   if (!o) return;
   let added = 0;

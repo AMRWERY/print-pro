@@ -93,7 +93,7 @@
               <LazyVButton variant="tertiary" @click="$emit('close')"
                 >Cancel</LazyVButton
               >
-              <LazyVButton type="submit" variant="primary"
+              <LazyVButton type="submit" variant="primary" :loading="submitting"
                 >Submit requisition</LazyVButton
               >
             </div>
@@ -165,6 +165,7 @@ const form = reactive({
 });
 
 const { validate } = useForm();
+const submitting = ref(false);
 
 onKeyStroke("Escape", () => props.open && emit("close"));
 
@@ -174,6 +175,9 @@ const submitCalibration = async () => {
     document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
     return;
   }
+  submitting.value = true;
+  await simulateRequest(600);
+  submitting.value = false;
   emit("submitted", { ...form });
   emit("close");
 };

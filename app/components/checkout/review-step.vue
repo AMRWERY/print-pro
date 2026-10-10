@@ -77,16 +77,9 @@
       <LazyVButton variant="primary" size="xl" block
         type="submit"
        
-        :disabled="placing"
+        :loading="placing"
       >
-        <Icon
-          v-if="placing"
-          name="lucide:loader-circle"
-          size="18"
-          class="animate-spin"
-          aria-hidden="true"
-        />
-        <Icon v-else name="lucide:lock" size="18" aria-hidden="true" />
+        <Icon v-if="!placing" name="lucide:lock" size="18" aria-hidden="true" />
         {{
           placing
             ? "Placing your order…"
