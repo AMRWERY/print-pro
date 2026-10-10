@@ -17,7 +17,7 @@
         </div>
 
         <div v-else-if="auth.isSignedIn" class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
-          <account-sidebar class="hidden lg:flex lg:sticky lg:top-28" :order-count="orders.length" :registry-count="registryCount" />
+          <account-sidebar class="hidden lg:block lg:sticky lg:top-28" :order-count="orders.length" :registry-count="registryCount" />
           <div class="min-w-0 pb-20 lg:pb-0"><slot /></div>
         </div>
 
