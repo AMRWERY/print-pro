@@ -2,7 +2,12 @@
   <div class="space-y-6">
     <LazyVBreadcrumb :items="crumbs" />
 
-    <template v-if="order">
+    <div v-if="!order && pending" class="space-y-4" aria-busy="true" aria-label="Loading your order">
+      <LazyVSkeletonLoader class="h-24" />
+      <LazyVSkeletonLoader class="h-56" />
+    </div>
+
+    <template v-else-if="order">
       <header class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p class="meta">
@@ -63,7 +68,7 @@ import { allProducts } from "~/data/product-details";
 
 const route = useRoute();
 const cart = useCartStore();
-const { findOrder } = useAccount();
+const { findOrder, pending } = useAccount();
 
 const order = computed(() => findOrder(String(route.params.id)));
 

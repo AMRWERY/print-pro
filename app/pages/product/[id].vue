@@ -1,61 +1,82 @@
 <template>
-  <div class="pb-20 lg:pb-0">
-    <div class="container-page page-stack">
-      <LazyVBreadcrumb :items="crumbs" />
+  <div v-if="product && detail" class="pb-20 lg:pb-0">
+      <div class="container-page page-stack">
+        <LazyVBreadcrumb :items="crumbs" />
 
-      <div class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <product-gallery :key="product.id" :items="detail.gallery" />
-      
-        <product-buy-box :key="product.id" :product="product" :detail="detail" />
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <product-gallery :key="product.id" :items="detail.gallery" />
+        
+          <product-buy-box :key="product.id" :product="product" :detail="detail" />
+        </div>
+
+        <key-facts :items="detail.keyFacts" />
       </div>
 
-      <key-facts :items="detail.keyFacts" />
-    </div>
+      <feature-trio v-if="detail.feature" :feature="detail.feature" />
+    
+      <benchmark-table v-if="detail.benchmark" :table="detail.benchmark" />
+    
+      <spec-groups :groups="detail.specGroups" />
+    
+      <document-downloads v-if="detail.documents.length" :items="detail.documents" />
+    
+      <reviews-section v-if="detail.reviews" :reviews="detail.reviews" />
 
-    <feature-trio v-if="detail.feature" :feature="detail.feature" />
-  
-    <benchmark-table v-if="detail.benchmark" :table="detail.benchmark" />
-  
-    <spec-groups :groups="detail.specGroups" />
-  
-    <document-downloads v-if="detail.documents.length" :items="detail.documents" />
-  
-    <reviews-section v-if="detail.reviews" :reviews="detail.reviews" />
+      <section class="border-t border-line py-12 md:py-16" aria-labelledby="qa-title">
+        <div class="container-page max-w-3xl space-y-8">
+          <LazyVAccordion id="qa-title" eyebrow="Pre-sale support" title="Technical inquiries & lab Q&A" />
+       
+          <faq-accordion :items="detail.qa" />
+        </div>
+      </section>
 
-    <section class="border-t border-line py-12 md:py-16" aria-labelledby="qa-title">
-      <div class="container-page max-w-3xl space-y-8">
-        <LazyVAccordion id="qa-title" eyebrow="Pre-sale support" title="Technical inquiries & lab Q&A" />
-     
-        <faq-accordion :items="detail.qa" />
-      </div>
-    </section>
+      <related-products v-if="related.length" :items="related" />
+      <trust-row />
+  </div>
 
-    <related-products v-if="related.length" :items="related" />
-    <trust-row />
+  <div v-else class="container-page page-stack" aria-busy="true">
+    <LazyVSkeletonLoader variant="line" class="!h-3 w-1/3" />
+    <product-details-skeleton-loader />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { findProduct, getProductDetail } from "~/data/product-details";
-
 const route = useRoute();
 const id = computed(() => String(route.params.id));
 
-const found = findProduct(id.value);
-if (!found) {
-  throw createError({ statusCode: 404, statusMessage: "Product not found", fatal: true });
-}
+// Same page component is reused when navigating between products; the URL is reactive so it refetches.
+const { data, error } = useFetch(() => `/api/products/${id.value}`, {
+  lazy: true,
+});
 
-// Same page component is reused when navigating between products.
-const product = computed(() => findProduct(id.value) ?? found);
-const detail = computed(() => getProductDetail(product.value));
-const related = computed(() =>
-  detail.value.related.map((rid) => findProduct(rid)).filter((p): p is NonNullable<typeof p> => !!p),
+watch(
+  error,
+  (e) => {
+    if (e)
+      showError(
+        createError({
+          statusCode: e.statusCode ?? 404,
+          statusMessage: "Product not found",
+          fatal: true,
+        }),
+      );
+  },
+  { immediate: true },
 );
-const crumbs = computed(() => detail.value.crumbs ?? [{ label: "Index", to: "/" }, { label: product.value.name }]);
+
+const product = computed(() => data.value?.product);
+const detail = computed(() => data.value?.detail);
+const related = computed(() => data.value?.related ?? []);
+const crumbs = computed(
+  () =>
+    detail.value?.crumbs ?? [
+      { label: "Index", to: "/" },
+      { label: product.value?.name ?? "Product" },
+    ],
+);
 
 useSeoMeta({
-  title: () => `${product.value.name}`,
-  description: () => detail.value.subtitle,
+  title: () => product.value?.name ?? "Product",
+  description: () => detail.value?.subtitle,
 });
 </script>

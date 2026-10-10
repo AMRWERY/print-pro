@@ -1,15 +1,17 @@
 <template>
   <catalog-page
+    v-if="products"
     :key="slug"
     :products="products"
     :crumb="page.label"
     :title="page.label"
     :description="page.description"
   />
+  <catalog-skeleton-loader v-else />
 </template>
 
 <script lang="ts" setup>
-import { catalogProducts, categoryPages } from "~/data/catalog";
+import { categoryPages } from "~/data/catalog";
 
 // The :key on <catalog-page> rebuilds the catalogue state when the category changes.
 const route = useRoute();
@@ -24,8 +26,9 @@ if (!categoryPages[slug.value]) {
   });
 }
 
+const { products: all } = useCatalogProducts();
 const products = computed(() =>
-  catalogProducts.filter((p) => page.value.scope.includes(p.category)),
+  all.value?.filter((p) => page.value.scope.includes(p.category)),
 );
 
 useSeoMeta({

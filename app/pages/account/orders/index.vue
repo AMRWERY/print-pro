@@ -33,7 +33,9 @@
     />
 
     <div id="results" class="scroll-mt-28">
-      <template v-if="filtered.length">
+      <table-skeleton-loader v-if="pending" :rows="5" />
+
+      <template v-else-if="filtered.length">
         <orders-table :orders="pageRows" />
 
         <orders-cards :orders="mobileRows" />
@@ -91,7 +93,7 @@
 </template>
 
 <script lang="ts" setup>
-const { orders } = useAccount();
+const { orders, pending } = useAccount();
 
 const search = ref("");
 const status = ref("all");

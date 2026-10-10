@@ -1,9 +1,10 @@
 <template>
-  <catalog-page :products="catalogProducts" />
+  <catalog-page v-if="products" :products="products" />
+  <catalog-skeleton-loader v-else />
 </template>
 
 <script lang="ts" setup>
-import { catalogProducts } from "~/data/catalog";
+const { products } = useCatalogProducts();
 
 useSeoMeta({
   title: "All Instruments & Archival Substrates",

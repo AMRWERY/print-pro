@@ -1,5 +1,4 @@
 import { defaultAtelierProfile } from "~/data/account";
-import { demoOrderHistory } from "~/data/account-orders";
 import { trackingStages, trackingState } from "~/data/tracking";
 import type { AtelierProfile, RequisitionOrder } from "~/types/account";
 import type { Order } from "~/types/order";
@@ -70,9 +69,16 @@ export const useAccount = () => {
     };
   });
 
+  // Order history comes from the API; `pending` is true until it has loaded.
+  const { data: history, status } = useFetch<RequisitionOrder[]>(
+    "/api/account/orders",
+    { key: "account-orders", lazy: true },
+  );
+  const pending = computed(() => status.value === "pending");
+
   const orders = computed<RequisitionOrder[]>(() => [
     ...orderStore.orders.map((o) => toRequisition(o, now.value)),
-    ...demoOrderHistory(),
+    ...(history.value ?? []),
   ]);
 
   const findOrder = (slug: string) => {
@@ -88,6 +94,7 @@ export const useAccount = () => {
     auth,
     profile,
     orders,
+    pending,
     findOrder,
     sourceOrder,
     registryCount: computed(() => wishlist.ids.length),
