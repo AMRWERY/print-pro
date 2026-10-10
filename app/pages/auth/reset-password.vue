@@ -7,8 +7,8 @@
         aria-busy="true"
         aria-label="Checking your link"
       >
-        <div class="h-8 w-2/3 animate-pulse rounded bg-raised" />
-        <div class="h-24 animate-pulse rounded bg-raised" />
+        <LazyVSkeletonLoader variant="line" class="!h-8 w-2/3" />
+        <LazyVSkeletonLoader class="h-24" />
       </div>
 
       <!-- Bad or expired link -->

@@ -12,8 +12,8 @@
       <div class="container-page py-6 lg:py-8">
         <!-- Accounts live in this browser, so wait until the session is read -->
         <div v-if="!ready" class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]" aria-busy="true" aria-label="Loading your account">
-          <div class="hidden h-96 animate-pulse rounded-card bg-raised lg:block" />
-          <div class="space-y-4"><div class="h-48 animate-pulse rounded-card bg-raised" /><div class="h-64 animate-pulse rounded-card bg-raised" /></div>
+          <LazyVSkeletonLoader class="hidden h-96 lg:block" />
+          <div class="space-y-4"><LazyVSkeletonLoader class="h-48" /><table-skeleton-loader :rows="4" /></div>
         </div>
 
         <div v-else-if="auth.isSignedIn" class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">

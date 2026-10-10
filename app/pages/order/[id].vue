@@ -7,8 +7,8 @@
       aria-busy="true"
       aria-label="Loading your order"
     >
-      <div class="h-56 animate-pulse rounded-card bg-raised" />
-      <div class="h-40 animate-pulse rounded-card bg-raised" />
+      <LazyVSkeletonLoader class="h-56" />
+      <LazyVSkeletonLoader class="h-40" />
     </div>
 
     <LazyVEmptyState

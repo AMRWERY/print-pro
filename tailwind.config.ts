@@ -121,6 +121,11 @@ export default {
         },
         // Infinite carousel: the track holds two identical halves, so sliding by
         // exactly 50% loops seamlessly. Direction follows the reading direction.
+        // Skeleton sheen sweeps in the reading direction.
+        shimmer: {
+          from: { translate: "calc(var(--icon-dir) * -100%) 0" },
+          to: { translate: "calc(var(--icon-dir) * 100%) 0" },
+        },
         marquee: {
           from: { translate: "0 0" },
           to: { translate: "calc(var(--icon-dir) * -50%) 0" },
@@ -148,6 +153,7 @@ export default {
         "icon-spin": "icon-spin .5s cubic-bezier(.22,.8,.3,1)",
         "icon-pop": "icon-pop .3s cubic-bezier(.22,.8,.3,1) both",
         marquee: "marquee 40s linear infinite",
+        shimmer: "shimmer 1.6s ease-in-out infinite",
         "reveal-up": "reveal-up .5s cubic-bezier(.22,.8,.3,1) both",
         "reveal-fade": "reveal-fade .5s ease-out both",
         "reveal-scale": "reveal-scale .5s cubic-bezier(.22,.8,.3,1) both",
