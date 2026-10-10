@@ -94,10 +94,9 @@
               placeholder="Constant 18°C / 45% relative humidity"
             />
 
-            <LazyVInput
+            <LazyVCheckboxImput
               v-model="primary"
               name="dock-primary"
-              type="checkbox"
               label="Use as my primary receiving port"
             />
 

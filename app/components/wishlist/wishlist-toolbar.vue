@@ -65,15 +65,14 @@
       v-if="!readonly"
       class="flex flex-wrap items-center justify-between gap-3 border-y border-line py-2"
     >
-      <LazyVInput
-        type="checkbox"
+      <LazyVCheckboxImput
         :model-value="allSelected"
         :indeterminate="someSelected && !allSelected"
         label-class="items-center"
         @update:model-value="(v) => emit('select-all', !!v)"
       >
         Select all ({{ shown }})
-      </LazyVInput>
+      </LazyVCheckboxImput>
 
       <LazyVButton
         variant="tertiary"

@@ -60,10 +60,9 @@
         </div>
       </dl>
 
-      <LazyVInput
+      <LazyVCheckboxImput
         v-model="f.terms"
         name="terms"
-        type="checkbox"
         :rules="mustAccept('Accept the terms to place your order.')"
       >
         I agree to the
@@ -73,7 +72,7 @@
           >terms of sale</nuxt-link-locale
         >
         and understand large-format equipment ships by appointment.
-      </LazyVInput>
+      </LazyVCheckboxImput>
 
       <LazyVButton variant="primary" size="xl" block
         type="submit"

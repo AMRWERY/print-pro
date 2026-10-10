@@ -99,11 +99,10 @@
           />
 
           <div class="flex flex-wrap items-center justify-between gap-3">
-            <LazyVInput
+            <LazyVCheckboxImput
               v-model="remember"
-              type="checkbox"
               label-class="items-center"
-              >Remember this device</LazyVInput
+              >Remember this device</LazyVCheckboxImput
             >
 
             <LazyVButton variant="tertiary" to="/auth/forgot-password" size="sm"

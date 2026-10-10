@@ -65,11 +65,12 @@
 
 <script lang="ts" setup>
 /**
- * Text-like inputs, checkboxes and radios. Selects live in <LazyVSelectInput> and
+ * Text-like inputs and radios. Selects live in <LazyVSelectInput> and
  * multi-line text in <LazyVTextarea>; all three share the same vee-validate wiring.
  *
  *   <LazyVInput v-model="email" name="email" label="Email" type="email" required rules="required|email" />
- *   <LazyVInput v-model="agree" type="checkbox">I agree to the terms</LazyVInput>
+ *   <LazyVInput v-model="plan" type="radio" value="pro">Pro plan</LazyVInput>
+ * Checkboxes live in <LazyVCheckboxImput>.
  *
  * - Works on its own, and inside a `useForm()` (it registers by `name`).
  * - Validates on blur, then re-checks while typing once an error is showing.
@@ -80,7 +81,7 @@ defineOptions({ inheritAttrs: false });
 
 type FieldType =
   | "text" | "email" | "tel" | "password" | "search" | "number" | "url" | "range"
-  | "checkbox" | "radio";
+  | "radio";
 
 const props = withDefaults(
   defineProps<{
@@ -90,7 +91,7 @@ const props = withDefaults(
     /** Keep the label for screen readers only. */
     hideLabel?: boolean;
     type?: FieldType;
-    /** The value a radio / array-checkbox stands for. */
+    /** The value a radio stands for. */
     value?: unknown;
     /** vee-validate rules: "required|email", an object, or a function. */
     rules?: unknown;
@@ -131,7 +132,7 @@ const {
 const shown = ref(false);
 const inputType = computed(() => (props.revealable && props.type === "password" && shown.value ? "text" : props.type));
 
-const isChoice = computed(() => props.type === "checkbox" || props.type === "radio");
+const isChoice = computed(() => props.type === "radio");
 const display = computed(() => (value.value ?? "") as string | number);
 
 const checked = computed(() => {

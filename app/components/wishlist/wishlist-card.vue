@@ -38,9 +38,8 @@
         class="absolute start-3 top-3 backdrop-blur"
       />
 
-      <LazyVInput
+      <LazyVCheckboxImput
         v-if="!readonly"
-        type="checkbox"
         :model-value="selected"
         :label="'Select ' + product.name"
         hide-label

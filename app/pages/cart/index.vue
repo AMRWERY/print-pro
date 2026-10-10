@@ -49,8 +49,7 @@
           <div
             class="flex flex-wrap items-center justify-between gap-3 card p-3"
           >
-            <LazyVInput
-              type="checkbox"
+            <LazyVCheckboxImput
               :model-value="allSelected"
               :indeterminate="selectedEntries.length > 0 && !allSelected"
               label-class="items-center"
@@ -58,7 +57,7 @@
             >
               Select all ({{ entries.length }}
               {{ entries.length === 1 ? "item" : "items" }})
-            </LazyVInput>
+            </LazyVCheckboxImput>
             <div class="flex flex-wrap items-center gap-4 text-sm">
               <LazyVButton
                 variant="tertiary"

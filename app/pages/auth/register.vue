@@ -138,10 +138,9 @@
 
         <fieldset class="space-y-3">
           <legend class="eyebrow mb-1">03 · Agreements</legend>
-          <LazyVInput
+          <LazyVCheckboxImput
             v-model="form.terms"
             name="terms"
-            type="checkbox"
             :rules="mustAccept('Accept the terms to create your account.')"
           >
             I agree to the
@@ -149,12 +148,12 @@
               >terms of sale</LazyVButton
             >
             and the transit and escrow conditions.
-          </LazyVInput>
+          </LazyVCheckboxImput>
 
-          <LazyVInput v-model="form.newsletter" type="checkbox">
+          <LazyVCheckboxImput v-model="form.newsletter">
             Send me bi-weekly technical bulletins and new-arrival reports
             <span class="text-mute">(optional)</span>.
-          </LazyVInput>
+          </LazyVCheckboxImput>
         </fieldset>
 
         <p

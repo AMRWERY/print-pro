@@ -23,7 +23,7 @@
       >
     </label>
 
-    <LazyVInput v-model="cmp.hideIdentical" type="checkbox" label-class="items-center">Hide identical specs</LazyVInput>
+    <LazyVCheckboxImput v-model="cmp.hideIdentical" label-class="items-center">Hide identical specs</LazyVCheckboxImput>
 
     <LazyVButton variant="tertiary"
       class="inline-flex items-center gap-1.5 text-sm"

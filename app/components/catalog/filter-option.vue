@@ -1,6 +1,5 @@
 <template>
-  <LazyVInput
-    type="checkbox"
+  <LazyVCheckboxImput
     :model-value="checked"
     label-class="group items-center rounded-control py-1.5"
     @update:model-value="emit('change')"
@@ -13,7 +12,7 @@
       >
       <span v-if="count !== undefined" class="meta">{{ count }}</span>
     </span>
-  </LazyVInput>
+  </LazyVCheckboxImput>
 </template>
 
 <script lang="ts" setup>

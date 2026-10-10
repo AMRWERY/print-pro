@@ -4,8 +4,7 @@
     :class="!selected && 'opacity-70'"
   >
     <div class="flex items-start gap-3 sm:contents">
-      <LazyVInput
-        type="checkbox"
+      <LazyVCheckboxImput
         :model-value="selected"
         :label="'Select ' + product.name"
         hide-label
