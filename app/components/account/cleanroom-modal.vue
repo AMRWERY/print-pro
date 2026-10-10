@@ -13,12 +13,8 @@
           @click="$emit('close')"
         />
 
-        <div
-          class="modal-panel"
-        >
-          <div
-            class="modal-head"
-          >
+        <div class="modal-panel">
+          <div class="modal-head">
             <div class="flex items-center gap-2">
               <span
                 class="h-2 w-2 rounded-full bg-success"
@@ -52,14 +48,15 @@
             />
 
             <div class="grid gap-3 sm:grid-cols-2">
-              <LazyVInput
+              <LazyVDatePicker
                 v-model="bookingDate"
                 name="room-date"
-                type="date"
                 label="Session date"
                 required
+                :min="tomorrow"
                 :rules="requiredText('Pick a session date.')"
               />
+
               <LazyVSelectInput
                 v-model="slot"
                 name="room-slot"
@@ -154,13 +151,17 @@ const equipmentType = ref(equipment[0]!.value);
 const { validate } = useForm();
 
 // A booking can't start in the past; default to tomorrow each time the dialog opens.
+const localIso = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const tomorrow = ref("");
+
 watch(
   () => props.open,
   (open) => {
     if (!open) return;
     const d = new Date();
     d.setDate(d.getDate() + 1);
-    bookingDate.value = d.toISOString().slice(0, 10);
+    tomorrow.value = bookingDate.value = localIso(d);
   },
 );
 
