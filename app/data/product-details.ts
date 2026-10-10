@@ -40,6 +40,24 @@ const accountProducts: DetailedProduct[] = [
   })),
 ];
 
+// The made-to-order print from the configurator; its price and options live on the cart line.
+accountProducts.push({
+  id: "custom-print",
+  sku: "LP-PRINT-CUSTOM",
+  group: "print",
+  badge: { label: "Made to order", tone: "info", icon: "lucide:printer" },
+  brand: "Lumen & Press Lab",
+  name: "Custom archival print",
+  blurb: "Museum-grade pigment print, configured in the printing service.",
+  specs: ["Archival pigment", "Spectro-verified"],
+  rating: 5,
+  reviews: 1,
+  price: 0,
+  lease: 0,
+  icon: "lucide:printer",
+  image: "/img/hero-img.png",
+});
+
 const base: DetailedProduct[] = [...catalogProducts, ...cameraProducts, ...featured];
 
 export const allProducts: DetailedProduct[] = [

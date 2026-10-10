@@ -16,6 +16,14 @@
           </nuxt-link-locale>
         </li>
       </ul>
+      <nuxt-link-locale
+        to="/printing"
+        active-class="!text-accent"
+        class="inline-flex h-11 items-center gap-1.5 px-3 font-mono text-xs font-semibold tracking-wider text-accent transition duration-200 hover:text-paper"
+      >
+        <Icon name="lucide:printer" size="14" aria-hidden="true" />
+        Print Lab
+      </nuxt-link-locale>
     </div>
   </nav>
 </template>

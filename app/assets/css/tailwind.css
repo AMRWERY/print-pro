@@ -96,12 +96,15 @@
   .btn-accent {
     @apply btn bg-accent text-onaccent hover:brightness-110;
   }
+
   .eyebrow {
     @apply font-mono text-xs tracking-widest text-mute;
   }
+
   .chip {
     @apply inline-flex items-center rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-xs text-mute;
   }
+
   .link-quiet {
     @apply text-mute transition duration-200 hover:text-paper;
   }
@@ -113,10 +116,12 @@
     opacity 0.25s ease-out,
     transform 0.25s ease-out;
 }
+
 .page-enter-from {
   opacity: 0;
   transform: translateY(8px);
 }
+
 .page-leave-to {
   opacity: 0;
 }

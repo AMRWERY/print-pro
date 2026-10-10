@@ -53,6 +53,16 @@
                     aria-hidden="true" />
                 </nuxt-link-locale>
               </li>
+              <li>
+                <nuxt-link-locale to="/printing" active-class="!text-accent bg-raised"
+                  class="flex min-h-12 items-center gap-3 rounded-control px-3 text-sm font-semibold transition duration-200 hover:bg-raised"
+                  @click="emit('close')">
+                  <Icon name="lucide:printer" size="20" class="icon-lift text-accent" aria-hidden="true" />
+                  <span class="flex-1">Print Lab &amp; Configurator</span>
+                  <Icon name="lucide:chevron-right" size="16" class="icon-nudge text-mute rtl:-scale-x-100"
+                    aria-hidden="true" />
+                </nuxt-link-locale>
+              </li>
               <li v-for="c in categories" :key="c.label">
                 <nuxt-link-locale :to="c.to" active-class="!text-accent bg-raised"
                   :class="matchesSearch(c) && '!text-accent bg-raised'"
