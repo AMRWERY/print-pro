@@ -34,8 +34,8 @@
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <LazyVButton variant="primary" :to="redirect">Continue</LazyVButton>
-
+          <LazyVButton variant="primary" :to="redirect || '/account'">Continue</LazyVButton>
+          <LazyVButton variant="secondary" to="/account" icon="lucide:layout-dashboard">Atelier Dashboard</LazyVButton>
           <LazyVButton
             variant="secondary"
             icon="lucide:log-out"
@@ -200,6 +200,7 @@ const error = ref("");
 
 // Too many wrong passwords pause sign-in briefly.
 const lockedFor = ref(0);
+
 const { pause, resume } = useIntervalFn(
   () => {
     lockedFor.value = Math.max(0, lockedFor.value - 1);
