@@ -1,74 +1,72 @@
 <template>
-  <Teleport to="body">
-    <section
-      class="pointer-events-none fixed inset-x-4 bottom-20 z-[70] flex flex-col items-end gap-2 sm:inset-x-auto sm:end-4 sm:w-96 lg:bottom-6 lg:end-6"
-      aria-label="Notifications"
+  <section
+    class="pointer-events-none fixed inset-x-4 bottom-20 z-[70] flex flex-col items-end gap-2 sm:inset-x-auto sm:end-4 sm:w-96 lg:bottom-6 lg:end-6"
+    aria-label="Notifications"
+  >
+    <TransitionGroup
+      name="toast"
+      tag="div"
+      class="flex w-full flex-col items-end gap-2"
     >
-      <TransitionGroup
-        name="toast"
-        tag="div"
-        class="flex w-full flex-col items-end gap-2"
+      <div
+        v-for="t in toasts"
+        :key="t.id"
+        :role="t.tone === 'error' ? 'alert' : 'status'"
+        :aria-live="t.tone === 'error' ? 'assertive' : 'polite'"
+        class="toast-item pointer-events-auto relative w-full overflow-hidden rounded-card border bg-surface shadow-2xl shadow-black/60"
+        :class="look[t.tone].border"
+        @mouseenter="pause(t.id)"
+        @mouseleave="resume(t.id)"
+        @focusin="pause(t.id)"
+        @focusout="resume(t.id)"
+        @keydown.esc="dismiss(t.id)"
       >
-        <div
-          v-for="t in toasts"
-          :key="t.id"
-          :role="t.tone === 'error' ? 'alert' : 'status'"
-          :aria-live="t.tone === 'error' ? 'assertive' : 'polite'"
-          class="toast-item pointer-events-auto relative w-full overflow-hidden rounded-card border bg-surface shadow-2xl shadow-black/60"
-          :class="look[t.tone].border"
-          @mouseenter="pause(t.id)"
-          @mouseleave="resume(t.id)"
-          @focusin="pause(t.id)"
-          @focusout="resume(t.id)"
-          @keydown.esc="dismiss(t.id)"
-        >
-          <div class="flex items-start gap-3 px-4 py-3">
-            <Icon
-              :name="t.icon ?? look[t.tone].icon"
-              size="18"
-              class="mt-px shrink-0"
-              :class="look[t.tone].text"
-              aria-hidden="true"
-            />
-            <div class="min-w-0 flex-1 space-y-0.5">
-              <p class="font-mono text-xs font-semibold text-paper">
-                {{ t.title }}
-              </p>
-              <p v-if="t.description" class="text-xs text-mute">
-                {{ t.description }}
-              </p>
-              <LazyVButton
-                v-if="t.action"
-                variant="tertiary"
-                size="sm"
-                class="!mt-1.5 !text-accent hover:underline"
-                :to="t.action.to"
-                @click="onAction(t)"
-                >{{ t.action.label }}</LazyVButton
-              >
-            </div>
-            <LazyVButton
-              variant="plain"
-              class="-me-1 -mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-control text-mute transition-colors duration-200 hover:text-paper"
-              aria-label="Dismiss notification"
-              @click="dismiss(t.id)"
-            >
-              <Icon name="lucide:x" size="14" aria-hidden="true" />
-            </LazyVButton>
-          </div>
-
-          <!-- Time left; pauses while hovered or focused -->
-          <span
-            v-if="t.duration"
-            class="toast-bar absolute inset-x-0 bottom-0 h-0.5 motion-reduce:hidden"
-            :class="[look[t.tone].bar, paused.has(t.id) && 'toast-paused']"
-            :style="{ animationDuration: `${t.duration}ms` }"
+        <div class="flex items-start gap-3 px-4 py-3">
+          <Icon
+            :name="t.icon ?? look[t.tone].icon"
+            size="18"
+            class="mt-px shrink-0"
+            :class="look[t.tone].text"
             aria-hidden="true"
           />
+          <div class="min-w-0 flex-1 space-y-0.5">
+            <p class="font-mono text-xs font-semibold text-paper">
+              {{ t.title }}
+            </p>
+            <p v-if="t.description" class="text-xs text-mute">
+              {{ t.description }}
+            </p>
+            <LazyVButton
+              v-if="t.action"
+              variant="tertiary"
+              size="sm"
+              class="!mt-1.5 !text-accent hover:underline"
+              :to="t.action.to"
+              @click="onAction(t)"
+              >{{ t.action.label }}</LazyVButton
+            >
+          </div>
+          <LazyVButton
+            variant="plain"
+            class="-me-1 -mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-control text-mute transition-colors duration-200 hover:text-paper"
+            aria-label="Dismiss notification"
+            @click="dismiss(t.id)"
+          >
+            <Icon name="lucide:x" size="14" aria-hidden="true" />
+          </LazyVButton>
         </div>
-      </TransitionGroup>
-    </section>
-  </Teleport>
+
+        <!-- Time left; pauses while hovered or focused -->
+        <span
+          v-if="t.duration"
+          class="toast-bar absolute inset-x-0 bottom-0 h-0.5 motion-reduce:hidden"
+          :class="[look[t.tone].bar, paused.has(t.id) && 'toast-paused']"
+          :style="{ animationDuration: `${t.duration}ms` }"
+          aria-hidden="true"
+        />
+      </div>
+    </TransitionGroup>
+  </section>
 </template>
 
 <script lang="ts" setup>
