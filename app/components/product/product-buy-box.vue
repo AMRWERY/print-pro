@@ -52,17 +52,14 @@
 
     <fieldset v-if="detail.packages.length > 1" class="space-y-2">
       <legend class="eyebrow mb-2">Configuration package</legend>
-      <LazyVInput
+      <LazyVRadioInput
         v-for="p in detail.packages"
         :key="p.id"
         v-model="choice"
-        type="radio"
         name="package"
         :value="p.id"
-        :label-class="[
-          'rounded-card border p-3 transition duration-200',
-          choice === p.id ? 'border-accent bg-accent-soft' : 'border-line hover:border-mute',
-        ]"
+        boxed
+        dense
       >
         <span class="flex items-start gap-3">
           <span class="flex-1">
@@ -71,7 +68,7 @@
           </span>
           <span class="shrink-0 font-mono text-sm">{{ money.format(product.price + p.delta) }}</span>
         </span>
-      </LazyVInput>
+      </LazyVRadioInput>
     </fieldset>
 
     <div class="space-y-3">

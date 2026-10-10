@@ -17,19 +17,14 @@
 
       <fieldset class="grid gap-2 sm:grid-cols-2">
         <legend class="sr-only">Payment method</legend>
-        <LazyVInput
+        <LazyVRadioInput
           v-for="m in paymentMethods"
           :key="m.id"
           v-model="state.form.payment"
-          type="radio"
           name="payment"
           :value="m.id"
-          :label-class="[
-            'items-center rounded-card border p-4 transition duration-200',
-            state.form.payment === m.id
-              ? 'border-accent bg-accent-soft'
-              : 'border-line hover:border-mute',
-          ]"
+          boxed
+          label-class="items-center"
         >
           <span class="flex items-center gap-3">
             <Icon
@@ -43,7 +38,7 @@
               <span class="block text-xs text-mute">{{ m.note }}</span>
             </span>
           </span>
-        </LazyVInput>
+        </LazyVRadioInput>
       </fieldset>
 
       <fieldset

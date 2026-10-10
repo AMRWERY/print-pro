@@ -287,12 +287,6 @@
   }
 }
 
-@layer components {
-  .check {
-    @apply h-4 w-4 shrink-0 cursor-pointer rounded-tight border-line bg-surface text-accent transition duration-200 focus:ring-2 focus:ring-accent/60 focus:ring-offset-0;
-  }
-}
-
 /* Scrollbars (page + every scrollable panel). Accent thumb on the surface tone, per theme. */
 * {
   scrollbar-width: thin;

@@ -74,11 +74,10 @@
 
     <filter-group title="Customer rating">
       <div class="space-y-1">
-        <LazyVInput
+        <LazyVRadioInput
           v-for="r in ratingOptions"
           :key="r"
           :model-value="catalog.filters.minRating"
-          type="radio"
           :value="r"
           :name="uid + '-rating'"
           label-class="items-center py-1.5"
@@ -93,7 +92,7 @@
             />
             <span>{{ r }} &amp; up</span>
           </span>
-        </LazyVInput>
+        </LazyVRadioInput>
 
         <LazyVButton
           variant="plain"

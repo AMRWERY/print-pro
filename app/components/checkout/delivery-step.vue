@@ -3,19 +3,13 @@
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <fieldset class="space-y-2">
         <legend class="sr-only">Choose a delivery method</legend>
-        <LazyVInput
+        <LazyVRadioInput
           v-for="o in deliveryOptions"
           :key="o.id"
           v-model="state.form.delivery"
-          type="radio"
           name="delivery"
           :value="o.id"
-          :label-class="[
-            'rounded-card border p-4 transition duration-200',
-            state.form.delivery === o.id
-              ? 'border-accent bg-accent-soft'
-              : 'border-line hover:border-mute',
-          ]"
+          boxed
         >
           <span class="flex items-start gap-3">
             <Icon
@@ -39,7 +33,7 @@
               }}</span
             >
           </span>
-        </LazyVInput>
+        </LazyVRadioInput>
       </fieldset>
 
       <LazyVTextarea

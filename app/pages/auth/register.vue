@@ -84,26 +84,22 @@
         <fieldset class="space-y-3">
           <legend class="eyebrow mb-1">Studio tier</legend>
           <div class="grid gap-2 sm:grid-cols-3">
-            <LazyVInput
+            <LazyVRadioInput
               v-for="t in tiers"
               :key="t.id"
               v-model="form.tier"
-              type="radio"
               name="tier"
               :value="t.id"
-              :label-class="[
-                'h-full rounded-card border p-3 transition duration-200',
-                form.tier === t.id
-                  ? 'border-accent bg-accent-soft'
-                  : 'border-line hover:border-mute',
-              ]"
+              boxed
+              dense
+              label-class="h-full"
             >
               <span class="block">
                 <span class="eyebrow block">{{ t.tag }}</span>
                 <span class="label">{{ t.title }}</span>
                 <span class="block text-xs text-mute">{{ t.body }}</span>
               </span>
-            </LazyVInput>
+            </LazyVRadioInput>
           </div>
         </fieldset>
 
