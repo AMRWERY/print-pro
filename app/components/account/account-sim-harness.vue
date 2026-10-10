@@ -13,7 +13,7 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Operating modes">
-        <button v-for="m in modes" :key="m.id" type="button" role="tab" :aria-selected="modelValue === m.id"
+        <LazyVButton variant="plain" v-for="m in modes" :key="m.id" role="tab" :aria-selected="modelValue === m.id"
           class="inline-flex items-center gap-1.5 rounded-control px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider transition duration-150"
           :class="modelValue === m.id
               ? 'bg-accent text-onaccent shadow-sm'
@@ -21,7 +21,7 @@
             " @click="$emit('update:modelValue', m.id)">
           <Icon :name="m.icon" size="13" aria-hidden="true" />
           <span>{{ m.label }}</span>
-        </button>
+        </LazyVButton>
       </div>
 
       <!-- Quick theme & view indicator -->

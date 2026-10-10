@@ -88,7 +88,7 @@ watch(
 );
 
 useSeoMeta({
-  title: () => (catalog.filters.query ? `“${catalog.filters.query}” — Search — PrintPro` : "Search — PrintPro"),
+  title: () => (catalog.filters.query ? `“${catalog.filters.query}” — Search` : "Search"),
   description: "Search bench-verified cameras, lenses, printers and archival substrates.",
   robots: "noindex",
 });

@@ -38,10 +38,10 @@
           <span class="text-accent truncate">
             {{ log.hash }}
           </span>
-          <button type="button" class="shrink-0 text-mute hover:text-paper" title="Copy verification hash"
+          <LazyVButton variant="plain" class="shrink-0 text-mute hover:text-paper" title="Copy verification hash"
             @click="copyHash(log.hash)">
             <Icon name="lucide:copy" size="12" />
-          </button>
+          </LazyVButton>
         </div>
       </article>
     </div>

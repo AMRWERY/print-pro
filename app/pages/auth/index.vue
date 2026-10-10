@@ -235,7 +235,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Sign In — PrintPro",
+  title: "Sign In",
   description: "Sign in to your studio account.",
   robots: "noindex",
 });

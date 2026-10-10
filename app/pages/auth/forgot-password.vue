@@ -146,7 +146,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Reset Password — PrintPro",
+  title: "Reset Password",
   description: "Reset your studio account password.",
   robots: "noindex",
 });

@@ -47,12 +47,12 @@
             {{ money.format(item.price) }}
           </span>
 
-          <button type="button"
+          <LazyVButton variant="plain"
             class="inline-flex items-center gap-1 rounded-control bg-accent px-2.5 py-1 font-mono text-xs font-semibold text-onaccent shadow-sm transition hover:brightness-110 active:scale-95"
             @click="$emit('add-to-manifest', item)">
             <Icon name="lucide:plus" size="12" />
             <span>MOVE TO MANIFEST</span>
-          </button>
+          </LazyVButton>
         </div>
       </article>
     </div>

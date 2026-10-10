@@ -21,10 +21,10 @@
               </h2>
             </div>
 
-            <button type="button" class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
+            <LazyVButton variant="plain" class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
               aria-label="Close telemetry HUD" @click="$emit('close')">
               <Icon name="lucide:x" size="18" />
-            </button>
+            </LazyVButton>
           </div>
 
           <div class="max-h-[80vh] overflow-y-auto p-5 sm:p-6 space-y-6">
@@ -132,11 +132,11 @@
           <!-- Modal Footer -->
           <div class="flex items-center justify-between border-t border-line bg-ink px-5 py-3">
             <span class="text-mute text-[11px]">Station Sync: FRA Telemetry Hub #04</span>
-            <button type="button"
+            <LazyVButton variant="plain"
               class="rounded-control bg-raised border border-line px-4 py-1.5 font-bold text-paper transition hover:border-accent hover:text-accent"
               @click="$emit('close')">
               DISMISS HUD
-            </button>
+            </LazyVButton>
           </div>
         </div>
       </div>

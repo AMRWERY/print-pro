@@ -20,16 +20,15 @@
       <!-- Action buttons -->
       <div class="flex flex-wrap items-center gap-2">
         <div class="relative min-w-36">
-          <input v-model="searchQuery" type="search" placeholder="Filter Requisition #"
-            class="w-full rounded-control border border-line bg-ink/60 px-3 py-1.5 font-mono text-xs text-paper placeholder:text-mute focus:border-accent focus:outline-none" />
+          <LazyVInput v-model="searchQuery" name="manifest-search" type="search" label="Filter requisitions" hide-label placeholder="Filter Requisition #" />
         </div>
 
-        <button type="button"
+        <LazyVButton variant="plain"
           class="inline-flex items-center gap-1.5 rounded-control border border-line bg-surface px-3 py-1.5 font-mono text-xs text-mute transition hover:border-accent hover:text-paper"
           @click="exportLedger">
           <Icon name="lucide:download" size="13" aria-hidden="true" />
           <span>EXPORT CSV</span>
-        </button>
+        </LazyVButton>
       </div>
     </header>
 
@@ -155,7 +154,7 @@
         <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-3">
           <div class="flex flex-wrap items-center gap-2">
             <template v-if="order.status === 'in-transit'">
-              <button type="button"
+              <LazyVButton variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control bg-accent px-3 py-1.5 font-mono text-xs font-semibold text-onaccent shadow-sm transition hover:brightness-110 active:scale-95"
                 @click="$emit('open-telemetry', order)">
                 <span class="relative flex h-2 w-2">
@@ -163,37 +162,37 @@
                   <span class="relative inline-flex h-2 w-2 rounded-full bg-white" />
                 </span>
                 TRACK LIVE TELEMETRY
-              </button>
-              <button type="button"
+              </LazyVButton>
+              <LazyVButton variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control border border-line bg-surface px-3 py-1.5 font-mono text-xs text-mute transition hover:border-accent hover:text-paper"
                 @click="$emit('view-waybill', order)">
                 <Icon name="lucide:file-text" size="13" />
                 WAYBILL PDF
-              </button>
+              </LazyVButton>
             </template>
 
             <template v-else-if="order.status === 'delivered'">
-              <button type="button"
+              <LazyVButton variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control border border-line bg-surface px-3 py-1.5 font-mono text-xs text-mute transition hover:border-accent hover:text-paper"
                 @click="$emit('view-calibration-cert', order)">
                 <Icon name="lucide:award" size="13" />
                 CALIBRATION CERT (PDF)
-              </button>
-              <button type="button"
+              </LazyVButton>
+              <LazyVButton variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control border border-line bg-surface px-3 py-1.5 font-mono text-xs text-mute transition hover:border-accent hover:text-paper"
                 @click="$emit('reorder-consumables', order)">
                 <Icon name="lucide:refresh-cw" size="13" />
                 RE-ORDER CONSUMABLES
-              </button>
+              </LazyVButton>
             </template>
 
             <template v-else>
-              <button type="button"
+              <LazyVButton variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control border border-line bg-surface px-3 py-1.5 font-mono text-xs text-mute transition hover:border-accent hover:text-paper"
                 @click="$emit('view-dossier', order)">
                 <Icon name="lucide:archive" size="13" />
                 VIEW REQUISITION DOSSIER
-              </button>
+              </LazyVButton>
             </template>
           </div>
 
@@ -208,11 +207,11 @@
     <footer
       class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3 font-mono text-xs text-mute">
       <span>Showing {{ filteredOrders.length }} of 24 Total Orders</span>
-      <button type="button" class="inline-flex items-center gap-1 text-accent transition hover:underline"
+      <LazyVButton variant="plain" class="inline-flex items-center gap-1 text-accent transition hover:underline"
         @click="$emit('view-fiscal-archive')">
         View Complete Fiscal Archive
         <Icon name="lucide:arrow-right" size="13" />
-      </button>
+      </LazyVButton>
     </footer>
   </section>
 </template>

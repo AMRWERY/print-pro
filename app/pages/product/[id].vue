@@ -55,7 +55,7 @@ const related = computed(() =>
 const crumbs = computed(() => detail.value.crumbs ?? [{ label: "Index", to: "/" }, { label: product.value.name }]);
 
 useSeoMeta({
-  title: () => `${product.value.name} — PrintPro`,
+  title: () => `${product.value.name}`,
   description: () => detail.value.subtitle,
 });
 </script>

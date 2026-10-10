@@ -1,7 +1,12 @@
 <template>
   <div class="container-page space-y-6 py-6 lg:py-10">
     <!-- Orders are kept in this browser, so wait until they are loaded before deciding. -->
-    <div v-if="!ready" class="space-y-4" aria-busy="true" aria-label="Loading your order">
+    <div
+      v-if="!ready"
+      class="space-y-4"
+      aria-busy="true"
+      aria-label="Loading your order"
+    >
       <div class="h-56 animate-pulse rounded-card bg-raised" />
       <div class="h-40 animate-pulse rounded-card bg-raised" />
     </div>
@@ -12,7 +17,9 @@
       title="We can't find that order"
       description="Orders are saved in the browser they were placed in. Open this link on that device, or start a new order."
     >
-      <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
+      <LazyVButton variant="primary" to="/products"
+        >Browse the catalog</LazyVButton
+      >
       <LazyVButton variant="secondary" to="/cart">Go to cart</LazyVButton>
     </LazyVEmptyState>
 
@@ -36,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-
 const route = useRoute();
 const orders = useOrderStore();
 
@@ -49,8 +55,9 @@ onMounted(async () => {
 const order = computed(() => orders.get(String(route.params.id)));
 
 useSeoMeta({
-  title: "Order Confirmed — PrintPro",
-  description: "Your order is confirmed. Track its progress and review the details.",
+  title: "Order Confirmed",
+  description:
+    "Your order is confirmed. Track its progress and review the details.",
   robots: "noindex",
 });
 </script>

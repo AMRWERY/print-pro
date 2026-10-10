@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 pb-20 font-sans text-paper">
+  <div class="space-y-4 font-sans text-paper">
     <!-- Top Mobile App Header Bar -->
     <header
       class="flex items-center justify-between rounded-control border border-line bg-surface p-3 font-mono text-xs">
@@ -17,11 +17,11 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <button type="button" class="relative text-mute hover:text-paper" aria-label="Studio notifications"
+        <LazyVButton variant="plain" class="relative text-mute hover:text-paper" aria-label="Studio notifications"
           @click="showNotifications = !showNotifications">
           <Icon name="lucide:bell" size="18" />
           <span class="absolute -top-1 -end-1 h-2 w-2 rounded-full bg-accent" />
-        </button>
+        </LazyVButton>
 
         <img :src="profile.avatarUrl" :alt="profile.name"
           class="h-8 w-8 rounded-full border border-line object-cover" />
@@ -32,30 +32,30 @@
     <div
       class="grid grid-cols-3 gap-1 rounded-control border border-line bg-surface p-1 font-mono text-xs font-semibold"
       role="tablist" aria-label="Mobile sections">
-      <button type="button" role="tab" :aria-selected="mobileTab === 'overview'"
+      <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'overview'"
         class="flex items-center justify-center gap-1.5 rounded-[4px] py-2 transition" :class="mobileTab === 'overview'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
           " @click="mobileTab = 'overview'">
         <span class="h-1.5 w-1.5 rounded-full bg-accent" />
         OVERVIEW
-      </button>
+      </LazyVButton>
 
-      <button type="button" role="tab" :aria-selected="mobileTab === 'active'"
+      <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'active'"
         class="flex items-center justify-center gap-1.5 rounded-[4px] py-2 transition" :class="mobileTab === 'active'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
           " @click="mobileTab = 'active'">
         ACTIVE ({{ activeOrderCount }})
-      </button>
+      </LazyVButton>
 
-      <button type="button" role="tab" :aria-selected="mobileTab === 'registry'"
+      <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'registry'"
         class="flex items-center justify-center gap-1.5 rounded-[4px] py-2 transition" :class="mobileTab === 'registry'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
           " @click="mobileTab = 'registry'">
         REGISTRY ({{ registryItems.length }})
-      </button>
+      </LazyVButton>
     </div>
 
     <!-- Doctor Profile Card -->
@@ -89,26 +89,26 @@
 
       <!-- Quick Action Buttons -->
       <div class="mt-4 grid grid-cols-3 gap-2 font-mono text-xs font-semibold">
-        <button type="button"
+        <LazyVButton variant="plain"
           class="flex items-center justify-center gap-1.5 rounded-control bg-accent py-2 text-onaccent shadow-sm transition hover:brightness-110 active:scale-95"
           @click="$emit('new-order')">
           <Icon name="lucide:plus" size="14" />
           <span>NEW ORDER</span>
-        </button>
+        </LazyVButton>
 
-        <button type="button"
+        <LazyVButton variant="plain"
           class="flex items-center justify-center gap-1.5 rounded-control border border-line bg-raised py-2 text-mute transition hover:border-accent hover:text-paper active:scale-95"
           @click="$emit('open-crate', inTransitOrder)">
           <Icon name="lucide:plane" size="14" />
           <span>#948201</span>
-        </button>
+        </LazyVButton>
 
-        <button type="button"
+        <LazyVButton variant="plain"
           class="flex items-center justify-center gap-1.5 rounded-control border border-line bg-raised py-2 text-mute transition hover:border-accent hover:text-paper active:scale-95"
           @click="$emit('open-escrow')">
           <Icon name="lucide:vault" size="14" />
           <span>ESCROW</span>
-        </button>
+        </LazyVButton>
       </div>
     </section>
 
@@ -205,11 +205,11 @@
           <span class="text-success font-semibold">👁 0.02G Safe</span>
         </div>
 
-        <button type="button" class="inline-flex items-center gap-1 text-accent font-semibold hover:underline"
+        <LazyVButton variant="plain" class="inline-flex items-center gap-1 text-accent font-semibold hover:underline"
           @click="$emit('open-telemetry', inTransitOrder)">
           <Icon name="lucide:activity" size="12" />
           <span>TELEMETRY</span>
-        </button>
+        </LazyVButton>
       </div>
     </article>
 
@@ -253,12 +253,12 @@
               {{ money.format(item.price) }}
             </span>
 
-            <button type="button"
+            <LazyVButton variant="plain"
               class="inline-flex items-center gap-1 rounded-control bg-surface border border-line px-2 py-1 font-mono text-[10px] font-bold text-paper hover:border-accent hover:text-accent"
               @click="$emit('add-registry', item)">
               <Icon name="lucide:shopping-bag" size="11" />
               <span>REQUISITION</span>
-            </button>
+            </LazyVButton>
           </div>
         </article>
       </div>
@@ -283,11 +283,11 @@
       </p>
 
       <div class="pt-2">
-        <button type="button"
+        <LazyVButton variant="plain"
           class="w-full rounded-control border border-line bg-raised py-2 font-mono text-xs font-semibold text-mute transition hover:border-accent hover:text-paper"
           @click="$emit('change-dock')">
           CHANGE DOCK
-        </button>
+        </LazyVButton>
       </div>
     </section>
 
@@ -373,38 +373,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Fixed Mobile Bottom Navigation Bar -->
-    <nav
-      class="fixed inset-x-0 bottom-0 z-40 flex items-center justify-around border-t border-line bg-ink/95 py-2 backdrop-blur font-mono text-[10px] font-semibold"
-      aria-label="Mobile navigation bar">
-      <button type="button" class="flex flex-col items-center gap-1 transition"
-        :class="mobileNav === 'overview' ? 'text-accent' : 'text-mute hover:text-paper'"
-        @click="mobileNav = 'overview'">
-        <Icon name="lucide:layout-dashboard" size="18" />
-        <span>OVERVIEW</span>
-      </button>
-
-      <button type="button" class="flex flex-col items-center gap-1 transition"
-        :class="mobileNav === 'orders' ? 'text-accent' : 'text-mute hover:text-paper'" @click="mobileNav = 'orders'">
-        <Icon name="lucide:receipt" size="18" />
-        <span>ORDERS</span>
-      </button>
-
-      <button type="button" class="flex flex-col items-center gap-1 transition"
-        :class="mobileNav === 'registry' ? 'text-accent' : 'text-mute hover:text-paper'"
-        @click="mobileNav = 'registry'">
-        <Icon name="lucide:bookmark" size="18" />
-        <span>REGISTRY</span>
-      </button>
-
-      <button type="button" class="flex flex-col items-center gap-1 transition"
-        :class="mobileNav === 'settings' ? 'text-accent' : 'text-mute hover:text-paper'"
-        @click="mobileNav = 'settings'">
-        <Icon name="lucide:settings" size="18" />
-        <span>SETTINGS</span>
-      </button>
-    </nav>
   </div>
 </template>
 
@@ -435,7 +403,6 @@ const money = useMoney();
 const showNotifications = ref(false);
 
 const mobileTab = ref<"overview" | "active" | "registry">("overview");
-const mobileNav = ref<"overview" | "orders" | "registry" | "settings">("overview");
 
 const openArchives = reactive<Record<string, boolean>>({});
 const toggleArchive = (id: string) => {

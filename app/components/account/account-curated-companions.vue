@@ -51,12 +51,12 @@
             {{ money.format(p.price) }}
           </span>
 
-          <button type="button"
+          <LazyVButton variant="plain"
             class="inline-flex items-center gap-1 rounded-control bg-surface border border-line px-2.5 py-1 font-mono text-xs font-semibold text-paper shadow-sm transition hover:border-accent hover:text-accent active:scale-95"
             @click="$emit('add-companion', p)">
             <Icon name="lucide:plus" size="12" />
             <span>{{ p.price > 10000 ? 'REQUEST' : 'ADD' }}</span>
-          </button>
+          </LazyVButton>
         </div>
       </article>
     </div>

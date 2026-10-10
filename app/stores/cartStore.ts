@@ -1,3 +1,4 @@
+import { skipHydrate } from "pinia";
 import type { CartLine } from "~/types/cart";
 
 export const MAX_QTY = 99;
@@ -73,10 +74,10 @@ export const useCartStore = defineStore("cart", () => {
   };
 
   return {
-    lines,
-    saved,
-    voucher,
-    checkoutKeys,
+    lines: skipHydrate(lines),
+    saved: skipHydrate(saved),
+    voucher: skipHydrate(voucher),
+    checkoutKeys: skipHydrate(checkoutKeys),
     drawerOpen,
     openDrawer,
     closeDrawer,

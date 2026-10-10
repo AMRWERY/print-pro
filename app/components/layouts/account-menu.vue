@@ -20,7 +20,7 @@
           </p>
         </div>
         <div class="space-y-1">
-          <LazyVButton variant="ghost" size="sm" block to="/account" icon="lucide:layout-dashboard" role="menuitem"
+          <LazyVButton variant="secondary" size="sm" block to="/account" icon="lucide:layout-dashboard" role="menuitem"
             @click="open = false">Atelier Dashboard</LazyVButton>
           <LazyVButton variant="secondary" size="sm" block icon="lucide:log-out" role="menuitem" @click="signOut">Sign
             out</LazyVButton>

@@ -5,10 +5,17 @@
 
       <header v-reveal class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-3">
-          <p class="eyebrow flex items-center gap-2 text-accent"><span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio procurement · station 04</p>
-          <h1 class="max-w-3xl text-3xl uppercase sm:text-5xl">Studio procurement cart &amp; manifest audit</h1>
+          <p class="eyebrow flex items-center gap-2 text-accent">
+            <span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio
+            procurement · station 04
+          </p>
+          <h1 class="max-w-3xl text-3xl uppercase sm:text-5xl">
+            Studio procurement cart &amp; manifest audit
+          </h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
-            Calibrated optical instruments, large-format fine-art print engines and certified archival substrates allocated for immediate laboratory dispatch.
+            Calibrated optical instruments, large-format fine-art print engines
+            and certified archival substrates allocated for immediate laboratory
+            dispatch.
           </p>
         </div>
       </header>
@@ -21,21 +28,63 @@
         title="Your procurement cart is empty"
         description="Add instruments from the catalog, or move saved apparatus from your studio registry."
       >
-        <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
-        <LazyVButton variant="secondary" to="/wishlist">Open studio registry</LazyVButton>
+        <LazyVButton variant="primary" to="/products"
+          >Browse the catalog</LazyVButton
+        >
+        <LazyVButton variant="secondary" to="/wishlist"
+          >Open studio registry</LazyVButton
+        >
       </v-empty-state>
 
-      <div v-else class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
+      <div
+        v-else
+        class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]"
+      >
         <div class="space-y-4">
           <!-- Bulk actions -->
-          <div class="flex flex-wrap items-center justify-between gap-3 rounded-card border border-line bg-surface p-3">
-            <LazyVInput type="checkbox" :model-value="allSelected" :indeterminate="selectedEntries.length > 0 && !allSelected" label-class="items-center" @update:model-value="(v) => selectAll(!!v)">
-              Select all ({{ entries.length }} {{ entries.length === 1 ? "item" : "items" }})
+          <div
+            class="flex flex-wrap items-center justify-between gap-3 rounded-card border border-line bg-surface p-3"
+          >
+            <LazyVInput
+              type="checkbox"
+              :model-value="allSelected"
+              :indeterminate="selectedEntries.length > 0 && !allSelected"
+              label-class="items-center"
+              @update:model-value="(v) => selectAll(!!v)"
+            >
+              Select all ({{ entries.length }}
+              {{ entries.length === 1 ? "item" : "items" }})
             </LazyVInput>
             <div class="flex flex-wrap items-center gap-4 text-sm">
-              <LazyVButton variant="tertiary" class="inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchLater"><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch save</LazyVButton>
-              <LazyVButton variant="tertiary" class="inline-flex items-center gap-1.5 disabled:opacity-40" :disabled="!selectedEntries.length" @click="batchClear"><Icon name="lucide:trash-2" size="14" aria-hidden="true" />Batch clear</LazyVButton>
-              <LazyVButton variant="tertiary" class="inline-flex items-center gap-1.5" @click="exportInvoice"><Icon name="lucide:file-down" size="14" aria-hidden="true" />Export pro-forma invoice (PDF)</LazyVButton>
+              <LazyVButton
+                variant="tertiary"
+                class="inline-flex items-center gap-1.5 disabled:opacity-40"
+                :disabled="!selectedEntries.length"
+                @click="batchLater"
+                ><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch
+                save</LazyVButton
+              >
+              <LazyVButton
+                variant="tertiary"
+                class="inline-flex items-center gap-1.5 disabled:opacity-40"
+                :disabled="!selectedEntries.length"
+                @click="batchClear"
+                ><Icon
+                  name="lucide:trash-2"
+                  size="14"
+                  aria-hidden="true"
+                />Batch clear</LazyVButton
+              >
+              <LazyVButton
+                variant="tertiary"
+                class="inline-flex items-center gap-1.5"
+                @click="exportInvoice"
+                ><Icon
+                  name="lucide:file-down"
+                  size="14"
+                  aria-hidden="true"
+                />Export pro-forma invoice (PDF)</LazyVButton
+              >
             </div>
           </div>
 
@@ -54,20 +103,46 @@
             </li>
           </TransitionGroup>
 
-          <saved-for-later v-if="savedProducts.length" :items="savedProducts" @restore="restore" @remove="cart.removeSaved" />
+          <saved-for-later
+            v-if="savedProducts.length"
+            :items="savedProducts"
+            @restore="restore"
+            @remove="cart.removeSaved"
+          />
         </div>
 
         <div class="lg:sticky lg:top-28 lg:self-start">
-          <order-summary :totals="totals" :selected-count="selectedEntries.length" :code="cart.voucher" :notice="notice" @voucher="(c) => (cart.voucher = c)" @checkout="checkout" />
+          <order-summary
+            :totals="totals"
+            :selected-count="selectedEntries.length"
+            :code="cart.voucher"
+            :notice="notice"
+            @voucher="(c) => (cart.voucher = c)"
+            @checkout="checkout"
+          />
         </div>
       </div>
     </div>
 
-    <section v-if="companions.length" class="border-t border-line py-12 md:py-16" aria-labelledby="companions-title">
+    <section
+      v-if="companions.length"
+      class="border-t border-line py-12 md:py-16"
+      aria-labelledby="companions-title"
+    >
       <div class="container-page space-y-8">
-        <section-heading id="companions-title" eyebrow="Calibrated companions" title="Complementary studio apparatus & consumables" body="Certified compatible with the items in your manifest." />
+        <section-heading
+          id="companions-title"
+          eyebrow="Calibrated companions"
+          title="Complementary studio apparatus & consumables"
+          body="Certified compatible with the items in your manifest."
+        />
         <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <li v-for="(p, i) in companions" :key="p.id" v-reveal="{ delay: i * 70 }" class="flex">
+          <li
+            v-for="(p, i) in companions"
+            :key="p.id"
+            v-reveal="{ delay: i * 70 }"
+            class="flex"
+          >
             <VProductCard :product="p" class="w-full" />
           </li>
         </ul>
@@ -107,10 +182,19 @@ const entries = computed<CartEntry[]>(() =>
 const unselected = ref<string[]>([]);
 const isSelected = (key: string) => !unselected.value.includes(key);
 const setSelected = (key: string, on: boolean) =>
-  (unselected.value = on ? unselected.value.filter((k) => k !== key) : [...unselected.value, key]);
-const selectedEntries = computed(() => entries.value.filter((e) => isSelected(e.line.key)));
-const allSelected = computed(() => entries.value.length > 0 && selectedEntries.value.length === entries.value.length);
-const selectAll = (on: boolean) => (unselected.value = on ? [] : entries.value.map((e) => e.line.key));
+  (unselected.value = on
+    ? unselected.value.filter((k) => k !== key)
+    : [...unselected.value, key]);
+const selectedEntries = computed(() =>
+  entries.value.filter((e) => isSelected(e.line.key)),
+);
+const allSelected = computed(
+  () =>
+    entries.value.length > 0 &&
+    selectedEntries.value.length === entries.value.length,
+);
+const selectAll = (on: boolean) =>
+  (unselected.value = on ? [] : entries.value.map((e) => e.line.key));
 
 // ---- money ----
 const code = computed(() => cart.voucher);
@@ -140,7 +224,9 @@ const batchLater = () => {
 };
 
 const savedProducts = computed(() =>
-  cart.saved.map((id) => findProduct(id)).filter((p): p is DetailedProduct => !!p),
+  cart.saved
+    .map((id) => findProduct(id))
+    .filter((p): p is DetailedProduct => !!p),
 );
 const restore = (p: DetailedProduct) => {
   cart.add(p.id, p.price);
@@ -166,8 +252,9 @@ const companions = computed(() => {
 });
 
 useSeoMeta({
-  title: "Procurement Cart — PrintPro",
-  description: "Review your allocation, adjust quantities and prepare your studio order.",
+  title: "Procurement Cart",
+  description:
+    "Review your allocation, adjust quantities and prepare your studio order.",
   robots: "noindex",
 });
 </script>
@@ -179,15 +266,18 @@ useSeoMeta({
     opacity 0.25s ease-out,
     transform 0.25s ease-out;
 }
+
 .line-enter-from,
 .line-leave-to {
   opacity: 0;
   transform: translateY(8px);
 }
+
 .line-leave-active {
   position: absolute;
   inset-inline: 0;
 }
+
 .line-move {
   transition: transform 0.3s ease-out;
 }

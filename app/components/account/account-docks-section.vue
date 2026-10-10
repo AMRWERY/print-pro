@@ -34,10 +34,10 @@
             </span>
           </div>
 
-          <button type="button" class="font-mono text-xs text-accent transition hover:underline"
+          <LazyVButton variant="plain" class="font-mono text-xs text-accent transition hover:underline"
             @click="$emit('edit-dock', dock)">
             EDIT DOCK
-          </button>
+          </LazyVButton>
         </div>
 
         <div>
@@ -63,12 +63,12 @@
 
     <!-- Deploy button -->
     <div class="mt-4 border-t border-line pt-3">
-      <button type="button"
+      <LazyVButton variant="plain"
         class="flex w-full items-center justify-center gap-2 rounded-control border border-dashed border-line bg-ink/20 py-2.5 font-mono text-xs font-semibold text-mute transition hover:border-accent hover:text-paper"
         @click="$emit('deploy-dock')">
         <Icon name="lucide:plus" size="14" />
         <span>+ DEPLOY NEW RECEIVING PORT / DOCK</span>
-      </button>
+      </LazyVButton>
     </div>
   </section>
 </template>

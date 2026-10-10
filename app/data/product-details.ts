@@ -1,12 +1,50 @@
 import { cameraProducts } from "~/data/cameras";
 import { catalogProducts, categoryOptions } from "~/data/catalog";
+import { defaultCompanionProducts, defaultRegistryItems } from "~/data/account";
 import { featured } from "~/data/home";
 import type { DetailedProduct, ProductDetail } from "~/types/product";
 
+// Registry and companion items from the account area, so they can be carted like any product.
+const accountProducts: DetailedProduct[] = [
+  ...defaultRegistryItems.map<DetailedProduct>((r) => ({
+    id: r.id,
+    sku: `LP-REG-${r.id}`,
+    group: "camera",
+    badge: { label: "Registry allocation", tone: "info", icon: "lucide:check" },
+    brand: "Atelier Registry",
+    name: r.name,
+    blurb: r.specNotes,
+    specs: ["Atelier allocated", "Bench QA"],
+    rating: 5,
+    reviews: 1,
+    price: r.price,
+    lease: 0,
+    icon: r.icon || "lucide:box",
+    image: r.image,
+  })),
+  ...defaultCompanionProducts.map<DetailedProduct>((c) => ({
+    id: c.id,
+    sku: `LP-COMP-${c.id}`,
+    group: "print",
+    badge: { label: c.badge, tone: "success", icon: "lucide:check" },
+    brand: "Lumen & Press",
+    name: c.name,
+    blurb: c.description,
+    specs: [c.tag, "Certified"],
+    rating: 5,
+    reviews: 1,
+    price: c.price,
+    lease: 0,
+    icon: c.icon || "lucide:box",
+    image: c.image,
+  })),
+];
+
+const base: DetailedProduct[] = [...catalogProducts, ...cameraProducts, ...featured];
+
 export const allProducts: DetailedProduct[] = [
-  ...catalogProducts,
-  ...cameraProducts,
-  ...featured,
+  ...base,
+  ...accountProducts.filter((a) => !base.some((b) => b.id === a.id)),
 ];
 
 /** Product lookup across the catalogue, the cameras page and the home page. */

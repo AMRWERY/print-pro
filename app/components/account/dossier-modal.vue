@@ -14,10 +14,10 @@
                 {{ title || 'ARCHIVAL REQUISITION DOSSIER' }}
               </h2>
             </div>
-            <button type="button" class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
+            <LazyVButton variant="plain" class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
               aria-label="Close modal" @click="$emit('close')">
               <Icon name="lucide:x" size="18" />
-            </button>
+            </LazyVButton>
           </div>
 
           <div class="max-h-[75vh] overflow-y-auto p-6 space-y-5">
@@ -85,17 +85,17 @@
           <div class="flex items-center justify-between border-t border-line bg-ink px-5 py-3">
             <span class="text-mute text-[11px]">Authorized Signatory: Dr. Vance Lab</span>
             <div class="flex items-center gap-2">
-              <button type="button"
+              <LazyVButton variant="plain"
                 class="rounded-control border border-line px-4 py-1.5 font-bold text-mute hover:text-paper"
                 @click="$emit('close')">
                 CLOSE
-              </button>
-              <button type="button"
+              </LazyVButton>
+              <LazyVButton variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control bg-accent px-4 py-1.5 font-bold text-onaccent hover:brightness-110 active:scale-95"
                 @click="printDoc">
                 <Icon name="lucide:printer" size="13" />
                 PRINT / EXPORT PDF
-              </button>
+              </LazyVButton>
             </div>
           </div>
         </div>

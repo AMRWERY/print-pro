@@ -79,11 +79,11 @@
         BOOK CLEANROOM QA BENCH
       </LazyVButton>
 
-      <LazyVButton variant="ghost" icon="lucide:truck" @click="$emit('request-courier')">
+      <LazyVButton variant="secondary" icon="lucide:truck" @click="$emit('request-courier')">
         REQUEST CONSIGNMENT COURIER
       </LazyVButton>
 
-      <LazyVButton variant="ghost" icon="lucide:file-text" @click="$emit('view-vat-dossier')">
+      <LazyVButton variant="secondary" icon="lucide:file-text" @click="$emit('view-vat-dossier')">
         TAX VAT DOSSIER (Q3)
       </LazyVButton>
     </div>

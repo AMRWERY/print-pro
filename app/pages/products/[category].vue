@@ -17,7 +17,11 @@ const slug = computed(() => String(route.params.category));
 
 const page = computed(() => categoryPages[slug.value]!);
 if (!categoryPages[slug.value]) {
-  throw createError({ statusCode: 404, statusMessage: "Category not found", fatal: true });
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Category not found",
+    fatal: true,
+  });
 }
 
 const products = computed(() =>
@@ -25,7 +29,7 @@ const products = computed(() =>
 );
 
 useSeoMeta({
-  title: () => `${page.value.label} — PrintPro`,
+  title: () => `${page.value.label}`,
   description: () => page.value.description,
 });
 </script>

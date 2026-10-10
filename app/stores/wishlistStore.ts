@@ -1,3 +1,4 @@
+import { skipHydrate } from "pinia";
 // initOnMounted keeps SSR and the first client render identical (both empty).
 export const useWishlistStore = defineStore("wishlist", () => {
   const ids = useLocalStorage<string[]>("wishlist-ids", [], {
@@ -41,5 +42,5 @@ export const useWishlistStore = defineStore("wishlist", () => {
     tags.value = {};
   };
 
-  return { ids, tags, name, has, toggle, addMany, remove, setTag, clear };
+  return { ids: skipHydrate(ids), tags: skipHydrate(tags), name: skipHydrate(name), has, toggle, addMany, remove, setTag, clear };
 });

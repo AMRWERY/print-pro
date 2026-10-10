@@ -1,3 +1,4 @@
+import { skipHydrate } from "pinia";
 import { MAX_COMPARE } from "~/data/compare";
 
 export const useCompareStore = defineStore("compare", () => {
@@ -19,5 +20,5 @@ export const useCompareStore = defineStore("compare", () => {
 
   const clear = () => (ids.value = []);
 
-  return { ids, full, has, toggle, set, clear };
+  return { ids: skipHydrate(ids), full, has, toggle, set, clear };
 });

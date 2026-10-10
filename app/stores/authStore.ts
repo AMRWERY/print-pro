@@ -1,3 +1,4 @@
+import { skipHydrate } from "pinia";
 import type { Account, LoginResult, ResetToken, Tier } from "~/types/auth";
 
 const MAX_FAILURES = 5;
@@ -116,5 +117,33 @@ export const useAuthStore = defineStore("auth", () => {
     return { ok: true };
   };
 
-  return { users, user, isSignedIn, register, login, logout, requestReset, tokenState, resetPassword };
+  /** Updates the signed-in account's profile fields. The email is the account's identity, so it isn't editable here. */
+  const updateProfile = (patch: Partial<Pick<Account, "name" | "studio" | "title" | "phone" | "newsletter">>) => {
+    const account = user.value;
+    if (account) Object.assign(account, patch);
+  };
+
+  /** Changes the password after checking the current one. */
+  const changePassword = async (current: string, next: string): Promise<{ ok: true } | { ok: false; reason: "wrong-password" }> => {
+    const account = user.value;
+    if (!account) return { ok: false, reason: "wrong-password" };
+    if ((await hashPassword(current, account.salt)) !== account.hash) return { ok: false, reason: "wrong-password" };
+    account.salt = randomSalt();
+    account.hash = await hashPassword(next, account.salt);
+    return { ok: true };
+  };
+
+  return {
+    users: skipHydrate(users),
+    user,
+    isSignedIn,
+    register,
+    login,
+    logout,
+    requestReset,
+    tokenState,
+    resetPassword,
+    updateProfile,
+    changePassword,
+  };
 });

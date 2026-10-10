@@ -11,7 +11,12 @@
     />
 
     <!-- Orders are kept in this browser, so wait until they are loaded. -->
-    <div v-if="!ready && route.query.order" class="space-y-4" aria-busy="true" aria-label="Loading your order">
+    <div
+      v-if="!ready && route.query.order"
+      class="space-y-4"
+      aria-busy="true"
+      aria-label="Loading your order"
+    >
       <div class="h-40 animate-pulse rounded-card bg-raised" />
       <div class="h-40 animate-pulse rounded-card bg-raised" />
     </div>
@@ -40,13 +45,20 @@
       title="Enter an order number to start"
       description="Your order number is in the confirmation email and on the confirmation page. Orders placed on this device also appear above."
     >
-      <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
+      <LazyVButton variant="primary" to="/products"
+        >Browse the catalog</LazyVButton
+      >
     </LazyVEmptyState>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { matchesVerification, trackingEvents, trackingStages, trackingState } from "~/data/tracking";
+import {
+  matchesVerification,
+  trackingEvents,
+  trackingStages,
+  trackingState,
+} from "~/data/tracking";
 import type { Order } from "~/types/order";
 
 const route = useRoute();
@@ -68,7 +80,9 @@ const loading = ref(false);
 const now = ref(new Date());
 useIntervalFn(() => (now.value = new Date()), 60_000);
 
-const stages = computed(() => (active.value ? trackingStages(active.value, now.value) : []));
+const stages = computed(() =>
+  active.value ? trackingStages(active.value, now.value) : [],
+);
 const status = computed(() => trackingState(active.value!, stages.value));
 const events = computed(() => trackingEvents(stages.value));
 
@@ -85,9 +99,11 @@ const lookup = async ({ id, verify }: { id: string; verify: string }) => {
 
   const order = orders.get(id.trim().toUpperCase());
   if (!order) {
-    error.value = "We couldn't find that order on this device. Check the number, or open the link from your confirmation on the device you ordered from.";
+    error.value =
+      "We couldn't find that order on this device. Check the number, or open the link from your confirmation on the device you ordered from.";
   } else if (!matchesVerification(order, verify)) {
-    error.value = "That postal code or email doesn't match this order. Use the same one you entered at checkout.";
+    error.value =
+      "That postal code or email doesn't match this order. Use the same one you entered at checkout.";
   } else {
     show(order);
   }
@@ -103,12 +119,14 @@ onMounted(async () => {
   if (q) {
     const o = orders.get(String(Array.isArray(q) ? q[0] : q).toUpperCase());
     if (o) active.value = o;
-    else error.value = "We couldn't find that order on this device. Enter the order number and postal code or email below.";
+    else
+      error.value =
+        "We couldn't find that order on this device. Enter the order number and postal code or email below.";
   }
 });
 
 useSeoMeta({
-  title: "Track Your Order — PrintPro",
+  title: "Track Your Order",
   description: "Check where your order is and what happens next.",
   robots: "noindex",
 });

@@ -37,7 +37,7 @@ export interface RequisitionOrder {
   id: string;
   crateId?: string;
   title: string;
-  status: "in-transit" | "delivered" | "archived";
+  status: "processing" | "in-transit" | "delivered" | "archived" | "recalled";
   statusLabel: string;
   badgeLabel?: string;
   waybill?: string;
@@ -60,6 +60,10 @@ export interface RequisitionOrder {
   benchVerified?: string;
   calibrationLog?: string;
   amount: number;
+  /** ISO timestamp the order was placed. */
+  placedAt?: string;
+  /** True for orders placed through checkout on this device (the rest are demo history). */
+  real?: boolean;
   items: {
     name: string;
     thumb?: string;

@@ -1,3 +1,4 @@
+import { skipHydrate } from "pinia";
 import type { Order } from "~/types/order";
 
 const MAX_ORDERS = 10;
@@ -13,5 +14,5 @@ export const useOrderStore = defineStore("orders", () => {
 
   const get = (id: string) => orders.value.find((o) => o.id === id);
 
-  return { orders, add, get };
+  return { orders: skipHydrate(orders), add, get };
 });

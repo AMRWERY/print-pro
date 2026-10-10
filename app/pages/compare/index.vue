@@ -21,7 +21,8 @@
           role="group"
           aria-label="Comparison presets"
         >
-          <LazyVButton variant="plain"
+          <LazyVButton
+            variant="plain"
             v-for="p in comparePresets"
             :key="p.key"
             class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
@@ -77,7 +78,8 @@
           </p>
         </div>
         <LazyVButton variant="primary" to="/products"
-          >Browse the catalog</LazyVButton>
+          >Browse the catalog</LazyVButton
+        >
       </div>
     </div>
 
@@ -127,7 +129,7 @@ onMounted(() => {
 });
 
 useSeoMeta({
-  title: "Bench Comparison — PrintPro",
+  title: "Bench Comparison",
   description:
     "Compare bench-verified cameras, printers and archival substrates side by side.",
   robots: "noindex",

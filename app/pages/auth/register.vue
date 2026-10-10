@@ -267,7 +267,7 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Create Account — PrintPro",
+  title: "Create Account",
   description: "Create a studio account.",
   robots: "noindex",
 });

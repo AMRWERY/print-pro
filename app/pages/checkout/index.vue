@@ -6,8 +6,10 @@
       title="There's nothing to check out"
       description="Your cart is empty. Add instruments from the catalog, then come back here to place the order."
     >
-      <LazyVButton variant="primary" to="/products">Browse the catalog</LazyVButton>
-   
+      <LazyVButton variant="primary" to="/products"
+        >Browse the catalog</LazyVButton
+      >
+
       <LazyVButton variant="secondary" to="/cart">Back to cart</LazyVButton>
     </LazyVEmptyState>
 
@@ -15,8 +17,17 @@
       <div class="mb-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <h1 class="font-display text-3xl">Checkout</h1>
-          <LazyVButton variant="tertiary" to="/cart" class="inline-flex items-center gap-1.5 text-sm">
-            <Icon name="lucide:arrow-left" size="14" class="rtl:-scale-x-100" aria-hidden="true" />Back to cart
+          <LazyVButton
+            variant="tertiary"
+            to="/cart"
+            class="inline-flex items-center gap-1.5 text-sm"
+          >
+            <Icon
+              name="lucide:arrow-left"
+              size="14"
+              class="rtl:-scale-x-100"
+              aria-hidden="true"
+            />Back to cart
           </LazyVButton>
         </div>
         <checkout-progress />
@@ -24,12 +35,43 @@
 
       <!-- Phones: the order total stays one tap away -->
       <div class="mb-4 lg:hidden">
-        <LazyVButton variant="plain" block class="card flex items-center justify-between gap-3 p-4 text-start" :aria-expanded="showSummary" aria-controls="co-summary-mobile" @click="showSummary = !showSummary">
-          <span class="flex items-center gap-2 text-sm"><Icon name="lucide:shopping-bag" size="16" class="text-accent" aria-hidden="true" />{{ showSummary ? "Hide" : "Show" }} order summary</span>
-          <span class="flex items-center gap-2 font-display text-lg">{{ money.format(amounts.total) }}<Icon name="lucide:chevron-down" size="16" class="text-mute transition-transform duration-200" :class="showSummary && 'rotate-180'" aria-hidden="true" /></span>
+        <LazyVButton
+          variant="plain"
+          block
+          class="card flex items-center justify-between gap-3 p-4 text-start"
+          :aria-expanded="showSummary"
+          aria-controls="co-summary-mobile"
+          @click="showSummary = !showSummary"
+        >
+          <span class="flex items-center gap-2 text-sm"
+            ><Icon
+              name="lucide:shopping-bag"
+              size="16"
+              class="text-accent"
+              aria-hidden="true"
+            />{{ showSummary ? "Hide" : "Show" }} order summary</span
+          >
+          <span class="flex items-center gap-2 font-display text-lg"
+            >{{ money.format(amounts.total)
+            }}<Icon
+              name="lucide:chevron-down"
+              size="16"
+              class="text-mute transition-transform duration-200"
+              :class="showSummary && 'rotate-180'"
+              aria-hidden="true"
+          /></span>
         </LazyVButton>
-        <div id="co-summary-mobile" class="grid transition-[grid-template-rows] duration-300 ease-out" :class="showSummary ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" :inert="!showSummary">
-          <div class="overflow-hidden"><div class="pt-3"><checkout-summary :entries="entries" :amounts="amounts" /></div></div>
+        <div
+          id="co-summary-mobile"
+          class="grid transition-[grid-template-rows] duration-300 ease-out"
+          :class="showSummary ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
+          :inert="!showSummary"
+        >
+          <div class="overflow-hidden">
+            <div class="pt-3">
+              <checkout-summary :entries="entries" :amounts="amounts" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -41,7 +83,12 @@
 
           <payment-step />
 
-          <review-step :shipping="amounts.shipping" :total="amounts.total" :placing="placing" @place="place" />
+          <review-step
+            :shipping="amounts.shipping"
+            :total="amounts.total"
+            :placing="placing"
+            @place="place"
+          />
         </div>
 
         <div class="hidden lg:sticky lg:top-6 lg:block lg:self-start">
@@ -53,7 +100,12 @@
 </template>
 
 <script lang="ts" setup>
-import { deliveryOptions, deliveryPrices, paymentMethods, WIRE_DISCOUNT } from "~/data/checkout";
+import {
+  deliveryOptions,
+  deliveryPrices,
+  paymentMethods,
+  WIRE_DISCOUNT,
+} from "~/data/checkout";
 import { pricing } from "~/data/cart";
 import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
@@ -85,7 +137,9 @@ const entries = computed<CartEntry[]>(() => {
 const code = computed(() => cart.voucher);
 const totals = useCartTotals(entries, code);
 
-const discounted = computed(() => totals.subtotal - totals.volumeDiscount - totals.voucherDiscount);
+const discounted = computed(
+  () => totals.subtotal - totals.volumeDiscount - totals.voucherDiscount,
+);
 
 const prices = computed(() => ({
   crated: discounted.value >= pricing.freeFreightFrom ? 0 : pricing.freight,
@@ -94,7 +148,8 @@ const prices = computed(() => ({
 }));
 
 const amounts = computed(() => {
-  const wire = f.payment === "wire" ? round2(discounted.value * WIRE_DISCOUNT) : 0;
+  const wire =
+    f.payment === "wire" ? round2(discounted.value * WIRE_DISCOUNT) : 0;
   const taxable = discounted.value - wire;
   const shipping = prices.value[f.delivery];
   const tax = round2(taxable * pricing.taxRate);
@@ -139,11 +194,19 @@ const buildOrder = (): Order => {
       postal: f.postal.trim(),
       country: f.country,
     },
-    delivery: { id: delivery.id, label: delivery.label, note: delivery.note, days: delivery.days },
+    delivery: {
+      id: delivery.id,
+      label: delivery.label,
+      note: delivery.note,
+      days: delivery.days,
+    },
     payment: {
       id: payment.id,
       label: payment.label,
-      last4: payment.id === "card" ? f.cardNumber.replace(/\D/g, "").slice(-4) : undefined,
+      last4:
+        payment.id === "card"
+          ? f.cardNumber.replace(/\D/g, "").slice(-4)
+          : undefined,
     },
     notes: f.notes.trim() || undefined,
     items: entries.value.map((e) => ({
@@ -188,9 +251,8 @@ const place = async () => {
   placing.value = false;
 };
 
-
 useSeoMeta({
-  title: "Secure Checkout — PrintPro",
+  title: "Secure Checkout",
   description: "Complete your studio order.",
   robots: "noindex",
 });

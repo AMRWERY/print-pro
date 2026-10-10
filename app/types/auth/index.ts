@@ -7,6 +7,9 @@ export interface Account {
   email: string;
   tier: Tier;
   newsletter: boolean;
+  /** Job title shown on the profile. */
+  title?: string;
+  phone?: string;
   /** Per-account random salt (base64). */
   salt: string;
   /** PBKDF2-SHA256 of the password (base64). The password itself is never stored. */
