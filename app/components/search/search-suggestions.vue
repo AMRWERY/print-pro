@@ -27,7 +27,9 @@
           role="option"
           :aria-selected="activeIndex === i"
         >
-          <LazyVButton variant="plain" block
+          <LazyVButton
+            variant="plain"
+            block
             class="flex items-baseline justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm transition-colors duration-200 hover:bg-raised"
             :class="activeIndex === i ? 'bg-raised text-accent' : 'text-paper'"
             @mousedown.prevent
@@ -52,7 +54,9 @@
       </h3>
       <ul v-if="recent.length" class="space-y-1">
         <li v-for="r in recent" :key="r">
-          <LazyVButton variant="plain" block
+          <LazyVButton
+            variant="plain"
+            block
             class="flex items-center justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm text-mute transition-colors duration-200 hover:bg-raised hover:text-paper"
             @mousedown.prevent
             @click="emit('pick', r)"
@@ -79,13 +83,15 @@
       </h3>
       <ul class="space-y-1">
         <li v-for="t in trending" :key="t.term">
-          <LazyVButton variant="plain" block
+          <LazyVButton
+            variant="plain"
+            block
             class="flex items-center justify-between gap-3 rounded-control px-2 py-1.5 text-start text-sm text-mute transition-colors duration-200 hover:bg-raised hover:text-paper"
             @mousedown.prevent
             @click="emit('pick', t.term)"
           >
             <span class="truncate">{{ t.term }}</span>
-            <span class="shrink-0 font-mono text-xs uppercase text-accent">{{
+            <span class="shrink-0 font-mono text-xs text-accent">{{
               t.tag
             }}</span>
           </LazyVButton>
@@ -100,7 +106,9 @@
         >Press <kbd class="rounded border border-line px-1">Esc</kbd> to
         dismiss</span
       >
-      <LazyVButton variant="plain"
+
+      <LazyVButton
+        variant="plain"
         v-if="recent.length"
         class="text-accent hover:underline"
         @mousedown.prevent

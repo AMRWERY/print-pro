@@ -1,9 +1,7 @@
 <template>
   <aside class="card space-y-4 p-5" aria-labelledby="summary-title">
     <div class="flex items-center justify-between gap-2">
-      <h2 id="summary-title" class="font-display text-2xl uppercase">
-        Order summary
-      </h2>
+      <h2 id="summary-title" class="font-display text-2xl">Order summary</h2>
       <span
         class="inline-flex items-center gap-1 rounded-control border border-line px-2 py-0.5 font-mono text-xs text-mute"
         ><Icon
@@ -81,7 +79,12 @@
     <!-- Voucher -->
     <div class="space-y-2">
       <p class="eyebrow">Studio voucher or consortium code</p>
-      <form v-if="!applied" class="flex items-start gap-2" novalidate @submit.prevent="apply">
+      <form
+        v-if="!applied"
+        class="flex items-start gap-2"
+        novalidate
+        @submit.prevent="apply"
+      >
         <LazyVInput
           ref="voucherInput"
           v-model="draft"
@@ -95,9 +98,15 @@
           placeholder="BIENNIAL-PRINT-2025"
           input-class="font-mono"
         />
-        <LazyVButton variant="secondary" type="submit" class="shrink-0" :disabled="!draft.trim()">Apply</LazyVButton>
+        <LazyVButton
+          variant="secondary"
+          type="submit"
+          class="shrink-0"
+          :disabled="!draft.trim()"
+          >Apply</LazyVButton
+        >
       </form>
-      
+
       <div
         v-if="applied"
         class="flex items-center justify-between gap-3 rounded-control border border-accent/40 bg-accent-soft px-3 py-2 text-sm"
@@ -112,7 +121,8 @@
               : "· applied"
           }}</span
         >
-        <LazyVButton variant="tertiary"
+        <LazyVButton
+          variant="tertiary"
           class="text-xs"
           @click="emit('voucher', '')"
         >
@@ -122,8 +132,10 @@
     </div>
 
     <div class="space-y-2">
-      <LazyVButton variant="primary" size="lg" block
-       
+      <LazyVButton
+        variant="primary"
+        size="lg"
+        block
         :disabled="!totals.units"
         @click="emit('checkout')"
       >
@@ -136,13 +148,17 @@
           aria-hidden="true"
         />
       </LazyVButton>
-      <LazyVButton variant="secondary" block
+
+      <LazyVButton
+        variant="secondary"
+        block
         class="text-xs"
         :disabled="!totals.units"
       >
         <Icon name="lucide:landmark" size="14" aria-hidden="true" />Wire
         transfer / escrow (save 2%)
       </LazyVButton>
+
       <p
         v-if="notice"
         class="rounded-control border border-line bg-raised p-2 text-xs text-mute"
@@ -150,7 +166,9 @@
       >
         {{ notice }}
       </p>
-      <LazyVButton variant="tertiary"
+
+      <LazyVButton
+        variant="tertiary"
         to="/products"
         class="flex items-center justify-center gap-1.5 text-sm"
         ><Icon
@@ -158,7 +176,8 @@
           size="14"
           class="rtl:-scale-x-100"
           aria-hidden="true"
-        />Continue exploring equipment catalog</LazyVButton>
+        />Continue exploring equipment catalog</LazyVButton
+      >
     </div>
 
     <ul class="space-y-2 border-t border-line pt-4 text-xs text-mute">
@@ -213,5 +232,4 @@ const apply = async () => {
   draft.value = "";
   emit("voucher", c);
 };
-
 </script>

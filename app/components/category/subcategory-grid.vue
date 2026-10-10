@@ -13,7 +13,9 @@
           :key="s.key"
           v-reveal="{ delay: (i % 6) * 60 }"
         >
-          <LazyVButton variant="plain" block
+          <LazyVButton
+            variant="plain"
+            block
             class="group card flex h-full flex-col gap-3 p-4 text-start transition duration-200 hover:-translate-y-0.5 hover:border-accent"
             @click="emit('select', s.key)"
           >
@@ -31,7 +33,7 @@
             }}</span>
             <span class="text-xs text-mute">{{ s.blurb }}</span>
             <span
-              class="mt-auto flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-accent"
+              class="mt-auto flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
             >
               Open spec
               <Icon

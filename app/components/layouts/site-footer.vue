@@ -22,7 +22,9 @@
             placeholder="Join optical dispatch"
             class="flex-1"
           />
-          <LazyVButton variant="primary" type="submit" class="shrink-0">Subscribe</LazyVButton>
+          <LazyVButton variant="primary" type="submit" class="shrink-0"
+            >Subscribe</LazyVButton
+          >
         </form>
       </div>
 
@@ -34,9 +36,7 @@
         <h2 class="eyebrow mb-4 !font-sans !font-semibold">{{ col.title }}</h2>
         <ul class="space-y-2.5 text-sm">
           <li v-for="l in col.links" :key="l">
-            <LazyVButton variant="tertiary" to="/">{{
-              l
-            }}</LazyVButton>
+            <LazyVButton variant="tertiary" to="/">{{ l }}</LazyVButton>
           </li>
         </ul>
       </nav>
@@ -47,10 +47,12 @@
         </h2>
         <ul class="space-y-2.5 text-sm text-mute">
           <li class="flex items-center gap-2">
-            <Icon name="lucide:phone" size="16" class="icon-wiggle" aria-hidden="true" /><span
-              dir="ltr"
-              >+1 (800) 412-5866</span
-            >
+            <Icon
+              name="lucide:phone"
+              size="16"
+              class="icon-wiggle"
+              aria-hidden="true"
+            /><span dir="ltr">+1 (800) 412-5866</span>
           </li>
           <li class="flex items-center gap-2">
             <Icon
@@ -61,8 +63,12 @@
             />bench@printpro.com
           </li>
           <li class="flex items-center gap-2">
-            <Icon name="lucide:clock" size="16" class="icon-spin" aria-hidden="true" />Mon–Fri ·
-            08:00–18:00
+            <Icon
+              name="lucide:clock"
+              size="16"
+              class="icon-spin"
+              aria-hidden="true"
+            />Mon–Fri · 08:00–18:00
           </li>
         </ul>
       </div>
@@ -70,11 +76,11 @@
 
     <div class="border-t border-line">
       <div
-        class="container-page flex flex-col gap-2 py-5 font-mono text-xs uppercase tracking-wider text-mute sm:flex-row sm:items-center sm:justify-between"
+        class="container-page flex flex-col gap-2 py-5 font-mono text-xs tracking-wider text-mute sm:flex-row sm:items-center sm:justify-between"
       >
         <p>
-          © 2026 PrintPro Optical Instruments &amp; Fine Art Printworks
-          Ltd. All rights reserved.
+          © 2026 PrintPro Optical Instruments &amp; Fine Art Printworks Ltd. All
+          rights reserved.
         </p>
         <ul class="flex gap-5">
           <li>

@@ -31,7 +31,7 @@
         autocomplete="off"
         autocapitalize="characters"
         placeholder="LP-XXXXXX"
-        input-class="font-mono uppercase"
+        input-class="font-mono"
       />
 
       <LazyVInput

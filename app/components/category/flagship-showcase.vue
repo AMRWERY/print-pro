@@ -6,7 +6,7 @@
         eyebrow="Optical bench spotlight"
         title="Curated studio flagships"
       />
-      
+
       <div class="grid gap-4 lg:grid-cols-2">
         <article
           v-for="(f, i) in items"
@@ -23,7 +23,7 @@
               class="h-56 sm:h-64"
             />
             <span
-              class="absolute start-3 top-3 rounded-control px-2.5 py-1 font-mono text-xs uppercase tracking-wider backdrop-blur"
+              class="absolute start-3 top-3 rounded-control px-2.5 py-1 font-mono text-xs tracking-wider backdrop-blur"
               :class="
                 f.tone === 'accent'
                   ? 'bg-accent text-onaccent'
@@ -63,6 +63,7 @@
                   aria-hidden="true"
                 />{{ f.action }}
               </LazyVButton>
+
               <LazyVButton variant="secondary" v-if="f.secondary">
                 {{ f.secondary }}
               </LazyVButton>

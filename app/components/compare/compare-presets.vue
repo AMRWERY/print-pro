@@ -12,7 +12,9 @@
       />
       <ul class="grid gap-4 md:grid-cols-3">
         <li v-for="(p, i) in presets" :key="p.key" v-reveal="{ delay: i * 80 }">
-          <LazyVButton variant="plain" block
+          <LazyVButton
+            variant="plain"
+            block
             class="group card flex h-full flex-col gap-3 p-5 text-start transition duration-200 hover:-translate-y-0.5 hover:border-accent"
             @click="emit('load', p.ids)"
           >
@@ -23,7 +25,7 @@
             <span class="font-display text-xl leading-snug">{{ p.title }}</span>
             <span class="text-sm text-mute">{{ p.body }}</span>
             <span
-              class="mt-auto flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-accent"
+              class="mt-auto flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
             >
               Load comparison
               <Icon

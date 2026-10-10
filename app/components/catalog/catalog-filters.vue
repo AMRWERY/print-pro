@@ -2,9 +2,10 @@
   <div>
     <div class="flex items-center justify-between pb-3">
       <h2 class="eyebrow !text-paper">Filter parameters</h2>
-      <LazyVButton variant="plain"
+      <LazyVButton
+        variant="plain"
         v-if="catalog.chips.length"
-        class="font-mono text-xs uppercase tracking-wider text-accent hover:underline"
+        class="font-mono text-xs tracking-wider text-accent hover:underline"
         @click="catalog.reset()"
       >
         Reset
@@ -45,9 +46,10 @@
         :checked="catalog.filters.brands.includes(b.name)"
         @change="catalog.toggleBrand(b.name)"
       />
-      <LazyVButton variant="plain"
+      <LazyVButton
+        variant="plain"
         v-if="catalog.brands.length > brandLimit"
-        class="mt-1 font-mono text-xs uppercase tracking-wider text-mute hover:text-paper"
+        class="mt-1 font-mono text-xs tracking-wider text-mute hover:text-paper"
         :aria-expanded="showAllBrands"
         @click="showAllBrands = !showAllBrands"
       >
@@ -83,13 +85,20 @@
           @update:model-value="catalog.filters.minRating = r"
         >
           <span class="flex items-center gap-2.5">
-            <Icon name="lucide:star" size="14" class="fill-yellow text-yellow" aria-hidden="true" />
+            <Icon
+              name="lucide:star"
+              size="14"
+              class="fill-yellow text-yellow"
+              aria-hidden="true"
+            />
             <span>{{ r }} &amp; up</span>
           </span>
         </LazyVInput>
-        <LazyVButton variant="plain"
+
+        <LazyVButton
+          variant="plain"
           v-if="catalog.filters.minRating !== null"
-          class="font-mono text-xs uppercase tracking-wider text-mute hover:text-paper"
+          class="font-mono text-xs tracking-wider text-mute hover:text-paper"
           @click="catalog.filters.minRating = null"
         >
           Any rating
@@ -115,9 +124,10 @@
 <script lang="ts" setup>
 import { ratingOptions } from "~/data/catalog";
 
+const catalog = useCatalog();
+
 defineProps<{ hideQuery?: boolean }>();
 
-const catalog = useCatalog();
 const uid = useId();
 
 const brandLimit = 6;

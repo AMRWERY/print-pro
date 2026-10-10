@@ -18,7 +18,7 @@
       </span>
     </header>
 
-    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
       <article v-for="p in products" :key="p.id"
         class="flex flex-col justify-between rounded-card border border-line bg-ink/30 p-3.5 transition duration-200 hover:border-accent/40">
         <div class="space-y-3">

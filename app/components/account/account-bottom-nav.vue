@@ -8,7 +8,7 @@
       :key="item.key"
       variant="plain"
       :to="item.to"
-      class="flex min-w-16 flex-col items-center gap-1 rounded-control px-2 py-2 uppercase transition-colors duration-200"
+      class="flex min-w-16 flex-col items-center gap-1 rounded-control px-2 py-2 transition-colors duration-200"
       :class="
         isAccountNavActive(item.key, route.path, route.hash)
           ? 'text-accent'

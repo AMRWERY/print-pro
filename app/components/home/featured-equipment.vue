@@ -11,11 +11,12 @@
           aria-label="Filter featured equipment"
           class="flex flex-wrap gap-2"
         >
-          <LazyVButton variant="plain"
+          <LazyVButton
+            variant="plain"
             v-for="f in featuredFilters"
             :key="f.key"
             :aria-pressed="active === f.key"
-            class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
+            class="rounded-control border px-3 py-1.5 font-mono text-xs tracking-wider transition duration-200"
             :class="
               active === f.key
                 ? 'border-accent bg-accent text-onaccent'
@@ -33,7 +34,12 @@
         name="list"
         class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
       >
-        <li v-for="(p, i) in visible" :key="p.id" v-reveal="{ delay: (i % 3) * 80 }" class="flex">
+        <li
+          v-for="(p, i) in visible"
+          :key="p.id"
+          v-reveal="{ delay: (i % 3) * 80 }"
+          class="flex"
+        >
           <LazyVProductCard :product="p" class="w-full" />
         </li>
       </TransitionGroup>

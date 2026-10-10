@@ -42,7 +42,7 @@
             <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
               <span class="font-bold text-accent">{{ order.id }}</span>
               <span class="text-line">•</span>
-              <span class="rounded-control px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider" :class="order.status === 'in-transit'
+              <span class="rounded-control px-2 py-0.5 text-[10px] font-semibold tracking-wider" :class="order.status === 'in-transit'
                 ? 'border border-accent/40 bg-accent-soft text-accent'
                 : order.status === 'delivered'
                   ? 'border border-success/40 bg-success-soft text-success'

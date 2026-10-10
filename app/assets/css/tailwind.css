@@ -97,7 +97,7 @@
     @apply btn bg-accent text-onaccent hover:brightness-110;
   }
   .eyebrow {
-    @apply font-mono text-xs uppercase tracking-widest text-mute;
+    @apply font-mono text-xs tracking-widest text-mute;
   }
   .chip {
     @apply inline-flex items-center rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-xs text-mute;

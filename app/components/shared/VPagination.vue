@@ -17,7 +17,8 @@
         aria-label="Items per page"
       >
         <span class="eyebrow">Show</span>
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           v-for="n in perPageOptions"
           :key="n"
           class="h-9 min-w-9 rounded-control border px-2 font-mono text-xs transition duration-200"
@@ -35,8 +36,9 @@
 
       <ul class="flex items-center gap-1.5">
         <li>
-          <LazyVButton variant="secondary"
-            class="h-9 !px-3 !py-0 font-mono text-xs uppercase"
+          <LazyVButton
+            variant="secondary"
+            class="h-9 !px-3 !py-0 font-mono text-xs"
             :disabled="page <= 1"
             @click="go(page - 1)"
           >
@@ -54,7 +56,8 @@
           <span v-if="p === '…'" class="px-1 text-mute" aria-hidden="true"
             >…</span
           >
-          <LazyVButton variant="plain"
+          <LazyVButton
+            variant="plain"
             v-else
             class="h-9 min-w-9 rounded-control border px-2 font-mono text-xs transition duration-200"
             :class="
@@ -71,8 +74,9 @@
         </li>
 
         <li>
-          <LazyVButton variant="secondary"
-            class="h-9 !px-3 !py-0 font-mono text-xs uppercase"
+          <LazyVButton
+            variant="secondary"
+            class="h-9 !px-3 !py-0 font-mono text-xs"
             :disabled="page >= pageCount"
             @click="go(page + 1)"
           >

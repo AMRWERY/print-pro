@@ -8,7 +8,7 @@
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-2">
           <p
-            class="inline-flex items-center gap-1.5 rounded-control border px-2.5 py-1 font-mono text-xs uppercase tracking-wider"
+            class="inline-flex items-center gap-1.5 rounded-control border px-2.5 py-1 font-mono text-xs tracking-wider"
             :class="toneClass"
           >
             <Icon

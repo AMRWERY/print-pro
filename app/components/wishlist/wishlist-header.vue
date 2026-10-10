@@ -6,7 +6,7 @@
           <span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio registry ·
           saved apparatus
         </p>
-        <h1 class="max-w-3xl text-4xl uppercase sm:text-5xl">
+        <h1 class="max-w-3xl text-4xl sm:text-5xl">
           Studio apparatus wishlist &amp; registry
         </h1>
         <p class="max-w-2xl text-sm text-mute sm:text-base">

@@ -3,7 +3,7 @@
     aria-label="Atelier simulation harness">
     <div class="container-page flex flex-wrap items-center justify-between gap-3 text-xs">
       <div class="flex flex-wrap items-center gap-2 font-mono">
-        <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-accent">
+        <span class="inline-flex items-center gap-1.5 font-bold tracking-wider text-accent">
           <span class="relative flex h-2 w-2">
             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
             <span class="relative inline-flex h-2 w-2 rounded-full bg-accent" />
@@ -14,7 +14,7 @@
 
       <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Operating modes">
         <LazyVButton variant="plain" v-for="m in modes" :key="m.id" role="tab" :aria-selected="modelValue === m.id"
-          class="inline-flex items-center gap-1.5 rounded-control px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider transition duration-150"
+          class="inline-flex items-center gap-1.5 rounded-control px-2.5 py-1 font-mono text-[11px] font-medium tracking-wider transition duration-150"
           :class="modelValue === m.id
               ? 'bg-accent text-onaccent shadow-sm'
               : 'border border-line bg-surface text-mute hover:border-accent/40 hover:text-paper'

@@ -6,9 +6,10 @@
         eyebrow="Recommended pairings"
         title="Certified media, substrates & consumables"
       >
-        <LazyVButton variant="tertiary"
+        <LazyVButton
+          variant="tertiary"
           to="/products"
-          class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider"
+          class="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider"
         >
           View all
           <Icon

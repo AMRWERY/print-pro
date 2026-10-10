@@ -39,7 +39,7 @@
                 d.meta
               }}</span>
               <span
-                class="mt-1 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-accent"
+                class="mt-1 inline-flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
               >
                 Download
                 <Icon

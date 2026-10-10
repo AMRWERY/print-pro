@@ -6,10 +6,11 @@
         role="group"
         aria-label="Filter by category"
       >
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           v-for="c in categories"
           :key="c.key"
-          class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
+          class="rounded-control border px-3 py-1.5 font-mono text-xs tracking-wider transition duration-200"
           :class="
             active === c.key
               ? 'border-accent bg-accent text-onaccent'
@@ -28,7 +29,8 @@
           role="group"
           aria-label="Layout"
         >
-          <LazyVButton variant="plain"
+          <LazyVButton
+            variant="plain"
             v-for="v in views"
             :key="v.key"
             class="grid h-8 w-8 place-items-center rounded-[4px] transition-colors duration-200"
@@ -72,7 +74,9 @@
       >
         Select all ({{ shown }})
       </LazyVInput>
-      <LazyVButton variant="tertiary"
+
+      <LazyVButton
+        variant="tertiary"
         class="inline-flex items-center gap-1.5 text-sm disabled:opacity-40"
         :disabled="!selectedCount"
         @click="emit('batch-remove')"
@@ -108,7 +112,10 @@ const emit = defineEmits<{
 }>();
 
 const uid = useId();
-const sortOptions = wishlistSortOptions.map((s) => ({ value: s.key, label: s.label }));
+const sortOptions = wishlistSortOptions.map((s) => ({
+  value: s.key,
+  label: s.label,
+}));
 
 const views = [
   { key: "grid" as const, label: "Grid view", icon: "lucide:layout-grid" },

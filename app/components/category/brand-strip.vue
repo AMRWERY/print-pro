@@ -6,7 +6,7 @@
     >
       <p class="eyebrow shrink-0">{{ label }}</p>
       <ul
-        class="flex flex-1 flex-wrap items-center gap-x-8 gap-y-2 font-display text-base font-semibold uppercase tracking-wider text-mute"
+        class="flex flex-1 flex-wrap items-center gap-x-8 gap-y-2 font-display text-base font-semibold tracking-wider text-mute"
       >
         <li v-for="b in brands" :key="b">{{ b }}</li>
       </ul>

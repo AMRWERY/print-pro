@@ -1,7 +1,7 @@
 <template>
   <nav aria-label="Breadcrumb">
     <ol
-      class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-mute"
+      class="flex flex-wrap items-center gap-2 font-mono text-xs tracking-wider text-mute"
     >
       <template v-for="(item, i) in items" :key="`${item.label}-${i}`">
         <li v-if="i > 0" aria-hidden="true">/</li>

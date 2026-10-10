@@ -20,7 +20,7 @@
           <ul
             v-for="copy in 2"
             :key="copy"
-            class="flex shrink-0 items-center gap-10 pe-10 font-display text-base font-semibold uppercase tracking-wider text-mute"
+            class="flex shrink-0 items-center gap-10 pe-10 font-display text-base font-semibold tracking-wider text-mute"
             :aria-hidden="copy === 2 ? true : undefined"
             :aria-label="copy === 1 ? 'Partners' : undefined"
           >

@@ -71,7 +71,7 @@
             <h2 class="font-display text-lg font-bold text-paper">
               {{ profile.name }}
             </h2>
-            <p class="font-mono text-[11px] text-mute uppercase tracking-wider truncate max-w-[200px]">
+            <p class="font-mono text-[11px] text-mute tracking-wider truncate max-w-[200px]">
               {{ profile.affiliation }}
             </p>
             <div class="flex items-center gap-2 font-mono text-[10px]">
@@ -164,7 +164,7 @@
         <h3 class="font-display text-base font-bold text-paper">
           Medium Format Optics &amp; Print Master
         </h3>
-        <p class="font-mono text-[10px] text-mute uppercase tracking-wider mt-0.5">
+        <p class="font-mono text-[10px] text-mute tracking-wider mt-0.5">
           CARRIER: LUFTHANSA CARGO FLIGHT LH-400 (PALLET #88)
         </p>
       </div>

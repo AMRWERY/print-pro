@@ -9,8 +9,8 @@
         eyebrow="Active studio session"
         title="Substrate history & monitored search alerts"
       >
-        <LazyVButton variant="secondary"
-         
+        <LazyVButton
+          variant="secondary"
           :disabled="!query.trim() || history.isSaved(query)"
           @click="history.save(query)"
         >
@@ -31,7 +31,8 @@
           <article class="card flex h-full flex-col gap-2 p-5">
             <p class="eyebrow flex items-center justify-between text-accent">
               <span>Alert configured</span>
-              <LazyVButton variant="plain"
+              <LazyVButton
+                variant="plain"
                 class="text-mute hover:text-paper"
                 :aria-label="`Remove saved search ${s.q}`"
                 @click="history.remove(s.q)"
@@ -67,11 +68,12 @@
             <h3 class="text-xl">{{ a.title }}</h3>
             <p class="text-sm text-mute">{{ a.body }}</p>
             <div class="mt-auto pt-3">
-              <LazyVButton variant="plain"
+              <LazyVButton
+                variant="plain"
                 :class="
                   a.highlight
                     ? 'btn-accent'
-                    : 'link-quiet font-mono text-xs uppercase tracking-wider'
+                    : 'link-quiet font-mono text-xs tracking-wider'
                 "
               >
                 {{ a.action }}

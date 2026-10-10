@@ -8,7 +8,7 @@
           <span class="h-2 w-2 bg-accent" aria-hidden="true" />Metric protocol ·
           bench certified
         </p>
-        <h1 class="max-w-4xl text-3xl uppercase sm:text-5xl">
+        <h1 class="max-w-4xl text-3xl sm:text-5xl">
           Bench comparison matrix &amp; difference audit
         </h1>
         <p class="max-w-3xl text-sm text-mute sm:text-base">
@@ -25,7 +25,7 @@
             variant="plain"
             v-for="p in comparePresets"
             :key="p.key"
-            class="rounded-control border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition duration-200"
+            class="rounded-control border px-3 py-1.5 font-mono text-xs tracking-wider transition duration-200"
             :class="
               isActivePreset(p.ids)
                 ? 'border-accent bg-accent text-onaccent'
@@ -77,6 +77,7 @@
             presets below.
           </p>
         </div>
+
         <LazyVButton variant="primary" to="/products"
           >Browse the catalog</LazyVButton
         >

@@ -7,7 +7,8 @@
   >
     <span class="eyebrow">Active</span>
     <TransitionGroup name="chip">
-      <VButton variant="plain"
+      <LazyVButton
+        variant="plain"
         v-for="c in catalog.chips"
         :key="c.key"
         class="inline-flex items-center gap-1.5 rounded-control border border-accent/40 bg-accent-soft px-2.5 py-1 text-xs transition duration-200 hover:border-accent"
@@ -16,15 +17,16 @@
       >
         {{ c.label }}
         <Icon name="lucide:x" size="12" aria-hidden="true" />
-      </VButton>
+      </LazyVButton>
     </TransitionGroup>
 
-    <VButton variant="plain"
-      class="font-mono text-xs uppercase tracking-wider text-accent hover:underline"
+    <LazyVButton
+      variant="plain"
+      class="font-mono text-xs tracking-wider text-accent hover:underline"
       @click="catalog.reset()"
     >
       Reset all
-    </VButton>
+    </LazyVButton>
   </div>
 </template>
 

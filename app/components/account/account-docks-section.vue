@@ -23,7 +23,7 @@
         class="rounded-control border border-line bg-ink/30 p-3.5 space-y-2 transition hover:border-accent/30">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div class="flex flex-wrap items-center gap-1.5 font-mono text-[10px]">
-            <span class="rounded-control px-2 py-0.5 font-bold uppercase tracking-wider" :class="dock.isPrimary
+            <span class="rounded-control px-2 py-0.5 font-bold tracking-wider" :class="dock.isPrimary
                 ? 'bg-accent-soft text-accent'
                 : 'bg-raised text-mute'
               ">

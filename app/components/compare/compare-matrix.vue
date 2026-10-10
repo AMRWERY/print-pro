@@ -46,14 +46,16 @@
         :aria-label="s.title"
       >
         <h2 class="border-b border-line bg-raised">
-          <LazyVButton variant="plain" block
+          <LazyVButton
+            variant="plain"
+            block
             class="flex items-center justify-between gap-3 px-4 py-3 text-start"
             :aria-expanded="!cmp.isCollapsed(s.key)"
             :aria-controls="`${uid}-${s.key}`"
             @click="cmp.toggleSection(s.key)"
           >
             <span class="flex flex-wrap items-center gap-3">
-              <span class="font-mono text-sm uppercase tracking-wider"
+              <span class="font-mono text-sm tracking-wider"
                 >{{ sectionNumber(s.key) }} / {{ s.title }}</span
               >
               <span
@@ -97,13 +99,13 @@
                 <p class="text-sm font-medium">{{ r.label }}</p>
                 <p
                   v-if="r.delta && r.hint"
-                  class="font-mono text-xs uppercase tracking-wider text-accent"
+                  class="font-mono text-xs tracking-wider text-accent"
                 >
                   {{ r.hint }}
                 </p>
                 <p
                   v-else-if="!r.delta && cmp.products.length > 1"
-                  class="font-mono text-xs uppercase tracking-wider text-mute"
+                  class="font-mono text-xs tracking-wider text-mute"
                 >
                   Identical spec
                 </p>

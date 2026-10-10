@@ -14,7 +14,7 @@
       <span class="block font-display text-base font-bold tracking-wide"
         >Print<span class="text-accent">Pro</span></span
       >
-      <span class="block font-mono text-xs uppercase tracking-widest text-mute"
+      <span class="block font-mono text-xs tracking-widest text-mute"
         >Studios &amp; Printworks</span
       >
     </span>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-page space-y-6 py-6 lg:py-8">
-      <v-breadcrumb :items="crumbs" />
+      <LazyVBreadcrumb :items="crumbs" />
 
       <header v-reveal class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-3">
@@ -9,7 +9,7 @@
             <span class="h-2 w-2 bg-accent" aria-hidden="true" />Studio
             procurement · station 04
           </p>
-          <h1 class="max-w-3xl text-3xl uppercase sm:text-5xl">
+          <h1 class="max-w-3xl text-3xl sm:text-5xl">
             Studio procurement cart &amp; manifest audit
           </h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
@@ -22,7 +22,7 @@
 
       <p class="sr-only" role="status">{{ announcement }}</p>
 
-      <v-empty-state
+      <LazyVEmptyState
         v-if="!entries.length"
         icon="lucide:shopping-cart"
         title="Your procurement cart is empty"
@@ -34,7 +34,7 @@
         <LazyVButton variant="secondary" to="/wishlist"
           >Open studio registry</LazyVButton
         >
-      </v-empty-state>
+      </LazyVEmptyState>
 
       <div
         v-else
@@ -64,6 +64,7 @@
                 ><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch
                 save</LazyVButton
               >
+
               <LazyVButton
                 variant="tertiary"
                 class="inline-flex items-center gap-1.5 disabled:opacity-40"
@@ -75,6 +76,7 @@
                   aria-hidden="true"
                 />Batch clear</LazyVButton
               >
+
               <LazyVButton
                 variant="tertiary"
                 class="inline-flex items-center gap-1.5"
@@ -143,7 +145,7 @@
             v-reveal="{ delay: i * 70 }"
             class="flex"
           >
-            <VProductCard :product="p" class="w-full" />
+            <LazyVProductCard :product="p" class="w-full" />
           </li>
         </ul>
       </div>

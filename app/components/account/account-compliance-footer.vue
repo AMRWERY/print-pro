@@ -3,7 +3,7 @@
     aria-label="Atelier technical compliance standards">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <div v-for="sec in sections" :key="sec.title" class="space-y-1.5 border-s border-line ps-3">
-        <h3 class="flex items-center gap-1.5 font-bold uppercase tracking-wider text-paper text-[11px]">
+        <h3 class="flex items-center gap-1.5 font-bold tracking-wider text-paper text-[11px]">
           <span class="h-2 w-2 bg-accent" aria-hidden="true" />
           {{ sec.title }}
         </h3>

@@ -21,7 +21,7 @@
       </Transition>
 
       <span
-        class="absolute start-3 top-3 rounded-control bg-ink/80 px-2.5 py-1 font-mono text-xs uppercase tracking-wider backdrop-blur"
+        class="absolute start-3 top-3 rounded-control bg-ink/80 px-2.5 py-1 font-mono text-xs tracking-wider backdrop-blur"
         >{{ current.label }}</span
       >
       <span
@@ -38,7 +38,9 @@
       aria-label="Product views"
     >
       <li v-for="(g, i) in items" :key="g.label" role="presentation">
-        <LazyVButton variant="plain" block
+        <LazyVButton
+          variant="plain"
+          block
           role="tab"
           :aria-selected="active === i"
           :aria-label="`Show ${g.label} view`"

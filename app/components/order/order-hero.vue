@@ -23,7 +23,7 @@
           <h1
             ref="heading"
             tabindex="-1"
-            class="text-3xl uppercase focus:outline-none sm:text-5xl"
+            class="text-3xl focus:outline-none sm:text-5xl"
           >
             Order confirmed &amp; sealed
           </h1>
@@ -82,12 +82,15 @@
         icon-class="icon-bob"
         >Track order</LazyVButton
       >
+
       <LazyVButton variant="secondary" icon="lucide:file-down" @click="print"
         >Download invoice (PDF)</LazyVButton
       >
+
       <LazyVButton variant="secondary" to="/products" icon="lucide:layout-grid"
         >Continue exploring catalog</LazyVButton
       >
+
       <LazyVButton
         variant="tertiary"
         :href="orderSupport.phoneHref"
@@ -106,8 +109,11 @@ import type { Order } from "~/types/order";
 const props = defineProps<{ order: Order }>();
 
 const heading = ref<HTMLElement>();
+
 const paid = computed(() => props.order.payment.id === "card");
+
 const handover = computed(() => estimatedHandover(props.order));
+
 const print = () => window.print();
 
 // Move focus to the confirmation so screen readers announce it.
