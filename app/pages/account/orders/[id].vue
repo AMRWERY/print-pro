@@ -35,6 +35,9 @@
     <LazyVEmptyState
       v-else
       icon="lucide:file-question"
+      eyebrow="QUERY :: ORDER_LOOKUP"
+      tag="404 NOT FOUND"
+      tag-tone="warning"
       title="We couldn't find that order"
       description="It may belong to a different account, or the number may be mistyped."
     >

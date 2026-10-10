@@ -25,6 +25,10 @@
       <LazyVEmptyState
         v-if="!entries.length"
         icon="lucide:shopping-cart"
+        eyebrow="MANIFEST :: CART_REQUISITION"
+        tag="0 UNITS"
+        caption="0 UNITS"
+        :meta="['PAYLOAD: 0.00 KG', 'SPEC: ISO-ARCHIVAL']"
         title="Your procurement cart is empty"
         description="Add instruments from the catalog, or move saved apparatus from your studio registry."
       >

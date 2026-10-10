@@ -42,6 +42,8 @@
     <LazyVEmptyState
       v-else-if="ready && !route.query.order"
       icon="lucide:package-search"
+      eyebrow="QUERY :: TRACKING_IDLE"
+      tag="AWAITING ID"
       title="Enter an order number to start"
       description="Your order number is in the confirmation email and on the confirmation page. Orders placed on this device also appear above."
     >

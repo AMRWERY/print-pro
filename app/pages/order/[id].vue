@@ -14,6 +14,9 @@
     <LazyVEmptyState
       v-else-if="!order"
       icon="lucide:file-search"
+      eyebrow="QUERY :: ORDER_LOOKUP"
+      tag="404 NOT FOUND"
+      tag-tone="warning"
       title="We can't find that order"
       description="Orders are saved in the browser they were placed in. Open this link on that device, or start a new order."
     >

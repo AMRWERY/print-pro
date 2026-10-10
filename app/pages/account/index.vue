@@ -48,40 +48,22 @@
           <!-- Tab: Overview or Orders -->
           <div class="space-y-6">
             <!-- Empty state for New Member Mode -->
-            <div
+            <LazyVEmptyState
               v-if="operatingMode === 'new-member'"
-              class="card border-dashed p-8 text-center space-y-4"
+              icon="lucide:sparkles"
+              eyebrow="ATELIER :: NEW_MEMBER"
+              tag="0 ORDERS"
+              tag-tone="success"
+              title="Welcome to the Metrology Atelier Network"
+              description="Your studio credentials are confirmed. Link your designated receiving port, reserve apparatus, or initiate your first bench calibration."
             >
-              <div
-                class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-raised text-accent"
+              <LazyVButton variant="primary" @click="openCalibrationModal = true"
+                >Initiate first calibration</LazyVButton
               >
-                <Icon name="lucide:sparkles" size="28" />
-              </div>
-              <div class="space-y-1">
-                <h3 class="title-md">
-                  Welcome to the Metrology Atelier Network
-                </h3>
-                <p class="max-w-md mx-auto text-sm text-mute">
-                  Your studio credentials are confirmed. Link your designated
-                  receiving port, reserve apparatus, or initiate your first
-                  bench calibration.
-                </p>
-              </div>
-              <div class="flex flex-wrap justify-center gap-3 pt-2">
-                <LazyVButton variant="plain"
-                  class="rounded-control bg-accent px-4 py-2 font-mono text-xs font-bold text-onaccent hover:brightness-110"
-                  @click="openCalibrationModal = true"
-                >
-                  INITIATE FIRST CALIBRATION
-                </LazyVButton>
-                <NuxtLinkLocale
-                  to="/products"
-                  class="rounded-control border border-line bg-surface px-4 py-2 meta hover:text-paper"
-                >
-                  EXPLORE APPARATUS CATALOG
-                </NuxtLinkLocale>
-              </div>
-            </div>
+              <LazyVButton variant="secondary" to="/products"
+                >Explore apparatus catalog</LazyVButton
+              >
+            </LazyVEmptyState>
 
             <!-- Orders Manifest -->
             <account-orders-manifest

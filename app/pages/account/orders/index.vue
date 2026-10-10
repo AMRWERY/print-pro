@@ -67,6 +67,8 @@
       <LazyVEmptyState
         v-else
         icon="lucide:receipt-text"
+        eyebrow="LEDGER :: ORDERS"
+        :tag="orders.length ? 'FILTERED' : 'EMPTY'"
         :title="
           orders.length ? 'No orders match these filters' : 'No orders yet'
         "

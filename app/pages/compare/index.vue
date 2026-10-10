@@ -60,28 +60,18 @@
         />
       </template>
 
-      <div
+      <LazyVEmptyState
         v-else
-        class="card flex flex-col items-center gap-4 px-6 py-16 text-center"
+        icon="lucide:git-compare"
+        eyebrow="MATRIX :: COMPARE_NULL"
+        tag="0 SPECIMENS"
+        title="Nothing to compare yet"
+        description="Use the compare button on any product card, or load one of the bench presets below."
       >
-        <span
-          class="grid h-14 w-14 place-items-center rounded-full border border-line text-mute"
-          aria-hidden="true"
-        >
-          <Icon name="lucide:git-compare" size="26" />
-        </span>
-        <div class="space-y-1">
-          <h2 class="font-display text-xl">Nothing to compare yet</h2>
-          <p class="max-w-md text-sm text-mute">
-            Use the compare button on any product card, or load one of the bench
-            presets below.
-          </p>
-        </div>
-
         <LazyVButton variant="primary" to="/products"
           >Browse the catalog</LazyVButton
         >
-      </div>
+      </LazyVEmptyState>
     </div>
 
     <compare-presets @load="setIds" />

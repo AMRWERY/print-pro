@@ -32,6 +32,9 @@
     <LazyVEmptyState
       v-if="!docks.length"
       icon="lucide:map-pin-off"
+      eyebrow="AIRLOCK :: DOCK_UNASSIGNED"
+      tag="0 PORTS"
+      caption="PORT: VACANT"
       title="No receiving ports yet"
       description="Add a delivery address so checkout can fill it in for you."
     >

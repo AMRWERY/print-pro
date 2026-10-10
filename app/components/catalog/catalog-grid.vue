@@ -4,7 +4,14 @@
       {{ catalog.total }} {{ catalog.total === 1 ? "item" : "items" }} found
     </p>
 
-    <LazyVEmptyState v-if="!catalog.total">
+    <LazyVEmptyState
+      v-if="!catalog.total"
+      eyebrow="FACET :: 0 RESULTS"
+      tag="OVER-FILTERED"
+      tag-tone="accent"
+      caption="BAY TRAY: EMPTY"
+      :meta="['FACET INTERSECTION: 0', 'TRAY STATUS: VACANT']"
+    >
       <LazyVButton variant="primary" @click="catalog.reset()">Reset all filters</LazyVButton>
     </LazyVEmptyState>
 

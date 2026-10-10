@@ -26,16 +26,18 @@
           </header>
 
           <!-- Empty -->
-          <div v-if="!entries.length" class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
-            <span class="grid h-14 w-14 place-items-center rounded-full border border-line text-mute" aria-hidden="true">
-              <Icon name="lucide:shopping-cart" size="26" />
-            </span>
-            <div class="space-y-1">
-              <p class="font-display text-xl">Your cart is empty</p>
-              <p class="text-sm text-mute">Add instruments from the catalog to start a procurement manifest.</p>
-            </div>
+          <LazyVEmptyState
+            v-if="!entries.length"
+            bare
+            as="p"
+            class="flex-1"
+            icon="lucide:shopping-cart"
+            caption="0 UNITS"
+            title="Your cart is empty"
+            description="Add instruments from the catalog to start a procurement manifest."
+          >
             <LazyVButton variant="primary" to="/products" @click="close">Browse the catalog</LazyVButton>
-          </div>
+          </LazyVEmptyState>
 
           <template v-else>
             <ul class="flex-1 divide-y divide-line overflow-y-auto" aria-label="Items in your cart">

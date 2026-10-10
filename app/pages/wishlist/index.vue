@@ -42,6 +42,10 @@
       <LazyVEmptyState
         v-if="!items.length"
         icon="lucide:bookmark-plus"
+        eyebrow="MANIFEST :: STUDIO_REGISTRY"
+        tag="0 BOOKMARKS"
+        caption="DOCKET #000-NIL"
+        :meta="['RESERVATIONS: NIL', 'TAGS: ARCHIVAL_MEDIUM']"
         title="Your registry is empty"
         description="Tap the heart on any product to save it here. Group items by studio, share the manifest with your team and move everything to the cart when you are ready."
       >

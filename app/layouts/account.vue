@@ -22,7 +22,7 @@
         </div>
 
         <!-- Signed out: send them to sign in, and bring them back here afterwards -->
-        <LazyVEmptyState v-else icon="lucide:lock" title="Sign in to see your account" description="Your orders, registry and delivery addresses are tied to your studio account.">
+        <LazyVEmptyState v-else icon="lucide:lock" eyebrow="ACCESS :: SIGNED_OUT" tag="AUTH REQUIRED" tag-tone="warning" title="Sign in to see your account" description="Your orders, registry and delivery addresses are tied to your studio account.">
           <LazyVButton variant="primary" :to="signInTo">Sign in</LazyVButton>
         </LazyVEmptyState>
       </div>

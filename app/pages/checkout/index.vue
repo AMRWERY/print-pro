@@ -3,6 +3,8 @@
     <LazyVEmptyState
       v-if="!entries.length"
       icon="lucide:shopping-cart"
+      eyebrow="MANIFEST :: CHECKOUT_NULL"
+      tag="0 UNITS"
       title="There's nothing to check out"
       description="Your cart is empty. Add instruments from the catalog, then come back here to place the order."
     >
