@@ -20,7 +20,7 @@
     
       <document-downloads v-if="detail.documents.length" :items="detail.documents" />
     
-      <reviews-section v-if="detail.reviews" :reviews="detail.reviews" />
+      <reviews-section :key="product.id" :product-id="product.id" :reviews="detail.reviews" />
 
       <section class="border-t border-line py-12 md:py-16" aria-labelledby="qa-title">
         <div class="container-page max-w-3xl space-y-8">

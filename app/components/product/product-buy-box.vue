@@ -13,9 +13,9 @@
         :aria-label="`Rated ${product.rating} out of 5 from ${product.reviews} reviews. Jump to reviews`"
       >
         <Icon
-          name="lucide:star"
+          name="material-symbols-light:kid-star-sharp"
           size="14"
-          class="fill-yellow text-yellow"
+          class="text-yellow"
           aria-hidden="true"
         />
         {{ product.rating.toFixed(1) }} ({{ product.reviews }} audits)

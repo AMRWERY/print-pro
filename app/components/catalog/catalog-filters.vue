@@ -85,9 +85,9 @@
         >
           <span class="flex items-center gap-2.5">
             <Icon
-              name="lucide:star"
+              name="material-symbols-light:kid-star-sharp"
               size="14"
-              class="fill-yellow text-yellow"
+              class="text-yellow"
               aria-hidden="true"
             />
             <span>{{ r }} &amp; up</span>

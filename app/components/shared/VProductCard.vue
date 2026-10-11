@@ -84,9 +84,9 @@
           :aria-label="`Rated ${product.rating} out of 5 from ${product.reviews} reviews`"
         >
           <Icon
-            name="lucide:star"
+            name="material-symbols-light:kid-star-sharp"
             size="12"
-            class="fill-yellow text-yellow"
+            class="text-yellow"
             aria-hidden="true"
           />
           {{ product.rating.toFixed(1) }}
@@ -120,12 +120,6 @@
           </p>
         </div>
         <div class="relative z-10 flex items-center gap-2">
-          <LazyVButton variant="icon"
-           
-            :aria-label="`Quick view ${product.name}`"
-          >
-            <Icon name="lucide:eye" size="16" class="icon-lift" aria-hidden="true" />
-          </LazyVButton>
           <LazyVButton variant="primary"
             class="min-w-[6.5rem]"
             :disabled="added"

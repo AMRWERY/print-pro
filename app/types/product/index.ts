@@ -43,6 +43,18 @@ export interface ReviewItem {
   date: string;
 }
 
+/** A review a customer submitted from the product page. */
+export interface CustomerReview {
+  id: string;
+  author: string;
+  /** 1 to 5. */
+  rating: number;
+  title: string;
+  body: string;
+  /** ISO timestamp. */
+  createdAt: string;
+}
+
 export interface ReviewSummary {
   score: number;
   count: number;

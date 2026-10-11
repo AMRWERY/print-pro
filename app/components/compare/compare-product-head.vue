@@ -46,9 +46,9 @@
     </h3>
     <p class="flex items-center gap-1 meta">
       <Icon
-        name="lucide:star"
+        name="material-symbols-light:kid-star-sharp"
         size="12"
-        class="fill-yellow text-yellow"
+        class="text-yellow"
         aria-hidden="true"
       />
       {{ product.rating.toFixed(2) }} ({{ product.reviews }} audits)

@@ -62,7 +62,7 @@
             v-if="dock.isPrimary"
             class="inline-flex items-center gap-1 rounded-control bg-accent-soft px-2 py-0.5 text-accent"
             ><Icon
-              name="lucide:star"
+              name="material-symbols-light:kid-star-sharp"
               size="10"
               aria-hidden="true"
             />Primary</span
@@ -118,7 +118,7 @@
             v-if="!dock.isPrimary"
             size="sm"
             variant="tertiary"
-            icon="lucide:star"
+            icon="material-symbols-light:kid-star-outline-sharp"
             @click="$emit('primary', dock)"
             >Make primary</LazyVButton
           >
