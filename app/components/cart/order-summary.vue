@@ -64,7 +64,7 @@
         <span class="eyebrow !text-paper">Total payable</span>
         <span class="font-display text-3xl font-semibold" aria-live="polite"
           >{{ money.format(totals.payable) }}
-          <span class="meta">USD</span></span
+          <span class="meta">EGP</span></span
         >
       </p>
       <p

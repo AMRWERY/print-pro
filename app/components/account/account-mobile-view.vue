@@ -119,7 +119,7 @@
           <span>TRANSIT</span>
           <span class="h-1.5 w-1.5 rounded-full bg-accent" />
         </div>
-        <p class="title-sm">$18.2K</p>
+        <p class="title-sm">EGP 18.2K</p>
         <p class="text-2xs text-mute leading-tight">LH-400 • 1 SEAL</p>
       </div>
 
@@ -128,7 +128,7 @@
           <span>ESCROW</span>
           <Icon name="lucide:shield-check" size="10" class="text-cyan" />
         </div>
-        <p class="title-sm">$32.5K</p>
+        <p class="title-sm">EGP 32.5K</p>
         <p class="text-2xs text-success leading-tight">AUTO-CLEAR ON</p>
       </div>
 
@@ -354,7 +354,7 @@
               <span class="text-mute text-2xs">YESTERDAY</span>
             </div>
             <p class="font-sans text-1xs text-mute">
-              Wire clearance $12,450.00 confirmed for Requisition #LP-948201.
+              Wire clearance EGP 12,450.00 confirmed for Requisition #LP-948201.
             </p>
           </div>
         </div>

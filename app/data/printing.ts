@@ -138,7 +138,7 @@ export const inks: PrintChoice[] = [
     name: "Monochrome Carbon Piezography",
     description:
       "Pure monochromatic carbon shade formulations. Seven dilutions of carbon black give photographic gradation and zero metamerism.",
-    note: "+$28 calibration fee",
+    note: "+EGP 28 calibration fee",
     price: 28,
   },
 ];

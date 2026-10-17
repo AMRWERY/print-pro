@@ -34,7 +34,7 @@
           </dt>
           <dd>
             {{ delivery.label }}<br /><span class="text-mute">{{
-              money.format(shipping) === "$0.00"
+              shipping === 0
                 ? "Free"
                 : money.format(shipping)
             }}</span>

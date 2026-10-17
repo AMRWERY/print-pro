@@ -57,7 +57,7 @@
       </LazyVButton>
     </filter-group>
 
-    <filter-group title="Acquisition value (USD)">
+    <filter-group title="Acquisition value (EGP)">
       <price-filter />
     </filter-group>
 

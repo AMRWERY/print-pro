@@ -7,7 +7,7 @@
         </span>
         <div>
           <h2 id="promo-title" class="text-xl">End-of-quarter studio upgrade program</h2>
-          <p class="text-sm text-mute">Up to $2,500 in manufacturer print rebates on qualifying medium-format and 44" Canon &amp; Epson pigment systems.</p>
+          <p class="text-sm text-mute">Up to EGP 2,500 in manufacturer print rebates on qualifying medium-format and 44" Canon &amp; Epson pigment systems.</p>
         </div>
       </div>
       <div class="flex flex-wrap gap-3">

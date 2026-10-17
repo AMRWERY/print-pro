@@ -33,8 +33,6 @@ const toggle = <T>(list: T[], value: T) => {
   else list.splice(i, 1);
 };
 
-const money = (n: number) => `$${n.toLocaleString("en-US")}`;
-
 // Every word must appear somewhere in the product text ("canon printer").
 const matchesQuery = (p: CatalogProduct, query: string) => {
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -50,6 +48,7 @@ const matchesQuery = (p: CatalogProduct, query: string) => {
 };
 
 const createCatalog = (products: CatalogProduct[]) => {
+  const { format: money } = useMoney();
   const filters = reactive<CatalogFilters>(emptyFilters());
   const sort = ref<SortKey>("featured");
   const perPage = ref<number>(perPageOptions[0]);

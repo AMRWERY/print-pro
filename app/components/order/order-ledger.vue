@@ -64,7 +64,7 @@
       </div>
       <p class="font-display text-4xl font-semibold text-accent">
         {{ money.format(amounts.total) }}
-        <span class="meta">USD</span>
+        <span class="meta">EGP</span>
       </p>
     </div>
   </section>

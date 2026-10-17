@@ -30,7 +30,7 @@ export const cartAssurances = [
     icon: "lucide:flask-conical",
     label: "Pre-flight bench QA & collimation verified",
   },
-  { icon: "lucide:truck", label: "Free cleanroom crated dispatch over $2,500" },
+  { icon: "lucide:truck", label: "Free cleanroom crated dispatch over EGP 2,500" },
   { icon: "lucide:headset", label: "Concierge hotline: +1 (800) 492-LUMN" },
 ];
 

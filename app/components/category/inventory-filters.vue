@@ -68,7 +68,7 @@
       />
     </filter-group>
 
-    <filter-group title="Investment range (USD)">
+    <filter-group title="Investment range (EGP)">
       <div class="grid grid-cols-2 gap-2">
         <LazyVInput
           v-model="inventory.facets.priceMin"

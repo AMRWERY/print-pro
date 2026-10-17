@@ -91,7 +91,7 @@
       <span class="eyebrow !text-paper">Total</span>
       <span class="font-display text-3xl font-semibold" aria-live="polite"
         >{{ money.format(amounts.total) }}
-        <span class="meta">USD</span></span
+        <span class="meta">EGP</span></span
       >
     </p>
 

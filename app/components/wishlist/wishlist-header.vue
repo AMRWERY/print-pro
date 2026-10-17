@@ -43,7 +43,7 @@
         <dt class="eyebrow">Estimated asset total</dt>
         <dd class="mt-1 font-display text-2xl" aria-live="polite">
           {{ money.format(total) }}
-          <span class="meta">USD</span>
+          <span class="meta">EGP</span>
         </dd>
         <dd class="meta">Excl. bonded tax / VAT</dd>
       </div>

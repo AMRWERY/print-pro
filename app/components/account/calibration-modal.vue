@@ -85,7 +85,7 @@
             >
               <span class="font-mono">Estimated bench cost</span>
               <span class="title-sm"
-                >$1,450.00</span
+                >EGP 1,450.00</span
               >
             </div>
 

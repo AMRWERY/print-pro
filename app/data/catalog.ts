@@ -31,10 +31,10 @@ export const sortOptions: { key: SortKey; label: string }[] = [
 export const perPageOptions = [12, 24, 48] as const;
 
 export const pricePresets = [
-  { label: "Under $1,000", min: null, max: 999 },
-  { label: "$1k – $5k", min: 1000, max: 5000 },
-  { label: "$5k – $10k", min: 5000, max: 10000 },
-  { label: "$10k+", min: 10000, max: null },
+  { label: "Under EGP 1,000", min: null, max: 999 },
+  { label: "EGP 1k – 5k", min: 1000, max: 5000 },
+  { label: "EGP 5k – 10k", min: 5000, max: 10000 },
+  { label: "EGP 10k+", min: 10000, max: null },
 ] as const;
 
 export const ratingOptions = [4.5, 4] as const;

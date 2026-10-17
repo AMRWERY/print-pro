@@ -81,7 +81,7 @@ const richDetails: Record<string, ProductDetail> = {
     ],
     compareAt: 6995,
     stockLabel: "In stock · NYC warehouse",
-    leaseNote: "Studio equipment lease from $220 / mo",
+    leaseNote: "Studio equipment lease from EGP 220 / mo",
     gallery: [
       { label: "Lab studio", src: "/img/hero-img.png", alt: "Epson large-format printer in a fine-art print studio" },
       { label: "Front", icon: "lucide:printer" },

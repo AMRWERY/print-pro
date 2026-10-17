@@ -1,7 +1,7 @@
 import type { Product } from "~/types/home";
 
 export const promoItems = [
-  "Free priority delivery on heavy freight over $2,000",
+  "Free priority delivery on heavy freight over EGP 2,000",
   "Certified Hasselblad, Leica & Epson Pro partner",
   "Pro calibration services",
 ];

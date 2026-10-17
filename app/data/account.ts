@@ -256,7 +256,7 @@ export const defaultAuditLogs: AuditLogEntry[] = [
     title: "ESCROW DEPOSIT CONFIRMED",
     timestamp: "08:14 CET",
     summary:
-      "Credit Transfer DCR-99374 executed via Valuta Swift MARX. $45,000 credit line unlocked.",
+      "Credit Transfer DCR-99374 executed via Valuta Swift MARX. EGP 45,000 credit line unlocked.",
     hash: "TX REF: CR-EUPR-V100-YANCE",
     category: "escrow",
     severity: "nominal",

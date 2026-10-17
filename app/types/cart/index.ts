@@ -5,7 +5,7 @@ export interface CartEntry {
 
 export interface Voucher {
   label: string;
-  /** "flat" is dollars off, "percent" is a share of the discounted subtotal. */
+  /** "flat" is a fixed amount off, "percent" is a share of the discounted subtotal. */
   type: "flat" | "percent";
   amount: number;
   minSubtotal?: number;

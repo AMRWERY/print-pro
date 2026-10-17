@@ -44,7 +44,7 @@
     <flagship-showcase :items="flagships" />
 
     <trade-in-banner
-      title="Step up to 100MP with up to $2,500 instant trade credit"
+      title="Step up to 100MP with up to EGP 2,500 instant trade credit"
       body="Bring your current body or back. Get an optical benchmark and trade value on the spot."
       primary="Appraise my kit"
       secondary="Trade terms"

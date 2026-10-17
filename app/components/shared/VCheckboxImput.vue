@@ -106,7 +106,7 @@
  *   <LazyVCheckboxImput v-model="terms" name="terms" :rules="mustAccept('…')">I agree…</LazyVCheckboxImput>
  *   <LazyVCheckboxImput v-model="picked" value="canon" label="Canon" />        array of values
  *   <LazyVCheckboxImput :model-value="all" :indeterminate="some && !all" label="Select all" />
- *   <LazyVCheckboxImput v-model="gift" boxed label="Gift wrap" description="Adds $5" />
+ *   <LazyVCheckboxImput v-model="gift" boxed label="Gift wrap" description="Adds EGP 5" />
  *
  * - `v-model`: boolean, or an array when `value` is given (the value is toggled in the array).
  * - `boxed` turns the whole row into a card that highlights when checked.
