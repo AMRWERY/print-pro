@@ -109,9 +109,9 @@ export const flagships: Flagship[] = [
       { label: "Stabilisation", value: "5.5 stops" },
       { label: "Capture", value: "16-bit 3FR" },
     ],
-    action: "Acquire system",
+    action: "Add to Cart",
     secondary: "Compare specs",
-    icon: "lucide:camera",
+    image: "/img/prod-01.png",
   },
   {
     id: "iq4-achro",
@@ -129,7 +129,7 @@ export const flagships: Flagship[] = [
       { label: "Platform", value: "Infinity" },
     ],
     action: "Request white-glove consult",
-    icon: "lucide:scan",
+    image: "/img/prod-02.png",
   },
 ];
 
@@ -177,6 +177,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.9,
     reviews: 38,
     price: 8199,
+    image: "/img/prod-01.png",
   }),
   cam({
     id: "gfx100ii",
@@ -194,6 +195,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.8,
     reviews: 29,
     price: 7499,
+    image: "/img/prod-02.png",
   }),
   cam({
     id: "iq4-150",
@@ -211,7 +213,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 5,
     reviews: 9,
     price: 41990,
-    icon: "lucide:scan",
+    image: "/img/prod-03.png",
   }),
   cam({
     id: "iq4-achro",
@@ -229,7 +231,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 5,
     reviews: 6,
     price: 37990,
-    icon: "lucide:scan",
+    image: "/img/prod-03.png",
   }),
   cam({
     id: "cfv100c",
@@ -247,6 +249,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.8,
     reviews: 11,
     price: 7299,
+    image: "/img/prod-04.png",
   }),
   cam({
     id: "alexa35",
@@ -264,7 +267,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.9,
     reviews: 7,
     price: 64500,
-    icon: "lucide:clapperboard",
+    image: "/img/prod-05.png",
   }),
   cam({
     id: "m11-mono",
@@ -282,6 +285,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.9,
     reviews: 14,
     price: 7450,
+    image: "/img/prod-06.png",
   }),
   cam({
     id: "alpa-12tc",
@@ -299,7 +303,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.7,
     reviews: 5,
     price: 5480,
-    icon: "lucide:move-3d",
+    image: "/img/prod-07.png",
   }),
   cam({
     id: "sl3",
@@ -317,6 +321,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.7,
     reviews: 22,
     price: 6995,
+    image: "/img/prod-08.png",
   }),
   cam({
     id: "907x",
@@ -334,6 +339,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.7,
     reviews: 26,
     price: 6399,
+    image: "/img/prod-09.png",
   }),
   cam({
     id: "gfx50s",
@@ -351,6 +357,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.6,
     reviews: 31,
     price: 3999,
+    image: "/img/prod-01.png",
   }),
   cam({
     id: "cambo-actus",
@@ -368,7 +375,7 @@ export const cameraProducts: CameraProduct[] = [
     rating: 4.6,
     reviews: 8,
     price: 4750,
-    icon: "lucide:move-3d",
+    image: "/img/prod-02.png",
   }),
 ];
 

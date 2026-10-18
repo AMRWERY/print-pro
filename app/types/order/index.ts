@@ -49,3 +49,22 @@ export interface Order {
   /** Short code the customer quotes when tracking the order. */
   pin: string;
 }
+
+export interface Step {
+  key: string;
+  title: string;
+  body: string;
+  status: StepStatus;
+  at?: Date | null;
+}
+
+export type StepStatus = "done" | "current" | "queued";
+
+export interface TimelineStep {
+  key: string;
+  title: string;
+  body: string;
+  status: StepStatus;
+  /** Shown as the time for the step; null means "in progress". */
+  when: Date | null;
+}

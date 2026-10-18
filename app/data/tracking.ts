@@ -1,7 +1,7 @@
 import { addWorkingDays, estimatedHandover } from "~/data/order";
-import type { StepStatus } from "~/data/order";
+import type { StepStatus } from "~/types/order";
 import type { Order } from "~/types/order";
-import type { TrackStage } from "~/types/track-order";
+import type { TrackStage, TrackEvent, TrackState } from "~/types/track-order";
 
 // There is no carrier feed yet, so tracking is worked out from the order itself and the
 // current time: each stage has a planned completion time and "now" decides where it is.
@@ -53,30 +53,30 @@ export const trackingStages = (o: Order, now: Date): TrackStage[] => {
     },
     pickup
       ? {
-          key: "ready",
-          title: "Ready for pickup",
-          body: "Waiting at our NYC bench. Bring photo ID and your order number.",
-          at: t4,
-        }
+        key: "ready",
+        title: "Ready for pickup",
+        body: "Waiting at our NYC bench. Bring photo ID and your order number.",
+        at: t4,
+      }
       : {
-          key: "transit",
-          title: "In transit",
-          body: `${o.delivery.label}: handed to the carrier, temperature-controlled.`,
-          at: t4,
-        },
+        key: "transit",
+        title: "In transit",
+        body: `${o.delivery.label}: handed to the carrier, temperature-controlled.`,
+        at: t4,
+      },
     pickup
       ? {
-          key: "done",
-          title: "Collected",
-          body: "Handed over to the consignee.",
-          at: t5,
-        }
+        key: "done",
+        title: "Collected",
+        body: "Handed over to the consignee.",
+        at: t5,
+      }
       : {
-          key: "done",
-          title: "Delivered",
-          body: "Handed over to the consignee, signature on delivery.",
-          at: t5,
-        },
+        key: "done",
+        title: "Delivered",
+        body: "Handed over to the consignee, signature on delivery.",
+        at: t5,
+      },
   ];
 
   let currentFound = false;
@@ -90,8 +90,6 @@ export const trackingStages = (o: Order, now: Date): TrackStage[] => {
     return { ...d, n: i + 1, status };
   });
 };
-
-export type TrackState = "processing" | "in-transit" | "ready" | "delivered";
 
 export const trackingState = (
   o: Order,
@@ -114,12 +112,6 @@ export const trackingState = (
     icon: "lucide:loader-circle",
   };
 };
-
-export interface TrackEvent {
-  at: Date;
-  title: string;
-  body: string;
-}
 
 /** Completed stages, newest first. */
 export const trackingEvents = (stages: TrackStage[]): TrackEvent[] =>

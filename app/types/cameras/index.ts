@@ -41,10 +41,14 @@ export interface Flagship {
   specs: { label: string; value: string }[];
   action: string;
   secondary?: string;
-  icon: string;
+  icon?: string;
   image?: string;
 }
 
-export type InventorySort = (typeof inventorySortOptions)[number]["key"];
+export type InventorySort =
+  | "featured"
+  | "price-asc"
+  | "price-desc"
+  | "resolution";
 
 export type Facet = "sub" | "sensor" | "mount" | "availability";

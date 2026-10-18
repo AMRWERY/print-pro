@@ -26,16 +26,10 @@ import { formatWhen } from "~/data/order";
 import type { StepStatus } from "~/data/order";
 import { trackingStages } from "~/data/tracking";
 import type { RequisitionOrder } from "~/types/account";
-
-interface Step {
-  key: string;
-  title: string;
-  body: string;
-  status: StepStatus;
-  at?: Date | null;
-}
+import type { Step } from "~/types/order";
 
 const props = defineProps<{ order: RequisitionOrder }>();
+
 const { sourceOrder, now } = useAccount();
 
 // Checkout orders use their real schedule; demo history gets stages that match its status.

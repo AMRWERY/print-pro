@@ -1,5 +1,5 @@
 import { countries } from "~/data/checkout";
-import type { Order } from "~/types/order";
+import type { Order, TimelineStep } from "~/types/order";
 
 const isWeekend = (d: Date) => d.getDay() === 0 || d.getDay() === 6;
 
@@ -28,17 +28,6 @@ export const formatWhen = (d: Date, withTime = true) =>
   });
 
 export const countryName = (code: string) => countries.find((c) => c.code === code)?.name ?? code;
-
-export type StepStatus = "done" | "current" | "queued";
-
-export interface TimelineStep {
-  key: string;
-  title: string;
-  body: string;
-  status: StepStatus;
-  /** Shown as the time for the step; null means "in progress". */
-  when: Date | null;
-}
 
 /** The sequence an order goes through. Steps are estimates until there is a real backend. */
 export const orderTimeline = (o: Order): TimelineStep[] => {
