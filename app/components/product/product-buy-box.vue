@@ -85,7 +85,7 @@
             :class="added ? 'animate-icon-pop' : 'icon-bob'"
             aria-hidden="true"
           />
-          {{ added ? "Added to order" : "Acquire engine" }}
+          {{ added ? "Added to order" : "Add to cart" }}
         </LazyVButton>
         <LazyVButton variant="icon"
           class="h-12 w-12"
@@ -152,7 +152,7 @@
         :disabled="added"
         @click="acquire"
       >
-        {{ added ? "Added" : "Acquire" }}
+        {{ added ? "Added" : "Add to cart" }}
       </LazyVButton>
     </div>
   </Transition>

@@ -132,7 +132,7 @@
               :class="added ? 'animate-icon-pop' : 'icon-bob'"
               aria-hidden="true"
             />
-            <span aria-live="polite">{{ added ? "Added" : "Acquire" }}</span>
+            <span aria-live="polite">{{ added ? "Added" : "Add to cart" }}</span>
           </LazyVButton>
         </div>
       </div>

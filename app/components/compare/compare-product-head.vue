@@ -87,7 +87,6 @@
 
     <div class="mt-auto space-y-2 pt-1">
       <LazyVButton variant="primary" block
-       
         :disabled="added"
         @click="acquire"
       >
@@ -100,9 +99,9 @@
         />
         {{ added ? "Added" : profile.primary }}
       </LazyVButton>
+
       <LazyVButton variant="secondary" block
         :to="`/product/${product.id}`"
-       
         >{{ profile.secondary }}</LazyVButton>
     </div>
   </div>

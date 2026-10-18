@@ -2,5 +2,32 @@
     "i18n-ally.localesPaths": [
         "app/config/i18n",
         "app/config/i18n/locales"
+    ],
+    "cSpell.words": [
+        "achro",
+        "ACMV",
+        "actuations",
+        "actus",
+        "ALEXA",
+        "alpa",
+        "ARRI",
+        "cambo",
+        "Cleanroom",
+        "Colour",
+        "colours",
+        "Hasselblad",
+        "HNCS",
+        "Kufi",
+        "lucide",
+        "mirrorless",
+        "Monochrom",
+        "nuxt",
+        "onaccent",
+        "onprimary",
+        "preorder",
+        "Reem",
+        "stabilisation",
+        "synchronisation",
+        "synchronise"
     ]
 }
