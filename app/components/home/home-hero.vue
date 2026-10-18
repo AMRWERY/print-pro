@@ -47,7 +47,7 @@
         <dl class="grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">
           <div v-for="s in heroStats" :key="s.label">
             <dt class="sr-only">{{ s.label }}</dt>
-            <dd class="font-display text-2xl font-semibold" dir="ltr">
+            <dd class="font-display text-start text-2xl font-semibold" dir="ltr">
               {{ s.value }}
             </dd>
             <dd class="text-xs text-mute">{{ s.label }}</dd>
@@ -61,7 +61,7 @@
           fit="cover"
           label="Hasselblad medium-format camera on a calibration bench"
           size="140"
-          class="aspect-[1697/927] w-full rounded-panel border border-line"
+          class="h-[360px] sm:h-[440px] lg:h-[520px] w-full rounded-panel border border-line"
         />
       </div>
     </div>
