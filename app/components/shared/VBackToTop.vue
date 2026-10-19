@@ -1,9 +1,9 @@
 <template>
   <Transition name="fab">
-    <VButton
+    <LazyVButton
       v-if="visible"
       variant="icon"
-      class="fixed bottom-5 end-5 z-30 h-11 w-11 bg-surface/90 shadow-lg shadow-black/20 backdrop-blur"
+      class="fixed bottom-24 end-6 z-30 h-11 w-11 bg-surface/90 shadow-lg shadow-black/20 backdrop-blur"
       aria-label="Back to top"
       @click="toTop"
     >
@@ -13,7 +13,7 @@
         class="icon-lift"
         aria-hidden="true"
       />
-    </VButton>
+    </LazyVButton>
   </Transition>
 </template>
 
