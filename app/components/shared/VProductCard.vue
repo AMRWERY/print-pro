@@ -109,7 +109,7 @@
       </ul>
 
       <div
-        class="mt-auto flex items-end justify-between gap-3 border-t border-line pt-4"
+        class="mt-auto flex flex-wrap items-end justify-between gap-x-3 gap-y-3 border-t border-line pt-4"
       >
         <div>
           <p class="meta">
@@ -119,9 +119,9 @@
             {{ money.format(product.price) }}
           </p>
         </div>
-        <div class="relative z-10 flex items-center gap-2">
+        <div class="relative z-10 flex min-w-[9rem] grow items-center gap-2">
           <LazyVButton variant="primary"
-            class="min-w-[6.5rem]"
+            class="w-full whitespace-nowrap"
             :disabled="added"
             @click="acquire"
           >
