@@ -92,13 +92,68 @@
 
       <div
         v-else
-        class="space-y-2 rounded-card border border-line bg-raised p-4 text-sm text-mute"
+        class="space-y-4 rounded-card border border-line bg-raised p-4 text-sm text-mute"
       >
         <p class="font-medium text-paper">{{ method.label }}</p>
+
+        <div
+          v-if="f.payment === 'vodafone'"
+          class="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line bg-surface p-3"
+        >
+          <div>
+            <p class="eyebrow">Send to this Vodafone Cash number</p>
+            <a
+              :href="`tel:${VODAFONE_CASH_NUMBER}`"
+              dir="ltr"
+              class="mt-1 block font-mono text-xl font-semibold tracking-wide text-paper"
+              >{{ VODAFONE_CASH_NUMBER }}</a
+            >
+          </div>
+          <LazyVButton
+            type="button"
+            variant="secondary"
+            :icon="copied ? 'lucide:check' : 'lucide:copy'"
+            @click="copy(VODAFONE_CASH_NUMBER)"
+          >
+            <span aria-live="polite">{{ copied ? "Copied" : "Copy number" }}</span>
+          </LazyVButton>
+        </div>
+
+        <div
+          v-else-if="f.payment === 'instapay'"
+          class="flex flex-col items-center gap-4 rounded-control border border-line bg-surface p-4 sm:flex-row sm:items-start"
+        >
+          <img
+            v-if="instapayQr"
+            :src="instapayQr"
+            width="176"
+            height="176"
+            alt="InstaPay QR code. Scan it with your banking app to pay."
+            class="h-44 w-44 shrink-0 rounded-control bg-white p-2"
+          />
+          <div
+            v-else
+            class="h-44 w-44 shrink-0 animate-pulse rounded-control bg-line"
+            aria-hidden="true"
+          />
+          <div class="space-y-2">
+            <p class="eyebrow">Scan with your InstaPay app</p>
+            <ol class="list-decimal space-y-1 ps-4">
+              <li>Open InstaPay or your bank's app and choose Scan QR.</li>
+              <li>Point the camera at this code and confirm the amount.</li>
+              <li>Place the order so we can match your transfer.</li>
+            </ol>
+            <p class="text-xs">
+              Or send to
+              <span dir="ltr" class="font-mono text-paper">{{ INSTAPAY_ADDRESS }}</span>
+            </p>
+          </div>
+        </div>
+
         <p>
-          Place the order and we'll email you the {{ method.label }} transfer
-          details and reference. Your items are reserved for 5 business days
-          while we wait for the transfer.
+          Place the order and we'll email you the transfer reference to quote.
+          Your items are reserved for 5 business days while we wait for the
+          transfer.
         </p>
       </div>
 
@@ -119,7 +174,15 @@
 </template>
 
 <script lang="ts" setup>
+import { useQRCode } from "@vueuse/integrations/useQRCode";
 import { paymentMethods } from "~/data/checkout";
+
+const instapayQr = useQRCode(INSTAPAY_QR_PAYLOAD, {
+  width: 352,
+  margin: 0,
+  errorCorrectionLevel: "M",
+});
+const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 
 const state = useCheckoutState();
 const f = state.form;

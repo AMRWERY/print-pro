@@ -55,7 +55,7 @@ export default defineNuxtConfig({
     optimizeDeps: {
       // Vite 8's dep scan can't resolve "#components" inside @nuxtjs/i18n
       noDiscovery: true,
-      include: ["vue", "vue-router", "pinia", "@vueuse/core", "vee-validate"],
+      include: ["vue", "vue-router", "pinia", "@vueuse/core", "vee-validate", "qrcode"],
     },
   },
   css: ["~/assets/css/main.css"],
