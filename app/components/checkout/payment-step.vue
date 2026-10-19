@@ -15,7 +15,7 @@
         or sent anywhere.
       </p>
 
-      <fieldset class="grid gap-2 sm:grid-cols-2">
+      <fieldset class="grid gap-2 sm:grid-cols-3">
         <legend class="sr-only">Payment method</legend>
         <LazyVRadioInput
           v-for="m in paymentMethods"
@@ -27,12 +27,6 @@
           label-class="items-center"
         >
           <span class="flex items-center gap-3">
-            <Icon
-              :name="m.icon"
-              size="20"
-              class="text-accent"
-              aria-hidden="true"
-            />
             <span>
               <span class="label">{{ m.label }}</span>
               <span class="block text-xs text-mute">{{ m.note }}</span>
@@ -100,11 +94,11 @@
         v-else
         class="space-y-2 rounded-card border border-line bg-raised p-4 text-sm text-mute"
       >
-        <p class="font-medium text-paper">Wire transfer or escrow</p>
+        <p class="font-medium text-paper">{{ method.label }}</p>
         <p>
-          Place the order to receive wire instructions by email. Your 2% saving
-          is applied to the order total, and equipment is reserved for 5
-          business days while we wait for funds.
+          Place the order and we'll email you the {{ method.label }} transfer
+          details and reference. Your items are reserved for 5 business days
+          while we wait for the transfer.
         </p>
       </div>
 
@@ -130,9 +124,13 @@ import { paymentMethods } from "~/data/checkout";
 const state = useCheckoutState();
 const f = state.form;
 
+const method = computed(
+  () => paymentMethods.find((m) => m.id === f.payment) ?? paymentMethods[0]!,
+);
+
 const summary = computed(() =>
   f.payment === "card"
     ? `Card ending ${f.cardNumber.replace(/\D/g, "").slice(-4) || "••••"}`
-    : "Wire transfer / escrow",
+    : method.value.label,
 );
 </script>

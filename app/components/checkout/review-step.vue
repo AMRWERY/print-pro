@@ -54,7 +54,7 @@
             {{
               f.payment === "card"
                 ? `Card ending ${f.cardNumber.replace(/\D/g, "").slice(-4)}`
-                : "Wire transfer / escrow"
+                : paymentMethods.find((m) => m.id === f.payment)?.label
             }}
           </dd>
         </div>
@@ -95,7 +95,7 @@
 </template>
 
 <script lang="ts" setup>
-import { countries, deliveryOptions } from "~/data/checkout";
+import { countries, deliveryOptions, paymentMethods } from "~/data/checkout";
 
 const props = defineProps<{
   shipping: number;

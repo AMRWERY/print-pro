@@ -156,8 +156,8 @@
         class="text-xs"
         :disabled="!totals.units"
       >
-        <Icon name="lucide:landmark" size="14" aria-hidden="true" />Wire
-        transfer / escrow (save 2%)
+        <Icon name="lucide:smartphone" size="14" aria-hidden="true" />Pay with
+        Vodafone Cash / Instapay
       </LazyVButton>
 
       <p

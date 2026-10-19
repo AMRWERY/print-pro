@@ -1,3 +1,5 @@
+import type { PaymentMethodId } from "~/types/checkout";
+
 export interface OrderItem {
   key: string;
   id: string;
@@ -19,7 +21,6 @@ export interface OrderAmounts {
   volume: number;
   voucher: number;
   voucherLabel?: string;
-  wire: number;
   shipping: number;
   tax: number;
   total: number;
@@ -42,7 +43,7 @@ export interface Order {
     country: string;
   };
   delivery: { id: string; label: string; note: string; days: number };
-  payment: { id: "card" | "wire"; label: string; last4?: string };
+  payment: { id: PaymentMethodId; label: string; last4?: string };
   notes?: string;
   items: OrderItem[];
   amounts: OrderAmounts;

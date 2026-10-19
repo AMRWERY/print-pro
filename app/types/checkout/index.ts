@@ -4,10 +4,17 @@ export interface CheckoutAmounts {
   volume: number;
   voucher: number;
   voucherLabel?: string;
-  wire: number;
   shipping: number;
   tax: number;
   total: number;
+}
+
+export type PaymentMethodId = "card" | "vodafone" | "instapay";
+
+export interface PaymentMethod {
+  id: PaymentMethodId;
+  label: string;
+  note: string;
 }
 
 export interface DeliveryOption {

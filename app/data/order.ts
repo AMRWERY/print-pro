@@ -39,9 +39,9 @@ export const orderTimeline = (o: Order): TimelineStep[] => {
       key: "auth",
       title: "Order authorized",
       body:
-        o.payment.id === "wire"
-          ? "Your reservation is confirmed. Funds are due within 5 business days."
-          : "Payment received and the order is registered with the bench.",
+        o.payment.id === "card"
+          ? "Payment received and the order is registered with the bench."
+          : "Your reservation is confirmed. Complete the transfer within 5 business days.",
       status: "done",
       when: created,
     },

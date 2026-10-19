@@ -27,10 +27,6 @@
         </dt>
         <dd class="font-mono">−{{ money.format(amounts.voucher) }}</dd>
       </div>
-      <div v-if="amounts.wire" class="flex justify-between gap-4 text-accent">
-        <dt>Wire transfer saving (2%)</dt>
-        <dd class="font-mono">−{{ money.format(amounts.wire) }}</dd>
-      </div>
       <div class="flex justify-between gap-4">
         <dt class="text-mute">Delivery</dt>
         <dd class="font-mono" :class="amounts.shipping === 0 && 'text-success'">
@@ -58,7 +54,7 @@
           {{
             payment.id === "card"
               ? `${payment.label} · ending ${payment.last4}`
-              : "Wire transfer / escrow"
+              : payment.label
           }}
         </p>
       </div>

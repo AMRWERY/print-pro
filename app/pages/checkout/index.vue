@@ -106,7 +106,6 @@ import {
   deliveryOptions,
   deliveryPrices,
   paymentMethods,
-  WIRE_DISCOUNT,
 } from "~/data/checkout";
 import { pricing } from "~/data/cart";
 import { findProduct } from "~/data/product-details";
@@ -150,9 +149,7 @@ const prices = computed(() => ({
 }));
 
 const amounts = computed(() => {
-  const wire =
-    f.payment === "wire" ? round2(discounted.value * WIRE_DISCOUNT) : 0;
-  const taxable = discounted.value - wire;
+  const taxable = discounted.value;
   const shipping = prices.value[f.delivery];
   const tax = round2(taxable * pricing.taxRate);
   return {
@@ -161,7 +158,6 @@ const amounts = computed(() => {
     volume: totals.volumeDiscount,
     voucher: totals.voucherDiscount,
     voucherLabel: totals.voucher?.label,
-    wire,
     shipping,
     tax,
     total: round2(taxable + shipping + tax),

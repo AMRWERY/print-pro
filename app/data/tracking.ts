@@ -34,9 +34,9 @@ export const trackingStages = (o: Order, now: Date): TrackStage[] => {
       key: "auth",
       title: "Order authorized",
       body:
-        o.payment.id === "wire"
-          ? "Reservation confirmed; funds due within 5 business days."
-          : "Payment received and the order registered.",
+        o.payment.id === "card"
+          ? "Payment received and the order registered."
+          : "Reservation confirmed; transfer due within 5 business days.",
       at: t1,
     },
     {

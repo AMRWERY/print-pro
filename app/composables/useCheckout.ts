@@ -1,3 +1,5 @@
+import type { PaymentMethodId } from "~/types/checkout";
+
 const KEY: InjectionKey<ReturnType<typeof createCheckout>> = Symbol("checkout");
 
 /**
@@ -20,7 +22,7 @@ const createCheckout = () => {
     postal: "",
     country: "US",
     delivery: "crated" as "crated" | "express" | "pickup",
-    payment: "card" as "card" | "wire",
+    payment: "card" as PaymentMethodId,
     cardName: "",
     cardNumber: "",
     cardExpiry: "",

@@ -51,7 +51,7 @@
             {{
               paid
                 ? `Paid · card ending ${order.payment.last4}`
-                : "Awaiting wire transfer"
+                : `Awaiting ${order.payment.label} transfer`
             }}
           </dd>
         </div>

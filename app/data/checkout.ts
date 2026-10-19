@@ -1,4 +1,4 @@
-import type { DeliveryOption } from "~/types/checkout";
+import type { DeliveryOption, PaymentMethod } from "~/types/checkout";
 
 export const countries = [
   { code: "US", name: "United States" },
@@ -39,22 +39,23 @@ export const deliveryOptions: DeliveryOption[] = [
 /** Flat price for options that don't follow the free-freight rule. */
 export const deliveryPrices = { express: 349, pickup: 0 } as const;
 
-export const paymentMethods = [
+export const paymentMethods: PaymentMethod[] = [
   {
     id: "card",
-    label: "Credit or debit card",
-    note: "Visa, Mastercard, Amex",
-    icon: "lucide:credit-card",
+    label: "Card / bank payment",
+    note: "National Bank of Egypt",
   },
   {
-    id: "wire",
-    label: "Wire transfer / escrow",
-    note: "Save 2% on the order",
-    icon: "lucide:landmark",
+    id: "vodafone",
+    label: "Vodafone Cash",
+    note: "Transfer from your mobile wallet",
   },
-] as const;
-
-export const WIRE_DISCOUNT = 0.02;
+  {
+    id: "instapay",
+    label: "Instapay",
+    note: "Instant bank transfer",
+  },
+];
 
 export const checkoutSteps = [
   { n: 1, title: "Contact & address", short: "Address" },
