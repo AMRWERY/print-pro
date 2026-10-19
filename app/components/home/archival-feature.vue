@@ -12,7 +12,7 @@
         fit="cover"
         label="Hasselblad medium-format camera on a calibration bench"
         size="140"
-        class="aspect-[1697/927] w-full rounded-panel border border-line"
+        class="h-[360px] w-full rounded-panel border border-line sm:h-[440px] lg:h-[520px]"
       />
 
       <div v-reveal class="space-y-6">
@@ -53,8 +53,6 @@
             <dd class="font-display text-xl" dir="ltr">{{ s.value }}</dd>
           </div>
         </dl>
-
-        <LazyVButton variant="primary">Request samples</LazyVButton>
       </div>
     </div>
   </section>
