@@ -1,9 +1,9 @@
 export const studioTags = [
-  "Main studio A",
-  "Bay 2 splash lab",
-  "Printworks archival wing",
-  "Street & doc kit",
-  "Museum print runs",
+  "Head office",
+  "Branch office",
+  "Print room",
+  "Reception",
+  "Home office",
   "Unassigned",
 ];
 
@@ -14,12 +14,12 @@ export const wishlistSortOptions = [
   { key: "name", label: "Name (A–Z)" },
 ] as const;
 
-/** One-click sample so a new visitor can see a populated registry. */
-export const sampleRegistry = ["x2d", "pro11", "p9570", "summilux", "hahnemuhle-308"];
+/** One-click sample so a new visitor can see a populated wishlist. */
+export const sampleRegistry = ["corex-laser-450c", "kopira-pro-a3-35", "nordjet-lf-44", "corex-toner-210-hy", "printa-tank-500"];
 
 export const wishlistAssurances = [
-  { icon: "lucide:flask-conical", title: "Optical bench testing", body: "Every lens, generator and medium-format chassis is bench-tested and collimated before it leaves us." },
-  { icon: "lucide:truck", title: "Bonded vault dispatch", body: "Temperature-controlled crated transport for high-precision engines and fragile sensor assemblies." },
-  { icon: "lucide:shield-check", title: "ISO 9706 archival guarantee", body: "Substrates certified acid-free and calcium-carbonate buffered for 200+ year museum life." },
-  { icon: "lucide:users", title: "Collaborative registry", body: "Share your manifest with studio managers, DITs and purchasing officers." },
+  { icon: "lucide:flask-conical", title: "Tested before dispatch", body: "Every printer and photocopier is test-printed and checked by a technician before it leaves us." },
+  { icon: "lucide:truck", title: "Delivery and installation", body: "Heavy machines are delivered on a pallet, installed on site and connected to your network." },
+  { icon: "lucide:shield-check", title: "Genuine supplies", body: "Original ink, toner and drum units, factory sealed and matched to your model." },
+  { icon: "lucide:users", title: "Share with your team", body: "Share your wishlist with colleagues and purchasing staff before you order." },
 ];

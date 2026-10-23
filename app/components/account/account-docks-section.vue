@@ -5,11 +5,11 @@
         <div class="flex items-center gap-2">
           <span class="h-2 w-2 rounded-full bg-cyan" aria-hidden="true" />
           <h2 id="docks-section-title" class="title-sm sm:text-lg">
-            Receiving Docks &amp; Ports
+            Delivery addresses
           </h2>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          Cleared customs routing and cleanroom RECEIVING ZONES
+          Where your orders are delivered
         </p>
       </div>
 
@@ -36,7 +36,7 @@
 
           <LazyVButton variant="plain" class="font-mono text-xs text-accent transition hover:underline"
             @click="$emit('edit-dock', dock)">
-            EDIT DOCK
+            EDIT
           </LazyVButton>
         </div>
 
@@ -52,10 +52,10 @@
         <div
           class="flex flex-wrap items-center justify-between gap-2 border-t border-line/60 pt-2 font-mono text-1xs">
           <span class="text-mute">
-            Clearance: <span class="text-paper font-semibold">{{ dock.securityClearance }}</span>
+            Receiving: <span class="text-paper font-semibold">{{ dock.securityClearance }}</span>
           </span>
           <span class="text-cyan">
-            Telemetry: {{ dock.telemetry }}
+            Hours: {{ dock.telemetry }}
           </span>
         </div>
       </article>
@@ -67,7 +67,7 @@
         class="flex w-full items-center justify-center gap-2 rounded-control border border-dashed border-line bg-ink/20 py-2.5 meta font-semibold transition hover:border-accent hover:text-paper"
         @click="$emit('deploy-dock')">
         <Icon name="lucide:plus" size="14" />
-        <span>+ DEPLOY NEW RECEIVING PORT / DOCK</span>
+        <span>+ ADD DELIVERY ADDRESS</span>
       </LazyVButton>
     </div>
   </section>

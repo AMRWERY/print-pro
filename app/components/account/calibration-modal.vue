@@ -25,7 +25,7 @@
                 id="calibration-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-accent"
               >
-                Initiate calibration order // ISO 12647-7
+                Order supplies
               </h2>
             </div>
             <LazyVButton
@@ -44,13 +44,13 @@
             <LazyVSelectInput
               v-model="form.standard"
               name="cal-standard"
-              label="Target metrology standard"
+              label="Supply type"
               :options="standards"
             />
             <LazyVSelectInput
               v-model="form.substrate"
               name="cal-substrate"
-              label="Substrate & paper profile"
+              label="Machine model"
               :options="substrates"
             />
 
@@ -58,15 +58,15 @@
               <LazyVInput
                 v-model="form.tolerance"
                 name="cal-tolerance"
-                label="Optical tolerance"
+                label="Quantity"
                 required
-                :rules="requiredText('Enter a tolerance, e.g. ΔE ≤ 0.35.')"
-                placeholder="ΔE ≤ 0.35"
+                :rules="requiredText('Enter how many you need, e.g. 2.')"
+                placeholder="e.g. 2"
               />
               <LazyVSelectInput
                 v-model="form.station"
                 name="cal-station"
-                label="Bench station"
+                label="Delivery address"
                 :options="stations"
               />
             </div>
@@ -74,16 +74,16 @@
             <LazyVTextarea
               v-model="form.notes"
               name="cal-notes"
-              label="Special curatorial instructions"
+              label="Notes for our team"
               optional
               rows="3"
-              placeholder="Ink limits, UV filtration, or a custom patch grid (e.g. 1728 patches)"
+              placeholder="Preferred delivery time, colours needed, or anything else we should know"
             />
 
             <div
               class="flex items-center justify-between rounded-control border border-line bg-ink/30 p-3 text-xs text-mute"
             >
-              <span class="font-mono">Estimated bench cost</span>
+              <span class="font-mono">Estimated total</span>
               <span class="title-sm"
                 >EGP 1,450.00</span
               >
@@ -94,7 +94,7 @@
                 >Cancel</LazyVButton
               >
               <LazyVButton type="submit" variant="primary" :loading="submitting"
-                >Submit requisition</LazyVButton
+                >Place order</LazyVButton
               >
             </div>
           </form>
@@ -121,46 +121,29 @@ const emit = defineEmits<{
 }>();
 
 const standards = [
-  {
-    value: "iso-12647-7",
-    label: "ISO 12647-7:2016 Proof Verification (Strict ΔE < 0.35)",
-  },
-  {
-    value: "fogra-51",
-    label: "FOGRA51 / PSO Coated v3 (Optical Brightener Compensated)",
-  },
-  { value: "g7-master", label: "Idealliance G7 Master Print Benchmark" },
+  { value: "toner", label: "Toner cartridges" },
+  { value: "ink", label: "Ink bottles and cartridges" },
+  { value: "drum", label: "Drum units" },
 ];
 
 const substrates = [
-  {
-    value: "hahnemuhle-rag",
-    label: "Hahnemühle Photo Rag 308gsm (100% Cotton, Pure White)",
-  },
-  {
-    value: "canson-platine",
-    label: "Canson Infinity Platine Fibre Rag 310gsm (Baryta Base)",
-  },
-  {
-    value: "ilford-gold",
-    label: "Ilford Galerie Gold Fibre Gloss 310gsm (Gelatin Coated)",
-  },
-  {
-    value: "awagami-kozo",
-    label: "Awagami Kozo Natural 110gsm (Handmade Mulberry)",
-  },
+  { value: "corex-laser-210", label: "Corex Laser 210 Mono" },
+  { value: "corex-laser-450c", label: "Corex Laser 450 Colour" },
+  { value: "kopira-pro-a3-35", label: "Kopira Pro A3 35 ppm Mono" },
+  { value: "printa-tank-500", label: "Printa Tank 500 Ink-Tank" },
+  { value: "nordjet-lf-44", label: 'Nordjet Large-Format 44"' },
 ];
 
 const stations = [
-  { value: "berlin-04", label: "Berlin Station 04 (Köpenicker)" },
-  { value: "nyc-4b", label: "NYC Metropolitan Wing (Dock 4B)" },
+  { value: "head-office", label: "Head office (Cairo)" },
+  { value: "branch", label: "Branch office (Giza)" },
 ];
 
 const form = reactive({
-  standard: "iso-12647-7",
-  substrate: "hahnemuhle-rag",
-  tolerance: "ΔE ≤ 0.35",
-  station: "berlin-04",
+  standard: "toner",
+  substrate: "corex-laser-210",
+  tolerance: "1",
+  station: "head-office",
   notes: "",
 });
 

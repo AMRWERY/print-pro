@@ -127,7 +127,7 @@
           <LazyVSelectInput
             :model-value="tag"
             name="studioTag"
-            label="Studio tag"
+            label="Location tag"
             inline
             label-class="eyebrow shrink-0"
             class="min-w-0 flex-1"

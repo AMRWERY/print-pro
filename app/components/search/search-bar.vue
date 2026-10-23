@@ -19,7 +19,7 @@
         role="combobox"
         autocomplete="off"
         enterkeyhint="search"
-        placeholder="Search cameras, lenses, printers, paper…"
+        placeholder="Search printers, photocopiers, ink, toner…"
         aria-autocomplete="list"
         :aria-expanded="open"
         :aria-controls="uid + '-panel'"

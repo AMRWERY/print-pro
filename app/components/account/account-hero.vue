@@ -1,6 +1,6 @@
 <template>
   <header class="card p-5 sm:p-7 shadow-sm transition-colors duration-200"
-    aria-labelledby="atelier-greeting">
+    aria-labelledby="account-greeting">
     <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-start">
       <!-- Left side: Identity & Greeting -->
       <div class="space-y-3">
@@ -15,19 +15,19 @@
           <span
             class="inline-flex items-center gap-1.5 rounded-control border border-success/30 bg-success-soft px-2.5 py-1 text-success">
             <Icon name="lucide:check-circle" size="13" aria-hidden="true" />
-            ISO 12647-7 Spec Verified
+            Verified business account
           </span>
 
           <span
             class="hidden items-center gap-1.5 rounded-control border border-line bg-raised px-2.5 py-1 text-mute sm:inline-flex">
-            SWISS METROLOGY ID: <span class="text-paper font-semibold">{{ profile.metrologyId }}</span>
+            ACCOUNT ID: <span class="text-paper font-semibold">{{ profile.metrologyId }}</span>
           </span>
         </div>
 
         <div>
-          <h1 id="atelier-greeting"
+          <h1 id="account-greeting"
             class="title-lg lg:text-4xl">
-            Good Morning, {{ profile.name }}.
+            Welcome back, {{ profile.name }}.
           </h1>
           <p class="mt-1 text-sm text-mute">
             {{ profile.title }} —
@@ -36,24 +36,24 @@
         </div>
       </div>
 
-      <!-- Right side: Escrow Vault & Radial Graphic Widget -->
+      <!-- Right side: account credit and radial graphic -->
       <div
         class="flex items-center gap-4 rounded-card border border-line bg-ink/40 p-4 transition duration-200 hover:border-accent/40">
         <div class="space-y-1">
           <p class="eyebrow flex items-center gap-1.5 text-mute">
             <Icon name="lucide:shield-check" size="13" class="text-accent" />
-            ESCROW VAULT AVAILABLE
+            CREDIT AVAILABLE
           </p>
           <div class="title-lg">
             {{ money.format(profile.escrowAvailable) }}
           </div>
           <p class="flex items-center gap-1.5 font-mono text-1xs text-success">
             <Icon name="lucide:zap" size="11" aria-hidden="true" />
-            100% Instant Clearance
+            Available to spend now
           </p>
         </div>
 
-        <!-- Decorative Technical Escrow Radial Ring -->
+        <!-- Decorative credit radial ring -->
         <div class="relative hidden h-16 w-16 shrink-0 place-items-center sm:grid">
           <svg class="h-full w-full -rotate-90" viewBox="0 0 36 36">
             <path class="text-line" stroke-width="3" stroke="currentColor" fill="none"
@@ -72,42 +72,42 @@
       <LazyVButton variant="primary" class="!bg-accent !text-onaccent font-medium shadow-sm hover:brightness-110"
         @click="$emit('initiate-calibration')">
         <span class="h-2 w-2 rounded-full bg-white animate-pulse" aria-hidden="true" />
-        INITIATE CALIBRATION ORDER
+        ORDER SUPPLIES
       </LazyVButton>
 
       <LazyVButton variant="secondary" icon="lucide:box" @click="$emit('book-cleanroom')">
-        BOOK CLEANROOM QA BENCH
+        BOOK A SERVICE VISIT
       </LazyVButton>
 
       <LazyVButton variant="secondary" icon="lucide:truck" @click="$emit('request-courier')">
-        REQUEST CONSIGNMENT COURIER
+        REQUEST A COURIER PICK-UP
       </LazyVButton>
 
       <LazyVButton variant="secondary" icon="lucide:file-text" @click="$emit('view-vat-dossier')">
-        TAX VAT DOSSIER (Q3)
+        VAT INVOICES (Q3)
       </LazyVButton>
     </div>
 
-    <!-- Atelier Specs / Status Grid (4 items) -->
+    <!-- Account status grid (4 items) -->
     <div
       class="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-control border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:credit-card" size="12" class="text-accent" />
-          ESCROW CLEARANCE LINE
+          CREDIT LIMIT
         </dt>
         <dd class="font-display text-base font-semibold text-paper">
-          {{ money.format(profile.escrowLimit) }} ACTIVE
+          {{ money.format(profile.escrowLimit) }} LIMIT
         </dd>
         <dd class="font-mono text-1xs text-accent">
-          Prime Tier Requisitioning
+          Business credit terms
         </dd>
       </div>
 
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:refresh-cw" size="12" class="text-cyan" />
-          METROLOGY AUDIT SYNC
+          LAST ACTIVITY
         </dt>
         <dd class="font-display text-base font-semibold text-paper">
           {{ profile.auditSyncTime }}
@@ -120,7 +120,7 @@
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:map-pin" size="12" class="text-yellow" />
-          ALLOCATED CLEANROOM DOCK
+          DEFAULT DELIVERY ADDRESS
         </dt>
         <dd class="font-display text-base font-semibold text-paper truncate">
           {{ profile.cleanroomDock }}

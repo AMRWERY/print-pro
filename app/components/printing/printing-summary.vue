@@ -1,6 +1,6 @@
 <template>
   <section class="card-compact" aria-labelledby="cost-title">
-    <h2 id="cost-title" class="eyebrow mb-3 text-mute">Itemised cost telemetry</h2>
+    <h2 id="cost-title" class="eyebrow mb-3 text-mute">Itemised cost</h2>
 
     <TransitionGroup name="row" tag="ul" class="space-y-2 text-sm">
       <li v-for="l in price.lines" :key="l.key" class="flex items-start justify-between gap-3">
@@ -10,7 +10,7 @@
     </TransitionGroup>
 
     <div class="mt-4 flex items-end justify-between gap-3 border-t border-line pt-4">
-      <span class="meta uppercase tracking-wider">Total valuation</span>
+      <span class="meta uppercase tracking-wider">Total</span>
       <span class="font-display text-3xl font-bold text-paper" aria-live="polite">{{ money.format(price.total) }}</span>
     </div>
     <p class="mt-1 text-end font-mono text-2xs text-mute">{{ money.format(price.unit) }} per print before discounts and fees</p>
@@ -20,13 +20,13 @@
     </p>
 
     <div class="mt-4 space-y-2">
-      <LazyVButton variant="primary" block size="lg" icon="lucide:shopping-cart" :disabled="!!blocked" @click="add">Add requisition to cart ({{ config.copies }} {{ config.copies === 1 ? "item" : "items" }})</LazyVButton>
+      <LazyVButton variant="primary" block size="lg" icon="lucide:shopping-cart" :disabled="!!blocked" @click="add">Add to cart ({{ config.copies }} {{ config.copies === 1 ? "item" : "items" }})</LazyVButton>
       <LazyVButton variant="secondary" block icon="lucide:zap" :disabled="!!blocked" @click="checkoutNow">Instant checkout</LazyVButton>
     </div>
 
     <p class="mt-3 flex items-start gap-2 text-1xs leading-relaxed text-mute">
       <Icon name="lucide:badge-check" size="14" class="mt-0.5 shrink-0 text-cyan" aria-hidden="true" />
-      Every print ships with a numbered certificate of authenticity and its spectro-verification report.
+      Every order is checked by a technician before it is printed, and we email you if a file needs attention.
     </p>
   </section>
 </template>

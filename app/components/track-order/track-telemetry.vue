@@ -6,11 +6,11 @@
         class="flex items-center gap-2 font-display text-xl"
       >
         <Icon
-          name="lucide:activity"
+          name="lucide:package"
           size="20"
           class="text-accent"
           aria-hidden="true"
-        />Package conditions
+        />Shipment details
       </h2>
       <span
         class="rounded-control border border-yellow/40 bg-yellow-soft px-2 py-0.5 font-mono text-xs text-yellow"
@@ -34,8 +34,8 @@
     </dl>
 
     <p class="mt-3 text-xs text-mute">
-      These readings are simulated for the demo. Once a carrier feed is
-      connected, live shock, humidity and temperature logs will appear here.
+      These details are simulated for the demo. Once a courier feed is
+      connected, live parcel scans will appear here.
     </p>
   </section>
 </template>
@@ -50,19 +50,29 @@ const readings = computed(() => {
   const t = demoTelemetry(props.order);
   return [
     {
-      label: "Shock / G-force",
-      value: t.gForce,
-      unit: "G",
-      note: "Within limit",
+      label: "Parcels",
+      value: String(t.parcels),
+      unit: t.parcels === 1 ? "parcel" : "parcels",
+      note: "All accounted for",
     },
     {
-      label: "Humidity",
-      value: String(t.humidity),
-      unit: "% RH",
-      note: "Stable",
+      label: "Weight",
+      value: String(t.weightKg),
+      unit: "kg",
+      note: "Matches your order",
     },
-    { label: "Crate temperature", value: t.temp, unit: "°C", note: "In range" },
-    { label: "Nitrogen seal", value: t.nitrogen, unit: "atm", note: "Intact" },
+    {
+      label: "Signature",
+      value: t.signature ? "Required" : "Not needed",
+      unit: "",
+      note: "On delivery",
+    },
+    {
+      label: "Insurance",
+      value: String(t.insuredPct),
+      unit: "%",
+      note: "Covered in transit",
+    },
   ];
 });
 </script>

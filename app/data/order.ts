@@ -40,22 +40,22 @@ export const orderTimeline = (o: Order): TimelineStep[] => {
       title: "Order authorized",
       body:
         o.payment.id === "card"
-          ? "Payment received and the order is registered with the bench."
+          ? "Payment received and the order is registered."
           : "Your reservation is confirmed. Complete the transfer within 5 business days.",
       status: "done",
       when: created,
     },
     {
       key: "qa",
-      title: "Bench QA & calibration",
-      body: "A technician checks every item against its spec sheet and prepares the calibration report.",
+      title: "Checked & tested",
+      body: "A technician checks every item against its specification and test-runs it before it is packed.",
       status: "current",
       when: null,
     },
     {
       key: "pack",
-      title: "Protective packaging",
-      body: "Items are sealed in climate-damped crating with shock and humidity loggers.",
+      title: "Packed",
+      body: "Items are wrapped and boxed securely, with cables and starter supplies.",
       status: "queued",
       when: at(addWorkingDays(created, 1), 9),
     },
@@ -63,7 +63,7 @@ export const orderTimeline = (o: Order): TimelineStep[] => {
       key: "ship",
       title: pickup ? "Ready for pickup" : o.delivery.label,
       body: pickup
-        ? "Collect your order from our NYC bench with photo ID and your order number."
+        ? "Collect your order from our Cairo showroom with photo ID and your order number."
         : o.delivery.note,
       status: "queued",
       when: at(addWorkingDays(created, o.delivery.days), pickup ? 10 : 17),
@@ -71,7 +71,7 @@ export const orderTimeline = (o: Order): TimelineStep[] => {
   ];
 };
 
-/** When the order leaves the bench (or is ready to collect). */
+/** When the order leaves our warehouse (or is ready to collect). */
 export const estimatedHandover = (o: Order) => orderTimeline(o).at(-1)!.when!;
 
 export const orderSupport = {

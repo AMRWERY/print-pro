@@ -17,7 +17,7 @@
         >
           <header class="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
             <h2 id="cart-drawer-title" class="font-display text-xl">
-              Studio cart
+              Your cart
               <span class="font-mono text-sm text-mute">({{ cart.count }} {{ cart.count === 1 ? "unit" : "units" }})</span>
             </h2>
             <LazyVButton variant="icon" ref="closeBtn" aria-label="Close cart" @click="close">
@@ -34,7 +34,7 @@
             icon="lucide:shopping-cart"
             caption="0 UNITS"
             title="Your cart is empty"
-            description="Add instruments from the catalog to start a procurement manifest."
+            description="Add printers, photocopiers or supplies from the catalog to start an order."
           >
             <LazyVButton variant="primary" to="/products" @click="close">Browse the catalog</LazyVButton>
           </LazyVEmptyState>
@@ -73,12 +73,12 @@
             <footer class="space-y-3 border-t border-line p-4">
               <!-- Free freight progress -->
               <div v-if="remaining > 0" class="space-y-1.5">
-                <p class="text-xs text-mute">Add <span class="font-medium text-paper">{{ money.format(remaining) }}</span> more for free climate-crated freight.</p>
+                <p class="text-xs text-mute">Add <span class="font-medium text-paper">{{ money.format(remaining) }}</span> more for free delivery.</p>
                 <div class="h-1.5 overflow-hidden rounded-full bg-raised" role="progressbar" :aria-valuenow="Math.round(progress)" aria-valuemin="0" aria-valuemax="100" aria-label="Progress toward free freight">
                   <div class="h-full rounded-full bg-accent transition-[width] duration-300" :style="{ width: `${progress}%` }" />
                 </div>
               </div>
-              <p v-else class="flex items-center gap-1.5 text-xs text-success"><Icon name="lucide:circle-check" size="14" aria-hidden="true" />Free climate-crated freight unlocked.</p>
+              <p v-else class="flex items-center gap-1.5 text-xs text-success"><Icon name="lucide:circle-check" size="14" aria-hidden="true" />Free delivery unlocked.</p>
 
               <p class="flex items-end justify-between gap-3">
                 <span class="eyebrow !text-paper">Subtotal</span>
@@ -86,7 +86,7 @@
               </p>
               <p class="text-xs text-mute">Freight, discounts and tax are calculated on the cart page.</p>
 
-              <!-- More than four lines: the full manifest lives on the cart page -->
+              <!-- More than four lines: the full cart lives on the cart page -->
               <template v-if="hiddenCount > 0">
                 <p class="rounded-control border border-line bg-raised p-2 text-center text-xs text-mute" role="status">
                   Showing {{ MAX_VISIBLE }} of {{ entries.length }} items. {{ hiddenCount }} more in your cart.
@@ -98,7 +98,7 @@
               </template>
               <template v-else>
                 <LazyVButton variant="primary" size="lg" block @click="checkout">
-                  <Icon name="lucide:lock" size="16" aria-hidden="true" />Secure studio checkout
+                  <Icon name="lucide:lock" size="16" aria-hidden="true" />Secure checkout
                 </LazyVButton>
                 <p v-if="notice" class="rounded-control border border-line bg-raised p-2 text-xs text-mute" role="status">{{ notice }}</p>
               </template>

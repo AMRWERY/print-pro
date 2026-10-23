@@ -25,7 +25,7 @@
                 id="dock-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"
               >
-                {{ dock ? "Edit receiving port" : "Deploy new receiving port" }}
+                {{ dock ? "Edit delivery address" : "Add delivery address" }}
               </h2>
             </div>
 
@@ -46,12 +46,12 @@
               ref="first"
               v-model="name"
               name="dock-name"
-              label="Port / atelier identifier"
+              label="Address name"
               required
               :rules="
-                requiredText('Name this port so you can pick it at checkout.')
+                requiredText('Name this address so you can pick it at checkout.')
               "
-              placeholder="e.g. Zurich Archival Ingest Bay 02"
+              placeholder="e.g. Head office"
             />
 
             <LazyVTextarea
@@ -63,41 +63,41 @@
               :rules="
                 minLengthText(
                   10,
-                  'Enter the full street, city and postal code the carrier should deliver to.',
+                  'Enter the full street, city and postal code the courier should deliver to.',
                 )
               "
-              placeholder="Street, building, city, postal code, wing"
+              placeholder="Street, building, floor, city, postal code"
             />
 
             <div class="grid gap-3 sm:grid-cols-2">
               <LazyVSelectInput
                 v-model="securityClearance"
                 name="dock-clearance"
-                label="Security clearance"
+                label="Receiving hours"
                 :options="clearances"
               />
 
               <LazyVInput
                 v-model="bondedAgent"
                 name="dock-agent"
-                label="Bonded agent"
+                label="Contact person"
                 optional
-                placeholder="#CH-882"
+                placeholder="e.g. Mona, reception"
               />
             </div>
 
             <LazyVInput
               v-model="climateSpecs"
               name="dock-climate"
-              label="Climate specs"
+              label="Delivery instructions"
               optional
-              placeholder="Constant 18°C / 45% relative humidity"
+              placeholder="e.g. Use the loading bay at the rear"
             />
 
             <LazyVCheckboxImput
               v-model="primary"
               name="dock-primary"
-              label="Use as my primary receiving port"
+              label="Use as my default delivery address"
             />
 
             <div class="flex items-center justify-end gap-3 pt-2">
@@ -106,7 +106,7 @@
               >
 
               <LazyVButton type="submit" variant="primary" :loading="saving"
-                >Save port</LazyVButton
+                >Save address</LazyVButton
               >
             </div>
           </form>
@@ -124,12 +124,9 @@ const props = defineProps<{ open: boolean; dock?: ReceivingDock | null }>();
 const emit = defineEmits<{ close: []; saved: [dock: ReceivingDock] }>();
 
 const clearances = [
-  {
-    value: "LEVEL 4 CONSERVATOR",
-    label: "Level 4 Conservator (Diplomatic Seal)",
-  },
-  { value: "DE-METRX-4", label: "DE-METRX-4 Cleanroom Transit" },
-  { value: "LEVEL 3 RESEARCH", label: "Level 3 Research Fellow" },
+  { value: "WEEKDAYS 08:00-17:00", label: "Weekdays 08:00 – 17:00" },
+  { value: "24/7 RECEPTION", label: "24/7 reception" },
+  { value: "BY APPOINTMENT", label: "By appointment" },
 ];
 
 const name = ref("");
@@ -143,7 +140,7 @@ const first = ref<{ focus: () => void } | null>(null);
 
 const { validate, resetForm } = useForm();
 
-// Every time the dialog opens, start from the dock being edited (or a blank one).
+// Every time the dialog opens, start from the address being edited (or a blank one).
 watch(
   () => props.open,
   async (open) => {
@@ -174,13 +171,13 @@ const submitDock = async () => {
   emit("saved", {
     id: props.dock?.id ?? `dock-${Date.now()}`,
     name: name.value.trim(),
-    code: props.dock?.code ?? "CUSTOM-DOCK",
-    typeBadge: props.dock?.typeBadge ?? "CUSTOM ATELIER",
-    clearanceBadge: props.dock?.clearanceBadge ?? "ISO 5 AIRLOCK",
+    code: props.dock?.code ?? "CUSTOM-ADDRESS",
+    typeBadge: props.dock?.typeBadge ?? "DELIVERY ADDRESS",
+    clearanceBadge: props.dock?.clearanceBadge ?? "SIGNATURE REQUIRED",
     address: address.value.trim(),
-    climateSpecs: climateSpecs.value.trim() || "Standard climate control",
+    climateSpecs: climateSpecs.value.trim() || "No special instructions",
     securityClearance: securityClearance.value,
-    telemetry: props.dock?.telemetry ?? "18.9°C / 44.0% RH",
+    telemetry: props.dock?.telemetry ?? "Mon–Fri · 08:00–17:00",
     bondedAgent: bondedAgent.value.trim() || undefined,
     isPrimary: !!primary.value,
   });

@@ -7,10 +7,10 @@
         <h1
           class="title-lg"
         >
-          Orders &amp; Calibrations
+          Orders &amp; Service
         </h1>
         <p class="mt-1 text-sm text-mute">
-          Every requisition placed with Lumen &amp; Press, with live status.
+          Every order you placed with PrintPro, with live status.
         </p>
       </div>
       <LazyVButton variant="secondary" icon="lucide:download" @click="exportCsv"
@@ -69,7 +69,7 @@
       <LazyVEmptyState
         v-else
         icon="lucide:receipt-text"
-        eyebrow="LEDGER :: ORDERS"
+        eyebrow="ORDERS :: HISTORY"
         :tag="orders.length ? 'FILTERED' : 'EMPTY'"
         :title="
           orders.length ? 'No orders match these filters' : 'No orders yet'
@@ -199,7 +199,7 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "Orders & Calibrations — Lumen & Press",
-  description: "Your requisitions, with live status and paperwork.",
+  title: "Orders & Service — PrintPro",
+  description: "Your orders, with live status and documents.",
 });
 </script>

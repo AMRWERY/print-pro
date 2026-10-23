@@ -56,11 +56,11 @@ const { file } = usePrintConfig();
 const reduce = usePreferredReducedMotion();
 
 const steps = [
-  { id: "upload", label: "Asset upload", hint: "Preflight" },
-  { id: "dimensions", label: "Dimensions & substrate", hint: "Size · paper" },
-  { id: "engine", label: "Colour engine & duplex", hint: "Ink · sides" },
-  { id: "finishing", label: "Binding & finishing", hint: "Edges · folio" },
-  { id: "fulfilment", label: "Fulfilment", hint: "Courier · pickup" },
+  { id: "upload", label: "Upload", hint: "File check" },
+  { id: "dimensions", label: "Size & paper", hint: "Size · paper" },
+  { id: "engine", label: "Colour & sides", hint: "Colour · sides" },
+  { id: "finishing", label: "Binding & finishing", hint: "Binding · finish" },
+  { id: "fulfilment", label: "Delivery", hint: "Courier · pickup" },
 ];
 
 const active = ref("upload");

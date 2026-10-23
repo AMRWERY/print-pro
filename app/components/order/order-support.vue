@@ -6,12 +6,12 @@
         size="20"
         class="text-accent"
         aria-hidden="true"
-      />Master curator support
+      />Customer support
     </h2>
     <p class="text-sm text-mute">
-      An optical engineer and archival specialist is assigned to order
+      A technician is assigned to order
       <span class="font-mono text-paper">#{{ orderId }}</span> until it arrives
-      and is calibrated.
+      and is installed.
     </p>
 
     <ul class="space-y-2">
@@ -51,22 +51,22 @@ defineProps<{ orderId: string }>();
 
 const rows = [
   {
-    label: "Curator hotline",
+    label: "Support hotline",
     value: orderSupport.phone,
     href: orderSupport.phoneHref,
     icon: "lucide:phone",
     end: "lucide:chevron-right",
   },
   {
-    label: "Priority dispatch desk",
+    label: "Dispatch desk",
     value: orderSupport.email,
     href: `mailto:${orderSupport.email}`,
     icon: "lucide:mail",
     end: "lucide:chevron-right",
   },
   {
-    label: "Calibration certificate",
-    value: "Sign-off (.pdf)",
+    label: "Delivery note",
+    value: "Order document (.pdf)",
     href: undefined,
     icon: "lucide:badge-check",
     end: "lucide:download",

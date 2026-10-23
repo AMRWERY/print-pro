@@ -16,15 +16,14 @@
 
     <value-props />
 
-    <digest-signup />
-
     <trust-row />
   </div>
 </template>
 
 <script lang="ts" setup>
 useSeoMeta({
-  title: 'PrintPro — Studios & Printworks',
-  description: 'Medium-format cameras, cinema glass, studio lighting and fine-art pigment printers, bench-certified and calibrated.',
-})
+  title: "PrintPro — Printers, Photocopiers & Inks",
+  description:
+    "Printers, photocopiers and genuine ink and toner, delivered and installed by our technicians.",
+});
 </script>

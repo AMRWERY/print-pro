@@ -96,6 +96,6 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: () => `Order ${order.value?.id ?? ""} — Lumen & Press`,
+  title: () => `Order ${order.value?.id ?? ""} — PrintPro`,
 });
 </script>

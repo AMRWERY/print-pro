@@ -44,7 +44,7 @@
           requiredText('Enter the postal code or email used for the order.')
         "
         autocomplete="off"
-        placeholder="10028 or you@studio.com"
+        placeholder="12311 or you@company.com"
       />
 
       <LazyVButton

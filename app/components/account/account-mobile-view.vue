@@ -8,7 +8,7 @@
           <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
           <span class="relative inline-flex h-2 w-2 rounded-full bg-success" />
         </span>
-        <span class="font-bold text-success">STUDIO ONLINE</span>
+        <span class="font-bold text-success">ACCOUNT ONLINE</span>
         <span class="text-line">|</span>
         <span class="flex items-center gap-1 text-mute">
           <Icon name="lucide:lock" size="12" />
@@ -17,7 +17,7 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <LazyVButton variant="plain" class="relative text-mute hover:text-paper" aria-label="Studio notifications"
+        <LazyVButton variant="plain" class="relative text-mute hover:text-paper" aria-label="Notifications"
           @click="showNotifications = !showNotifications">
           <Icon name="lucide:bell" size="18" />
           <span class="absolute -top-1 -end-1 pip rounded-full" />
@@ -75,7 +75,7 @@
               {{ profile.affiliation }}
             </p>
             <div class="flex items-center gap-2 font-mono text-2xs">
-              <span class="text-accent font-semibold">LEAD CONSERVATOR</span>
+              <span class="text-accent font-semibold">OPERATIONS MANAGER</span>
               <span class="text-mute">•</span>
               <span class="text-mute">BER ⇄ JFK OK</span>
             </div>
@@ -107,7 +107,7 @@
           class="flex items-center justify-center gap-1.5 rounded-control border border-line bg-raised py-2 text-mute transition hover:border-accent hover:text-paper active:scale-95"
           @click="$emit('open-escrow')">
           <Icon name="lucide:vault" size="14" />
-          <span>ESCROW</span>
+          <span>CREDIT</span>
         </LazyVButton>
       </div>
     </section>
@@ -125,7 +125,7 @@
 
       <div class="card p-2.5 space-y-1">
         <div class="flex items-center justify-between text-mute text-2xs">
-          <span>ESCROW</span>
+          <span>CREDIT</span>
           <Icon name="lucide:shield-check" size="10" class="text-cyan" />
         </div>
         <p class="title-sm">EGP 32.5K</p>
@@ -147,7 +147,7 @@
       <div class="flex items-center justify-between border-b border-line pb-2.5">
         <div class="flex items-center gap-1.5 font-mono text-xs">
           <span class="rounded-control bg-accent/20 px-2 py-0.5 font-bold text-accent">
-            {{ inTransitOrder.crateId || 'CRATE #LP-948201' }}
+            {{ inTransitOrder.crateId || 'ORDER #LP-948201' }}
           </span>
           <span class="flex items-center gap-1 text-1xs text-accent">
             <span class="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
@@ -162,22 +162,22 @@
 
       <div>
         <h3 class="title-sm">
-          Medium Format Optics &amp; Print Master
+          Photocopier &amp; printer order
         </h3>
         <p class="font-mono text-2xs text-mute tracking-wider mt-0.5">
-          CARRIER: LUFTHANSA CARGO FLIGHT LH-400 (PALLET #88)
+          CARRIER: INSURED COURIER (PALLET #88)
         </p>
       </div>
 
       <!-- Equipment Thumbnails -->
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5">
-          <img src="/img/prod-01.png" alt="Hasselblad" class="h-8 w-8 object-contain" />
-          <span class="font-mono text-2xs text-paper">Hasselblad 907X 50C</span>
+          <img src="/img/prod-01.png" alt="Photocopier" class="h-8 w-8 object-contain" />
+          <span class="font-mono text-2xs text-paper">Kopira Pro A3 35</span>
         </div>
         <div class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5">
-          <img src="/img/prod-03.png" alt="Epson" class="h-8 w-8 object-contain" />
-          <span class="font-mono text-2xs text-paper">Epson Ultra...</span>
+          <img src="/img/prod-03.png" alt="Toner" class="h-8 w-8 object-contain" />
+          <span class="font-mono text-2xs text-paper">Kopira Toner...</span>
         </div>
       </div>
 
@@ -191,33 +191,33 @@
         </div>
 
         <div class="grid grid-cols-4 text-center font-mono text-3xs">
-          <span class="text-mute">BER Cleared</span>
-          <span class="text-mute">TXL Customs</span>
-          <span class="font-bold text-accent">In Flight</span>
-          <span class="text-mute">JFK Dock 4B</span>
+          <span class="text-mute">Confirmed</span>
+          <span class="text-mute">Packed</span>
+          <span class="font-bold text-accent">On the way</span>
+          <span class="text-mute">Delivered</span>
         </div>
       </div>
 
-      <!-- Live Sensor telemetry strip -->
+      <!-- Delivery strip -->
       <div class="flex items-center justify-between border-t border-line pt-2.5 font-mono text-xs">
         <div class="flex items-center gap-3 text-1xs text-mute">
-          <span>🌡 19.4°C / 42% RH</span>
-          <span class="text-success font-semibold">👁 0.02G Safe</span>
+          <span>🚚 Out for delivery</span>
+          <span class="text-success font-semibold">✔ Sealed</span>
         </div>
 
         <LazyVButton variant="plain" class="inline-flex items-center gap-1 text-accent font-semibold hover:underline"
           @click="$emit('open-telemetry', inTransitOrder)">
           <Icon name="lucide:activity" size="12" />
-          <span>TELEMETRY</span>
+          <span>TRACKING</span>
         </LazyVButton>
       </div>
     </article>
 
-    <!-- Studio Registry Horizontal Scroll Carousel -->
+    <!-- Saved items carousel -->
     <section class="card-compact space-y-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 font-mono text-xs">
-          <span class="font-bold text-paper">STUDIO REGISTRY</span>
+          <span class="font-bold text-paper">SAVED ITEMS</span>
           <span class="rounded-control bg-raised px-1.5 py-0.2 text-2xs text-mute">
             {{ registryItems.length }} RESERVED
           </span>
@@ -257,45 +257,45 @@
               class="inline-flex items-center gap-1 rounded-control bg-surface border border-line px-2 py-1 font-mono text-2xs font-bold text-paper hover:border-accent hover:text-accent"
               @click="$emit('add-registry', item)">
               <Icon name="lucide:shopping-bag" size="11" />
-              <span>REQUISITION</span>
+              <span>ADD TO CART</span>
             </LazyVButton>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- Designated Receiving Dock Card -->
+    <!-- Default delivery address card -->
     <section class="card-compact space-y-2">
       <div class="flex items-center justify-between font-mono text-xs">
         <span class="flex items-center gap-1.5 text-mute">
           <Icon name="lucide:map-pin" size="13" class="text-accent" />
-          DESIGNATED RECEIVING DOCK
+          DEFAULT DELIVERY ADDRESS
         </span>
-        <span class="text-cyan text-1xs font-bold">SECURITY TIER IV</span>
+        <span class="text-cyan text-1xs font-bold">SIGNATURE REQUIRED</span>
       </div>
 
       <h3 class="title-sm">
-        Dock 4B — Archival Freight Terminal
+        Head office — Cairo
       </h3>
       <p class="text-xs text-mute leading-relaxed">
-        Metropolitan Archival Wing, 1000 5th Avenue, NYC, NY 10028<br />
-        Direct Climate Airlock Access (Bay 12)
+        12 Tahrir Street, Dokki, Cairo<br />
+        Loading bay at the rear, weekdays 08:00 – 17:00
       </p>
 
       <div class="pt-2">
         <LazyVButton variant="plain"
           class="w-full rounded-control border border-line bg-raised py-2 meta font-semibold transition hover:border-accent hover:text-paper"
           @click="$emit('change-dock')">
-          CHANGE DOCK
+          CHANGE ADDRESS
         </LazyVButton>
       </div>
     </section>
 
-    <!-- Collapsible Archived Requisitions -->
+    <!-- Collapsible past orders -->
     <section class="card-compact space-y-3">
       <div class="flex items-center justify-between font-mono text-xs">
-        <span class="font-bold text-paper">ARCHIVED REQUISITIONS</span>
-        <span class="text-mute">2024 VENDOR REGISTRY</span>
+        <span class="font-bold text-paper">PAST ORDERS</span>
+        <span class="text-mute">ORDER HISTORY</span>
       </div>
 
       <div class="space-y-2">
@@ -328,7 +328,7 @@
         <span class="font-bold text-paper">REAL-TIME ACTIVITY LOG</span>
         <span class="text-success flex items-center gap-1 text-2xs">
           <span class="status-dot" />
-          LIVE SECURE STREAM
+          LIVE UPDATES
         </span>
       </div>
 
@@ -337,11 +337,11 @@
           <Icon name="lucide:activity" size="14" class="bullet-icon" />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-bold text-paper">Cargo Seal Telemetry Ping</span>
+              <span class="font-bold text-paper">Delivery update</span>
               <span class="text-mute text-2xs">08:42 EDT</span>
             </div>
             <p class="font-sans text-1xs text-mute">
-              Flight LH-400 automated health report passed. Sensor array indicates optimal atmosphere.
+              Your order left the warehouse and is with the courier.
             </p>
           </div>
         </div>
@@ -350,11 +350,11 @@
           <Icon name="lucide:credit-card" size="14" class="text-cyan shrink-0 mt-0.5" />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-bold text-paper">Escrow Allocation Verified</span>
+              <span class="font-bold text-paper">Account credit applied</span>
               <span class="text-mute text-2xs">YESTERDAY</span>
             </div>
             <p class="font-sans text-1xs text-mute">
-              Wire clearance EGP 12,450.00 confirmed for Requisition #LP-948201.
+              Payment of EGP 12,450.00 confirmed for order #LP-948201.
             </p>
           </div>
         </div>
@@ -363,11 +363,11 @@
           <Icon name="lucide:bookmark" size="14" class="text-yellow shrink-0 mt-0.5" />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-bold text-paper">Registry Item Reserved</span>
+              <span class="font-bold text-paper">Saved item back in stock</span>
               <span class="text-mute text-2xs">NOV 02</span>
             </div>
             <p class="font-sans text-1xs text-mute">
-              Calibrite ColorChecker Studio held in conservation inventory for Vance Lab.
+              Corex Toner Black 210 is back in stock and ready to order.
             </p>
           </div>
         </div>

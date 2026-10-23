@@ -6,8 +6,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="alerts-title"
-        eyebrow="Active studio session"
-        title="Substrate history & monitored search alerts"
+        eyebrow="Your searches"
+        title="Search history & alerts"
       >
         <LazyVButton
           variant="secondary"
@@ -100,17 +100,17 @@ const formatDate = (iso: string) =>
 
 const defaults = [
   {
-    eyebrow: "Printer profiles · sync",
-    title: "Epson UltraChrome PRO12 700 ml",
-    body: "Automated reorder triggers set for Photo Black (PK) and Gray (GY) cartridges.",
-    action: "Inspect levels +",
+    eyebrow: "Supplies · reorder",
+    title: "Corex Toner Black 210",
+    body: "Get a reminder to reorder when your toner is about to run out.",
+    action: "Set a reminder +",
     highlight: false,
   },
   {
-    eyebrow: "Laboratory profile guarantee",
-    title: "Custom ICC profiles included",
-    body: "Every 44-inch roll purchased from PrintPro includes a free spectrophotometric target reading for your exact printer engine.",
-    action: "Request spectro target",
+    eyebrow: "Installation included",
+    title: "Free installation on photocopiers",
+    body: "Every photocopier bought from PrintPro is delivered, installed and connected to your network by our technicians.",
+    action: "See how it works",
     highlight: true,
   },
 ];

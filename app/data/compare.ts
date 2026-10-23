@@ -1,329 +1,243 @@
 import type {
+  CatalogCategory,
+  CatalogProduct,
+  CopierAttrs,
+  InkAttrs,
+  PrinterAttrs,
+} from "~/types/catalog";
+import type {
   CompareSectionDef,
   ComparePreset,
   ProductCompareData,
+  SpecValue,
 } from "~/types/compare";
+import type { DetailedProduct } from "~/types/product";
 
 export const MAX_COMPARE = 4;
 
-export const compareSections: CompareSectionDef[] = [
-  {
-    key: "engine",
-    title: "Pigment output engines",
-    rows: [
-      { key: "printhead", label: "Printhead technology", hint: "Architecture delta" },
-      { key: "droplet", label: "Minimum droplet volume", hint: "Kinetic delta" },
-      { key: "resolution", label: "Maximum print resolution" },
-      { key: "blackline", label: "Black ink line architecture", hint: "No-purge advantage" },
-      { key: "ink", label: "Ink chemistry & pigments", hint: "Spectral set delta" },
-    ],
-  },
-  {
-    key: "gamut",
-    title: "Colour gamut, calibration & archival profiling",
-    rows: [
-      { key: "pantone", label: "Pantone Formula Guide solid coated", hint: "Superior gamut" },
-      { key: "spectro", label: "In-line spectrophotometer QA", hint: "Proofer hardware delta" },
-      { key: "dmax", label: "Maximum optical density (Dmax)", hint: "On baryta" },
-      { key: "longevity", label: "Archival longevity", hint: "B&W longevity" },
-    ],
-  },
-  {
-    key: "media",
-    title: "Media feed, substrate thickness & vacuum platen",
-    rows: [
-      { key: "thickness", label: "Media thickness capacity", hint: "Rigid board support" },
-      { key: "platen", label: "Platen air suction / vacuum", hint: "Platen architecture" },
-      { key: "spindle", label: "Roll spindle geometry", hint: "Loading mechanism" },
-      { key: "borderless", label: "Borderless printing / cut", hint: "Bleed widths" },
-    ],
-  },
-  {
-    key: "connect",
-    title: "Connectivity, RIP integration & footprint",
-    rows: [
-      { key: "ports", label: "Interface ports", hint: "I/O bus" },
-      { key: "storage", label: "Internal spool server", hint: "Disk capacity" },
-      { key: "dims", label: "Dimensions & net weight", hint: "Chassis" },
-      { key: "power", label: "Operating power consumption", hint: "Draw rate" },
-    ],
-  },
-  {
-    key: "sensor",
-    title: "Sensor metallurgy, conversion & optical engine",
-    rows: [
-      { key: "sensorDim", label: "Sensor dimensions", hint: "Physical area & crop factor" },
-      { key: "mp", label: "Effective resolution", hint: "Base capture megapixels" },
-      { key: "pitch", label: "Photosite pixel pitch", hint: "Centre-to-centre spacing" },
-      { key: "cfa", label: "Colour filtration array", hint: "Bayer mask vs pure monochrome" },
-      { key: "adc", label: "A/D conversion bit depth", hint: "Quantisation levels" },
-      { key: "dyn", label: "Certified dynamic range", hint: "Stops of usable range" },
-      { key: "iso", label: "Calibrated sensitivity", hint: "ISO range" },
-    ],
-  },
-  {
-    key: "stab",
-    title: "Shutter architecture, stabilisation & optical mount",
-    rows: [
-      { key: "ibis", label: "Image stabilisation (IBIS)", hint: "In-body sensor shift" },
-      { key: "shutter", label: "Shutter architecture", hint: "Curtain or in-lens leaf" },
-      { key: "sync", label: "Full flash sync speed", hint: "Maximum strobe velocity" },
-      { key: "flange", label: "Baseline lens mount", hint: "Optical flange" },
-    ],
-  },
-  {
-    key: "storage",
-    title: "Recording architecture, internal NVMe & bus pipelines",
-    rows: [
-      { key: "internal", label: "Internal write storage", hint: "Non-volatile flash" },
-      { key: "cards", label: "Removable card slots", hint: "Physical receptacles" },
-      { key: "tether", label: "Tethering link interface", hint: "Data rate to workstation" },
-      { key: "tetherSw", label: "Tethered processing engine", hint: "Supported capture suites" },
-    ],
-  },
-  {
-    key: "chassis",
-    title: "Chassis metallurgy, EVF & cleanroom calibration",
-    rows: [
-      { key: "body", label: "Chassis metallurgy", hint: "Body material" },
-      { key: "evf", label: "Optical / EVF viewfinder", hint: "Display resolution" },
-      { key: "collim", label: "Cleanroom collimation", hint: "Flange-to-sensor tolerance" },
-      { key: "mass", label: "Operational mass", hint: "Body with battery and media" },
-    ],
-  },
-];
+/** Rows to compare, per category. Products are only compared within one category. */
+export const compareSections: Record<CatalogCategory, CompareSectionDef[]> = {
+  printers: [
+    {
+      key: "print",
+      title: "Printing",
+      rows: [
+        { key: "technology", label: "Technology", hint: "Inkjet, laser or large-format" },
+        { key: "colour", label: "Colour or black & white" },
+        { key: "maxPaper", label: "Largest paper size" },
+        { key: "duplex", label: "Automatic two-sided printing" },
+        { key: "resolution", label: "Maximum resolution" },
+        { key: "speed", label: "Print speed" },
+        { key: "runningCost", label: "Running cost", hint: "Per page, at 5% coverage" },
+      ],
+    },
+    {
+      key: "connect",
+      title: "Connectivity and size",
+      rows: [
+        { key: "connectivity", label: "Connectivity" },
+        { key: "paperCapacity", label: "Paper capacity" },
+        { key: "dims", label: "Dimensions and weight" },
+      ],
+    },
+  ],
+  copiers: [
+    {
+      key: "performance",
+      title: "Performance",
+      rows: [
+        { key: "ppm", label: "Print and copy speed", hint: "Pages per minute" },
+        { key: "paper", label: "Paper size" },
+        { key: "colour", label: "Colour or black & white" },
+        { key: "duplex", label: "Automatic two-sided" },
+        { key: "duty", label: "Monthly duty cycle", hint: "Maximum pages per month" },
+        { key: "runningCost", label: "Running cost", hint: "Per page, at 5% coverage" },
+      ],
+    },
+    {
+      key: "functions",
+      title: "Functions and paper handling",
+      rows: [
+        { key: "functions", label: "Functions" },
+        { key: "capacity", label: "Paper capacity" },
+        { key: "scanSpeed", label: "Scan speed" },
+        { key: "finishing", label: "Finishing options" },
+      ],
+    },
+    {
+      key: "size",
+      title: "Size and power",
+      rows: [
+        { key: "dims", label: "Dimensions and weight" },
+        { key: "power", label: "Power" },
+      ],
+    },
+  ],
+  "inks-toner": [
+    {
+      key: "supply",
+      title: "Supply",
+      rows: [
+        { key: "kind", label: "Type" },
+        { key: "colour", label: "Colour" },
+        { key: "yield", label: "Yield", hint: "Pages or volume" },
+        { key: "fits", label: "Fits models" },
+      ],
+    },
+  ],
+};
 
-const v = (value: string, note?: string) => ({ value, note });
+const v = (value: string, note?: string): SpecValue => ({ value, note });
 
-// Spec sheets for the products that have them. Everything else falls back to
-// the core facts (price, rating, lease, dispatch) that every product has.
+const cap = (s: string) => s[0]!.toUpperCase() + s.slice(1);
+const colourLabel = (c: "colour" | "mono") => (c === "colour" ? "Colour" : "Black & white");
+
+/** Spec values every catalog product has, taken from its attributes. */
+export const derivedSpecs = (p: DetailedProduct): Record<string, SpecValue> => {
+  const cp = p as Partial<CatalogProduct>;
+  if (!cp.attrs) return {};
+  if (cp.category === "printers") {
+    const a = cp.attrs as PrinterAttrs;
+    return {
+      technology: v(cap(a.technology.replace("-", " "))),
+      colour: v(colourLabel(a.colour)),
+      maxPaper: v(a.maxPaper),
+      duplex: v(a.duplex ? "Yes" : "No"),
+      connectivity: v(
+        a.connectivity.map((c) => ({ wifi: "Wi-Fi", ethernet: "Ethernet", usb: "USB" })[c]).join(", "),
+      ),
+    };
+  }
+  if (cp.category === "copiers") {
+    const a = cp.attrs as CopierAttrs;
+    return {
+      ppm: v(`${a.ppm} ppm`),
+      paper: v(a.paper),
+      colour: v(colourLabel(a.colour)),
+      duplex: v(a.duplex ? "Yes" : "No"),
+      functions: v(a.functions.map(cap).join(", ")),
+    };
+  }
+  const a = cp.attrs as InkAttrs;
+  return {
+    kind: v(cap(a.kind)),
+    colour: v(a.colour === "multi" ? "Multi-colour set" : cap(a.colour)),
+    yield: v(a.yield),
+    fits: v(a.compatibleWith.join(", ")),
+  };
+};
+
+// Fuller spec sheets for the flagship products. Everything else uses derivedSpecs
+// plus the core facts (price, rating, lease, availability) that every product has.
 export const compareData: Record<string, ProductCompareData> = {
-  p9570: {
+  "nordjet-lf-44": {
     profile: {
-      origin: "Epson Pro Graphics · Japan",
-      bench: 99.2,
-      highlights: ["UltraChrome PRO10 ink set (99% Pantone)", "Dedicated PK/MK lines, zero delay", '44″ max width · 1.5 mm platen'],
-      primary: "Acquire engine · book freight",
-      secondary: "Book spectro demo",
+      origin: "Nordjet · wide-format range",
+      bench: 98.4,
+      highlights: ["44″ roll, A0 posters", "A1 in 28 seconds", "300 ml cartridges"],
+      primary: "Add to cart",
+      secondary: "View details",
     },
     specs: {
-      printhead: v("PrecisionCore MicroTFP 10-channel", "8,000 total nozzles (800 / ch)"),
-      droplet: v("3.5 picolitres", "3-size multi-drop kinetics"),
       resolution: v("2400 × 1200 dpi"),
-      blackline: v("Dedicated PK & MK lines", "0 ml wasted · 0 s delay"),
-      ink: v("UltraChrome PRO10 (10-col)", "PK, MK, C, M, Y, LC, LM, GY, R, V"),
-      pantone: v("99.0%", "Violet ink expansion"),
-      spectro: v("SpectroProofer ILS30EP (optional)", "Automated M0 / M1 / M2 validation"),
-      dmax: v("2.84 Dmax", "Hahnemühle Photo Rag Baryta 315"),
-      longevity: v("200+ yrs colour / 400+ yrs B&W", "Tested under UV filter glass"),
-      thickness: v("0.08 – 1.50 mm", "Straight through-feed pasteboard"),
-      platen: v("Dynamic 4-zone vacuum platen", "Prevents substrate bleed-up"),
-      spindle: v("Dual 2″ and 3″ high-tension spindles"),
-      borderless: v('10″–44″ rotary cutter'),
-      ports: v("SuperSpeed USB 3.0 + 1000Base-T", "Gigabit line isolation"),
-      storage: v("320 GB", "AES-256 self-encrypting drive"),
-      dims: v('75.2 × 26.2 × 47.9 in', "337 lbs (153 kg)"),
-      power: v("110 Watts", "Sleep: 3.4 W"),
+      speed: v("A1 in 28 seconds", "Draft mode"),
+      runningCost: v("EGP 4.20 per A1", "Standard mode"),
+      paperCapacity: v("One roll, auto cutter"),
+      dims: v("1900 × 920 × 1250 mm", "58 kg with stand"),
     },
   },
-  pro4100: {
+  "nordjet-lf-24": {
     profile: {
-      origin: "Canon Print Systems · Japan",
-      bench: 98.6,
-      highlights: ["LUCIA PRO II 11-colour + chroma optimiser", "1.28″ integrated printhead (18,432 nozzles)", "Smart multi-sensor intelligent feed"],
-      primary: "Order engine · direct tier",
-      secondary: "Spec sheet PDF",
+      origin: "Nordjet · wide-format range",
+      bench: 96.9,
+      highlights: ["24″ roll, A1 drawings", "Compact footprint", "Wi-Fi and Ethernet"],
+      primary: "Add to cart",
+      secondary: "View details",
     },
     specs: {
-      printhead: v("Integrated full-photolithography head", "18,432 nozzles (1,536 / ch)"),
-      droplet: v("4.0 picolitres", "Micro-fine FINE nozzles"),
       resolution: v("2400 × 1200 dpi"),
-      blackline: v("Dual lines + surface levelling", "Chroma optimiser overcoat"),
-      ink: v("LUCIA PRO II (11-col)", "MBK, PBK, C, M, Y, PC, PM, GY, R, B + CO"),
-      pantone: v("96.8%", "Blue / red pigment mapping"),
-      spectro: v("None integrated", "External table spectrometer required"),
-      dmax: v("2.76 Dmax", "With chroma optimiser pass"),
-      longevity: v("200+ yrs colour / 400+ yrs B&W", "Tested under UV filter glass"),
-      thickness: v("0.07 – 0.80 mm", "Flexible fine-art papers only"),
-      platen: v("Air-suction feeding belt", "Continuous belt stabilisation"),
-      spindle: v("Smart roll auto-feed", "No single spindle"),
-      borderless: v("Any custom width borderless"),
-      ports: v("Hi-speed USB + Gigabit + Wi-Fi", "Wireless direct proofing"),
-      storage: v("500 GB", "Encrypted direct hard drive"),
-      dims: v('62.7 × 38.7 × 46.0 in', "271 lbs (123 kg)"),
-      power: v("107 Watts", "Sleep: 2.8 W"),
+      speed: v("A1 in 40 seconds", "Draft mode"),
+      runningCost: v("EGP 4.60 per A1", "Standard mode"),
+      paperCapacity: v("One roll, auto cutter"),
+      dims: v("1020 × 700 × 1100 mm", "34 kg with stand"),
     },
   },
-  p7570: {
+  "kopira-pro-a3-30c": {
     profile: {
-      origin: "Epson Pro Graphics · Japan",
-      bench: 99.0,
-      highlights: ["UltraChrome PRO10 (99% Pantone)", "Identical droplet kinetics to the 44″ flagship", "Minimal lab footprint · 24″ max width"],
-      primary: "Acquire system · add to cart",
-      secondary: "Media sample kit",
+      origin: "Kopira · Pro A3 series",
+      bench: 97.8,
+      highlights: ["30 ppm colour and mono", "Scan to cloud", "Secure print release"],
+      primary: "Add to cart",
+      secondary: "View details",
     },
     specs: {
-      printhead: v("PrecisionCore MicroTFP 10-channel", "8,000 total nozzles (800 / ch)"),
-      droplet: v("3.5 picolitres", "3-size multi-drop kinetics"),
-      resolution: v("2400 × 1200 dpi"),
-      blackline: v("Dedicated PK & MK lines", "0 ml wasted · 0 s delay"),
-      ink: v("UltraChrome PRO10 (10-col)", "PK, MK, C, M, Y, LC, LM, GY, R, V"),
-      pantone: v("99.0%", "Violet ink expansion"),
-      spectro: v("SpectroProofer ILS30EP (optional)", "Automated M0 / M1 / M2 validation"),
-      dmax: v("2.84 Dmax", "Hahnemühle Photo Rag Baryta 315"),
-      longevity: v("200+ yrs colour / 400+ yrs B&W", "Tested under UV filter glass"),
-      thickness: v("0.08 – 1.50 mm", "Straight through-feed pasteboard"),
-      platen: v("Dynamic 2-zone vacuum platen", "Calibrated for 24″ paper path"),
-      spindle: v('Dual 2″ and 3″ spindles', "Compact spool retainers"),
-      borderless: v('10″–24″ max'),
-      ports: v("SuperSpeed USB 3.0 + 1000Base-T", "Gigabit line isolation"),
-      storage: v("320 GB", "AES-256 self-encrypting drive"),
-      dims: v('55.2 × 26.2 × 47.9 in', "176 lbs (80 kg) · compact"),
-      power: v("85 Watts", "Sleep: 3.2 W"),
+      duty: v("150,000 pages"),
+      runningCost: v("EGP 0.09 mono · EGP 0.48 colour", "Black and C/M/Y toner"),
+      capacity: v("1,150 sheets", "Up to 3,300 with options"),
+      scanSpeed: v("80 ipm duplex"),
+      finishing: v("Booklet finisher (optional)"),
+      dims: v("587 × 685 × 790 mm", "78 kg"),
+      power: v("220–240 V, 50/60 Hz"),
     },
   },
-  x2d: {
+  "kopira-pro-a3-45c": {
     profile: {
-      origin: "Hasselblad · Sweden",
-      bench: 99.4,
-      highlights: ["Natural Colour Solution, 16-bit", "100 MP · 43.8 × 32.9 mm", "Central leaf shutter lens system"],
-      primary: "Acquire system",
-      secondary: "Book 8K desk",
+      origin: "Kopira · Pro A3 series",
+      bench: 98.1,
+      highlights: ["45 ppm colour", "Booklet finisher", "Large paper capacity"],
+      primary: "Add to cart",
+      secondary: "View details",
     },
     specs: {
-      sensorDim: v("43.8 × 32.9 mm", "0.79× crop (1.44 ratio)"),
-      mp: v("100 megapixels", "11,656 × 8,742 px"),
-      pitch: v("3.76 µm BSI", "Back-side illuminated"),
-      cfa: v("HNCS dual-filter colour solution"),
-      adc: v("16-bit hardware", "65,536 tonal levels"),
-      dyn: v("15.0 stops", "Measured @ ISO 64 base"),
-      iso: v("ISO 64 – 25,600"),
-      ibis: v("6-axis 7.0-stop", "Compact voice-coil sensor shift"),
-      shutter: v("Central lens leaf shutter", "Zero focal-plane distortion"),
-      sync: v("1/2000 s across all speeds", "Full-daylight leaf sync"),
-      flange: v("Hasselblad XCD", "Flange: 38.0 mm"),
-      internal: v("1 TB SSD built-in", "Write speed: 2,270 MB/s"),
-      cards: v("1× CFexpress Type B + 1× SD", "UHS-II"),
-      tether: v("USB 3.2 Gen 2 (10 Gbps)", "Type-C power delivery"),
-      tetherSw: v("Phocus 2.7 + Lightroom", "Hasselblad Natural Colour Solution"),
-      body: v("Machined aluminium", "Space-grade anodised"),
-      evf: v("5.76 M-dot OLED (1.0×)", "Electronic diopter ±4.0"),
-      collim: v("±0.003 mm", "Laser-aligned in Gothenburg"),
-      mass: v("650 g", "Extremely balanced backgrip"),
+      duty: v("300,000 pages"),
+      runningCost: v("EGP 0.08 mono · EGP 0.45 colour", "Black and C/M/Y toner"),
+      capacity: v("2,300 sheets", "Up to 6,300 with options"),
+      scanSpeed: v("120 ipm duplex"),
+      finishing: v("Booklet finisher (included)"),
+      dims: v("615 × 750 × 1100 mm", "142 kg"),
+      power: v("220–240 V, 50/60 Hz"),
     },
   },
-  gfx100ii: {
+  "kopira-pro-a3-35": {
     profile: {
-      origin: "Fujifilm · Japan",
-      bench: 98.7,
-      highlights: ["102 MP BSI · 43.8 × 32.9 mm", "8.0-stop in-body stabilisation", "Phase-detect autofocus"],
-      primary: "Acquire body · ships today",
-      secondary: "Spec sheet PDF",
+      origin: "Kopira · Pro A3 series",
+      bench: 97.2,
+      highlights: ["35 ppm mono", "Finisher ready", "Fax included"],
+      primary: "Add to cart",
+      secondary: "View details",
     },
     specs: {
-      sensorDim: v("43.8 × 32.9 mm", "0.79× crop (1.44 ratio)"),
-      mp: v("102 megapixels", "11,648 × 8,736 px"),
-      pitch: v("3.76 µm BSI", "High-speed BSI"),
-      cfa: v("Standard Bayer", "Film simulation interpolation"),
-      adc: v("16-bit hardware", "65,536 tonal levels"),
-      dyn: v("14.0 stops", "Measured @ ISO 80 base"),
-      iso: v("ISO 80 – 12,800"),
-      ibis: v("5-axis 8.0-stop", "Dual gyro processing"),
-      shutter: v("Focal-plane shutter", "Up to 1/16,000 s mechanical"),
-      sync: v("1/125 s", "High-speed sync available"),
-      flange: v("Fujifilm GF", "Flange: 26.7 mm"),
-      internal: v("None (removable only)", "Card required"),
-      cards: v("1× CFexpress Type B + 1× SD", "UHS-II"),
-      tether: v("USB 3.2 Gen 2 (10 Gbps)", "Type-C"),
-      tetherSw: v("Capture One + Lightroom", "Tether Shooting Plug-in"),
-      body: v("Magnesium alloy", "Weather-sealed"),
-      evf: v("9.44 M-dot OLED (1.0×)", "World's highest-magnification EVF"),
-      collim: v("±0.005 mm", "Factory benchmark"),
-      mass: v("1,030 g", "Body with battery and card"),
-    },
-  },
-  "iq4-achro": {
-    profile: {
-      origin: "Phase One · Denmark",
-      bench: 99.7,
-      highlights: ["True monochrome, no colour filter array", "150 MP · full 645 sensor", "Infinity platform, certified consignment"],
-      primary: "Institutional escrow",
-      secondary: "Certificate of provenance",
-    },
-    specs: {
-      sensorDim: v("53.4 × 40.0 mm", "Full 645 frame"),
-      mp: v("151 megapixels", "14,204 × 10,652 px"),
-      pitch: v("3.76 µm back-illuminated"),
-      cfa: v("None (pure monochrome)", "100% panchromatic interpolation"),
-      adc: v("16-bit IQ4 RAW format", "Pure"),
-      dyn: v("15.0+ stops", "Achromatic sensor advantage"),
-      iso: v("ISO 50 – 25,600"),
-      ibis: v("None (body dependent)", "Use with stabilised bodies"),
-      shutter: v("Leaf or focal-plane", "Lens and body dependent"),
-      sync: v("1/1600 s with leaf-shutter lenses"),
-      flange: v("Phase One XF", "Flange: 40.0 mm"),
-      internal: v("None (external)", "Direct tethered to server"),
-      cards: v("1× CFexpress Type B + 1× SD", "UHS-II"),
-      tether: v("Gigabit Ethernet + USB-C + Wi-Fi", "Direct network shooting"),
-      tetherSw: v("Capture One Pro", "Spectral-optimised pipeline"),
-      body: v("Cast aerospace magnesium", "Industrial damping module"),
-      evf: v("Prism optical / live monitor", "6.75× rangefinder"),
-      collim: v("±0.002 mm", "Absolute zero-tilt tolerance"),
-      mass: v("790 g", "Back only, with battery"),
-    },
-  },
-  "m11-mono": {
-    profile: {
-      origin: "Leica Camera · Germany",
-      bench: 98.3,
-      highlights: ["True black-and-white sensor", "60 MP full frame · rangefinder", "Bench certified, 87 actuations"],
-      primary: "Reserve body",
-      secondary: "Collimation audit",
-    },
-    specs: {
-      sensorDim: v("36.0 × 24.0 mm", "Full frame 1.0×"),
-      mp: v("60 megapixels", "9,528 × 6,328 px"),
-      pitch: v("3.76 µm BSI", "Silicon BSI"),
-      cfa: v("None (pure monochrome)", "No Bayer interpolation"),
-      adc: v("14-bit hardware", "16,384 tonal levels"),
-      dyn: v("13.5 stops", "Measured @ ISO 125 base"),
-      iso: v("ISO 125 – 200,000"),
-      ibis: v("None", "Mechanical rangefinder"),
-      shutter: v("Focal-plane shutter", "Damped cloth blades"),
-      sync: v("1/180 s", "Standard focal-plane"),
-      flange: v("Leica M", "Flange: 27.8 mm"),
-      internal: v("64 GB internal", "Non-removable"),
-      cards: v("1× SD", "UHS-II"),
-      tether: v("USB 3.1 Gen 2 (10 Gbps)", "Type-C"),
-      tetherSw: v("Lightroom / Leica FOTOS"),
-      body: v("Full brass top plate", "Black chrome finish"),
-      evf: v("Optical rangefinder", "0.73× magnification"),
-      collim: v("±0.01 mm", "Calibrated in Wetzlar"),
-      mass: v("530 g", "Body with battery"),
+      duty: v("200,000 pages"),
+      runningCost: v("EGP 0.09 mono", "Black toner"),
+      capacity: v("1,150 sheets", "Up to 3,300 with options"),
+      scanSpeed: v("80 ipm duplex"),
+      finishing: v("Stapling finisher (optional)"),
+      dims: v("587 × 685 × 790 mm", "72 kg"),
+      power: v("220–240 V, 50/60 Hz"),
     },
   },
 };
 
 export const comparePresets: ComparePreset[] = [
   {
-    key: "printers",
-    label: "Large-format printers",
-    title: 'Epson P9570 vs Canon PRO-4100 vs Epson P7570',
-    body: "Droplet kinetics, gamut, Dmax and media handling for 24–44″ pigment engines.",
-    ids: ["p9570", "pro4100", "p7570"],
+    key: "office-printers",
+    label: "Office printers",
+    title: "Printa Tank 500 vs Corex Laser 210 vs Corex Laser 450 Colour",
+    body: "Ink tank, mono laser and colour laser compared on speed, running cost and connectivity.",
+    ids: ["printa-tank-500", "corex-laser-210", "corex-laser-450c"],
   },
   {
-    key: "cameras",
-    label: "Medium-format cameras",
-    title: "Hasselblad X2D vs Fujifilm GFX100 II vs Phase One IQ4 vs Leica M11 Monochrom",
-    body: "Sensor area, colour pipeline, shutter sync and tethering across studio bodies.",
-    ids: ["x2d", "gfx100ii", "iq4-achro", "m11-mono"],
+    key: "a3-copiers",
+    label: "A3 photocopiers",
+    title: "Kopira Pro A3 25, 35, 30 colour and 45 colour",
+    body: "Speed, duty cycle, paper capacity and finishing across the Pro A3 range.",
+    ids: ["kopira-pro-a3-25", "kopira-pro-a3-35", "kopira-pro-a3-30c", "kopira-pro-a3-45c"],
   },
   {
-    key: "substrates",
-    label: "Archival substrates",
-    title: "Hahnemühle Photo Rag 308 vs Canson Platine Fibre Rag 310",
-    body: "Weight, base colour and price for cotton rag and baryta fine-art papers.",
-    ids: ["hahnemuhle-308", "canson-platine"],
+    key: "toner",
+    label: "Toner yield",
+    title: "Corex Toner 210: standard vs high-yield",
+    body: "Pages per cartridge and price for the same machine.",
+    ids: ["corex-toner-210", "corex-toner-210-hy"],
   },
 ];

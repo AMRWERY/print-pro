@@ -72,8 +72,8 @@ const router = useRouter();
 const orders = useOrderStore();
 
 const crumbs = [
-  { label: "Studio procurement", to: "/" },
-  { label: "Dispatch & tracking", to: "/products" },
+  { label: "Index", to: "/" },
+  { label: "Orders", to: "/account/orders" },
   { label: "Track order" },
 ];
 

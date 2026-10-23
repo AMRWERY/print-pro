@@ -40,7 +40,7 @@
         <LazyVInput
           v-model="f.company"
           name="company"
-          label="Company or studio"
+          label="Company"
           optional
           autocomplete="organization"
         />

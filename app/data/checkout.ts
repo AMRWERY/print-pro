@@ -15,22 +15,22 @@ export const countries = [
 export const deliveryOptions: DeliveryOption[] = [
   {
     id: "crated",
-    label: "Climate-crated freight (insured)",
-    note: "Cleanroom crate with white-glove delivery and unboxing.",
+    label: "Standard delivery (insured)",
+    note: "Insured courier delivery. Heavy machines are installed by our technicians.",
     days: 5,
     icon: "lucide:truck",
   },
   {
     id: "express",
-    label: "Bonded vault dispatch (express)",
-    note: "Temperature-controlled transport, signature on delivery.",
+    label: "Express delivery",
+    note: "Next-working-day courier, signature on delivery.",
     days: 2,
     icon: "lucide:zap",
   },
   {
     id: "pickup",
-    label: "Studio pickup (NYC lab)",
-    note: "Collect from our bench after quality sign-off.",
+    label: "Pick up from our showroom (Cairo)",
+    note: "Collect from our showroom once your order is checked and ready.",
     days: 1,
     icon: "lucide:store",
   },

@@ -28,12 +28,6 @@
         size="56"
         class="h-32"
       />
-      <span
-        v-if="profile.bench"
-        class="absolute start-2 top-2 rounded-control bg-ink/80 px-2 py-0.5 font-mono text-xs backdrop-blur"
-      >
-        Bench <span class="text-accent">{{ profile.bench }}</span>
-      </span>
     </div>
 
     <p class="eyebrow">{{ profile.origin }}</p>
@@ -51,7 +45,7 @@
         class="text-yellow"
         aria-hidden="true"
       />
-      {{ product.rating.toFixed(2) }} ({{ product.reviews }} audits)
+      {{ product.rating.toFixed(2) }} ({{ product.reviews }} reviews)
     </p>
 
     <div>

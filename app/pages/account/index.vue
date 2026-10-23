@@ -1,6 +1,6 @@
 <template>
   <div class="text-paper">
-    <!-- Atelier Simulation Harness (Top sticky mode bar) -->
+    <!-- Demo account switcher (top sticky bar) -->
     <account-sim-harness v-model="operatingMode" />
 
     <div class="space-y-6">
@@ -16,10 +16,10 @@
             @book-cleanroom="openCleanroomModal = true"
             @request-courier="
               showToast(
-                'Bonded courier request dispatched to DHL Global Forwarding Aviation',
+                'Courier request sent. We will confirm the pick-up time by phone.',
               )
             "
-            @view-vat-dossier="openDossier('TAX VAT DOSSIER // FISCAL Q3')"
+            @view-vat-dossier="openDossier('VAT INVOICE SUMMARY // Q3')"
           />
 
           <!-- 4 Stat Metric Cards -->
@@ -39,30 +39,30 @@
             <LazyVEmptyState
               v-if="operatingMode === 'new-member'"
               icon="lucide:sparkles"
-              eyebrow="ATELIER :: NEW_MEMBER"
+              eyebrow="ACCOUNT :: NEW_CUSTOMER"
               tag="0 ORDERS"
               tag-tone="success"
-              title="Welcome to the Metrology Atelier Network"
-              description="Your studio credentials are confirmed. Link your designated receiving port, reserve apparatus, or initiate your first bench calibration."
+              title="Welcome to PrintPro"
+              description="Your account is ready. Add a delivery address, save products for later, or place your first order for supplies."
             >
               <LazyVButton variant="primary" @click="openCalibrationModal = true"
-                >Initiate first calibration</LazyVButton
+                >Order supplies</LazyVButton
               >
               <LazyVButton variant="secondary" to="/products"
-                >Explore apparatus catalog</LazyVButton
+                >Browse the catalog</LazyVButton
               >
             </LazyVEmptyState>
 
-            <!-- Orders Manifest -->
+            <!-- Orders -->
             <account-orders-manifest
               v-else
               :orders="currentOrders"
               @open-telemetry="openTelemetry"
               @view-waybill="
-                openDossier(`AIR WAYBILL // ${$event.waybill || $event.id}`)
+                openDossier(`DELIVERY NOTE // ${$event.waybill || $event.id}`)
               "
               @view-calibration-cert="
-                openDossier(`CALIBRATION CERTIFICATE // ${$event.id}`)
+                openDossier(`SERVICE REPORT // ${$event.id}`)
               "
               @reorder-consumables="reorderItems($event)"
               @view-dossier="viewOrder($event)"
@@ -72,13 +72,13 @@
 
           <!-- Tab: Overview or Registry -->
           <div class="grid grid-cols-1 gap-6 xl:grid-cols-2">
-            <!-- Studio Registry & Reserved Apparatus -->
+            <!-- Saved items -->
             <account-registry-section
               :items="registryItems"
               @add-to-manifest="addToCartItem($event)"
             />
 
-            <!-- Receiving Docks & Ports -->
+            <!-- Delivery addresses -->
             <account-docks-section
               :docks="receivingDocks"
               @edit-dock="editDock($event)"
@@ -86,12 +86,12 @@
             />
           </div>
 
-          <!-- Tab: Overview or Vault -->
+          <!-- Tab: Overview or Addresses -->
           <div class="grid grid-cols-1 gap-6 xl:grid-cols-[1.1fr_1.9fr]">
             <!-- Cryptographic Audit Stream -->
             <account-audit-stream :logs="auditLogs" />
 
-            <!-- Curated Companion Apparatus & Consumables -->
+            <!-- Suggested supplies -->
             <account-curated-companions
               :products="companionProducts"
               @add-companion="addCompanionItem($event)"
@@ -113,7 +113,7 @@
           @open-crate="openTelemetry($event)"
           @open-escrow="
             showToast(
-              `Escrow Pool Liquidity: ${money.format(currentProfile.escrowAvailable)} Instant Clearance`,
+              `Account credit available: ${money.format(currentProfile.escrowAvailable)}`,
             )
           "
           @open-telemetry="openTelemetry($event)"
@@ -188,7 +188,7 @@ const openCalibrationModal = ref(false);
 const openCleanroomModal = ref(false);
 const openDockModal = ref(false);
 const openDossierModal = ref(false);
-const dossierTitle = ref("ARCHIVAL REQUISITION DOSSIER");
+const dossierTitle = ref("ORDER DOCUMENT");
 const selectedOrder = ref<RequisitionOrder | null>(null);
 const editingDock = ref<ReceivingDock | null>(null);
 
@@ -232,7 +232,7 @@ const metricValues = computed(() => {
         orderCount: 0,
         settledTotal: 0,
         transitCount: 0,
-        crateCode: "NO ACTIVE CRATE",
+        crateCode: "NO ACTIVE DELIVERY",
         apparatusCount: 3,
         registryValuation: 4593,
         escrowAmount: 5000,
@@ -300,9 +300,26 @@ const onDockSaved = (dock: ReceivingDock) => {
   docks.save(dock);
   showToast(
     isNew
-      ? `Deployed new receiving port: ${dock.name}`
-      : `Updated receiving port: ${dock.name}`,
+      ? `Added delivery address: ${dock.name}`
+      : `Updated delivery address: ${dock.name}`,
   );
+};
+
+const supplyLabel: Record<string, string> = {
+  toner: "toner",
+  ink: "ink",
+  drum: "drum unit",
+};
+const modelLabel: Record<string, string> = {
+  "corex-laser-210": "Corex Laser 210",
+  "corex-laser-450c": "Corex Laser 450 Colour",
+  "kopira-pro-a3-35": "Kopira Pro A3 35 ppm",
+  "printa-tank-500": "Printa Tank 500",
+  "nordjet-lf-44": 'Nordjet Large-Format 44"',
+};
+const addressLabel: Record<string, string> = {
+  "head-office": "your head office",
+  branch: "your branch office",
 };
 
 const onCalibrationSubmitted = (details: {
@@ -312,14 +329,14 @@ const onCalibrationSubmitted = (details: {
   station: string;
 }) => {
   showToast(
-    `Calibration order submitted for ${details.standard.toUpperCase()} (Tolerance: ${details.tolerance})`,
+    `Supplies order placed: ${details.tolerance} × ${supplyLabel[details.standard] ?? details.standard}`,
   );
   auditLogs.value.unshift({
     id: `audit-${Date.now()}`,
-    title: "CALIBRATION ORDER REGISTERED",
+    title: "SUPPLIES ORDER PLACED",
     timestamp: "JUST NOW",
-    summary: `Spectro proof order initiated for ${details.substrate} at ${details.station}.`,
-    hash: `SHA-256: 4e99f...${Date.now().toString(16).slice(-4)}`,
+    summary: `Supplies for ${modelLabel[details.substrate] ?? details.substrate} ordered for delivery to ${addressLabel[details.station] ?? details.station}.`,
+    hash: `ORDER REF: PP-${Date.now().toString(16).slice(-5).toUpperCase()}`,
     category: "qa",
     severity: "verified",
   });
@@ -331,19 +348,19 @@ const onCleanroomBooked = (details: {
   slot: string;
 }) => {
   showToast(
-    `Cleanroom bench reserved at ${details.location} on ${details.date} (${details.slot})`,
+    `Service visit booked at ${details.location} on ${details.date} (${details.slot})`,
   );
 };
 
 // Cart integrations: items resolve through the shared product lookup
 const addToCartItem = (item: RegistryItem) => {
   cart.add(item.id, item.price);
-  showToast(`Added ${item.name} to requisition manifest`);
+  showToast(`Added ${item.name} to your cart`);
 };
 
 const addCompanionItem = (prod: CompanionProduct) => {
   cart.add(prod.id, prod.price);
-  showToast(`Added ${prod.name} to studio cart`);
+  showToast(`Added ${prod.name} to your cart`);
 };
 
 const reorderItems = (order: RequisitionOrder) => {
@@ -364,8 +381,8 @@ const reorderItems = (order: RequisitionOrder) => {
 };
 
 const crumbs = [
-  { label: "Studio procurement", to: "/" },
-  { label: "Atelier workspace", to: "/account" },
+  { label: "Account", to: "/account" },
+  { label: "Dashboard" },
   { label: "Account dashboard" },
 ];
 
@@ -374,8 +391,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "Atelier Workspace & Dashboard — Lumen & Press",
+  title: "Account dashboard — PrintPro",
   description:
-    "Curatorial studio dashboard, live armored telemetry tracking, apparatus registry, and escrow management.",
+    "Your orders, delivery tracking, saved items and delivery addresses.",
 });
 </script>

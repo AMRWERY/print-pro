@@ -88,6 +88,10 @@ export interface ProductDetail {
   specGroups: SpecGroup[];
   documents: DocumentLink[];
   reviews?: ReviewSummary;
+  /** Printer or copier models a supply fits (inks and toner), or supplies a machine uses. */
+  compatibleWith?: string[];
+  /** Short note under the compatibility list, such as how yield is measured. */
+  yieldNote?: string;
   qa: { q: string; a: string }[];
   related: string[];
 }

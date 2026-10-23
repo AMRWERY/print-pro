@@ -3,16 +3,16 @@
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div class="space-y-3">
         <p class="eyebrow-accent">
-          <span class="pip" aria-hidden="true" />Studio registry ·
-          saved apparatus
+          <span class="pip" aria-hidden="true" />Wishlist ·
+          saved products
         </p>
         <h1 class="max-w-3xl text-4xl sm:text-5xl">
-          Studio apparatus wishlist &amp; registry
+          Your wishlist
         </h1>
         <p class="max-w-2xl text-sm text-mute sm:text-base">
-          Curated technical configurations, lab-tested optics, fine-art print
-          engines and archival substrates reserved for studio allocation and
-          cleanroom integration.
+          Printers, photocopiers and supplies you saved for later. Group them
+          by location, share the list with your team and move everything to the
+          cart when you are ready.
         </p>
       </div>
     </div>
@@ -45,11 +45,11 @@
           {{ money.format(total) }}
           <span class="meta">EGP</span>
         </dd>
-        <dd class="meta">Excl. bonded tax / VAT</dd>
+        <dd class="meta">Excl. VAT</dd>
       </div>
       <div class="bg-surface p-4">
         <dt class="eyebrow flex items-center justify-between">
-          Readiness telemetry
+          Availability
           <Icon
             name="lucide:circle-check"
             size="14"
@@ -61,7 +61,7 @@
           {{ ready }} / {{ count }} <span class="text-base">Ready</span>
         </dd>
         <dd class="meta">
-          {{ ready }}/{{ count }} units bench-tested
+          {{ ready }}/{{ count }} items in stock
         </dd>
       </div>
     </dl>
@@ -93,7 +93,7 @@
           :class="copied && 'animate-icon-pop'"
           aria-hidden="true"
         />
-        {{ copied ? "Link copied" : "Share registry manifest" }}
+        {{ copied ? "Link copied" : "Share wishlist" }}
       </LazyVButton>
 
       <LazyVButton

@@ -3,46 +3,46 @@ import type { InfoPage } from "~/types/info";
 export const infoPages: InfoPage[] = [
   // Services
   {
-    slug: "bench-calibration",
+    slug: "maintenance-contracts",
     group: "services",
     eyebrow: "Service",
-    title: "Bench calibration",
+    title: "Maintenance contracts",
     summary:
-      "Have a lens, camera body, printer or colorimeter checked and re-aligned on our certified bench, then returned with a written calibration report.",
-    icon: "lucide:ruler",
+      "Keep your printers and photocopiers running with scheduled servicing, genuine parts and on-site repairs, for a fixed yearly price.",
+    icon: "lucide:wrench",
     facts: [
-      { label: "Typical turnaround", value: "3–5 working days" },
-      { label: "Report", value: "PDF with measured values" },
-      { label: "Pick-up", value: "Insured courier available" },
+      { label: "Response", value: "Next working day" },
+      { label: "Visits", value: "Scheduled servicing" },
+      { label: "Parts", value: "Genuine, included" },
     ],
     sections: [
       {
-        heading: "What we check",
+        heading: "What is covered",
         list: [
-          "Lens back-focus, centring and aperture accuracy",
-          "Sensor and shutter timing on camera bodies",
-          "Printer head alignment, nozzle health and feed accuracy",
-          "Colorimeter and spectrophotometer response against a reference tile",
+          "Scheduled cleaning, checks and wear-part replacement",
+          "On-site repairs when something breaks",
+          "Genuine replacement parts",
+          "Software and driver updates",
         ],
       },
       {
         heading: "How it works",
         body: [
-          "Book a slot, send the item in its case with the supplied label, and we confirm receipt by email. Every item is measured before and after adjustment so you can see exactly what changed.",
-          "If an item is outside tolerance and cannot be corrected, we tell you before any further work is done and quote the repair separately.",
+          "Choose a contract when you buy a machine, or add one to a machine you already own. A technician visits on the schedule you agree, and calls out whenever you report a fault.",
+          "Report a problem by phone or email and we confirm a visit time. If we cannot fix a machine on site, we provide a loan machine where one is available.",
         ],
       },
       {
-        heading: "What you get back",
+        heading: "What is not covered",
         body: [
-          "Your equipment, a calibration report listing the before and after readings, and a sticker with the next recommended check date.",
+          "Ink, toner and paper are not part of a maintenance contract. Damage from misuse, spills or unauthorised repair is quoted separately.",
         ],
       },
     ],
     cta: {
-      label: "Browse calibration tools",
-      to: "/products/accessories",
-      text: "Prefer to calibrate in your own studio? Colorimeters and spectrophotometers are in stock.",
+      label: "Browse photocopiers",
+      to: "/products/photocopiers",
+      text: "Photocopiers can be bought with a three-year maintenance contract in one step.",
     },
   },
   {
@@ -51,52 +51,51 @@ export const infoPages: InfoPage[] = [
     eyebrow: "Service",
     title: "Trade-in",
     summary:
-      "Put the value of your current cameras, lenses and printers toward new equipment. We assess every item on the bench and give you a clear offer.",
+      "Put the value of your old printer or photocopier toward a new machine. We assess it, collect it and take care of the swap.",
     icon: "lucide:repeat",
     facts: [
-      { label: "Offer", value: "After bench assessment" },
+      { label: "Offer", value: "After assessment" },
       { label: "Payout", value: "Credit toward your order" },
-      { label: "Shipping", value: "Prepaid label for approved items" },
+      { label: "Collection", value: "Arranged by us" },
     ],
     sections: [
       {
-        heading: "Items we accept",
+        heading: "What we accept",
         list: [
-          "Digital and film camera bodies",
-          "Lenses with working focus and aperture",
-          "Fine-art and desktop printers in working order",
-          "Studio lighting and calibration tools",
+          "Inkjet and laser printers in working order",
+          "A3 and A4 photocopiers and multifunction machines",
+          "Large-format printers and plotters",
         ],
       },
       {
         heading: "How the offer is set",
         body: [
-          "We grade each item on cosmetic condition, working order and included accessories. The offer reflects that grade and current demand, and it stays valid for the period stated in your offer email.",
+          "We grade each machine on its condition, age, page count and included accessories. The offer reflects that grade and current demand, and it stays valid for the period stated in your offer email.",
         ],
       },
       {
         heading: "Steps",
         list: [
-          "Tell us what you have, with its condition and any accessories.",
-          "We send a provisional range and a prepaid shipping label.",
-          "We assess the item on the bench and confirm the final offer.",
-          "Accept the offer and the credit is applied to your next order.",
+          "Tell us the make, model, age and condition of your machine.",
+          "We send a provisional range and arrange collection.",
+          "We assess the machine and confirm the final offer.",
+          "Accept the offer and the credit is applied to your new machine.",
         ],
       },
     ],
     cta: {
-      label: "Shop equipment",
-      to: "/products",
-      text: "Already know what you want to upgrade to? Browse the full range.",
+      label: "Shop printers",
+      to: "/products/printers",
+      text: "Already know what you want to upgrade to? Browse the range.",
     },
   },
   {
-    slug: "studio-financing",
+    slug: "financing",
     group: "services",
     eyebrow: "Service",
-    title: "Studio financing",
+    title: "Financing",
     summary:
-      "Spread the cost of professional equipment with a lease or instalment plan, so you can equip a studio without a large upfront payment.",
+      "Spread the cost of a photocopier or large printer with a lease or monthly instalments, so you can equip your office without a large upfront payment.",
     icon: "lucide:wallet",
     facts: [
       { label: "Options", value: "Lease or instalments" },
@@ -107,7 +106,7 @@ export const infoPages: InfoPage[] = [
       {
         heading: "Lease",
         body: [
-          "Eligible products show a monthly lease price beside the purchase price. A lease keeps your cash free and the equipment in use from day one.",
+          "Eligible products show a monthly lease price beside the purchase price. A lease keeps your cash free and the machine in use from day one.",
         ],
       },
       {
@@ -126,35 +125,35 @@ export const infoPages: InfoPage[] = [
       },
     ],
     cta: {
-      label: "Find financed equipment",
-      to: "/products",
+      label: "Find machines you can lease",
+      to: "/products/photocopiers",
       text: "Look for the lease price on product pages to see what you can finance.",
     },
   },
   {
-    slug: "shipping-freight",
+    slug: "shipping-delivery",
     group: "services",
     eyebrow: "Service",
-    title: "Shipping & freight",
+    title: "Shipping & delivery",
     summary:
-      "Small items travel by insured courier. Large-format printers and heavy equipment ship by freight with scheduled delivery.",
+      "Ink and toner ship by insured courier. Photocopiers and large printers are delivered, installed and tested by our technicians.",
     icon: "lucide:truck",
     facts: [
-      { label: "Parcels", value: "Insured courier" },
-      { label: "Large equipment", value: "Scheduled freight" },
+      { label: "Supplies", value: "Courier, same-day dispatch" },
+      { label: "Machines", value: "Delivery and installation" },
       { label: "Tracking", value: "Every order" },
     ],
     sections: [
       {
-        heading: "Parcels",
+        heading: "Ink, toner and small printers",
         body: [
-          "Cameras, lenses, inks, paper and accessories ship by insured courier. You receive tracking details as soon as your order leaves our warehouse.",
+          "Items in stock leave our warehouse the same day when you order before the cut-off time shown at checkout. You receive tracking details as soon as the courier collects your order.",
         ],
       },
       {
-        heading: "Freight",
+        heading: "Photocopiers and large printers",
         body: [
-          "Large-format printers and other heavy items ship on a pallet. We contact you to book a delivery window, and you should check access, door width and floor space beforehand.",
+          "Heavy machines are delivered on a pallet and installed by a technician. We contact you to book a delivery window. Please check access, door width and floor space beforehand.",
         ],
       },
       {
@@ -162,7 +161,7 @@ export const infoPages: InfoPage[] = [
         list: [
           "Inspect the packaging before signing and note any damage on the delivery receipt.",
           "Report damage or missing items within 48 hours so we can resolve it quickly.",
-          "Keep the original packaging for any return or calibration visit.",
+          "Keep the original packaging for any return.",
         ],
       },
     ],
@@ -175,117 +174,116 @@ export const infoPages: InfoPage[] = [
 
   // Guides
   {
-    slug: "icc-profiling",
+    slug: "choosing-a-printer",
     group: "guides",
     eyebrow: "Guide",
-    title: "ICC profiling",
+    title: "Choosing a printer",
     summary:
-      "An ICC profile describes how a device reproduces colour, so a print matches what you saw on screen. Here is how profiling works and when you need a custom one.",
-    icon: "lucide:palette",
+      "Inkjet, ink tank or laser? A short guide to matching a printer to what you print and how much you print.",
+    icon: "lucide:printer",
     sections: [
       {
-        heading: "What a profile does",
+        heading: "Inkjet or laser",
         body: [
-          "Every printer, paper and ink combination reproduces colour a little differently. A profile records that behaviour so your software can compensate and keep colours consistent.",
+          "Inkjet printers suit colour documents and occasional photos at a low purchase price. Laser printers print text faster and more cheaply per page, which suits offices that print every day.",
         ],
       },
       {
-        heading: "Generic or custom",
+        heading: "Ink tank printers",
         body: [
-          "Paper makers publish generic profiles that are a good starting point. A custom profile is measured from your own printer and paper, so it also captures batch and wear differences.",
+          "Ink tank models use refillable bottles instead of cartridges. They cost more to buy but much less to run, which makes them a good fit for homes and small offices with steady use.",
         ],
       },
       {
-        heading: "Getting a good result",
+        heading: "What to check before you buy",
         list: [
-          "Print the test chart with colour management turned off.",
-          "Let the print dry fully before measuring it.",
-          "Measure with a spectrophotometer and a consistent light source.",
-          "Re-profile when you change paper or ink, and after long periods of use.",
+          "How many pages you print each month",
+          "Whether you need colour, and the largest paper size you print on",
+          "Automatic two-sided printing, to save paper",
+          "Wi-Fi or Ethernet, depending on how people connect",
+          "The cost per page of the ink or toner it uses",
         ],
       },
     ],
     cta: {
-      label: "Browse calibration tools",
-      to: "/products/accessories",
-      text: "Spectrophotometers and colorimeters for building your own profiles.",
+      label: "Browse printers",
+      to: "/products/printers",
+      text: "Filter by technology, colour, paper size and connectivity.",
     },
   },
   {
-    slug: "medium-format-film",
+    slug: "choosing-a-photocopier",
     group: "guides",
     eyebrow: "Guide",
-    title: "Medium format film",
+    title: "Choosing a photocopier",
     summary:
-      "Larger negatives give finer detail and smoother tones. A short guide to formats and what to consider before you start shooting medium format.",
-    icon: "lucide:film",
+      "Speed, paper size and finishing: how to pick a photocopier that fits your office without paying for features you will not use.",
+    icon: "lucide:copy",
     sections: [
       {
-        heading: "Why medium format",
+        heading: "Work out your volume",
         body: [
-          "A larger negative records more detail and a gentler transition between tones. Many portrait, landscape and studio photographers choose it for that look.",
+          "Add up the pages your office copies and prints in a month. Choose a machine whose rated monthly duty cycle is comfortably above that number, and a speed that keeps queues short.",
         ],
       },
       {
-        heading: "Common formats",
-        list: [
-          "6×4.5 for the most frames per roll",
-          "6×6 square, with no need to rotate the camera",
-          "6×7 for large, detailed prints",
-          "6×9 for wide, panoramic-style frames",
+        heading: "A4 or A3",
+        body: [
+          "A4 machines are smaller and cheaper. Choose A3 if you copy drawings, spreadsheets or posters, or want to print booklets.",
         ],
       },
       {
-        heading: "Before you buy",
+        heading: "Features to compare",
         list: [
-          "Choose a camera system with lenses you can grow into.",
-          "Plan how you will develop and scan your film.",
-          "Store film cool and process it soon after exposure.",
+          "Print and copy speed in pages per minute",
+          "Colour or black and white",
+          "Scan to email, folder or cloud",
+          "Finishing, such as stapling and booklet making",
+          "A maintenance contract, which keeps running costs predictable",
         ],
       },
     ],
     cta: {
-      label: "Browse cameras",
-      to: "/products/cameras",
-      text: "See the medium format cameras we stock.",
+      label: "Browse photocopiers",
+      to: "/products/photocopiers",
+      text: "Filter by speed, paper size, colour and functions.",
     },
   },
   {
-    slug: "calibration",
+    slug: "ink-toner-compatibility",
     group: "guides",
     eyebrow: "Guide",
-    title: "Calibration",
+    title: "Ink and toner compatibility",
     summary:
-      "Calibration keeps your screen, printer and lenses telling the truth. This guide covers what to calibrate, how often, and the tools you need.",
-    icon: "lucide:sliders-horizontal",
+      "Ordering the wrong cartridge is the most common supplies mistake. Here is how to find the right ink or toner for your machine.",
+    icon: "lucide:droplets",
     sections: [
       {
-        heading: "What to calibrate",
-        list: [
-          "Your monitor, so what you edit is what you see",
-          "Your printer, so prints match the screen",
-          "Your lenses and bodies, so focus is accurate",
-        ],
-      },
-      {
-        heading: "How often",
+        heading: "Find your model name",
         body: [
-          "Monitors drift slowly, so check them about once a month. Re-calibrate printers when you change paper or ink, and after a long idle period. Have lenses and bodies checked once a year, or after a knock.",
+          "The model name is printed on the front or top of your printer or photocopier. Use the full name, for example Corex Laser 210, not only the brand.",
         ],
       },
       {
-        heading: "Tools you need",
+        heading: "Check the compatibility list",
+        body: [
+          "Every ink, toner and drum unit page has a Compatible with list. Your exact model must be on it. If it is not, contact us before you order.",
+        ],
+      },
+      {
+        heading: "Standard or high-yield",
         list: [
-          "A colorimeter or spectrophotometer for screens and prints",
-          "A neutral, controlled light for viewing prints",
-          "A bench calibration visit for optical equipment",
+          "Standard cartridges cost less up front.",
+          "High-yield cartridges print more pages and lower the cost of each page.",
+          "Colour sets bundle cyan, magenta and yellow in one purchase.",
+          "Drum units wear out more slowly than toner and are replaced less often.",
         ],
       },
     ],
     cta: {
-      label: "Book bench calibration",
-      to: "/services/bench-calibration",
-      text: "Let us check your optical equipment on the bench.",
+      label: "Shop ink and toner",
+      to: "/products/inks-toner",
+      text: "Filter by type, colour and the brand your machine is made by.",
     },
   },
 
@@ -315,19 +313,19 @@ export const infoPages: InfoPage[] = [
       {
         heading: "Returns",
         body: [
-          "You may return unused equipment in its original packaging within the return period stated at checkout. Custom-profiled or made-to-order items may not be returnable.",
+          "You may return unused equipment and supplies in their original, sealed packaging within the return period stated at checkout. Installed machines and special-order items may not be returnable.",
         ],
       },
       {
         heading: "Warranty",
         body: [
-          "Equipment carries the manufacturer's warranty. Warranty does not cover damage from misuse, unauthorised repair or normal wear.",
+          "Equipment carries the manufacturer's warranty. Warranty does not cover damage from misuse, unauthorised repair, non-genuine supplies or normal wear.",
         ],
       },
       {
         heading: "Leasing and services",
         body: [
-          "Lease and financing terms are provided when you apply. Service and calibration work is quoted before it starts.",
+          "Lease and financing terms are provided when you apply. Maintenance contracts and repairs are quoted before they start.",
         ],
       },
     ],
@@ -350,7 +348,7 @@ export const infoPages: InfoPage[] = [
       {
         heading: "What we collect",
         list: [
-          "Account details such as your name, studio and email",
+          "Account details such as your name, company and email",
           "Order, delivery and payment information",
           "Messages you send us and your newsletter preferences",
           "Basic technical data about how the site is used",
@@ -359,14 +357,14 @@ export const infoPages: InfoPage[] = [
       {
         heading: "How we use it",
         body: [
-          "We use your data to process orders, deliver goods, provide support and, if you opted in, send bulletins. We do not sell your personal data.",
+          "We use your data to process orders, deliver goods, provide support and, if you opted in, send newsletters. We do not sell your personal data.",
         ],
       },
       {
         heading: "Your choices",
         list: [
           "Update your details in your account at any time.",
-          "Unsubscribe from bulletins using the link in any email.",
+          "Unsubscribe from newsletters using the link in any email.",
           "Ask us to export or delete your data.",
         ],
       },
@@ -378,7 +376,7 @@ export const infoPages: InfoPage[] = [
       },
       {
         heading: "Contact",
-        body: ["Questions about your data can be sent to bench@printpro.com."],
+        body: ["Questions about your data can be sent to support@printpro.com."],
       },
     ],
     cta: {

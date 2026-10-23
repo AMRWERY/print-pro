@@ -61,7 +61,7 @@
         <dd class="font-mono">{{ money.format(amounts.subtotal) }}</dd>
       </div>
       <div v-if="amounts.volume" class="flex justify-between gap-4 text-accent">
-        <dt>Volume discount (media)</dt>
+        <dt>Volume discount (ink & toner)</dt>
         <dd class="font-mono">−{{ money.format(amounts.volume) }}</dd>
       </div>
       <div
@@ -115,12 +115,12 @@ const money = useMoney();
 const trust = [
   {
     icon: "lucide:shield-check",
-    label: "3-year zero-deductible mechanical warranty",
+    label: "Manufacturer warranty on every machine",
   },
   {
     icon: "lucide:flask-conical",
-    label: "Pre-flight bench QA and collimation verified",
+    label: "Tested before dispatch",
   },
-  { icon: "lucide:headset", label: "Concierge hotline: +1 (800) 492-LUMN" },
+  { icon: "lucide:headset", label: "Support hotline: +1 (800) 412-5866" },
 ];
 </script>

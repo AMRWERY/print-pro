@@ -11,24 +11,23 @@
     >
       <div class="animate-rise space-y-6">
         <p class="eyebrow inline-flex items-center gap-2">
-          <span class="h-px w-6 bg-accent" />Calibration standard 2026 · bench
-          certified
+          <span class="h-px w-6 bg-accent" />Printers · Photocopiers · Inks &amp; Toner
         </p>
         <h1
           id="hero-title"
           class="text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl"
         >
-          Optical Precision Meets
-          <span class="text-accent">Archival Mastery.</span>
+          Print, copy and keep going.
+          <span class="text-accent">Without the downtime.</span>
         </h1>
         <p class="max-w-xl text-base text-mute">
-          Equipping world-class studios, master printmakers and visionaries with
-          medium-format cameras, cinema glass and 64-inch pigment print labs
-          engineered for zero-defect output.
+          Printers and photocopiers for homes, offices and print rooms, plus the
+          genuine ink and toner to keep them running, delivered and installed
+          by our technicians.
         </p>
         <div class="flex flex-wrap gap-3">
           <LazyVButton variant="primary" to="/products">
-            Explore studio catalog
+            Shop the catalog
             <Icon
               name="lucide:arrow-right"
               size="16"
@@ -41,7 +40,7 @@
             variant="secondary"
             icon="lucide:calendar-clock"
             @click="conciergeOpen = true"
-            >Book 1-on-1 tech concierge</LazyVButton
+            >Talk to a technician</LazyVButton
           >
         </div>
         <dl class="grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">
@@ -59,7 +58,7 @@
         <media-placeholder
           src="/img/hero-img.png"
           fit="cover"
-          label="Hasselblad medium-format camera on a calibration bench"
+          label="A photocopier and a printer in a bright office"
           size="140"
           class="h-[360px] sm:h-[440px] lg:h-[520px] w-full rounded-panel border border-line"
         />

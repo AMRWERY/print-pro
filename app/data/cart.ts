@@ -2,13 +2,13 @@ import type { Voucher } from "~/types/cart";
 
 /** Demo codes. Real validation belongs on the server. */
 export const vouchers: Record<string, Voucher> = {
-  "BIENNIAL-PRINT-2025": {
-    label: "Biennial print rebate",
+  "OFFICE-2026": {
+    label: "Office upgrade offer",
     type: "flat",
     amount: 500,
     minSubtotal: 2000,
   },
-  STUDIO5: { label: "Studio welcome", type: "percent", amount: 5 },
+  WELCOME5: { label: "Welcome offer", type: "percent", amount: 5 },
 };
 
 export const pricing = {
@@ -16,7 +16,7 @@ export const pricing = {
   freeFreightFrom: 2500,
   freight: 149,
   taxRate: 0.085,
-  /** Media rolls, 3 or more per line. */
+  /** Ink and toner, 3 or more per line. */
   volumeMinQty: 3,
   volumeRate: 0.07,
 };
@@ -24,22 +24,22 @@ export const pricing = {
 export const cartAssurances = [
   {
     icon: "lucide:shield-check",
-    label: "3-year zero-deductible mechanical warranty",
+    label: "Manufacturer warranty on every machine",
   },
   {
     icon: "lucide:flask-conical",
-    label: "Pre-flight bench QA & collimation verified",
+    label: "Tested before dispatch",
   },
-  { icon: "lucide:truck", label: "Free cleanroom crated dispatch over EGP 2,500" },
-  { icon: "lucide:headset", label: "Concierge hotline: +1 (800) 492-LUMN" },
+  { icon: "lucide:truck", label: "Free delivery over EGP 2,500" },
+  { icon: "lucide:headset", label: "Support hotline: +1 (800) 412-5866" },
 ];
 
 /** Suggested pairings for the "complementary" section (skips anything in the cart). */
 export const companionIds = [
-  "colorchecker",
-  "canson-platine",
-  "hahnemuhle-308",
-  "b10x",
-  "summilux",
-  "pro4100",
+  "corex-toner-210-hy",
+  "kopira-toner-a3-black",
+  "printa-ink-black",
+  "nordjet-pigment-set",
+  "corex-toner-450-set",
+  "kopira-drum-a3",
 ];

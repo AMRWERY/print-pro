@@ -20,9 +20,9 @@
           role="columnheader"
           class="sticky start-0 z-10 flex flex-col gap-2 bg-surface p-4"
         >
-          <p class="eyebrow text-accent">Audit summary</p>
+          <p class="eyebrow text-accent">Summary</p>
           <p class="font-display text-xl leading-snug">
-            Side-by-side bench evaluation
+            Side-by-side comparison
           </p>
           <p class="text-xs text-mute">
             {{ cmp.products.length }}

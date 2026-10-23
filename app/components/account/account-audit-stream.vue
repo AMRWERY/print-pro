@@ -5,11 +5,11 @@
         <div class="flex items-center gap-2">
           <span class="pip rounded-full animate-pulse" aria-hidden="true" />
           <h2 id="audit-stream-title" class="title-sm sm:text-lg">
-            Cryptographic Audit Stream
+            Account activity
           </h2>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          Live telemetry ledger of studio actions
+          Recent activity on your account
         </p>
       </div>
 

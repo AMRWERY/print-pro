@@ -112,7 +112,7 @@
         class="mt-auto flex flex-wrap items-end justify-between gap-x-3 gap-y-3 border-t border-line pt-4"
       >
         <div>
-          <p class="meta">
+          <p v-if="product.lease" class="meta">
             Lease from {{ money.format(product.lease) }}/mo
           </p>
           <p class="font-display text-2xl font-semibold">

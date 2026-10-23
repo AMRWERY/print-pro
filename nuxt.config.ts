@@ -1,5 +1,33 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// Pages from before the store became printers, photocopiers and inks. Old links go to the nearest new page.
+const movedPages: Record<string, string> = {
+  "/products/cameras": "/products",
+  "/products/lenses": "/products",
+  "/products/lighting": "/products",
+  "/products/audio": "/products",
+  "/products/tripods": "/products",
+  "/products/accessories": "/products",
+  "/products/paper-ink": "/products/inks-toner",
+  "/services/bench-calibration": "/services/maintenance-contracts",
+  "/services/studio-financing": "/services/financing",
+  "/services/shipping-freight": "/services/shipping-delivery",
+  "/guides/icc-profiling": "/guides/choosing-a-printer",
+  "/guides/medium-format-film": "/guides/choosing-a-printer",
+  "/guides/calibration": "/guides/choosing-a-printer",
+};
+
+const redirects = Object.fromEntries(
+  ["en", "ar"].flatMap((locale) =>
+    Object.entries(movedPages).map(([from, to]) => [
+      `/${locale}${from}`,
+      { redirect: { to: `/${locale}${to}`, statusCode: 301 } },
+    ]),
+  ),
+);
+
 export default defineNuxtConfig({
+  routeRules: redirects,
   modules: [
     "@pinia/nuxt",
     "@vee-validate/nuxt",
@@ -55,7 +83,14 @@ export default defineNuxtConfig({
     optimizeDeps: {
       // Vite 8's dep scan can't resolve "#components" inside @nuxtjs/i18n
       noDiscovery: true,
-      include: ["vue", "vue-router", "pinia", "@vueuse/core", "vee-validate", "qrcode"],
+      include: [
+        "vue",
+        "vue-router",
+        "pinia",
+        "@vueuse/core",
+        "vee-validate",
+        "qrcode",
+      ],
     },
   },
   css: ["~/assets/css/main.css"],

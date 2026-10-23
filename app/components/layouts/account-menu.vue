@@ -1,17 +1,32 @@
 <template>
-  <LazyVButton v-if="!auth.isSignedIn" variant="icon" to="/auth" aria-label="Sign in">
+  <LazyVButton
+    v-if="!auth.isSignedIn"
+    variant="icon"
+    to="/auth"
+    aria-label="Sign in"
+  >
     <Icon name="lucide:user" size="18" class="icon-wiggle" aria-hidden="true" />
   </LazyVButton>
 
   <div v-else ref="root" class="relative">
-    <VButton variant="icon" class="font-mono text-xs font-bold" aria-haspopup="menu" :aria-expanded="open"
-      :aria-label="`Account menu for ${auth.user?.name}`" @click="open = !open">
+    <VButton
+      variant="icon"
+      class="font-mono text-md font-bold"
+      aria-haspopup="menu"
+      :aria-expanded="open"
+      :aria-label="`Account menu for ${auth.user?.name}`"
+      @click="open = !open"
+    >
       {{ initials }}
     </VButton>
 
     <Transition name="menu">
-      <div v-if="open" role="menu" aria-label="Account"
-        class="absolute end-0 top-full z-50 mt-2 w-64 space-y-3 card p-3 shadow-xl shadow-black/30">
+      <div
+        v-if="open"
+        role="menu"
+        aria-label="Account"
+        class="absolute end-0 top-full z-50 mt-2 w-64 space-y-3 card p-3 shadow-xl shadow-black/30"
+      >
         <div class="space-y-0.5 border-b border-line pb-3">
           <p class="truncate font-medium">{{ auth.user?.name }}</p>
           <p class="truncate text-xs text-mute">{{ auth.user?.studio }}</p>
@@ -20,10 +35,26 @@
           </p>
         </div>
         <div class="space-y-1">
-          <LazyVButton variant="secondary" size="sm" block to="/account" icon="lucide:layout-dashboard" role="menuitem"
-            @click="open = false">Atelier Dashboard</LazyVButton>
-          <LazyVButton variant="secondary" size="sm" block icon="lucide:log-out" role="menuitem" @click="signOut">Sign
-            out</LazyVButton>
+          <LazyVButton
+            variant="secondary"
+            size="sm"
+            block
+            to="/account"
+            icon="lucide:user"
+            role="menuitem"
+            @click="open = false"
+            >Profile</LazyVButton
+          >
+
+          <LazyVButton
+            variant="secondary"
+            size="sm"
+            block
+            icon="lucide:log-out"
+            role="menuitem"
+            @click="signOut"
+            >Sign out</LazyVButton
+          >
         </div>
       </div>
     </Transition>

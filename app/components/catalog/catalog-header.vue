@@ -2,7 +2,7 @@
   <header v-reveal class="space-y-4 border-b border-line pb-6">
     <p class="eyebrow-accent">
       <span class="pip" aria-hidden="true" />
-      Division of registered optics &amp; colour engines
+      Printers, photocopiers &amp; supplies
     </p>
     <h1 class="text-3xl sm:text-5xl">{{ title }}</h1>
     <p class="max-w-3xl text-sm text-mute sm:text-base">{{ description }}</p>
@@ -15,7 +15,7 @@
         <span class="text-paper"
           >{{ catalog.rangeStart }}–{{ catalog.rangeEnd }}</span
         >
-        of <span class="text-paper">{{ catalog.total }}</span> precision items
+        of <span class="text-paper">{{ catalog.total }}</span> products
       </span>
       <span class="inline-flex items-center gap-1.5 text-success">
         <Icon name="lucide:circle-check" size="12" aria-hidden="true" />{{
@@ -23,11 +23,11 @@
         }}
         ships today
       </span>
-      <span class="inline-flex items-center gap-1.5 text-cyan">
+      <span v-if="consigned" class="inline-flex items-center gap-1.5 text-cyan">
         <Icon name="lucide:badge-check" size="12" aria-hidden="true" />{{
           consigned
         }}
-        certified consignments
+        certified refurbished
       </span>
     </p>
   </header>
@@ -35,9 +35,9 @@
 
 <script lang="ts" setup>
 withDefaults(defineProps<{ title?: string; description?: string }>(), {
-  title: "All Instruments & Archival Substrates",
+  title: "All products",
   description:
-    "Calibrated medium-format digital systems, cinema primes, pigment printers and 100% cotton rag media. Every unit is bench-verified before dispatch.",
+    "Printers, photocopiers and genuine ink and toner. Every machine is tested before dispatch.",
 });
 
 const catalog = useCatalog();

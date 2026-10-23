@@ -2,7 +2,7 @@
   <printing-section
     id="fulfilment"
     step="05"
-    title="Cleanroom Packaging & Chain-of-Custody Logistics"
+    title="Packaging and Delivery"
     stage="Stage 5/5"
   >
     <printing-choice

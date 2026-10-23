@@ -6,16 +6,14 @@
       <header v-reveal class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-3">
           <p class="eyebrow-accent">
-            <span class="pip" aria-hidden="true" />Studio
-            procurement · station 04
+            <span class="pip" aria-hidden="true" />Your order
           </p>
           <h1 class="max-w-3xl text-3xl sm:text-5xl">
-            Studio procurement cart &amp; manifest audit
+            Your cart
           </h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
-            Calibrated optical instruments, large-format fine-art print engines
-            and certified archival substrates allocated for immediate laboratory
-            dispatch.
+            Review your printers, photocopiers and supplies, adjust quantities
+            and continue to checkout.
           </p>
         </div>
       </header>
@@ -25,18 +23,18 @@
       <LazyVEmptyState
         v-if="!entries.length"
         icon="lucide:shopping-cart"
-        eyebrow="MANIFEST :: CART_REQUISITION"
+        eyebrow="CART :: EMPTY"
         tag="0 UNITS"
         caption="0 UNITS"
-        :meta="['PAYLOAD: 0.00 KG', 'SPEC: ISO-ARCHIVAL']"
-        title="Your procurement cart is empty"
-        description="Add instruments from the catalog, or move saved apparatus from your studio registry."
+        :meta="['ITEMS: 0', 'WEIGHT: 0.00 KG']"
+        title="Your cart is empty"
+        description="Add printers, photocopiers or supplies from the catalog, or move products from your wishlist."
       >
         <LazyVButton variant="primary" to="/products"
           >Browse the catalog</LazyVButton
         >
         <LazyVButton variant="secondary" to="/wishlist"
-          >Open studio registry</LazyVButton
+          >Open wishlist</LazyVButton
         >
       </LazyVEmptyState>
 
@@ -137,9 +135,9 @@
       <div class="container-page space-y-8">
         <section-heading
           id="companions-title"
-          eyebrow="Calibrated companions"
-          title="Complementary studio apparatus & consumables"
-          body="Certified compatible with the items in your manifest."
+          eyebrow="Goes well with your order"
+          title="Supplies and accessories"
+          body="Genuine supplies that fit the machines in your cart."
         />
         <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <li
@@ -167,9 +165,9 @@ const localePath = useLocalePath();
 const wishlist = useWishlistStore();
 
 const crumbs = [
-  { label: "Studio procurement", to: "/" },
-  { label: "Optical & print apparatus", to: "/products" },
-  { label: "Cart manifest (active)" },
+  { label: "Index", to: "/" },
+  { label: "Products", to: "/products" },
+  { label: "Cart" },
 ];
 
 const preview = ref(false);
@@ -235,7 +233,7 @@ const savedProducts = computed(() =>
 );
 const restore = (p: DetailedProduct) => {
   cart.add(p.id, p.price);
-  say(`${p.name} moved back to the manifest.`);
+  say(`${p.name} moved back to your cart.`);
 };
 
 const notice = ref("");
@@ -257,9 +255,9 @@ const companions = computed(() => {
 });
 
 useSeoMeta({
-  title: "Procurement Cart",
+  title: "Cart",
   description:
-    "Review your allocation, adjust quantities and prepare your studio order.",
+    "Review your items, adjust quantities and continue to checkout.",
   robots: "noindex",
 });
 </script>

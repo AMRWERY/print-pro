@@ -22,7 +22,7 @@ export const trackingStages = (o: Order, now: Date): TrackStage[] => {
   const t1 = created;
   const t2 = new Date(created.getTime() + 4 * HOUR);
   const t3 = atHour(addWorkingDays(created, 1), 9);
-  // Leaves the bench the working day before handover (same day for pickup), never before packing is done.
+  // Leaves our warehouse the working day before handover (same day for pickup), never before packing is done.
   const dispatch = pickup
     ? handover
     : atHour(addWorkingDays(created, Math.max(1, o.delivery.days - 1)), 8);
@@ -41,40 +41,40 @@ export const trackingStages = (o: Order, now: Date): TrackStage[] => {
     },
     {
       key: "qa",
-      title: "Bench QA & calibration",
-      body: "Each item is checked against its spec sheet and a calibration report is prepared.",
+      title: "Checked & tested",
+      body: "Each item is checked against its specification and test-printed or test-run before it is packed.",
       at: t2,
     },
     {
       key: "pack",
-      title: "Protective crating",
-      body: "Sealed in climate-damped crating with shock and humidity loggers.",
+      title: "Packed",
+      body: "Wrapped and boxed securely, with the machine, power cable and starter supplies.",
       at: t3,
     },
     pickup
       ? {
         key: "ready",
         title: "Ready for pickup",
-        body: "Waiting at our NYC bench. Bring photo ID and your order number.",
+        body: "Waiting at our Cairo showroom. Bring photo ID and your order number.",
         at: t4,
       }
       : {
         key: "transit",
         title: "In transit",
-        body: `${o.delivery.label}: handed to the carrier, temperature-controlled.`,
+        body: `${o.delivery.label}: handed to the courier.`,
         at: t4,
       },
     pickup
       ? {
         key: "done",
         title: "Collected",
-        body: "Handed over to the consignee.",
+        body: "Handed over to you.",
         at: t5,
       }
       : {
         key: "done",
         title: "Delivered",
-        body: "Handed over to the consignee, signature on delivery.",
+        body: "Handed over to you, signature on delivery.",
         at: t5,
       },
   ];
@@ -108,7 +108,7 @@ export const trackingState = (
     return { state: "ready", label: "Ready for pickup", icon: "lucide:store" };
   return {
     state: "processing",
-    label: "Processing at the bench",
+    label: "Being prepared",
     icon: "lucide:loader-circle",
   };
 };
@@ -120,15 +120,15 @@ export const trackingEvents = (stages: TrackStage[]): TrackEvent[] =>
     .map((s) => ({ at: s.at, title: s.title, body: s.body }))
     .reverse();
 
-/** Made-up readings, steady for a given order, so the demo looks consistent between visits. */
+/** Made-up delivery details, steady for a given order, so the demo looks consistent between visits. */
 export const demoTelemetry = (o: Order) => {
   let h = 0;
   for (const c of o.id) h = (h * 31 + c.charCodeAt(0)) % 997;
   return {
-    gForce: (0.01 + (h % 4) / 100).toFixed(2),
-    humidity: 40 + (h % 5),
-    temp: (18 + (h % 8) / 10).toFixed(1),
-    nitrogen: (1 + (h % 4) / 100).toFixed(2),
+    parcels: 1 + (h % 4),
+    weightKg: 4 + (h % 40),
+    signature: h % 2 === 0,
+    insuredPct: 100,
   };
 };
 

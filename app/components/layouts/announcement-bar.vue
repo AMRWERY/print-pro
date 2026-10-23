@@ -23,7 +23,7 @@
           class="icon-wiggle"
           aria-hidden="true"
         />
-        Concierge +1 (800) 412-5866
+        Support +1 (800) 412-5866
       </a>
     </div>
   </div>

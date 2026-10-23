@@ -1,6 +1,6 @@
 <template>
   <aside class="border-b border-line bg-ink/95 px-4 py-2.5 backdrop-blur transition-colors duration-200"
-    aria-label="Atelier simulation harness">
+    aria-label="Demo account switcher">
     <div class="container-page flex flex-wrap items-center justify-between gap-3 text-xs">
       <div class="flex flex-wrap items-center gap-2 font-mono">
         <span class="inline-flex items-center gap-1.5 font-bold tracking-wider text-accent">
@@ -8,11 +8,11 @@
             <span class="ping-ring" />
             <span class="relative inline-flex pip rounded-full" />
           </span>
-          ATELIER SIM HARNESS // SELECT OPERATING MODE:
+          DEMO ACCOUNT // SELECT ACCOUNT TYPE:
         </span>
       </div>
 
-      <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Operating modes">
+      <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Account types">
         <LazyVButton variant="plain" v-for="m in modes" :key="m.id" role="tab" :aria-selected="modelValue === m.id"
           class="inline-flex items-center gap-1.5 rounded-control px-2.5 py-1 font-mono text-1xs font-medium tracking-wider transition duration-150"
           :class="modelValue === m.id
@@ -28,7 +28,7 @@
       <div class="hidden items-center gap-3 font-mono text-1xs text-mute xl:flex">
         <span class="flex items-center gap-1.5">
           <span class="h-1.5 w-1.5 rounded-full bg-success" />
-          ISO 5 BENCH ACTIVE
+          DEMO MODE
         </span>
         <span class="text-line">|</span>
         <span class="flex items-center gap-1.5">
@@ -54,7 +54,7 @@ defineEmits<{
 const modes = [
   {
     id: "standard" as OperatingMode,
-    label: "[STANDARD ATELIER MODE]",
+    label: "[STANDARD ACCOUNT]",
     icon: "lucide:sliders-horizontal",
   },
   {
@@ -64,12 +64,12 @@ const modes = [
   },
   {
     id: "new-member" as OperatingMode,
-    label: "[NEW STUDIO MEMBER]",
+    label: "[NEW CUSTOMER]",
     icon: "lucide:user-plus",
   },
   {
     id: "vip-escrow" as OperatingMode,
-    label: "[VIP CONSIGNMENT ESCROW ACTIVE]",
+    label: "[BUSINESS CREDIT ACTIVE]",
     icon: "lucide:lock",
   },
 ];

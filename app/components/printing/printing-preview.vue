@@ -1,18 +1,18 @@
 <template>
   <section class="card-compact" aria-labelledby="proof-title">
     <header class="mb-3 flex items-center justify-between gap-2">
-      <h2 id="proof-title" class="eyebrow text-mute">Metrological soft-proof simulator</h2>
-      <span class="rounded-control border border-accent/40 bg-accent-soft px-2 py-0.5 font-mono text-2xs font-bold text-accent">D50 5000K</span>
+      <h2 id="proof-title" class="eyebrow text-mute">Print preview</h2>
+      <span class="rounded-control border border-accent/40 bg-accent-soft px-2 py-0.5 font-mono text-2xs font-bold text-accent">PREVIEW</span>
     </header>
 
-    <!-- A dark mount board with the print floating in it, drawn at the chosen proportions -->
+    <!-- A dark board with the print on it, drawn at the chosen proportions -->
     <div class="grid aspect-[4/5] place-items-center rounded-control bg-[#15171d] p-6">
       <div class="max-h-full max-w-full bg-white p-2 shadow-2xl shadow-black/60 transition-all duration-300 motion-reduce:transition-none" :style="{ aspectRatio: ratio, height: tall ? '100%' : 'auto', width: tall ? 'auto' : '100%' }">
-        <img :src="previewUrl || sample" :alt="previewUrl ? 'Soft-proof of your uploaded image' : 'Sample artwork, shown until you upload a file'" class="h-full w-full object-cover transition-[filter] duration-300 motion-reduce:transition-none" :style="{ filter: paper.tint }" />
+        <img :src="previewUrl || sample" :alt="previewUrl ? 'Preview of your uploaded file' : 'Sample image, shown until you upload a file'" class="h-full w-full object-cover transition-[filter] duration-300 motion-reduce:transition-none" :style="{ filter: paper.tint }" />
       </div>
     </div>
     <p class="mt-3 font-mono text-1xs leading-relaxed text-mute">
-      {{ caption }}<span v-if="!previewUrl"> · sample artwork</span>
+      {{ caption }}<span v-if="!previewUrl"> · sample image</span>
     </p>
   </section>
 </template>
@@ -30,6 +30,6 @@ const tall = computed(() => price.value.size.h >= price.value.size.w);
 
 const caption = computed(() => {
   const { w, h } = price.value.size;
-  return `${w}″ × ${h}″ · ${paper.value.name} · ${config.ink === "mono" ? "Piezography" : "PRO12"} · ${config.duplex === "double" ? "double" : "single"}-sided`;
+  return `${w}″ × ${h}″ · ${paper.value.name} · ${config.ink === "mono" ? "black & white" : "full colour"} · ${config.duplex === "double" ? "double" : "single"}-sided`;
 });
 </script>

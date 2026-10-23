@@ -38,8 +38,10 @@ const switchTo = () => {
 };
 
 // The server never sees the URL hash, so keeping it would render a different href on the client (hydration mismatch).
-const targetPath = computed(
-  () => switchLocalePath(target.value?.code ?? "").split("#")[0] ?? "",
+const targetPath = computed(() =>
+  target.value
+    ? (switchLocalePath(target.value.code as "en" | "ar").split("#")[0] ?? "")
+    : "",
 );
 
 const target = computed(() =>

@@ -4,7 +4,7 @@
       <section-heading
         id="related-title"
         eyebrow="Recommended pairings"
-        title="Certified media, substrates & consumables"
+        title="Related products & supplies"
       >
         <LazyVButton
           variant="tertiary"

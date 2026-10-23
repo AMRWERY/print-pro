@@ -98,9 +98,13 @@ const uid = useId();
 
 const options = computed(() => {
   const picked = new Set(props.cmp.products.map((p) => p.id));
+  const category = (props.cmp.products[0] as { category?: string } | undefined)
+    ?.category;
   return allProducts.filter(
     (p, i, all) =>
-      !picked.has(p.id) && all.findIndex((q) => q.id === p.id) === i,
+      !picked.has(p.id) &&
+      all.findIndex((q) => q.id === p.id) === i &&
+      (!category || (p as { category?: string }).category === category),
   );
 });
 

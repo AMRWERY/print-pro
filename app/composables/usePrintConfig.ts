@@ -64,7 +64,7 @@ export const providePrintConfig = () => {
     checking.value = true;
     file.value = f;
 
-    // JPEG and PNG can be read here. TIFF, PSD and PDF are accepted and measured at the bench.
+    // JPEG and PNG can be read here. TIFF, PSD and PDF are accepted and checked by a technician.
     if (/^image\/(jpeg|png)$/.test(f.type)) {
       const url = URL.createObjectURL(f);
       previewUrl.value = url;
@@ -114,21 +114,21 @@ export const providePrintConfig = () => {
     if (!f)
       return {
         state: "idle",
-        title: "No asset yet",
-        detail: "Upload your master file to run the preflight.",
+        title: "No file yet",
+        detail: "Upload your file and we will check it.",
       };
     if (dpi.value === null)
       return {
         state: "review",
-        title: "Accepted — bench review",
+        title: "Accepted, to be checked",
         detail:
-          "We measure resolution and colour space on ingest and email you before printing anything.",
+          "A technician checks the resolution and colours and emails you before printing anything.",
       };
     if (dpi.value >= 250)
       return {
         state: "pass",
-        title: "Preflight passed",
-        detail: `${dpi.value} ppi at this size — comfortably above the 250 ppi archival target.`,
+        title: "File check passed",
+        detail: `${dpi.value} ppi at this size — comfortably above the 250 ppi we recommend.`,
       };
     if (dpi.value >= 150)
       return {
@@ -183,7 +183,7 @@ export const providePrintConfig = () => {
         ? `${config.customW}″×${config.customL}″`
         : p.size.label,
       p.paper.name,
-      config.ink === "mono" ? "Monochrome" : "PRO12",
+      config.ink === "mono" ? "Black & white" : "Full colour",
       config.duplex === "double" ? "double-sided" : "single-sided",
       bindings.find((b) => b.value === config.binding)?.name ?? "",
       ...config.edges.map((v) => edges.find((e) => e.value === v)?.name ?? v),

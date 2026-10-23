@@ -22,7 +22,7 @@
                 cart.count }}</span>
             </LazyVButton>
             <LazyVButton variant="icon" to="/wishlist" class="relative"
-              :aria-label="`Studio registry, ${wishlist.ids.length} saved`" @click="emit('close')">
+              :aria-label="`Wishlist, ${wishlist.ids.length} saved`" @click="emit('close')">
               <Icon name="lucide:bookmark" size="18" class="icon-lift" aria-hidden="true" />
               <span v-if="wishlist.ids.length"
                 class="count-badge">{{
@@ -44,21 +44,11 @@
           <nav aria-label="Product categories" class="flex-1 overflow-y-auto p-2">
             <ul>
               <li>
-                <nuxt-link-locale to="/account"
-                  class="flex min-h-12 items-center gap-3 rounded-control px-3 text-sm transition duration-200 hover:bg-raised text-accent font-semibold"
-                  @click="emit('close')">
-                  <Icon name="lucide:layout-dashboard" size="20" class="icon-lift text-accent" aria-hidden="true" />
-                  <span class="flex-1">Atelier Dashboard</span>
-                  <Icon name="lucide:chevron-right" size="16" class="icon-nudge text-mute rtl:-scale-x-100"
-                    aria-hidden="true" />
-                </nuxt-link-locale>
-              </li>
-              <li>
                 <nuxt-link-locale to="/printing" active-class="!text-accent bg-raised"
                   class="flex min-h-12 items-center gap-3 rounded-control px-3 text-sm font-semibold transition duration-200 hover:bg-raised"
                   @click="emit('close')">
                   <Icon name="lucide:printer" size="20" class="icon-lift text-accent" aria-hidden="true" />
-                  <span class="flex-1">Print Lab &amp; Configurator</span>
+                  <span class="flex-1">Print Lab</span>
                   <Icon name="lucide:chevron-right" size="16" class="icon-nudge text-mute rtl:-scale-x-100"
                     aria-hidden="true" />
                 </nuxt-link-locale>
@@ -77,8 +67,8 @@
             </ul>
           </nav>
           <div class="grid gap-2 border-t border-line p-4">
-            <LazyVButton variant="primary" to="/" @click="emit('close')">Trade-in evaluation</LazyVButton>
-            <LazyVButton variant="secondary" to="/" @click="emit('close')">ICC custom profile</LazyVButton>
+            <LazyVButton variant="primary" to="/services/trade-in" @click="emit('close')">Trade-in</LazyVButton>
+            <LazyVButton variant="secondary" to="/services/maintenance-contracts" @click="emit('close')">Maintenance contracts</LazyVButton>
           </div>
         </div>
       </div>

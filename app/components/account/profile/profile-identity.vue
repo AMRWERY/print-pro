@@ -3,16 +3,16 @@
     <header class="mb-5 flex items-center gap-3 border-b border-line pb-4">
       <span class="grid h-12 w-12 place-items-center rounded-full bg-accent-soft font-display text-lg font-bold text-accent" aria-hidden="true">{{ initials }}</span>
       <div>
-        <h2 id="identity-title" class="font-display text-lg font-bold text-paper">Studio identity</h2>
-        <p class="text-xs text-mute">How you appear on orders, invoices and calibration certificates.</p>
+        <h2 id="identity-title" class="font-display text-lg font-bold text-paper">Account details</h2>
+        <p class="text-xs text-mute">How you appear on orders, invoices and service reports.</p>
       </div>
     </header>
 
     <form class="grid gap-4 sm:grid-cols-2" novalidate @submit.prevent="save">
       <LazyVInput v-model="name" name="profile-name" label="Full name" required autocomplete="name" :rules="requiredText('Enter your full name.')" />
       <LazyVInput v-model="title" name="profile-title" label="Job title" optional autocomplete="organization-title" />
-      <LazyVInput v-model="studio" name="profile-studio" label="Studio / company" required autocomplete="organization" :rules="requiredText('Enter your studio or company name.')" />
-      <LazyVInput v-model="phone" name="profile-phone" type="tel" label="Phone" optional autocomplete="tel" :rules="phoneOptional" hint="Used by the carrier for delivery." />
+      <LazyVInput v-model="studio" name="profile-studio" label="Company" required autocomplete="organization" :rules="requiredText('Enter your company name.')" />
+      <LazyVInput v-model="phone" name="profile-phone" type="tel" label="Phone" optional autocomplete="tel" :rules="phoneOptional" hint="Used by the courier for delivery." />
       <LazyVInput :model-value="auth.user?.email" name="profile-email" type="email" label="Email" disabled hint="Your sign-in email can't be changed here." class="sm:col-span-2" />
 
       <div class="flex flex-wrap items-center gap-3 sm:col-span-2">

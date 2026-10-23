@@ -15,13 +15,12 @@ export const useCartTotals = (entries: Ref<CartEntry[]>, code: Ref<string>) => {
     entries.value.reduce((n, e) => n + e.line.qty * e.line.unitPrice, 0),
   );
 
-  // Media bought in bulk gets a tier price.
+  // Ink and toner bought in bulk get a tier price.
   const volumeDiscount = computed(() =>
     round2(
       entries.value.reduce((n, e) => {
-        const isMedia =
-          (e.product as { category?: string }).category === "substrates";
-        return isMedia && e.line.qty >= pricing.volumeMinQty
+        const isSupply = (e.product as { group?: string }).group === "ink";
+        return isSupply && e.line.qty >= pricing.volumeMinQty
           ? n + e.line.qty * e.line.unitPrice * pricing.volumeRate
           : n;
       }, 0),

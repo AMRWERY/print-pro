@@ -2,14 +2,14 @@
   <auth-shell>
     <template #aside>
       <auth-aside
-        eyebrow="Archival registry"
-        tag="Master colour calibration bench"
-        title="Calibrated optical registries and mechanical print escrows."
-        icon="lucide:aperture"
+        eyebrow="Your account"
+        tag="Orders, delivery and service"
+        title="Track orders, reorder supplies and manage your machines."
+        icon="lucide:printer"
         :stats="[
-          { label: 'ISO standard', value: '12647-7' },
-          { label: 'Print substrate', value: '310 GSM Rag' },
-          { label: 'Order ledger', value: 'Verified' },
+          { label: 'Orders', value: 'Tracked' },
+          { label: 'Supplies', value: 'Genuine' },
+          { label: 'Service', value: 'On site' },
         ]"
       />
     </template>
@@ -35,7 +35,9 @@
 
         <div class="flex flex-wrap gap-3">
           <LazyVButton variant="primary" :to="redirect || '/account'">Continue</LazyVButton>
-          <LazyVButton variant="secondary" to="/account" icon="lucide:layout-dashboard">Atelier Dashboard</LazyVButton>
+        
+          <LazyVButton variant="secondary" to="/account" icon="lucide:layout-dashboard">Account dashboard</LazyVButton>
+         
           <LazyVButton
             variant="secondary"
             icon="lucide:log-out"
@@ -48,10 +50,10 @@
       <template v-else>
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2">
-            <span class="pip" aria-hidden="true" />Studio account
+            <span class="pip" aria-hidden="true" />Your account
           </p>
           <h1 id="login-title" class="font-display text-3xl sm:text-4xl">
-            Studio sign in
+            Sign in
           </h1>
           <p class="text-sm text-mute">
             Access your equipment orders, saved registry and delivery tracking.
@@ -143,7 +145,7 @@
             variant="tertiary"
             to="/auth/register"
             class="!text-accent"
-            >Create a studio account</LazyVButton
+            >Create an account</LazyVButton
           >
         </p>
 
@@ -235,7 +237,7 @@ const submit = async () => {
 
 useSeoMeta({
   title: "Sign In",
-  description: "Sign in to your studio account.",
+  description: "Sign in to your PrintPro account.",
   robots: "noindex",
 });
 </script>

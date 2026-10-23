@@ -3,12 +3,12 @@
     <div class="container-page space-y-8">
       <section-heading
         id="disciplines-title"
-        eyebrow="Architecture of creation"
-        title="Instrument disciplines"
-        body="Precision-bench tested categories for large-format and fine-art output, from camera body to finished print."
+        eyebrow="Shop by category"
+        title="Everything for printing and copying"
+        body="Printers, photocopiers and the genuine supplies that keep them running."
       />
 
-      <ul class="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-4">
+      <ul class="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3">
         <li
           v-for="(c, i) in categories"
           :key="c.label"
@@ -22,7 +22,7 @@
               class="flex items-center justify-between meta"
             >
               0{{ i + 1 }} /
-              {{ c.label.split(" ")[0]!.toUpperCase().slice(0, 7) }}
+              {{ c.label.split(" ")[0]!.toUpperCase() }}
               <Icon
                 :name="c.icon"
                 size="20"

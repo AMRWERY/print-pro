@@ -24,7 +24,7 @@
                 id="cleanroom-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"
               >
-                Book cleanroom QA bench // ISO 5
+                Book a service visit
               </h2>
             </div>
             <LazyVButton
@@ -43,7 +43,7 @@
             <LazyVSelectInput
               v-model="location"
               name="room-location"
-              label="Location & airlock dock"
+              label="Visit location"
               :options="locations"
             />
 
@@ -60,7 +60,7 @@
               <LazyVSelectInput
                 v-model="slot"
                 name="room-slot"
-                label="Timeslot (CET/EDT)"
+                label="Time slot"
                 :options="slots"
               />
             </div>
@@ -68,7 +68,7 @@
             <LazyVSelectInput
               v-model="equipmentType"
               name="room-equipment"
-              label="Equipment allocation"
+              label="Type of visit"
               :options="equipment"
             />
 
@@ -78,12 +78,12 @@
               <div
                 class="flex items-center justify-between font-mono font-semibold text-paper"
               >
-                <span>SECURITY CLEARANCE</span>
-                <span class="text-success">LEVEL 4 CONSERVATOR (ACTIVE)</span>
+                <span>ACCOUNT TYPE</span>
+                <span class="text-success">BUSINESS ACCOUNT (ACTIVE)</span>
               </div>
               <p>
-                {{ name }} holds biometric pre-clearance for cleanroom entry
-                without secondary vetting.
+                Visits for {{ name }} are covered by your maintenance terms. A
+                technician will confirm the time by phone.
               </p>
             </div>
 
@@ -92,7 +92,7 @@
                 >Cancel</LazyVButton
               >
               <LazyVButton type="submit" variant="primary" :loading="submitting"
-                >Confirm reservation</LazyVButton
+                >Confirm visit</LazyVButton
               >
             </div>
           </form>
@@ -121,26 +121,20 @@ const { profile } = useAccount();
 const name = computed(() => profile.value.name);
 
 const locations = [
-  {
-    value: "Berlin Station 04",
-    label: "Berlin Station 04 — Köpenicker Str. 148 (Tier 4 Airlock)",
-  },
-  {
-    value: "New York Dock 4B",
-    label: "New York Dock 4B — Metropolitan Archival Wing (Class 100)",
-  },
+  { value: "Head office", label: "Head office (Cairo)" },
+  { value: "Branch office", label: "Branch office (Giza)" },
 ];
 
 const slots = [
   { value: "09:00 - 13:00", label: "Morning session: 09:00 - 13:00" },
   { value: "14:00 - 18:00", label: "Afternoon session: 14:00 - 18:00" },
-  { value: "Full day", label: "Full 8-hour intensive bench block" },
+  { value: "Full day", label: "Full day: 09:00 - 17:00" },
 ];
 
 const equipment = [
-  { value: "interferometry", label: "Laser Interferometry MTF Bench" },
-  { value: "collimator", label: "Parallel Beam Optical Collimator" },
-  { value: "spectro", label: "D50 2000-Lux Spectro Verification Chamber" },
+  { value: "service", label: "Scheduled servicing" },
+  { value: "repair", label: "Repair call-out" },
+  { value: "install", label: "Installation and setup" },
 ];
 
 const location = ref(locations[0]!.value);

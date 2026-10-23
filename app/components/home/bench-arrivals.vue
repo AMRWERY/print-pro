@@ -3,15 +3,15 @@
     <div class="container-page space-y-8">
       <section-heading
         id="arrivals-title"
-        eyebrow="Verified consignment & fresh drops"
-        title="Bench-certified arrivals"
+        eyebrow="New and back in stock"
+        title="Latest arrivals"
       >
         <LazyVButton
           variant="tertiary"
-          to="/"
+          to="/products"
           class="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider"
         >
-          View all consignments
+          View all products
           <Icon
             name="lucide:arrow-right"
             size="14"

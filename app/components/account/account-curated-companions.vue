@@ -5,16 +5,16 @@
         <div class="flex items-center gap-2">
           <span class="pip rounded-full" aria-hidden="true" />
           <h2 id="companions-section-title" class="title-sm sm:text-lg">
-            Curated Companion Apparatus &amp; Consumables
+            Suggested supplies &amp; accessories
           </h2>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          Calibrated compatibility for your active camera and printer configurations
+          Supplies matched to the printers and photocopiers you use
         </p>
       </div>
 
       <span class="rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-2xs text-mute">
-        ATELIER COMPATIBLE
+        COMPATIBLE
       </span>
     </header>
 

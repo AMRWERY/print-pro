@@ -46,6 +46,6 @@ const tabs = [
   { key: "in-transit", label: "In transit" },
   { key: "processing", label: "Processing" },
   { key: "delivered", label: "Delivered" },
-  { key: "archived", label: "Archived" },
+  { key: "archived", label: "Completed" },
 ];
 </script>

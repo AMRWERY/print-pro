@@ -2,16 +2,16 @@
   <printing-section
     id="dimensions"
     step="02"
-    title="Dimensions, Quantity & Substrate Selection"
+    title="Size, Quantity and Paper"
     stage="Stage 2/5"
   >
     <div class="grid gap-6 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-end">
       <div>
-        <p class="eyebrow mb-2 text-mute">Print edition quantity</p>
+        <p class="eyebrow mb-2 text-mute">Number of copies</p>
         <LazyVQuantityStepper
           v-model="config.copies"
           :max="99"
-          label="Print edition quantity"
+          label="Number of copies"
         />
       </div>
       <p
@@ -35,7 +35,7 @@
 
     <div class="mt-6">
       <p class="eyebrow mb-3 text-mute">
-        Physical sheet dimension (native scale)
+        Print size
       </p>
       <printing-choice
         v-model="config.size"

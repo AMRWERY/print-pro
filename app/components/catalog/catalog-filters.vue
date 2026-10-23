@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex items-center justify-between pb-3">
-      <h2 class="eyebrow !text-paper">Filter parameters</h2>
+      <h2 class="eyebrow !text-paper">Filters</h2>
       <LazyVButton
         variant="plain"
         v-if="catalog.chips.length"
@@ -18,11 +18,11 @@
       class="pb-4"
       type="search"
       name="catalogQuery"
-      label="Filter by name, spec or SKU"
+      label="Filter by name, model or SKU"
       hide-label
       icon="lucide:search"
       autocomplete="off"
-      placeholder="Filter specs, mounts, SKUs"
+      placeholder="Filter by name, model or SKU"
       input-class="truncate"
     />
 
@@ -37,7 +37,21 @@
       />
     </filter-group>
 
-    <filter-group title="Brand & laboratory alliances">
+    <filter-group
+      v-for="g in catalog.attrGroups"
+      :key="g.key"
+      :title="g.label"
+    >
+      <filter-option
+        v-for="o in g.options"
+        :key="o.value"
+        :label="o.label"
+        :checked="(catalog.filters.attrs[g.key] ?? []).includes(o.value)"
+        @change="catalog.toggleAttr(g.key, o.value)"
+      />
+    </filter-group>
+
+    <filter-group title="Brand">
       <filter-option
         v-for="b in visibleBrands"
         :key="b.name"
@@ -57,11 +71,11 @@
       </LazyVButton>
     </filter-group>
 
-    <filter-group title="Acquisition value (EGP)">
+    <filter-group title="Price (EGP)">
       <price-filter />
     </filter-group>
 
-    <filter-group title="Dispatch status">
+    <filter-group title="Availability">
       <filter-option
         v-for="d in catalog.dispatches"
         :key="d.key"
@@ -114,8 +128,8 @@
         class="mt-0.5 shrink-0 text-success"
         aria-hidden="true"
       />
-      Every printer ships with a custom ICC profile and a bench calibration
-      report.
+      Every machine is tested before dispatch and covered by the manufacturer
+      warranty.
     </p>
   </div>
 </template>

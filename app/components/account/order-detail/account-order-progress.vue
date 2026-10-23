@@ -40,10 +40,10 @@ const steps = computed<Step[]>(() => {
   const reached = { processing: 1, "in-transit": 2, delivered: 3, archived: 3, recalled: 1 }[props.order.status];
   const placed = orderDate(props.order);
   const defs = [
-    ["auth", "Order authorized", "Payment cleared and the requisition registered."],
-    ["qa", "Bench QA & calibration", "Items checked against spec and calibrated."],
-    ["transit", "In transit", props.order.dispatchedFrom ? `Dispatched from ${props.order.dispatchedFrom}.` : "Handed to the carrier."],
-    ["done", props.order.status === "recalled" ? "Refunded" : "Delivered", props.order.status === "recalled" ? "Recalled and refunded to the original method." : "Received and signed for."],
+    ["auth", "Order authorized", "Payment cleared and the order registered."],
+    ["qa", "Checked & tested", "Items checked against their specification and tested."],
+    ["transit", "In transit", props.order.dispatchedFrom ? `Dispatched from ${props.order.dispatchedFrom}.` : "Handed to the courier."],
+    ["done", props.order.status === "recalled" ? "Refunded" : "Delivered", props.order.status === "recalled" ? "Cancelled and refunded to the original method." : "Received and signed for."],
   ] as const;
   return defs.map(([key, title, body], i) => ({
     key,

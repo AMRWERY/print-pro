@@ -31,7 +31,7 @@
             size="sm"
             icon="lucide:file-text"
             @click="print"
-            >Print waybill</LazyVButton
+            >Print delivery note</LazyVButton
           >
 
           <LazyVButton

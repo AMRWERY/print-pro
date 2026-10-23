@@ -3,25 +3,25 @@
     <template #aside>
       <auth-aside
         eyebrow="Form 1984-PrintPro"
-        tag="Archival audit"
-        title="Establish your studio registry."
-        body="Register your atelier, gallery or independent studio for calibrated equipment, bulk media allocations and tracked delivery."
-        icon="lucide:landmark"
+        tag="Business account"
+        title="Create your PrintPro account."
+        body="Register your business, school or home office to order printers, photocopiers, ink and toner with tracked delivery."
+        icon="lucide:printer"
         :points="[
           {
             icon: 'lucide:shield-check',
-            title: 'Bench & cleanroom access',
-            body: 'Calibrated sensor arrays, vacuum print beds and zero-deflection glass.',
+            title: 'Service and maintenance',
+            body: 'Book technician visits and manage maintenance contracts online.',
           },
           {
             icon: 'lucide:package-check',
-            title: 'Priority allocations',
-            body: 'Direct quotas on archival cotton rag and custom mounts.',
+            title: 'Supplies on repeat',
+            body: 'Reorder the right ink and toner for your machines in one click.',
           },
         ]"
         :stats="[
-          { label: 'MTF bench', value: '99.4%' },
-          { label: 'Max cotton', value: '640 g/m²' },
+          { label: 'Genuine supplies', value: '100%' },
+          { label: 'Dispatch', value: 'Same day' },
           { label: 'Transit', value: 'Insured' },
         ]"
       />
@@ -33,10 +33,10 @@
           <span class="pip" aria-hidden="true" />Create account
         </p>
         <h1 id="register-title" class="font-display text-3xl sm:text-4xl">
-          Establish studio registry
+          Create your account
         </h1>
         <p class="text-sm text-mute">
-          Create a studio account to save your registry, place orders and track
+          Create an account to save products, place orders and track
           delivery.
         </p>
       </div>
@@ -60,11 +60,11 @@
           <LazyVInput
             v-model="form.studio"
             name="studio"
-            label="Studio or atelier name"
+            label="Company or organisation"
             required
-            :rules="requiredText('Enter your studio or organisation name.')"
+            :rules="requiredText('Enter your company or organisation name.')"
             autocomplete="organization"
-            placeholder="e.g. Galerie Max Hetzler"
+            placeholder="e.g. Delta Architects"
           />
 
           <LazyVInput
@@ -72,17 +72,17 @@
             class="sm:col-span-2"
             name="email"
             type="email"
-            label="Studio email"
+            label="Email"
             required
             rules="required|email"
             autocomplete="email"
             inputmode="email"
-            placeholder="curator@atelier.com"
+            placeholder="name@company.com"
           />
         </fieldset>
 
         <fieldset class="space-y-3">
-          <legend class="eyebrow mb-1">Studio tier</legend>
+          <legend class="eyebrow mb-1">Account type</legend>
           <div class="grid gap-2 sm:grid-cols-3">
             <LazyVRadioInput
               v-for="t in tiers"
@@ -104,7 +104,7 @@
         </fieldset>
 
         <fieldset class="space-y-4">
-          <legend class="eyebrow mb-3">02 · Security credentials</legend>
+          <legend class="eyebrow mb-3">02 · Password</legend>
           <div class="grid gap-4 sm:grid-cols-2">
             <LazyVInput
               v-model="form.password"
@@ -143,11 +143,11 @@
             <LazyVButton variant="tertiary" to="/" class="!text-accent"
               >terms of sale</LazyVButton
             >
-            and the transit and escrow conditions.
+            and the delivery and returns conditions.
           </LazyVCheckboxImput>
 
           <LazyVCheckboxImput v-model="form.newsletter">
-            Send me bi-weekly technical bulletins and new-arrival reports
+            Send me the monthly newsletter with offers and new arrivals
             <span class="text-mute">(optional)</span>.
           </LazyVCheckboxImput>
         </fieldset>
@@ -183,7 +183,7 @@
           :loading="loading"
           icon-end="lucide:arrow-right"
           icon-end-class="icon-nudge rtl:-scale-x-100"
-          >Create studio account</LazyVButton
+          >Create account</LazyVButton
         >
       </form>
 
@@ -222,7 +222,7 @@ const form = reactive({
   name: "",
   studio: "",
   email: "",
-  tier: "atelier" as Tier,
+  tier: "business" as Tier,
   password: "",
   confirm: "",
   terms: false,
@@ -263,7 +263,7 @@ const submit = async () => {
 
 useSeoMeta({
   title: "Create Account",
-  description: "Create a studio account.",
+  description: "Create a PrintPro account.",
   robots: "noindex",
 });
 </script>

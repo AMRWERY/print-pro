@@ -1,6 +1,6 @@
 /**
  * True when the current page is a search whose whole query names a category
- * ("camera", "cameras", "paper"…), so the category row can highlight it.
+ * ("printer", "toner", "copier"…), so the category row can highlight it.
  */
 export const useCategorySearchMatch = () => {
   const route = useRoute();

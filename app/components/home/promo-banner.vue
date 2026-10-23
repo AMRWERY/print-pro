@@ -16,16 +16,16 @@
         </span>
         <div>
           <h2 id="promo-title" class="text-xl">
-            End-of-quarter studio upgrade program
+            Trade in your old printer or photocopier
           </h2>
           <p class="text-sm text-mute">
-            Up to EGP 2,500 in manufacturer print rebates on qualifying
-            medium-format and 44" Canon &amp; Epson pigment systems.
+            Get credit toward a new machine. We assess your old one, collect it
+            and take care of the swap.
           </p>
         </div>
       </div>
-      <LazyVButton variant="primary" to="/products/printers">
-        Shop eligible printers
+      <LazyVButton variant="primary" to="/services/trade-in">
+        See how trade-in works
         <Icon
           name="lucide:arrow-right"
           size="16"

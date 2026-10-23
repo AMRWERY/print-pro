@@ -1,6 +1,7 @@
-import { compareData, compareSections } from "~/data/compare";
+import { compareData, compareSections, derivedSpecs } from "~/data/compare";
 import { findProduct } from "~/data/product-details";
 import type { MatrixRow, MatrixSection, SpecValue } from "~/types/compare";
+import type { CatalogCategory } from "~/types/catalog";
 import type { DetailedProduct } from "~/types/product";
 
 const MISSING: SpecValue = { value: "—" };
@@ -25,30 +26,33 @@ export const useComparison = (ids: Ref<string[]>) => {
   // Facts every product has, so any selection can be compared.
   const coreValues = (p: DetailedProduct): Record<string, SpecValue> => ({
     price: { value: money.format(p.price) },
-    rating: { value: `${p.rating.toFixed(1)} / 5`, note: `${p.reviews} audits` },
-    lease: p.lease ? { value: `${money.format(p.lease)} / mo`, note: "Studio lease" } : MISSING,
+    rating: { value: `${p.rating.toFixed(1)} / 5`, note: `${p.reviews} reviews` },
+    lease: p.lease ? { value: `${money.format(p.lease)} / mo`, note: "Lease" } : MISSING,
     dispatch: { value: p.badge.label },
   });
 
   const coreRows = [
-    { key: "price", label: "Acquisition price" },
+    { key: "price", label: "Price" },
     { key: "rating", label: "Customer rating" },
     { key: "lease", label: "Lease from" },
-    { key: "dispatch", label: "Dispatch status" },
+    { key: "dispatch", label: "Availability" },
   ];
 
   const sections = computed<MatrixSection[]>(() => {
     const list = products.value;
     if (!list.length) return [];
 
-    const defs = [{ key: "core", title: "Core facts", rows: coreRows }, ...compareSections];
+    const category = (list[0] as { category?: CatalogCategory }).category ?? "printers";
+    const defs = [{ key: "core", title: "Core facts", rows: coreRows }, ...compareSections[category]];
     const out: MatrixSection[] = [];
 
     for (const def of defs) {
       const rows: MatrixRow[] = [];
       for (const row of def.rows) {
         const values = list.map((p) =>
-          def.key === "core" ? coreValues(p)[row.key] : compareData[p.id]?.specs[row.key],
+          def.key === "core"
+            ? coreValues(p)[row.key]
+            : (compareData[p.id]?.specs[row.key] ?? derivedSpecs(p)[row.key]),
         );
         if (!values.some(Boolean)) continue; // nobody has this row
 

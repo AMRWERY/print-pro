@@ -39,7 +39,7 @@ const tones: Record<
   archived: {
     cls: "border-line bg-raised text-mute",
     icon: "lucide:archive",
-    text: "Archived",
+    text: "Completed",
   },
   recalled: {
     cls: "border-magenta/40 bg-magenta-soft text-magenta",

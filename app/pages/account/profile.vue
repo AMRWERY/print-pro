@@ -9,7 +9,7 @@
         Profile &amp; addresses
       </h1>
       <p class="mt-1 text-sm text-mute">
-        Your studio details, sign-in security and delivery ports.
+        Your account details, sign-in security and delivery addresses.
       </p>
     </header>
 
@@ -46,7 +46,7 @@ const modalOpen = ref(false);
 const editing = ref<ReceivingDock | null>(null);
 
 const crumbs = [
-  { label: "Atelier workspace", to: "/account" },
+  { label: "Account", to: "/account" },
   { label: "Profile & addresses" },
 ];
 
@@ -66,7 +66,7 @@ const onSaved = (dock: ReceivingDock) => {
 
 const makePrimary = (dock: ReceivingDock) => {
   docks.makePrimary(dock.id);
-  notify(`${dock.name} is now your primary port`);
+  notify(`${dock.name} is now your default address`);
 };
 
 const remove = (id: string) => {
@@ -99,8 +99,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "Profile & addresses — Lumen & Press",
-  description: "Manage your studio details, password and receiving ports.",
+  title: "Profile & addresses — PrintPro",
+  description: "Manage your account details, password and delivery addresses.",
   robots: "noindex",
 });
 </script>

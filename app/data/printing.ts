@@ -6,7 +6,7 @@ import type {
   PrintSubstrate,
 } from "~/types/printing";
 
-// Lab price list. There is no pricing service yet, so the configurator prices from this file.
+// Print Lab price list. There is no pricing service yet, so the configurator prices from this file.
 
 export const MAX_FILE_MB = 500;
 export const FILE_PATTERN = /\.(tiff?|psd|pdf|jpe?g|png)$/i;
@@ -23,150 +23,150 @@ export const FILE_ACCEPT = [
 export const sizes: PrintSize[] = [
   {
     value: "a4",
-    label: "A4 Standard",
+    label: "A4 Document",
     w: 8.3,
     h: 11.7,
     note: '8.3" × 11.7" (210 × 297 mm)',
-    price: 42,
+    price: 8,
   },
   {
-    value: "a3p",
-    label: "A3+ Super Proof",
-    w: 13,
-    h: 19,
-    note: '13" × 19" (329 × 483 mm)',
-    price: 74,
+    value: "a3",
+    label: "A3 Drawing",
+    w: 11.7,
+    h: 16.5,
+    note: '11.7" × 16.5" (297 × 420 mm)',
+    price: 15,
   },
   {
     value: "a2",
-    label: "A2 Exhibition",
+    label: "A2 Poster",
     w: 16.5,
     h: 23.4,
     note: '16.5" × 23.4" (420 × 594 mm)',
-    price: 112,
+    price: 45,
   },
   {
-    value: "24x36",
-    label: '24" × 36" Gallery Master',
-    w: 24,
-    h: 36,
-    note: "610 × 914 mm",
-    price: 168,
+    value: "a1",
+    label: "A1 Plan",
+    w: 23.4,
+    h: 33.1,
+    note: '23.4" × 33.1" (594 × 841 mm)',
+    price: 85,
   },
   {
-    value: "36x54",
-    label: '36" × 54" Museum Wall',
-    w: 36,
-    h: 54,
-    note: "914 × 1372 mm",
-    price: 280,
+    value: "a0",
+    label: "A0 Large poster",
+    w: 33.1,
+    h: 46.8,
+    note: '33.1" × 46.8" (841 × 1189 mm)',
+    price: 150,
   },
   {
     value: "custom",
-    label: "Custom Roll Dimension",
+    label: "Custom roll size",
     note: 'Continuous up to 44" width',
     price: 0,
   },
 ];
 
 /** Custom sizes are priced by area. */
-export const CUSTOM_PER_SQFT = 9;
+export const CUSTOM_PER_SQFT = 14;
 export const CUSTOM_MAX_WIDTH = 44;
 
 export const substrates: PrintSubstrate[] = [
   {
-    value: "hahnemuhle",
-    name: "Hahnemühle Photo Rag",
-    spec: "308gsm · 100% cotton rag",
-    tag: "Museum archival",
+    value: "plain",
+    name: "Plain Paper",
+    spec: "80gsm · bright white",
+    tag: "Everyday",
     description:
-      "Smooth velvety surface with a muted chalk-white finish. Outstanding pictorial depth and an exceptional dMax of 2.45. Wilhelm longevity verified.",
-    detail: "ISO 9706 acid-free · standard base",
+      "Bright white office paper for drafts, documents and CAD checks. The lowest cost per page.",
+    detail: "Best value",
     delta: 0,
     duplex: true,
     tint: "none",
   },
   {
-    value: "canson",
-    name: "Canson Platine Fibre Rag",
-    spec: "310gsm · baryta satin",
-    tag: "Baryta satin",
+    value: "coated",
+    name: "Coated Paper",
+    spec: "130gsm · coated matt",
+    tag: "Sharp lines",
     description:
-      "Pure 100% cotton rag with a darkroom baryta coating. Deep, rich blacks and a satin sheen recreate traditional silver gelatin prints.",
-    detail: "True darkroom feel",
-    delta: 18,
+      "Coated stock that keeps thin lines and small text crisp. Good for technical drawings, flyers and reports.",
+    detail: "Crisp detail",
+    delta: 6,
     duplex: true,
+    tint: "contrast(1.04)",
+  },
+  {
+    value: "poster",
+    name: "Poster Paper",
+    spec: "190gsm · satin",
+    tag: "Posters",
+    description:
+      "Heavier satin paper with rich colour for posters, menus and displays.",
+    detail: "Rich colour",
+    delta: 12,
+    duplex: false,
     tint: "contrast(1.06) saturate(1.04)",
   },
   {
-    value: "ilford",
-    name: "Ilford Gold Fibre Gloss",
-    spec: "310gsm · warm baryta",
-    tag: "Warm baryta",
+    value: "card",
+    name: "Silk Card",
+    spec: "300gsm · silk coated",
+    tag: "Cards & covers",
     description:
-      "Traditional barium sulphate coating on an alpha-cellulose base. Subtle cream warmth, ideal for classic cinematic tones.",
-    detail: "Subtle cream base",
-    delta: 14,
-    duplex: false,
-    tint: "sepia(0.12) saturate(1.05)",
-  },
-  {
-    value: "awagami",
-    name: "Awagami Bamboo Washi",
-    spec: "250gsm · Japanese washi",
-    tag: "Natural matte",
-    description:
-      "Ecological handcrafted Japanese mulberry and bamboo fibre. Organic fibre texture with soft contrast and exceptional tactile appeal.",
-    detail: "Handcrafted heritage",
-    delta: 22,
-    duplex: false,
-    tint: "sepia(0.18) contrast(0.95)",
+      "Stiff silk-coated card for report covers, business cards and signage.",
+    detail: "Premium feel",
+    delta: 16,
+    duplex: true,
+    tint: "saturate(1.02)",
   },
 ];
 
 export const inks: PrintChoice[] = [
   {
-    value: "pro12",
-    name: "12-Color UltraChrome PRO12",
+    value: "colour",
+    name: "Full colour",
     description:
-      "Full-spectrum pigment set with dedicated Violet, Orange and Green channels and a triple-level Light Gray for smooth colour gradients and 99% Pantone coverage.",
-    note: "Colorimetric verification included",
+      "Vivid, accurate colour from our wide-format and laser machines. Good for presentations, posters and marketing.",
+    note: "Colour check included",
     price: 0,
   },
   {
     value: "mono",
-    name: "Monochrome Carbon Piezography",
+    name: "Black & white",
     description:
-      "Pure monochromatic carbon shade formulations. Seven dilutions of carbon black give photographic gradation and zero metamerism.",
-    note: "+EGP 28 calibration fee",
-    price: 28,
+      "Sharp text and line work at the lowest price. Best for plans, forms and documents.",
+    note: "Lowest cost per page",
+    price: 0,
   },
 ];
 
 export const bindings: PrintChoice[] = [
   {
     value: "loose",
-    name: "None / Loose Sheet",
-    description: "Interleaved glassine",
+    name: "None / loose sheets",
+    description: "Delivered flat",
     price: 0,
   },
   {
-    value: "screwpost",
-    name: "Screw-Post Portfolio",
-    description: "Anodized titanium",
-    price: 65,
+    value: "staple",
+    name: "Stapled corner",
+    description: "Up to 30 sheets",
+    price: 5,
   },
   {
-    value: "linen",
-    name: "Linen Hardcover Folio",
-    description: "Hand-sewn spine",
-    price: 120,
+    value: "spiral",
+    name: "Spiral binding",
+    description: "Plastic comb with a clear cover",
+    price: 25,
   },
   {
-    value: "clamshell",
-    name: "Museum Clamshell Box",
-    description: "Archival buckram",
-    price: 145,
+    value: "hardcover",
+    name: "Hardcover binding",
+    description: "Thermal glue, cloth cover",
+    price: 60,
   },
 ];
 
@@ -174,30 +174,30 @@ export const bindings: PrintChoice[] = [
 export const edges: PrintChoice[] = [
   {
     value: "trim",
-    name: "Clean Trim / Rotary Blade Flush Cut",
+    name: "Trim to size",
     description:
-      "Exact calibrated edge cut with zero micro-fraying. Standard archival practice for floating frame mounts.",
-    price: 18,
+      "Cut to the exact size you choose with a guillotine, for clean straight edges.",
+    price: 3,
   },
   {
-    value: "deckled",
-    name: "Hand-Deckled Feathered Edges",
+    value: "laminate",
+    name: "Gloss or matt lamination",
     description:
-      "Hand-torn along water-conditioned fibres for an authentic deckled fine-art rim on pure rag paper.",
-    price: 18,
+      "Protects posters and menus from spills, fingerprints and everyday wear.",
+    price: 12,
   },
   {
-    value: "lacquer",
-    name: "Archival Protective Lacquer Spray",
+    value: "foam",
+    name: "Mounted on foam board",
     description:
-      "Aerosol sealing without gloss shift. Shields against UV radiation and atmospheric yellowing.",
-    price: 14.5,
+      "Rigid 5 mm foam board backing for displays, exhibitions and shop windows.",
+    price: 20,
   },
   {
     value: "border",
-    name: '100% Rag Acid-Free 2" White Border',
+    name: "White border",
     description:
-      "Generates an integrated white border around the image for safe museum hinge mounting and dry mounting.",
+      "Adds a clean white margin around the artwork, so nothing is cut off when framed.",
     price: 0,
   },
 ];
@@ -205,18 +205,18 @@ export const edges: PrintChoice[] = [
 export const dispatches: PrintChoice[] = [
   {
     value: "courier",
-    name: "Armored Courier Delivery",
+    name: "Courier delivery",
     description:
-      "Climate-regulated express dispatch, flat-packed inside hermetically sealed Baltic birch crate. Full transit insurance included.",
-    note: "2–3 business days transit",
+      "Insured courier, flat-packed or rolled in a protective tube. Tracking included.",
+    note: "2–3 business days",
     price: 25,
   },
   {
     value: "pickup",
-    name: "Atelier Dock Pickup",
+    name: "Pick up from our branch",
     description:
-      "Direct collection from the cleanroom release gate at our NYC bench, immediately after 24-hour print degassing.",
-    note: "Complimentary",
+      "Collect your order from our print room as soon as it is ready. We email you when it is.",
+    note: "Free",
     price: 0,
   },
 ];
@@ -226,16 +226,16 @@ export const volumeTiers = [
   { from: 5, rate: 0.1 },
 ];
 
-export const FLAT_FEES = { preflight: 24, crate: 18 };
+export const FLAT_FEES = { preflight: 10, crate: 8 };
 export const DUPLEX_SUPPLEMENT = 0.6;
 
 export const defaultConfig = (): PrintConfig => ({
   copies: 1,
-  size: "24x36",
+  size: "a1",
   customW: 24,
   customL: 36,
-  substrate: "hahnemuhle",
-  ink: "pro12",
+  substrate: "coated",
+  ink: "colour",
   duplex: "single",
   binding: "loose",
   edges: ["trim"],
@@ -294,7 +294,7 @@ export const priceConfig = (cfg: PrintConfig) => {
     });
   lines.push({
     key: "preflight",
-    label: "Metrological preflight & colour profiling",
+    label: "File check",
     amount: FLAT_FEES.preflight,
   });
   if (ink.price) lines.push({ key: "ink", label: ink.name, amount: ink.price });
@@ -302,7 +302,7 @@ export const priceConfig = (cfg: PrintConfig) => {
     lines.push({ key: "binding", label: binding.name, amount: binding.price });
   lines.push({
     key: "crate",
-    label: "Archival curing & hermetic crate",
+    label: "Protective packaging",
     amount: FLAT_FEES.crate,
   });
   if (dispatch.price)
@@ -316,9 +316,9 @@ export const priceConfig = (cfg: PrintConfig) => {
   return { lines, total, unit, size, paper };
 };
 
-/** Working days at the bench before the order can leave. */
+/** Working days in the print room before the order can leave. */
 export const productionDays = (cfg: PrintConfig) =>
-  3 +
+  2 +
   (cfg.duplex === "double" ? 1 : 0) +
-  (cfg.edges.includes("lacquer") ? 1 : 0) +
+  (cfg.edges.includes("foam") ? 1 : 0) +
   (cfg.copies >= 10 ? 1 : 0);

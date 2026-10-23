@@ -6,8 +6,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="docs-title"
-        eyebrow="Digital lab assets"
-        title="Calibrated ICC profiles & technical manuals"
+        eyebrow="Downloads"
+        title="Drivers, manuals & specification sheets"
       >
         <LazyVButton variant="secondary">
           <Icon
@@ -16,7 +16,7 @@
             class="icon-bob"
             aria-hidden="true"
           />
-          Download all certified archives
+          Download all
         </LazyVButton>
       </section-heading>
 

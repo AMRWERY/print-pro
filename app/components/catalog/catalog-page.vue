@@ -48,7 +48,7 @@ const props = withDefaults(
     description?: string;
   }>(),
   {
-    crumb: "Precision catalog (all)",
+    crumb: "All products",
     title: undefined,
     description: undefined,
   },
@@ -56,7 +56,7 @@ const props = withDefaults(
 
 const crumbs = computed(() => [
   { label: "Index", to: "/" },
-  { label: "Optical & print apparatus", to: "/products" },
+  { label: "Products", to: "/products" },
   { label: props.crumb },
 ]);
 

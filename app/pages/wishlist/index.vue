@@ -3,7 +3,7 @@
     <div class="container-page page-stack">
       <v-breadcrumb :items="crumbs" />
 
-      <!-- A shared manifest opened from a link -->
+      <!-- A shared wishlist opened from a link -->
       <div
         v-if="shared"
         class="flex flex-wrap items-center justify-between gap-3 rounded-card border border-accent/40 bg-accent-soft p-3 text-sm"
@@ -11,11 +11,11 @@
       >
         <p class="flex items-center gap-2">
           <Icon name="lucide:share-2" size="16" aria-hidden="true" />You're
-          viewing a shared registry manifest ({{ items.length }} items).
+          viewing a shared wishlist ({{ items.length }} items).
         </p>
         <div class="flex gap-2">
           <LazyVButton variant="primary" size="sm" @click="saveShared"
-            >Save to my registry</LazyVButton
+            >Save to my wishlist</LazyVButton
           >
           <LazyVButton variant="secondary" size="sm" @click="closeShared"
             >Close</LazyVButton
@@ -42,12 +42,12 @@
       <LazyVEmptyState
         v-if="!items.length"
         icon="lucide:bookmark-plus"
-        eyebrow="MANIFEST :: STUDIO_REGISTRY"
+        eyebrow="WISHLIST :: EMPTY"
         tag="0 BOOKMARKS"
-        caption="DOCKET #000-NIL"
-        :meta="['RESERVATIONS: NIL', 'TAGS: ARCHIVAL_MEDIUM']"
-        title="Your registry is empty"
-        description="Tap the heart on any product to save it here. Group items by studio, share the manifest with your team and move everything to the cart when you are ready."
+        caption="EMPTY"
+        :meta="['SAVED: 0', 'LOCATIONS: NONE']"
+        title="Your wishlist is empty"
+        description="Tap the heart on any product to save it here. Group items by location, share the list with your team and move everything to the cart when you are ready."
       >
         <LazyVButton variant="primary" to="/products"
           >Browse the catalog</LazyVButton
@@ -131,12 +131,12 @@ const wl = useWishlistStore();
 const cart = useCartStore();
 
 const crumbs = [
-  { label: "Studio registry", to: "/" },
-  { label: "Printworks & optical hub", to: "/products" },
-  { label: "Curated apparatus wishlist" },
+  { label: "Index", to: "/" },
+  { label: "Products", to: "/products" },
+  { label: "Wishlist" },
 ];
 
-// ?items=a,b,c opens someone else's manifest read-only.
+// ?items=a,b,c opens someone else's wishlist read-only.
 const shared = computed(() => {
   const raw = route.query.items;
   const list = String((Array.isArray(raw) ? raw[0] : raw) ?? "")
@@ -226,7 +226,7 @@ const ready = computed(
 const registryId = computed(() => {
   let h = 0;
   for (const c of wl.name) h = (h * 31 + c.charCodeAt(0)) % 9973;
-  return `NYC-${String(h).padStart(4, "0")}`;
+  return `PP-${String(h).padStart(4, "0")}`;
 });
 
 // ---- actions ----
@@ -276,9 +276,9 @@ const loadSample = () => {
 };
 
 useSeoMeta({
-  title: "Studio Registry & Wishlist",
+  title: "Wishlist",
   description:
-    "Your saved apparatus: share the manifest, group items by studio and move them to the cart.",
+    "Your saved products: share the list, group items by location and move them to the cart.",
   robots: "noindex",
 });
 </script>

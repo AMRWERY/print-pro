@@ -16,17 +16,12 @@
 
         <!-- Dialog Window -->
         <div
-          class="relative w-full max-w-2xl overflow-hidden rounded-panel border border-accent/40 bg-surface shadow-2xl shadow-black/60 font-mono text-xs"
+          class="relative w-full max-w-2xl overflow-hidden rounded-panel border border-accent/40 bg-surface shadow-2xl shadow-black/60 text-sm"
         >
-          <!-- HUD Header -->
-          <div
-            class="modal-head"
-          >
+          <div class="modal-head">
             <div class="flex items-center gap-2.5">
               <span class="relative flex h-2.5 w-2.5">
-                <span
-                  class="ping-ring"
-                />
+                <span class="ping-ring" />
                 <span
                   class="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"
                 />
@@ -35,14 +30,14 @@
                 id="telemetry-modal-title"
                 class="font-bold tracking-wider text-accent text-sm"
               >
-                LIVE TELEMETRY HUD // CRATE #LP-948201
+                Delivery tracking · {{ order?.id ?? "Order" }}
               </h2>
             </div>
 
             <LazyVButton
               variant="plain"
               class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
-              aria-label="Close telemetry HUD"
+              aria-label="Close delivery tracking"
               @click="$emit('close')"
             >
               <Icon name="lucide:x" size="18" />
@@ -50,184 +45,99 @@
           </div>
 
           <div class="max-h-[80vh] overflow-y-auto p-5 sm:p-6 space-y-6">
-            <!-- Flight Status Strip -->
+            <!-- Courier strip -->
             <div
               class="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line bg-ink/50 p-3"
             >
               <div>
-                <p class="eyebrow text-mute">CARRIER ROUTE</p>
+                <p class="eyebrow text-mute">Courier</p>
                 <p class="title-sm">
-                  Lufthansa Cargo • Flight LH-400 (FRA ✈ JFK)
+                  {{ order?.badgeLabel ?? "Insured courier delivery" }}
                 </p>
-                <p class="text-1xs text-mute">
-                  Waybill: <span class="text-paper">LH-CARGO-VP185-26</span> •
-                  Est. Touchdown:
-                  <span class="text-paper">28 OCT 14:30 EDT</span>
+                <p class="text-xs text-mute">
+                  Tracking number:
+                  <span class="text-paper" dir="ltr">{{
+                    order?.waybill ?? "Pending"
+                  }}</span>
                 </p>
               </div>
-
               <div class="text-end">
                 <span
-                  class="rounded-control bg-success-soft px-2.5 py-1 text-xs font-bold text-success border border-success/30"
+                  class="inline-flex items-center gap-1.5 rounded-control bg-success-soft px-2 py-1 text-xs font-semibold text-success"
                 >
-                  ON-SCHEDULE • IN FLIGHT
+                  <Icon name="lucide:truck" size="13" aria-hidden="true" />
+                  {{ order?.statusLabel ?? "On the way" }}
                 </span>
-                <p class="text-1xs text-mute mt-1">
-                  Altitude: 36,000 FT (Cruising)
+                <p class="mt-1 text-xs text-mute">
+                  Delivering to {{ order?.destination ?? "your address" }}
                 </p>
               </div>
             </div>
 
-            <!-- Route Stepper -->
+            <!-- Progress -->
             <div class="space-y-2">
-              <p class="eyebrow text-mute">CRATE DISPATCH TIMELINE</p>
-              <div class="grid grid-cols-4 gap-2">
-                <div
-                  class="rounded-control border border-line bg-ink/30 p-2.5 text-center space-y-1"
+              <p class="eyebrow text-mute">Delivery progress</p>
+              <ol class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                <li
+                  v-for="(s, i) in steps"
+                  :key="s.label"
+                  class="rounded-control border p-3"
+                  :class="
+                    i < current
+                      ? 'border-success/40 bg-success-soft'
+                      : i === current
+                        ? 'border-accent/60 bg-accent-soft'
+                        : 'border-line bg-ink/40'
+                  "
+                  :aria-current="i === current ? 'step' : undefined"
                 >
                   <Icon
-                    name="lucide:check-circle"
+                    :name="i < current ? 'lucide:check-circle' : s.icon"
                     size="14"
-                    class="text-success mx-auto"
+                    :class="
+                      i < current
+                        ? 'text-success'
+                        : i === current
+                          ? 'text-accent'
+                          : 'text-mute'
+                    "
+                    aria-hidden="true"
                   />
-                  <p class="font-bold text-paper">BER Cleared</p>
-                  <p class="text-2xs text-mute">26 OCT 08:15</p>
-                </div>
-                <div
-                  class="rounded-control border border-line bg-ink/30 p-2.5 text-center space-y-1"
-                >
-                  <Icon
-                    name="lucide:check-circle"
-                    size="14"
-                    class="text-success mx-auto"
-                  />
-                  <p class="font-bold text-paper">TXL Customs</p>
-                  <p class="text-2xs text-mute">26 OCT 12:40</p>
-                </div>
-                <div
-                  class="rounded-control border border-accent bg-accent/10 p-2.5 text-center space-y-1"
-                >
-                  <Icon
-                    name="lucide:plane"
-                    size="14"
-                    class="text-accent animate-pulse mx-auto"
-                  />
-                  <p class="font-bold text-accent">Mid-Atlantic</p>
-                  <p class="text-2xs text-accent">ACTIVE CRUISE</p>
-                </div>
-                <div
-                  class="rounded-control border border-line bg-ink/30 p-2.5 text-center space-y-1 opacity-60"
-                >
-                  <Icon
-                    name="lucide:clock"
-                    size="14"
-                    class="text-mute mx-auto"
-                  />
-                  <p class="font-bold text-paper">JFK Dock 4B</p>
-                  <p class="text-2xs text-mute">ETA 28 OCT</p>
-                </div>
-              </div>
+                  <p class="mt-1.5 font-semibold text-paper">{{ s.label }}</p>
+                  <p class="text-xs text-mute">{{ s.note }}</p>
+                </li>
+              </ol>
             </div>
 
-            <!-- Real-Time Atmospheric & Physical Sensors Grid -->
-            <div>
-              <p class="eyebrow text-mute mb-2">
-                HERMETIC VAULT SENSOR READINGS (LIVE FEED)
+            <!-- Handover notes -->
+            <div class="space-y-2 rounded-control border border-line bg-ink/40 p-4">
+              <p class="flex items-center gap-1.5 font-semibold text-paper">
+                <Icon
+                  name="lucide:shield-check"
+                  size="14"
+                  class="text-success"
+                  aria-hidden="true"
+                />
+                On delivery
               </p>
-              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div
-                  class="rounded-control border border-line bg-surface p-3 space-y-1"
-                >
-                  <dt class="text-mute text-2xs">INTERNAL TEMP</dt>
-                  <dd class="title-md">
-                    19.2°C
-                  </dd>
-                  <dd class="text-2xs text-success">
-                    Target 18°C ± 2°C (Optimal)
-                  </dd>
-                </div>
-
-                <div
-                  class="rounded-control border border-line bg-surface p-3 space-y-1"
-                >
-                  <dt class="text-mute text-2xs">RELATIVE HUMIDITY</dt>
-                  <dd class="title-md">
-                    42% RH
-                  </dd>
-                  <dd class="text-2xs text-success">
-                    Target 45% ± 5% (Dry)
-                  </dd>
-                </div>
-
-                <div
-                  class="rounded-control border border-line bg-surface p-3 space-y-1"
-                >
-                  <dt class="text-mute text-2xs">IMPACT / G-FORCE</dt>
-                  <dd class="title-md">
-                    0.02 G
-                  </dd>
-                  <dd class="text-2xs text-success">
-                    &lt; 0.5 G Damped Safe
-                  </dd>
-                </div>
-
-                <div
-                  class="rounded-control border border-line bg-surface p-3 space-y-1"
-                >
-                  <dt class="text-mute text-2xs">NITROGEN SEAL</dt>
-                  <dd class="title-md">
-                    1.02 atm
-                  </dd>
-                  <dd class="text-2xs text-cyan">Airlock Sealed</dd>
-                </div>
-              </div>
-            </div>
-
-            <!-- Cryptographic Tamper Seal -->
-            <div
-              class="rounded-control border border-line bg-ink/60 p-3.5 space-y-2"
-            >
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-paper flex items-center gap-1.5">
-                  <Icon
-                    name="lucide:shield-check"
-                    size="14"
-                    class="text-cyan"
-                  />
-                  PHYSICAL &amp; CRYPTOGRAPHIC TAMPER SEAL
-                </span>
-                <span
-                  class="rounded bg-success/20 px-2 py-0.5 font-bold text-success text-2xs"
-                >
-                  SEAL INTACT
-                </span>
-              </div>
-              <p class="font-sans text-xs text-mute">
-                Hardware electronic seal #SEAL-LP-884920 polled every 120
-                seconds. No unshielded decompression or mechanical breach
-                detected.
-              </p>
-              <p class="text-2xs text-mute font-mono">
-                SIGNATURE: SHA-256:
-                7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069
-              </p>
+              <ul class="list-disc space-y-1 ps-5 text-xs text-mute">
+                <li>Someone must be present to sign for the delivery.</li>
+                <li>
+                  Check the packaging before signing and note any damage on the
+                  delivery receipt.
+                </li>
+                <li>Photocopiers and large printers are installed by a technician.</li>
+              </ul>
             </div>
           </div>
 
-          <!-- Modal Footer -->
           <div
-            class="modal-foot"
+            class="flex items-center justify-between gap-3 border-t border-line px-5 py-3"
           >
-            <span class="text-mute text-1xs"
-              >Station Sync: FRA Telemetry Hub #04</span
+            <span class="text-xs text-mute">Need help? support@printpro.com</span>
+            <LazyVButton variant="secondary" @click="$emit('close')"
+              >Close</LazyVButton
             >
-            <LazyVButton
-              variant="plain"
-              class="rounded-control bg-raised border border-line px-4 py-1.5 font-bold text-paper transition hover:border-accent hover:text-accent"
-              @click="$emit('close')"
-            >
-              DISMISS HUD
-            </LazyVButton>
           </div>
         </div>
       </div>
@@ -238,7 +148,7 @@
 <script lang="ts" setup>
 import type { RequisitionOrder } from "~/types/account";
 
-defineProps<{
+const props = defineProps<{
   open: boolean;
   order?: RequisitionOrder | null;
 }>();
@@ -246,6 +156,21 @@ defineProps<{
 defineEmits<{
   (e: "close"): void;
 }>();
+
+const steps = [
+  { label: "Order confirmed", note: "We have your order", icon: "lucide:clipboard-check" },
+  { label: "Packed", note: "Checked and sealed", icon: "lucide:package" },
+  { label: "On the way", note: "With the courier", icon: "lucide:truck" },
+  { label: "Delivered", note: "Signed for", icon: "lucide:home" },
+];
+
+// Where the order is in the steps above.
+const current = computed(() => {
+  const status = props.order?.status;
+  if (status === "delivered" || status === "archived") return 3;
+  if (status === "in-transit") return 2;
+  return 1;
+});
 </script>
 
 <style scoped>

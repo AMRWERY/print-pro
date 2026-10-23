@@ -5,11 +5,11 @@
         <div class="flex items-center gap-2">
           <span class="h-2 w-2 rounded-full bg-yellow" aria-hidden="true" />
           <h2 id="registry-section-title" class="title-sm sm:text-lg">
-            Studio Registry &amp; Reserved Apparatus
+            Saved items
           </h2>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          Curated inventory queued for cleanroom collimation &amp; allocation
+          Products you saved for later
         </p>
       </div>
 
@@ -51,7 +51,7 @@
             class="inline-flex items-center gap-1 rounded-control bg-accent px-2.5 py-1 font-mono text-xs font-semibold text-onaccent shadow-sm transition hover:brightness-110 active:scale-95"
             @click="$emit('add-to-manifest', item)">
             <Icon name="lucide:plus" size="12" />
-            <span>MOVE TO MANIFEST</span>
+            <span>ADD TO CART</span>
           </LazyVButton>
         </div>
       </article>

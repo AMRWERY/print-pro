@@ -109,7 +109,7 @@
           class="icon-wiggle"
           aria-hidden="true"
         />
-        Request a studio print test
+        Request a demo
       </LazyVButton>
     </div>
 

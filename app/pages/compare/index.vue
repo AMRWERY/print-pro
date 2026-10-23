@@ -5,16 +5,14 @@
 
       <header v-reveal class="space-y-4">
         <p class="eyebrow-accent">
-          <span class="pip" aria-hidden="true" />Metric protocol ·
-          bench certified
+          <span class="pip" aria-hidden="true" />Compare products
         </p>
         <h1 class="max-w-4xl text-3xl sm:text-5xl">
-          Bench comparison matrix &amp; difference audit
+          Compare printers, photocopiers and supplies
         </h1>
         <p class="max-w-3xl text-sm text-mute sm:text-base">
-          Side-by-side technical evaluation across engines, sensors, optics and
-          archival substrates. Differences are highlighted so you can see what
-          actually separates two systems.
+          Put up to four products from one category side by side. Differences
+          are highlighted so you can see what actually separates them.
         </p>
         <div
           class="flex flex-wrap gap-2"
@@ -23,7 +21,7 @@
         >
           <LazyVButton
             variant="plain"
-            v-for="p in comparePresets"
+            v-for="p in presetList"
             :key="p.key"
             class="rounded-control border px-3 py-1.5 font-mono text-xs tracking-wider transition duration-200"
             :class="
@@ -64,9 +62,9 @@
         v-else
         icon="lucide:git-compare"
         eyebrow="MATRIX :: COMPARE_NULL"
-        tag="0 SPECIMENS"
+        tag="0 PRODUCTS"
         title="Nothing to compare yet"
-        description="Use the compare button on any product card, or load one of the bench presets below."
+        description="Use the compare button on any product card, or load one of the ready-made comparisons below."
       >
         <LazyVButton variant="primary" to="/products"
           >Browse the catalog</LazyVButton
@@ -79,8 +77,12 @@
 </template>
 
 <script lang="ts" setup>
-import { comparePresets, MAX_COMPARE } from "~/data/compare";
+// Named presetList so <compare-presets> resolves to the component, not this array.
+import { comparePresets as presetList, MAX_COMPARE } from "~/data/compare";
 import { findProduct } from "~/data/product-details";
+
+const categoryOf = (id: string) =>
+  (findProduct(id) as { category?: string } | undefined)?.category;
 
 const route = useRoute();
 const router = useRouter();
@@ -88,8 +90,8 @@ const store = useCompareStore();
 
 const crumbs = [
   { label: "Index", to: "/" },
-  { label: "Bench tools", to: "/products" },
-  { label: "Comparison bench (active session)" },
+  { label: "Products", to: "/products" },
+  { label: "Compare products" },
 ];
 
 // The URL (?ids=a,b,c) is the source of truth so a comparison can be shared.
@@ -98,6 +100,7 @@ const ids = computed(() => {
   return String((Array.isArray(raw) ? raw[0] : raw) ?? "")
     .split(",")
     .filter((id, i, all) => id && all.indexOf(id) === i && findProduct(id))
+    .filter((id, _i, all) => categoryOf(id) === categoryOf(all[0]!)) // one category at a time
     .slice(0, MAX_COMPARE);
 });
 
@@ -120,9 +123,8 @@ onMounted(() => {
 });
 
 useSeoMeta({
-  title: "Bench Comparison",
-  description:
-    "Compare bench-verified cameras, printers and archival substrates side by side.",
+  title: "Compare products",
+  description: "Compare printers, photocopiers and supplies side by side.",
   robots: "noindex",
 });
 </script>

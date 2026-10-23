@@ -1,4 +1,5 @@
 import { skipHydrate } from "pinia";
+import { findProduct } from "~/data/product-details";
 // initOnMounted keeps SSR and the first client render identical (both empty).
 export const useWishlistStore = defineStore("wishlist", () => {
   const ids = useLocalStorage<string[]>("wishlist-ids", [], {
@@ -13,8 +14,20 @@ export const useWishlistStore = defineStore("wishlist", () => {
     },
   );
 
-  const name = useLocalStorage("wishlist-name", "Studio Buildout", {
+  const name = useLocalStorage("wishlist-name", "My wishlist", {
     initOnMounted: true,
+  });
+
+  // Drop products that no longer exist (saved by an older version of the catalogue).
+  onMounted(() => {
+    const known = ids.value.filter((id) => findProduct(id));
+    if (known.length !== ids.value.length) ids.value = known;
+    const staleTags = Object.keys(tags.value).filter((id) => !findProduct(id));
+    if (staleTags.length) {
+      const next = { ...tags.value };
+      for (const id of staleTags) delete next[id];
+      tags.value = next;
+    }
   });
 
   const has = (id: string) => ids.value.includes(id);

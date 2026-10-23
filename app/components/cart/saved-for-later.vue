@@ -8,8 +8,8 @@
         @click="open = !open"
       >
         <span class="eyebrow !text-paper"
-          >Saved for later &amp; studio registry ({{ items.length }}
-          {{ items.length === 1 ? "apparatus" : "apparatus" }})</span
+          >Saved for later ({{ items.length }}
+          {{ items.length === 1 ? "item" : "items" }})</span
         >
         <Icon
           name="lucide:chevron-down"
@@ -66,7 +66,7 @@
                 name="lucide:corner-up-left"
                 size="14"
                 aria-hidden="true"
-              />Move to manifest
+              />Move to cart
             </LazyVButton>
             <LazyVButton variant="icon" size="sm"
              

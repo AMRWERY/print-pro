@@ -39,14 +39,14 @@
 providePrintConfig();
 
 const crumbs = [
-  { label: "Studio workspace", to: "/" },
-  { label: "Archival lab services" },
-  { label: "Custom print configurator" },
+  { label: "Index", to: "/" },
+  { label: "Print Lab" },
+  { label: "Print configurator" },
 ];
 
 useSeoMeta({
-  title: "Archival Printing & Metrology Configurator — Lumen & Press",
+  title: "Print Lab — PrintPro",
   description:
-    "Configure museum-grade archival pigment prints: size, paper, ink set, finishing and delivery, with a live price.",
+    "Configure your print job: size, paper, colour, binding and delivery, with a live price.",
 });
 </script>

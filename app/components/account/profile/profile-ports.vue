@@ -32,14 +32,14 @@
     <LazyVEmptyState
       v-if="!docks.length"
       icon="lucide:map-pin-off"
-      eyebrow="AIRLOCK :: DOCK_UNASSIGNED"
-      tag="0 PORTS"
-      caption="PORT: VACANT"
-      title="No receiving ports yet"
+      eyebrow="DELIVERY :: NO_ADDRESS"
+      tag="0 ADDRESSES"
+      caption="EMPTY"
+      title="No delivery addresses yet"
       description="Add a delivery address so checkout can fill it in for you."
     >
       <LazyVButton variant="primary" icon="lucide:plus" @click="$emit('add')"
-        >Add your first port</LazyVButton
+        >Add your first address</LazyVButton
       >
     </LazyVEmptyState>
 

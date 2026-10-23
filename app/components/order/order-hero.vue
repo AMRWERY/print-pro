@@ -25,11 +25,11 @@
             tabindex="-1"
             class="text-3xl focus:outline-none sm:text-5xl"
           >
-            Order confirmed &amp; sealed
+            Order confirmed
           </h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
             Order <span class="font-mono text-paper">#{{ order.id }}</span> has
-            been placed and queued for bench inspection. A confirmation is on
+            been placed and queued for checking and packing. A confirmation is on
             its way to <span class="text-paper">{{ order.email }}</span
             >.
           </p>

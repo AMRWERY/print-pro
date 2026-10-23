@@ -1,6 +1,6 @@
 <template>
   <div class="mt-6">
-    <p class="eyebrow mb-3 text-mute">Archival fine-art paper &amp; media rag</p>
+    <p class="eyebrow mb-3 text-mute">Paper and media</p>
     <printing-choice v-model="config.substrate" label="Paper" :options="options">
       <template #default="{ option }">
         <span class="flex items-start justify-between gap-2 pe-6">

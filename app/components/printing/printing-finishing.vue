@@ -2,10 +2,10 @@
   <printing-section
     id="finishing"
     step="04"
-    title="Edge Finishing, Coating & Folio Enclosure"
+    title="Binding and Finishing"
     stage="Stage 4/5"
   >
-    <p class="eyebrow mb-3 text-mute">Binding &amp; enclosure architecture</p>
+    <p class="eyebrow mb-3 text-mute">Binding</p>
     <printing-choice
       v-model="config.binding"
       label="Binding"
@@ -24,12 +24,12 @@
     </printing-choice>
 
     <p class="eyebrow mb-3 mt-6 text-mute">
-      Edge treatment &amp; surface shielding
+      Finishing
       <span class="normal-case">(choose any)</span>
     </p>
     <printing-choice
       v-model="config.edges"
-      label="Edge treatments"
+      label="Finishing"
       multiple
       :options="edges"
     >

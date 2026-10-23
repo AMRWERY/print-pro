@@ -70,7 +70,7 @@
 
 <script lang="ts" setup>
 /**
- * The one empty state for the whole project: a "manifest" card with an optional
+ * The one empty state for the whole project: a card with an optional
  * header strip, framed icon, headline, explanation, stacked actions and an
  * optional footer strip. Only icon/title/description are needed; the rest adds
  * the technical flavour.
@@ -79,7 +79,7 @@
  *     icon="lucide:shopping-cart"
  *     title="Your cart is empty"
  *     description="…"
- *     eyebrow="MANIFEST :: CART_NULL"
+ *     eyebrow="CART :: EMPTY"
  *     tag="0 UNITS" tag-tone="accent"
  *     caption="0 UNITS"
  *     :meta="['PAYLOAD: 0.00 KG', 'SPEC: ISO']"
@@ -114,9 +114,9 @@ withDefaults(
   }>(),
   {
     icon: "lucide:search-x",
-    title: "No instruments match these constraints",
+    title: "No products match your filters",
     description:
-      "Try removing a filter or widening the price range. Can’t find a specific model? Our bench team can source it.",
+      "Try removing a filter or widening the price range. Can’t find a specific model? Our team can source it.",
     tagTone: "neutral",
     as: "h2",
   },

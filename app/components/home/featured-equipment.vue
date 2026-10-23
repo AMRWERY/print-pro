@@ -3,12 +3,12 @@
     <div class="container-page space-y-8">
       <section-heading
         id="featured-title"
-        eyebrow="Curated bench allocations"
-        title="Featured equipment"
+        eyebrow="Popular right now"
+        title="Featured products"
       >
         <div
           role="group"
-          aria-label="Filter featured equipment"
+          aria-label="Filter featured products"
           class="flex flex-wrap gap-2"
         >
           <LazyVButton

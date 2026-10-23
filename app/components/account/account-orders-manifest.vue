@@ -6,21 +6,21 @@
         <div class="flex items-center gap-2">
           <span class="pip rounded-full" aria-hidden="true" />
           <h2 id="orders-manifest-title" class="font-display text-lg font-bold text-paper sm:text-xl">
-            Recent Orders &amp; Requisitions Manifest
+            Recent orders
           </h2>
           <span class="rounded-full bg-raised px-2 py-0.5 font-mono text-1xs text-mute">
             {{ orders.length }} Active
           </span>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          Calibrated apparatus, sealed roll media, and trace-telemetry tracked shipments
+          Printers, photocopiers and supplies, with delivery tracking
         </p>
       </div>
 
       <!-- Action buttons -->
       <div class="flex flex-wrap items-center gap-2">
         <div class="relative min-w-36">
-          <LazyVInput v-model="searchQuery" name="manifest-search" type="search" label="Filter requisitions" hide-label placeholder="Filter Requisition #" />
+          <LazyVInput v-model="searchQuery" name="manifest-search" type="search" label="Filter orders" hide-label placeholder="Filter by order #" />
         </div>
 
         <LazyVButton variant="plain"
@@ -56,7 +56,7 @@
             </div>
 
             <p v-if="order.waybill" class="font-mono text-1xs text-mute">
-              WAYBILL: <span class="text-paper">{{ order.waybill }}</span>
+              TRACKING: <span class="text-paper">{{ order.waybill }}</span>
             </p>
             <p v-else-if="order.serial" class="font-mono text-1xs text-mute">
               Serial: <span class="text-paper">{{ order.serial }}</span> • {{ order.date }}
@@ -105,10 +105,10 @@
                     }}</span></span>
               </p>
               <p v-if="order.traceTelemetry" class="text-cyan">
-                TRACE: {{ order.traceTelemetry }}
+                STATUS: {{ order.traceTelemetry }}
               </p>
               <p v-if="order.benchVerified" class="text-success">
-                Bench Verified: {{ order.benchVerified }}
+                Tested: {{ order.benchVerified }}
               </p>
               <p v-if="order.calibrationLog" class="text-mute">
                 {{ order.calibrationLog }}
@@ -117,15 +117,15 @@
           </div>
         </div>
 
-        <!-- Telemetry bar for in-transit order -->
+        <!-- Delivery bar for in-transit order -->
         <div v-if="order.flight"
           class="mt-3 rounded-control border border-line/60 bg-ink/70 p-2.5 font-mono text-1xs text-mute space-y-2">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex flex-wrap items-center gap-3">
-              <span class="font-bold text-paper">FLIGHT: {{ order.flight.code }} ({{ order.flight.route }})</span>
-              <span>ALTITUDE: <span class="text-paper">{{ order.flight.altitude }}</span></span>
-              <span>CARGO TEMP: <span class="text-paper">{{ order.flight.cargoTemp }}</span></span>
-              <span>RELATIVE HUMIDITY: <span class="text-paper">{{ order.flight.humidity }}</span></span>
+              <span class="font-bold text-paper">COURIER: {{ order.flight.code }} ({{ order.flight.route }})</span>
+              <span>DISTANCE: <span class="text-paper">{{ order.flight.altitude }}</span></span>
+              <span>PARCELS: <span class="text-paper">{{ order.flight.cargoTemp }}</span></span>
+              <span>WEIGHT: <span class="text-paper">{{ order.flight.humidity }}</span></span>
             </div>
             <span class="inline-flex items-center gap-1.5 font-bold text-success">
               <span class="status-dot" />
@@ -161,13 +161,13 @@
                   <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
                   <span class="relative inline-flex h-2 w-2 rounded-full bg-white" />
                 </span>
-                TRACK LIVE TELEMETRY
+                TRACK DELIVERY
               </LazyVButton>
               <LazyVButton variant="plain"
                 class="chip-link"
                 @click="$emit('view-waybill', order)">
                 <Icon name="lucide:file-text" size="13" />
-                WAYBILL PDF
+                DELIVERY NOTE
               </LazyVButton>
             </template>
 
@@ -176,13 +176,13 @@
                 class="chip-link"
                 @click="$emit('view-calibration-cert', order)">
                 <Icon name="lucide:award" size="13" />
-                CALIBRATION CERT (PDF)
+                SERVICE REPORT (PDF)
               </LazyVButton>
               <LazyVButton variant="plain"
                 class="chip-link"
                 @click="$emit('reorder-consumables', order)">
                 <Icon name="lucide:refresh-cw" size="13" />
-                RE-ORDER CONSUMABLES
+                RE-ORDER SUPPLIES
               </LazyVButton>
             </template>
 
@@ -191,25 +191,25 @@
                 class="chip-link"
                 @click="$emit('view-dossier', order)">
                 <Icon name="lucide:archive" size="13" />
-                VIEW REQUISITION DOSSIER
+                VIEW ORDER DOCUMENT
               </LazyVButton>
             </template>
           </div>
 
           <span class="meta">
-            Zero Bead Pixel Warranty Active
+            Manufacturer warranty active
           </span>
         </div>
       </article>
     </div>
 
-    <!-- Manifest Footer -->
+    <!-- Footer -->
     <footer
       class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3 meta">
       <span>Showing {{ filteredOrders.length }} of 24 Total Orders</span>
       <LazyVButton variant="plain" class="inline-flex items-center gap-1 text-accent transition hover:underline"
         @click="$emit('view-fiscal-archive')">
-        View Complete Fiscal Archive
+        View all orders
         <Icon name="lucide:arrow-right" size="13" />
       </LazyVButton>
     </footer>
@@ -248,7 +248,7 @@ const filteredOrders = computed(() => {
 });
 
 const exportLedger = () => {
-  const headers = ["Order ID", "Title", "Status", "Amount", "Waybill"];
+  const headers = ["Order ID", "Title", "Status", "Amount", "Tracking"];
   const rows = props.orders.map((o) => [
     o.id,
     `"${o.title.replace(/"/g, '""')}"`,
@@ -262,7 +262,7 @@ const exportLedger = () => {
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "atelier-orders-manifest.csv");
+  link.setAttribute("download", "printpro-orders.csv");
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

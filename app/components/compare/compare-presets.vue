@@ -6,9 +6,9 @@
     <div class="container-page space-y-8">
       <section-heading
         id="presets-title"
-        eyebrow="Lab direct presets"
-        title="Compare another optical discipline"
-        body="Instant-load calibrated bench test configurations across printers, medium-format bodies and archival papers."
+        eyebrow="Quick comparisons"
+        title="Compare another type of product"
+        body="Load a ready-made comparison across printers, photocopiers and toner."
       />
       <ul class="grid gap-4 md:grid-cols-3">
         <li v-for="(p, i) in presets" :key="p.key" v-reveal="{ delay: i * 80 }">

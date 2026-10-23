@@ -79,7 +79,7 @@
     <section aria-labelledby="sg-trending">
       <h3 id="sg-trending" class="eyebrow mb-3 flex items-center gap-1.5">
         <Icon name="lucide:trending-up" size="12" aria-hidden="true" />
-        Trending in gallery
+        Popular searches
       </h3>
       <ul class="space-y-1">
         <li v-for="t in trending" :key="t.term">
@@ -135,9 +135,9 @@ const emit = defineEmits<{ pick: [term: string]; "clear-recent": [] }>();
 const money = useMoney();
 
 const trending = [
-  { term: "Hahnemühle Photo Rag", tag: "Craft" },
-  { term: "Spectrophotometer", tag: "Service" },
-  { term: "Epson SureColor", tag: "New batch" },
-  { term: "Canon PIXMA", tag: "Popular" },
+  { term: "Toner", tag: "Supplies" },
+  { term: "A3 photocopier", tag: "Popular" },
+  { term: "Ink tank printer", tag: "Low running cost" },
+  { term: "Large-format plotter", tag: "New" },
 ];
 </script>

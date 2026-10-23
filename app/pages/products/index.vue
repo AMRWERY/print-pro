@@ -7,8 +7,8 @@
 const { products } = useCatalogProducts();
 
 useSeoMeta({
-  title: "All Instruments & Archival Substrates",
+  title: "All products",
   description:
-    "Browse bench-verified medium-format cameras, cinema lenses, pigment printers and archival papers.",
+    "Browse printers, photocopiers and genuine ink and toner.",
 });
 </script>

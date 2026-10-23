@@ -2,10 +2,10 @@
   <printing-section
     id="engine"
     step="03"
-    title="Colour Engine & Duplex Geometry"
+    title="Colour and Printing Sides"
     stage="Stage 3/5"
   >
-    <p class="eyebrow mb-3 text-mute">Optical ink &amp; gamut engine</p>
+    <p class="eyebrow mb-3 text-mute">Colour or black &amp; white</p>
     <printing-choice v-model="config.ink" label="Ink set" :options="inks">
       <template #default="{ option }">
         <span class="pe-6 text-base font-semibold text-paper">{{
@@ -22,7 +22,7 @@
     </printing-choice>
 
     <p class="eyebrow mb-3 mt-6 text-mute">
-      Print orientation &amp; duplex mode
+      Printing sides
     </p>
     <printing-choice
       v-model="config.duplex"
@@ -54,19 +54,19 @@ const { config, paper } = usePrintConfig();
 const duplexOptions = computed(() => [
   {
     value: "single",
-    name: "Single-Sided (Exhibition Wall)",
+    name: "Single-sided",
     description:
-      "Engineered for direct custom archival glazing, back-framing and wall installations. Backside carries a lab serial watermark.",
+      "Prints on one side only. Best for posters, plans and anything that will be displayed.",
     note: "Baseline configuration",
   },
   {
     value: "double",
-    name: "Double-Sided Duplex (Folios)",
+    name: "Double-sided",
     description:
-      "Front and rear register alignment for bound portfolios and boxed edition folios. Available only on selected dual-coated papers.",
+      "Prints on both sides with front and back aligned. Good for booklets and reports. Available only on papers coated on both sides.",
     note: `+${Math.round(DUPLEX_SUPPLEMENT * 100)}% size supplement`,
     disabled: !paper.value.duplex,
-    reason: `Not available on ${paper.value.name}. Choose Hahnemühle Photo Rag or Canson Platine.`,
+    reason: `Not available on ${paper.value.name}. Choose Plain Paper, Coated Paper or Silk Card.`,
   },
 ]);
 </script>

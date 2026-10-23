@@ -3,10 +3,10 @@
     <LazyVEmptyState
       v-if="!entries.length"
       icon="lucide:shopping-cart"
-      eyebrow="MANIFEST :: CHECKOUT_NULL"
+      eyebrow="CHECKOUT :: EMPTY"
       tag="0 UNITS"
       title="There's nothing to check out"
-      description="Your cart is empty. Add instruments from the catalog, then come back here to place the order."
+      description="Your cart is empty. Add products from the catalog, then come back here to place the order."
     >
       <LazyVButton variant="primary" to="/products"
         >Browse the catalog</LazyVButton
@@ -251,7 +251,7 @@ const place = async () => {
 
 useSeoMeta({
   title: "Secure Checkout",
-  description: "Complete your studio order.",
+  description: "Complete your order.",
   robots: "noindex",
 });
 </script>

@@ -25,7 +25,7 @@
                 id="dossier-modal-title"
                 class="font-bold tracking-wider text-paper text-sm"
               >
-                {{ title || "ARCHIVAL REQUISITION DOSSIER" }}
+                {{ title || "ORDER DOCUMENT" }}
               </h2>
             </div>
             <LazyVButton
@@ -45,13 +45,13 @@
             >
               <div>
                 <p class="title-md">
-                  LUMEN &amp; PRESS METROLOGY WORKS
+                  PRINTPRO
                 </p>
                 <p class="text-1xs text-mute mt-0.5">
-                  SWISS CALIBRATION ACCREDITATION // DIN EN ISO 9001:2015
+                  SALES &amp; SERVICE // support@printpro.com
                 </p>
                 <p class="text-1xs text-accent mt-1">
-                  ISSUED TO: Amr Mohamed • Metropolitan Archival Wing
+                  ISSUED TO: Amr Mohamed • Delta Architects
                 </p>
               </div>
 
@@ -59,18 +59,18 @@
                 <span
                   class="rounded border border-line bg-ink px-2.5 py-1 text-mute text-2xs"
                 >
-                  ARCHIVE REGISTRY: ARCH-2024-DE-NYC
+                  REFERENCE: PP-2026-CAI
                 </span>
-                <p class="text-1xs text-mute mt-1">Date: 28 OCT 2024</p>
+                <p class="text-1xs text-mute mt-1">Date: 28 OCT 2026</p>
               </div>
             </div>
 
             <!-- Content preview -->
             <div class="space-y-3 font-sans text-xs text-mute leading-relaxed">
               <p>
-                This dossier constitutes the official forensic record for
-                optical instruments, calibration curves, and substrate
-                allocations registered under Curatorial Tier 01 agreement.
+                This document is the official record of your order, its
+                delivery and any service work carried out under your business
+                account.
               </p>
 
               <div
@@ -79,39 +79,38 @@
                 <div
                   class="flex justify-between border-b border-line/40 pb-1.5 text-paper font-bold"
                 >
-                  <span>METROLOGY SPECIFICATION</span>
+                  <span>CHECK</span>
                   <span>RESULT</span>
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>FOGRA51 Proof Tolerance</span>
+                  <span>Pre-dispatch test</span>
                   <span class="text-success font-semibold"
-                    >PASS (ΔE = 0.186 Nom)</span
+                    >PASSED</span
                   >
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>Spectral Collimation MTF</span>
+                  <span>Test page quality</span>
                   <span class="text-success font-semibold"
-                    >98.4% @ 50 Lp/mm</span
+                    >PASSED</span
                   >
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>Relative Humidity Chamber Retention</span>
-                  <span class="text-paper">42% (Airlock Sealed)</span>
+                  <span>Packaging condition</span>
+                  <span class="text-paper">Sealed</span>
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>G-Force Maximum Shock Record</span>
+                  <span>Delivery condition</span>
                   <span class="text-success font-semibold"
-                    >0.02 G (Damped Safe)</span
+                    >No damage reported</span
                   >
                 </div>
               </div>
 
-              <p>Cryptographic authentication hash for this document:</p>
+              <p>Document reference:</p>
               <p
                 class="rounded-control bg-ink/70 p-2 font-mono text-1xs text-accent break-all"
               >
-                SHA-256:
-                e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                PP-DOC-2026-0001
               </p>
             </div>
           </div>
@@ -120,7 +119,7 @@
             class="modal-foot"
           >
             <span class="text-mute text-1xs"
-              >Authorized Signatory: Dr. Vance Lab</span
+              >Issued by PrintPro customer service</span
             >
             <div class="flex items-center gap-2">
               <LazyVButton

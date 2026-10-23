@@ -1,4 +1,5 @@
 import { skipHydrate } from "pinia";
+import { findProduct } from "~/data/product-details";
 import type { CartLine } from "~/types/cart";
 
 export const MAX_QTY = 99;
@@ -16,6 +17,18 @@ export const useCartStore = defineStore("cart", () => {
   /** Lines ticked on the cart page for checkout. Empty means "everything". */
   const checkoutKeys = useLocalStorage<string[]>("cart-checkout-keys", [], {
     initOnMounted: true,
+  });
+
+  // Drop products that no longer exist (saved by an older version of the catalogue).
+  onMounted(() => {
+    const known = lines.value.filter((l) => findProduct(l.id));
+    if (known.length !== lines.value.length) lines.value = known;
+    const keep = saved.value.filter((id) => findProduct(id));
+    if (keep.length !== saved.value.length) saved.value = keep;
+    if (checkoutKeys.value.some((k) => !known.some((l) => l.key === k)))
+      checkoutKeys.value = checkoutKeys.value.filter((k) =>
+        known.some((l) => l.key === k),
+      );
   });
 
   /** Mini-cart drawer (opens from the end side). Not persisted. */

@@ -24,7 +24,7 @@
                 id="concierge-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"
               >
-                Book a 1-on-1 tech concierge
+                Talk to a technician
               </h2>
             </div>
             <LazyVButton
@@ -41,7 +41,7 @@
             @submit.prevent="submitBooking"
           >
             <p class="text-sm text-mute">
-              A bench technician walks you through gear, calibration or a print
+              A technician walks you through choosing a machine, supplies or a print
               job in a private 30-minute video session.
             </p>
 
@@ -67,7 +67,7 @@
               <LazyVSelectInput
                 v-model="slot"
                 name="concierge-slot"
-                label="Time (studio time)"
+                label="Time"
                 :options="slots"
               />
             </div>
@@ -131,10 +131,10 @@ const props = defineProps<{ open: boolean }>();
 const emit = defineEmits<{ close: [] }>();
 
 const topics = [
-  { value: "gear", label: "Choosing cameras, lenses or lighting" },
-  { value: "printing", label: "Planning a print job or paper choice" },
-  { value: "calibration", label: "Calibration and colour management" },
-  { value: "setup", label: "Setting up or troubleshooting equipment" },
+  { value: "gear", label: "Choosing a printer or photocopier" },
+  { value: "supplies", label: "Finding the right ink or toner" },
+  { value: "service", label: "Maintenance, repairs or a service contract" },
+  { value: "setup", label: "Setting up or troubleshooting a machine" },
 ];
 
 const slots = [
@@ -194,7 +194,7 @@ const submitBooking = async () => {
     day: "numeric",
     month: "short",
   });
-  toast.success("Concierge session booked", {
+  toast.success("Session booked", {
     description: `${when} at ${slot.value}. A confirmation is on its way to ${email.value}.`,
   });
   notes.value = "";

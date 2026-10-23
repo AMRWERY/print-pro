@@ -54,9 +54,9 @@ import type { CatalogProduct } from "~/types/catalog";
 const props = defineProps<{ products: CatalogProduct[] }>();
 
 const crumbs = [
-  { label: "Catalog", to: "/" },
-  { label: "Fine-art substrates", to: "/products" },
-  { label: "Search archive (active)" },
+  { label: "Index", to: "/" },
+  { label: "Products", to: "/products" },
+  { label: "Search" },
 ];
 
 const route = useRoute();
@@ -91,7 +91,7 @@ watch(
 
 useSeoMeta({
   title: () => (catalog.filters.query ? `“${catalog.filters.query}” — Search` : "Search"),
-  description: "Search bench-verified cameras, lenses, printers and archival substrates.",
+  description: "Search printers, photocopiers, ink and toner.",
   robots: "noindex",
 });
 </script>

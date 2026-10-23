@@ -9,7 +9,7 @@
           size="12"
           class="text-success"
           aria-hidden="true"
-        />Tax-exempt studio verified</span
+        />Business account verified</span
       >
     </div>
 
@@ -26,7 +26,7 @@
         v-if="totals.volumeDiscount"
         class="flex justify-between gap-4 text-accent"
       >
-        <dt>Tiered volume discount (media)</dt>
+        <dt>Volume discount (ink & toner)</dt>
         <dd class="font-mono">−{{ money.format(totals.volumeDiscount) }}</dd>
       </div>
       <div
@@ -37,7 +37,7 @@
         <dd class="font-mono">−{{ money.format(totals.voucherDiscount) }}</dd>
       </div>
       <div class="flex justify-between gap-4">
-        <dt class="text-mute">Climate-crated freight (insured)</dt>
+        <dt class="text-mute">Delivery (insured)</dt>
         <dd
           class="font-mono"
           :class="!totals.freight && totals.units && 'text-success'"
@@ -78,7 +78,7 @@
 
     <!-- Voucher -->
     <div class="space-y-2">
-      <p class="eyebrow">Studio voucher or consortium code</p>
+      <p class="eyebrow">Voucher or offer code</p>
       <form
         v-if="!applied"
         class="flex items-start gap-2"
@@ -95,7 +95,7 @@
           :rules="voucherRule"
           autocomplete="off"
           autocapitalize="characters"
-          placeholder="BIENNIAL-PRINT-2025"
+          placeholder="OFFICE-2026"
           input-class="font-mono"
         />
         <LazyVButton
@@ -140,7 +140,7 @@
         :disabled="!totals.units"
         @click="emit('checkout')"
       >
-        <Icon name="lucide:lock" size="16" aria-hidden="true" />Secure studio
+        <Icon name="lucide:lock" size="16" aria-hidden="true" />Secure
         checkout
         <Icon
           name="lucide:arrow-right"
@@ -224,7 +224,7 @@ const voucherInput = ref<{ validate: () => Promise<{ valid: boolean }> }>();
 const voucherRule = (v: unknown) =>
   !v || vouchers[String(v).trim().toUpperCase()]
     ? true
-    : "That code isn't recognised. Check it for typos, or try BIENNIAL-PRINT-2025.";
+    : "That code isn't recognised. Check it for typos, or try OFFICE-2026.";
 
 const applying = ref(false);
 

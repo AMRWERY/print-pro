@@ -8,8 +8,8 @@
         <LazyVBrandMark />
 
         <p class="max-w-xs text-sm text-mute">
-          Precision optical instruments, large-format fine-art printing
-          machinery and archival media for working studios.
+          Printers, photocopiers and genuine ink and toner for homes, offices
+          and print rooms, delivered and installed by our technicians.
         </p>
       </div>
 
@@ -28,7 +28,7 @@
 
       <div>
         <h2 class="eyebrow mb-4 !font-sans !font-semibold">
-          Support &amp; Spec
+          Support
         </h2>
         <ul class="space-y-2.5 text-sm text-mute">
           <li class="flex items-center gap-2">
@@ -45,7 +45,7 @@
               size="16"
               class="icon-wiggle"
               aria-hidden="true"
-            />bench@printpro.com
+            />support@printpro.com
           </li>
           <li class="flex items-center gap-2">
             <Icon
@@ -64,8 +64,7 @@
         class="container-page flex flex-col gap-2 py-5 meta tracking-wider sm:flex-row sm:items-center sm:justify-between"
       >
         <p>
-          © 2026 PrintPro Optical Instruments &amp; Fine Art Printworks Ltd. All
-          rights reserved.
+          © 2026 PrintPro. All rights reserved.
         </p>
         <ul class="flex gap-5">
           <li v-for="l in legalLinks" :key="l.label">
@@ -85,7 +84,7 @@ import { footerColumns } from "~/data/home";
 const legalLinks = [
   { label: "Equipment terms", to: "/legal/equipment-terms" },
   { label: "Privacy", to: "/legal/privacy" },
-  { label: "Calibration", to: "/guides/calibration" },
+  { label: "Shipping & delivery", to: "/services/shipping-delivery" },
 ];
 
 const toast = useToast();
@@ -98,6 +97,6 @@ const subscribe = async () => {
   await simulateRequest(600);
   subscribing.value = false;
   resetForm();
-  toast.success("You’re on the list", { description: "Optical dispatch bulletins will arrive by email." });
+  toast.success("You’re on the list", { description: "Our monthly newsletter will arrive by email." });
 };
 </script>

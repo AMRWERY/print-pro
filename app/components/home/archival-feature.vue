@@ -10,39 +10,39 @@
         v-reveal:start
         src="/img/hero-img.png"
         fit="cover"
-        label="Hasselblad medium-format camera on a calibration bench"
+        label="Technician installing a photocopier in an office"
         size="140"
         class="h-[360px] w-full rounded-panel border border-line sm:h-[440px] lg:h-[520px]"
       />
 
       <div v-reveal class="space-y-6">
         <div class="space-y-3">
-          <p class="eyebrow text-accent">Modern archival discipline</p>
+          <p class="eyebrow text-accent">Genuine supplies</p>
           <h2 id="archival-title" class="text-3xl lg:text-5xl">
-            Archival Chemistry &amp; Cleanroom Colorimetry.
+            Genuine ink and toner, matched to your machine.
           </h2>
           <p class="text-base text-mute">
-            Fine-art galleries demand uncompromised pigment stability. We source
-            pigment formulations and mould-made European papers tested against
-            ozone decay, thermal degradation and lightfast tolerances.
+            Original ink, toner and drum units keep prints sharp and machines
+            reliable. Every supply lists the exact models it fits, so you order
+            the right one the first time.
           </p>
         </div>
 
         <div class="grid gap-3 sm:grid-cols-2">
           <article class="card-compact space-y-1 bg-ink">
-            <p class="eyebrow">Encapsulated pigment</p>
-            <h3 class="text-xl">Mineral crystal core</h3>
+            <p class="eyebrow">Sealed and genuine</p>
+            <h3 class="text-xl">Factory-sealed packaging</h3>
             <p class="text-sm text-mute">
-              Resin-encapsulated particles mechanically anchored to the fibre
-              for deeper blacks and superior longevity.
+              Never refilled or relabelled. What you receive is what the
+              manufacturer packed.
             </p>
           </article>
           <article class="card-compact space-y-1 bg-ink">
-            <p class="eyebrow">Custom ICC spectrum</p>
-            <h3 class="text-xl">Bench Delta-E &lt; 0.4</h3>
+            <p class="eyebrow">Matched to your model</p>
+            <h3 class="text-xl">Compatibility checked</h3>
             <p class="text-sm text-mute">
-              Every printer is profiled against a spectrophotometer target
-              before it ships.
+              Each product page lists the printers and photocopiers it fits, with
+              page yield and cost per page.
             </p>
           </article>
         </div>
@@ -60,8 +60,8 @@
 
 <script lang="ts" setup>
 const specs = [
-  { label: "Lightfastness", value: "200+ yr" },
-  { label: "Color gamut", value: "118 %" },
-  { label: "Black density", value: "Dmax 2.9" },
+  { label: "Genuine", value: "100 %" },
+  { label: "Dispatch", value: "Same day" },
+  { label: "Returns", value: "Easy" },
 ];
 </script>

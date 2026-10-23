@@ -2,14 +2,14 @@
   <printing-section
     id="upload"
     step="01"
-    title="File Ingestion & Optical Preflight"
+    title="Upload and File Check"
     stage="Stage 1/5"
   >
     <LazyVFileUpload
       ref="uploader"
-      title="Drag high-resolution TIFF, PSD or PDF files here"
-      drop-title="Drop your master file"
-      :description="`or browse your workstation. Supports 16-bit ProPhoto RGB and CMYK, TIFF up to ${MAX_FILE_MB} MB. Calibrated baseline: 300 native optical DPI.`"
+      title="Drag your PDF, TIFF or image file here"
+      drop-title="Drop your file"
+      :description="`or browse your computer. Supports PDF, TIFF, PSD, JPEG and PNG up to ${MAX_FILE_MB} MB. For sharp prints use 300 dpi at the final size.`"
       hint="Demo build: your file is checked in this browser and isn’t uploaded anywhere."
       :accept="FILE_ACCEPT"
       :max-size-mb="MAX_FILE_MB"

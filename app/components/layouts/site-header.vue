@@ -29,7 +29,7 @@
           variant="icon"
           to="/wishlist"
           class="relative hidden lg:inline-flex"
-          :aria-label="`Studio registry, ${wishlist.ids.length} saved`"
+          :aria-label="`Wishlist, ${wishlist.ids.length} saved`"
           active-class="!border-accent !text-accent"
         >
           <Icon

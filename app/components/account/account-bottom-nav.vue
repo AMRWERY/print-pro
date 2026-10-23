@@ -31,6 +31,6 @@ import { accountNav, isAccountNavActive } from "~/data/account-nav";
 
 const route = useRoute();
 
-// The phone bar has four slots; "Vault & addresses" lives on the Settings page there.
+// The phone bar has four slots; "Addresses" lives on the Settings page there.
 const items = accountNav.filter((n) => n.key !== "vault");
 </script>

@@ -20,11 +20,18 @@
     
       <document-downloads v-if="detail.documents.length" :items="detail.documents" />
     
+      <compatibility-list
+        v-if="detail.compatibleWith?.length"
+        :items="detail.compatibleWith"
+        :yield-note="detail.yieldNote"
+        :heading="product.group === 'ink' ? 'Compatible with' : 'Compatible supplies'"
+      />
+
       <reviews-section :key="product.id" :product-id="product.id" :reviews="detail.reviews" />
 
       <section class="border-t border-line py-12 md:py-16" aria-labelledby="qa-title">
         <div class="container-page max-w-3xl space-y-8">
-          <LazyVAccordion id="qa-title" eyebrow="Pre-sale support" title="Technical inquiries & lab Q&A" />
+          <LazyVAccordion id="qa-title" eyebrow="Pre-sale support" title="Questions & answers" />
        
           <faq-accordion :items="detail.qa" />
         </div>

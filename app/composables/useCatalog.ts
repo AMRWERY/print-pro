@@ -7,6 +7,8 @@ import type {
   SortKey,
 } from "~/types/catalog";
 import {
+  attrFilterDefs,
+  attrValues,
   categoryKeywords,
   categoryOptions,
   dispatchOptions,
@@ -25,6 +27,7 @@ const emptyFilters = (): CatalogFilters => ({
   priceMax: null,
   dispatch: [],
   minRating: null,
+  attrs: {},
 });
 
 const toggle = <T>(list: T[], value: T) => {
@@ -41,7 +44,7 @@ const matchesQuery = (p: CatalogProduct, query: string) => {
   const haystack = [p.name, p.brand, p.blurb, p.sku, category, categoryKeywords[p.category], ...p.specs]
     .join(" ")
     .toLowerCase();
-  // "cameras" should also find "camera": try the singular of plural-looking words.
+  // "printers" should also find "printer": try the singular of plural-looking words.
   return words.every(
     (w) => haystack.includes(w) || (w.length > 3 && w.endsWith("s") && haystack.includes(w.slice(0, -1))),
   );
@@ -66,6 +69,11 @@ const createCatalog = (products: CatalogProduct[]) => {
       return false;
     if (filters.minRating !== null && p.rating < filters.minRating)
       return false;
+    for (const [key, selected] of Object.entries(filters.attrs)) {
+      if (!selected.length) continue;
+      const have = attrValues(p, key);
+      if (!selected.some((v) => have.includes(v))) return false;
+    }
     return true;
   };
 
@@ -116,6 +124,27 @@ const createCatalog = (products: CatalogProduct[]) => {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
+  // Attribute filters belong to one category: the selected one, or the only one on a category page.
+  const activeCategory = computed<CatalogCategory | null>(() => {
+    if (filters.categories.length === 1) return filters.categories[0]!;
+    if (filters.categories.length > 1) return null;
+    const present = new Set(products.map((p) => p.category));
+    return present.size === 1 ? [...present][0]! : null;
+  });
+  const attrGroups = computed(() =>
+    activeCategory.value ? attrFilterDefs[activeCategory.value] : [],
+  );
+  watch(activeCategory, () => (filters.attrs = {}));
+
+  const toggleAttr = (key: string, value: string) => {
+    const list = filters.attrs[key] ?? [];
+    const next = list.includes(value)
+      ? list.filter((v) => v !== value)
+      : [...list, value];
+    if (next.length) filters.attrs[key] = next;
+    else delete filters.attrs[key];
+  };
+
   const chips = computed<FilterChip[]>(() => {
     const out: FilterChip[] = [];
     if (filters.query.trim())
@@ -142,6 +171,13 @@ const createCatalog = (products: CatalogProduct[]) => {
         label: dispatchOptions.find((o) => o.key === d)?.label ?? d,
         remove: () => toggle(filters.dispatch, d),
       });
+    for (const group of attrGroups.value)
+      for (const value of filters.attrs[group.key] ?? [])
+        out.push({
+          key: `attr-${group.key}-${value}`,
+          label: group.options.find((o) => o.value === value)?.label ?? value,
+          remove: () => toggleAttr(group.key, value),
+        });
     if (filters.priceMin !== null || filters.priceMax !== null) {
       const { priceMin: lo, priceMax: hi } = filters;
       out.push({
@@ -201,6 +237,8 @@ const createCatalog = (products: CatalogProduct[]) => {
     toggleCategory: (c: CatalogCategory) => toggle(filters.categories, c),
     toggleBrand: (b: string) => toggle(filters.brands, b),
     toggleDispatch: (d: DispatchKey) => toggle(filters.dispatch, d),
+    attrGroups,
+    toggleAttr,
     sortOptions,
     reset,
   });
