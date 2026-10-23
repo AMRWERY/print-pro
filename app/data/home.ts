@@ -310,28 +310,28 @@ export const footerColumns = [
   {
     title: "Cameras & Optics",
     links: [
-      "Digital medium format",
-      "ICC profiling",
-      "Medium format film",
-      "Cine lenses",
+      { label: "Digital medium format", to: "/products/cameras" },
+      { label: "ICC profiling", to: "/guides/icc-profiling" },
+      { label: "Medium format film", to: "/guides/medium-format-film" },
+      { label: "Cine lenses", to: "/products/lenses" },
     ],
   },
   {
     title: "Print & Lab",
     links: [
-      "Fine-art printers",
-      "Pigment inks",
-      "Archival paper",
-      "Calibration",
+      { label: "Fine-art printers", to: "/products/printers" },
+      { label: "Pigment inks", to: "/products/paper-ink" },
+      { label: "Archival paper", to: "/products/paper-ink" },
+      { label: "Calibration", to: "/guides/calibration" },
     ],
   },
   {
     title: "Services",
     links: [
-      "Bench calibration",
-      "Trade-in",
-      "Studio financing",
-      "Shipping & freight",
+      { label: "Bench calibration", to: "/services/bench-calibration" },
+      { label: "Trade-in", to: "/services/trade-in" },
+      { label: "Studio financing", to: "/services/studio-financing" },
+      { label: "Shipping & freight", to: "/services/shipping-freight" },
     ],
   },
 ];

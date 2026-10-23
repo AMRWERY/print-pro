@@ -2,7 +2,7 @@
   <!-- :localize="false": switchLocalePath() already returns the prefixed path (/ar); adding the locale again would give /en/ar. -->
   <LazyVButton
     v-if="target"
-    :to="switchLocalePath(target.code)"
+    :to="targetPath"
     :localize="false"
     :variant="compact ? 'icon' : 'secondary'"
     :class="!compact && 'h-10 !px-3'"
@@ -28,7 +28,7 @@ const { run } = useViewTransition();
 // Not returning the promise keeps VButton from showing its loading spinner.
 const switchTo = () => {
   if (!target.value) return;
-  const path = switchLocalePath(target.value.code);
+  const path = targetPath.value;
   run(
     async () => {
       await navigateTo(path);
@@ -36,6 +36,11 @@ const switchTo = () => {
     { kind: "locale" },
   );
 };
+
+// The server never sees the URL hash, so keeping it would render a different href on the client (hydration mismatch).
+const targetPath = computed(
+  () => switchLocalePath(target.value?.code ?? "").split("#")[0] ?? "",
+);
 
 const target = computed(() =>
   (locales.value as { code: string; name: string }[]).find(

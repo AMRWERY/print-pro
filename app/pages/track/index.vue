@@ -18,6 +18,7 @@
       aria-label="Loading your order"
     >
       <LazyVSkeletonLoader class="h-40" />
+    
       <LazyVSkeletonLoader class="h-40" />
     </div>
 
@@ -32,8 +33,11 @@
         </div>
         <div class="space-y-6">
           <order-items :items="active.items" />
+       
           <order-ledger :amounts="active.amounts" :payment="active.payment" />
+         
           <order-consignee :order="active" />
+        
           <order-support :order-id="active.id" />
         </div>
       </div>
@@ -80,12 +84,15 @@ const loading = ref(false);
 
 // "Now" ticks so a visitor who leaves the page open sees stages advance.
 const now = ref(new Date());
+
 useIntervalFn(() => (now.value = new Date()), 60_000);
 
 const stages = computed(() =>
   active.value ? trackingStages(active.value, now.value) : [],
 );
+
 const status = computed(() => trackingState(active.value!, stages.value));
+
 const events = computed(() => trackingEvents(stages.value));
 
 const show = (o: Order) => {

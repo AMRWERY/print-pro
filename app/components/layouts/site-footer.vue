@@ -11,21 +11,6 @@
           Precision optical instruments, large-format fine-art printing
           machinery and archival media for working studios.
         </p>
-        <form class="flex max-w-xs gap-2" novalidate @submit.prevent="subscribe">
-          <LazyVInput
-            name="footerEmail"
-            type="email"
-            label="Email for studio bulletins"
-            hide-label
-            rules="email"
-            autocomplete="email"
-            placeholder="Join optical dispatch"
-            class="flex-1"
-          />
-          <LazyVButton variant="primary" type="submit" class="shrink-0" :loading="subscribing"
-            >Subscribe</LazyVButton
-          >
-        </form>
       </div>
 
       <nav
@@ -35,8 +20,8 @@
       >
         <h2 class="eyebrow mb-4 !font-sans !font-semibold">{{ col.title }}</h2>
         <ul class="space-y-2.5 text-sm">
-          <li v-for="l in col.links" :key="l">
-            <LazyVButton variant="tertiary" to="/">{{ l }}</LazyVButton>
+          <li v-for="l in col.links" :key="l.label">
+            <LazyVButton variant="tertiary" :to="l.to">{{ l.label }}</LazyVButton>
           </li>
         </ul>
       </nav>
@@ -83,20 +68,10 @@
           rights reserved.
         </p>
         <ul class="flex gap-5">
-          <li>
-            <nuxt-link-locale to="/" class="hover:text-paper"
-              >Equipment terms</nuxt-link-locale
-            >
-          </li>
-          <li>
-            <nuxt-link-locale to="/" class="hover:text-paper"
-              >Privacy</nuxt-link-locale
-            >
-          </li>
-          <li>
-            <nuxt-link-locale to="/" class="hover:text-paper"
-              >Calibration</nuxt-link-locale
-            >
+          <li v-for="l in legalLinks" :key="l.label">
+            <nuxt-link-locale :to="l.to" class="hover:text-paper">{{
+              l.label
+            }}</nuxt-link-locale>
           </li>
         </ul>
       </div>
@@ -106,6 +81,12 @@
 
 <script lang="ts" setup>
 import { footerColumns } from "~/data/home";
+
+const legalLinks = [
+  { label: "Equipment terms", to: "/legal/equipment-terms" },
+  { label: "Privacy", to: "/legal/privacy" },
+  { label: "Calibration", to: "/guides/calibration" },
+];
 
 const toast = useToast();
 const { validate, resetForm } = useForm();
