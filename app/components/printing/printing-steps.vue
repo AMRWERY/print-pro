@@ -1,6 +1,8 @@
 <template>
+  <!-- Sticks just below the site header, so the steps stay visible while you scroll and after you click one. -->
   <nav
-    class="sticky top-0 z-30 -mx-4 border-y border-line bg-ink/90 px-4 backdrop-blur sm:mx-0 sm:rounded-card sm:border"
+    class="sticky z-30 -mx-4 border-y border-line bg-ink/90 px-4 backdrop-blur sm:mx-0 sm:rounded-card sm:border"
+    :style="{ top: `${stickyTop}px` }"
     aria-label="Configuration steps"
   >
     <ol class="flex gap-1 overflow-x-auto py-2 [scrollbar-width:none]">
@@ -64,6 +66,13 @@ const steps = [
 ];
 
 const active = ref("upload");
+
+// The site header is sticky too, so this bar sticks right under it (its height changes with the screen size).
+const stickyTop = ref(0);
+const measureHeader = () => {
+  const header = document.querySelector<HTMLElement>("header.sticky");
+  stickyTop.value = header ? Math.round(header.getBoundingClientRect().height) : 0;
+};
 // Steps 2-5 have sensible defaults, so only the upload can be "not done yet".
 const done = (id: string) => id === "upload" && !!file.value;
 
@@ -80,6 +89,16 @@ const go = (id: string) => {
 
 // Highlight the step that is currently crossing the top third of the screen.
 onMounted(() => {
+  measureHeader();
+  const header = document.querySelector<HTMLElement>("header.sticky");
+  const ro = header ? new ResizeObserver(measureHeader) : null;
+  if (header) ro?.observe(header);
+  window.addEventListener("resize", measureHeader);
+  onBeforeUnmount(() => {
+    ro?.disconnect();
+    window.removeEventListener("resize", measureHeader);
+  });
+
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) if (e.isIntersecting) active.value = e.target.id;

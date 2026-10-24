@@ -1,5 +1,8 @@
 <template>
-  <div class="space-y-5">
+  <!-- On wide screens this column scrolls on its own. -->
+  <div
+    class="space-y-5 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:overscroll-contain lg:pe-2"
+  >
     <header class="space-y-2">
       <p class="eyebrow">
         {{ product.brand
@@ -87,6 +90,7 @@
           />
           {{ added ? "Added to order" : "Add to cart" }}
         </LazyVButton>
+        
         <LazyVButton variant="icon"
           class="h-12 w-12"
           :aria-pressed="wished"
@@ -102,15 +106,6 @@
           />
         </LazyVButton>
       </div>
-      <LazyVButton variant="secondary" block>
-        <Icon
-          name="lucide:calendar-clock"
-          size="16"
-          class="icon-wiggle"
-          aria-hidden="true"
-        />
-        Request a demo
-      </LazyVButton>
     </div>
 
     <aside

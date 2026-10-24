@@ -16,10 +16,6 @@
         <div class="modal-panel">
           <div class="modal-head">
             <div class="flex items-center gap-2">
-              <span
-                class="h-2 w-2 rounded-full bg-success"
-                aria-hidden="true"
-              />
               <h2
                 id="concierge-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"

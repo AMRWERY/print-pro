@@ -2,7 +2,7 @@
   <section
     :id="id"
     :aria-labelledby="`${id}-title`"
-    class="scroll-mt-40 card-roomy"
+    class="scroll-mt-48 card-roomy"
   >
     <header
       class="mb-5 flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-4"
