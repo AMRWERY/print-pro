@@ -13,12 +13,8 @@
           @click="$emit('close')"
         />
 
-        <div
-          class="modal-panel"
-        >
-          <div
-            class="modal-head"
-          >
+        <div class="modal-panel">
+          <div class="modal-head">
             <div class="flex items-center gap-2">
               <span class="h-2 w-2 rounded-full bg-cyan" aria-hidden="true" />
               <h2
@@ -49,7 +45,9 @@
               label="Address name"
               required
               :rules="
-                requiredText('Name this address so you can pick it at checkout.')
+                requiredText(
+                  'Name this address so you can pick it at checkout.',
+                )
               "
               placeholder="e.g. Head office"
             />
@@ -94,20 +92,20 @@
               placeholder="e.g. Use the loading bay at the rear"
             />
 
-            <LazyVCheckboxImput
+            <LazyVCheckboxInput
               v-model="primary"
               name="dock-primary"
               label="Use as my default delivery address"
             />
 
             <div class="flex items-center justify-end gap-3 pt-2">
-              <LazyVButton variant="tertiary" @click="$emit('close')"
-                >Cancel</LazyVButton
-              >
+              <LazyVButton variant="tertiary" @click="$emit('close')">{{
+                t("btn.cancel")
+              }}</LazyVButton>
 
-              <LazyVButton type="submit" variant="primary" :loading="saving"
-                >Save address</LazyVButton
-              >
+              <LazyVButton type="submit" variant="primary" :loading="saving">{{
+                t("btn.save_address")
+              }}</LazyVButton>
             </div>
           </form>
         </div>
@@ -118,6 +116,8 @@
 
 <script lang="ts" setup>
 import type { ReceivingDock } from "~/types/account";
+
+const { t } = useI18n();
 
 const props = defineProps<{ open: boolean; dock?: ReceivingDock | null }>();
 

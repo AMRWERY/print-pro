@@ -16,9 +16,7 @@
         <div
           class="relative max-h-full w-full max-w-xl overflow-y-auto rounded-panel border border-accent/40 bg-surface shadow-2xl shadow-black/60"
         >
-          <div
-            class="modal-head"
-          >
+          <div class="modal-head">
             <div class="flex items-center gap-2">
               <span class="pip rounded-full" aria-hidden="true" />
               <h2
@@ -47,6 +45,7 @@
               label="Supply type"
               :options="standards"
             />
+
             <LazyVSelectInput
               v-model="form.substrate"
               name="cal-substrate"
@@ -63,6 +62,7 @@
                 :rules="requiredText('Enter how many you need, e.g. 2.')"
                 placeholder="e.g. 2"
               />
+
               <LazyVSelectInput
                 v-model="form.station"
                 name="cal-station"
@@ -84,17 +84,19 @@
               class="flex items-center justify-between rounded-control border border-line bg-ink/30 p-3 text-xs text-mute"
             >
               <span class="font-mono">Estimated total</span>
-              <span class="title-sm"
-                >EGP 1,450.00</span
-              >
+              <span class="title-sm">EGP 1,450.00</span>
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-2">
-              <LazyVButton variant="tertiary" @click="$emit('close')"
-                >Cancel</LazyVButton
-              >
-              <LazyVButton type="submit" variant="primary" :loading="submitting"
-                >Place order</LazyVButton
+              <LazyVButton variant="tertiary" @click="$emit('close')">{{
+                t("btn.cancel")
+              }}</LazyVButton>
+
+              <LazyVButton
+                type="submit"
+                variant="primary"
+                :loading="submitting"
+                >{{ t("btn.place_order") }}</LazyVButton
               >
             </div>
           </form>
@@ -105,6 +107,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const props = defineProps<{ open: boolean }>();
 
 const emit = defineEmits<{

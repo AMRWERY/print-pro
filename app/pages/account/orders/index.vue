@@ -4,17 +4,16 @@
 
     <header class="flex flex-wrap items-end justify-between gap-3">
       <div>
-        <h1
-          class="title-lg"
-        >
-          Orders &amp; Service
-        </h1>
+        <h1 class="title-lg">Orders &amp; Service</h1>
         <p class="mt-1 text-sm text-mute">
           Every order you placed with PrintPro, with live status.
         </p>
       </div>
-      <LazyVButton variant="secondary" icon="lucide:download" @click="exportCsv"
-        >Export CSV</LazyVButton
+      <LazyVButton
+        variant="secondary"
+        icon="lucide:download"
+        @click="exportCsv"
+        >{{ t("btn.export_csv") }}</LazyVButton
       >
     </header>
 
@@ -61,7 +60,7 @@
             block
             icon="lucide:chevrons-down"
             @click="mobileLimit += perPage"
-            >Load more orders</LazyVButton
+            >{{ t("btn.load_more_orders") }}</LazyVButton
           >
         </div>
       </template>
@@ -80,19 +79,21 @@
             : 'Orders you place show up here with live tracking and paperwork.'
         "
       >
-        <LazyVButton v-if="orders.length" variant="primary" @click="reset"
-          >Clear filters</LazyVButton
-        >
+        <LazyVButton v-if="orders.length" variant="primary" @click="reset">{{
+          t("btn.clear_filters")
+        }}</LazyVButton>
 
-        <LazyVButton v-else variant="primary" to="/products"
-          >Browse the catalog</LazyVButton
-        >
+        <LazyVButton v-else variant="primary" to="/products">{{
+          t("btn.browse_the_catalog")
+        }}</LazyVButton>
       </LazyVEmptyState>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const { orders, pending } = useAccount();
 
 const search = ref("");

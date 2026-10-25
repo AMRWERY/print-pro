@@ -1,7 +1,9 @@
 <template>
   <section class="border-b border-line py-4 last:border-b-0">
     <h3>
-      <LazyVButton variant="plain" block
+      <LazyVButton
+        variant="plain"
+        block
         class="eyebrow flex items-center justify-between gap-2 !text-paper"
         :aria-expanded="open"
         :aria-controls="id"

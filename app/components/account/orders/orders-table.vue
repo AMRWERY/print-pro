@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="hidden overflow-hidden card md:block"
-  >
+  <div class="hidden overflow-hidden card md:block">
     <table class="w-full text-start text-sm">
       <caption class="sr-only">
         Your orders
@@ -27,10 +25,10 @@
           class="transition-colors duration-150 hover:bg-raised/40"
         >
           <td class="px-4 py-3 align-middle">
-            <NuxtLinkLocale
+            <nuxt-link-locale
               :to="`/account/orders/${orderSlug(o.id)}`"
               class="font-mono text-xs font-bold text-accent hover:underline"
-              >{{ o.id }}</NuxtLinkLocale
+              >{{ o.id }}</nuxt-link-locale
             >
             <p v-if="o.waybill" class="font-mono text-2xs text-mute">
               {{ o.waybill }}
@@ -44,9 +42,7 @@
               </p>
             </div>
           </td>
-          <td
-            class="whitespace-nowrap px-4 py-3 align-middle meta"
-          >
+          <td class="whitespace-nowrap px-4 py-3 align-middle meta">
             {{ orderDateLabel(o) }}
           </td>
           <td class="px-4 py-3 align-middle">
@@ -63,7 +59,7 @@
               size="sm"
               :to="`/account/orders/${orderSlug(o.id)}`"
               icon-end="lucide:arrow-right"
-              >View</LazyVButton
+              >{{ t("btn.view") }}</LazyVButton
             >
           </td>
         </tr>
@@ -74,6 +70,8 @@
 
 <script lang="ts" setup>
 import type { RequisitionOrder } from "~/types/account";
+
+const { t } = useI18n();
 
 defineProps<{ orders: RequisitionOrder[] }>();
 

@@ -7,11 +7,12 @@
         <div class="space-y-1 bg-surface p-4">
           <dt class="eyebrow flex items-center justify-between">
             Ship to
-            <LazyVButton variant="tertiary"
+            <LazyVButton
+              variant="tertiary"
               class="normal-case tracking-normal"
               @click="state.edit(1)"
             >
-              Edit
+              {{ t("btn.edit") }}
             </LazyVButton>
           </dt>
           <dd>
@@ -25,29 +26,29 @@
         <div class="space-y-1 bg-surface p-4">
           <dt class="eyebrow flex items-center justify-between">
             Delivery
-            <LazyVButton variant="tertiary"
+            <LazyVButton
+              variant="tertiary"
               class="normal-case tracking-normal"
               @click="state.edit(2)"
             >
-              Edit
+              {{ t("btn.edit") }}
             </LazyVButton>
           </dt>
           <dd>
             {{ delivery.label }}<br /><span class="text-mute">{{
-              shipping === 0
-                ? "Free"
-                : money.format(shipping)
+              shipping === 0 ? "Free" : money.format(shipping)
             }}</span>
           </dd>
         </div>
         <div class="space-y-1 bg-surface p-4">
           <dt class="eyebrow flex items-center justify-between">
             Payment
-            <LazyVButton variant="tertiary"
+            <LazyVButton
+              variant="tertiary"
               class="normal-case tracking-normal"
               @click="state.edit(3)"
             >
-              Edit
+              {{ t("btn.edit") }}
             </LazyVButton>
           </dt>
           <dd>
@@ -60,7 +61,7 @@
         </div>
       </dl>
 
-      <LazyVCheckboxImput
+      <LazyVCheckboxInput
         v-model="f.terms"
         name="terms"
         :rules="mustAccept('Accept the terms to place your order.')"
@@ -72,18 +73,20 @@
           >terms of sale</nuxt-link-locale
         >
         and understand large-format equipment ships by appointment.
-      </LazyVCheckboxImput>
+      </LazyVCheckboxInput>
 
-      <LazyVButton variant="primary" size="xl" block
+      <LazyVButton
+        variant="primary"
+        size="xl"
+        block
         type="submit"
-       
         :loading="placing"
       >
         <Icon v-if="!placing" name="lucide:lock" size="18" aria-hidden="true" />
         {{
           placing
-            ? "Placing your order…"
-            : `Place order · ${money.format(total)}`
+            ? t("btn.placing_your_order")
+            : `${t("btn.place_order")} · ${money.format(total)}`
         }}
       </LazyVButton>
       <p class="text-center text-xs text-mute">
@@ -96,6 +99,8 @@
 
 <script lang="ts" setup>
 import { countries, deliveryOptions, paymentMethods } from "~/data/checkout";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   shipping: number;
@@ -112,8 +117,10 @@ const f = state.form;
 const countryName = computed(
   () => countries.find((c) => c.code === f.country)?.name ?? f.country,
 );
+
 const delivery = computed(
   () => deliveryOptions.find((o) => o.id === f.delivery)!,
 );
+
 void props;
 </script>

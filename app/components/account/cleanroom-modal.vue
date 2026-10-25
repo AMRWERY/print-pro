@@ -88,11 +88,15 @@
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-2">
-              <LazyVButton variant="tertiary" @click="$emit('close')"
-                >Cancel</LazyVButton
-              >
-              <LazyVButton type="submit" variant="primary" :loading="submitting"
-                >Confirm visit</LazyVButton
+              <LazyVButton variant="tertiary" @click="$emit('close')">{{
+                t("btn.cancel")
+              }}</LazyVButton>
+              
+              <LazyVButton
+                type="submit"
+                variant="primary"
+                :loading="submitting"
+                >{{ t("btn.confirm_visit") }}</LazyVButton
               >
             </div>
           </form>
@@ -103,6 +107,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const props = defineProps<{ open: boolean }>();
 
 const emit = defineEmits<{

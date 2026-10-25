@@ -6,7 +6,8 @@
         :key="s.n"
         class="flex flex-1 items-center last:flex-none"
       >
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           class="flex items-center gap-2 rounded-control py-1 text-start transition-colors duration-200 disabled:cursor-default"
           :disabled="!state.canOpen(s.n)"
           :aria-current="state.step === s.n ? 'step' : undefined"

@@ -8,11 +8,13 @@
       title="There's nothing to check out"
       description="Your cart is empty. Add products from the catalog, then come back here to place the order."
     >
-      <LazyVButton variant="primary" to="/products"
-        >Browse the catalog</LazyVButton
-      >
+      <LazyVButton variant="primary" to="/products">{{
+        t("btn.browse_the_catalog")
+      }}</LazyVButton>
 
-      <LazyVButton variant="secondary" to="/cart">Back to cart</LazyVButton>
+      <LazyVButton variant="secondary" to="/cart">{{
+        t("btn.back_to_cart")
+      }}</LazyVButton>
     </LazyVEmptyState>
 
     <template v-else>
@@ -29,7 +31,7 @@
               size="14"
               class="rtl:-scale-x-100"
               aria-hidden="true"
-            />Back to cart
+            />{{ t("btn.back_to_cart") }}
           </LazyVButton>
         </div>
         <checkout-progress />
@@ -51,7 +53,8 @@
               size="16"
               class="text-accent"
               aria-hidden="true"
-            />{{ showSummary ? "Hide" : "Show" }} order summary</span
+            />{{ showSummary ? t("btn.hide") : t("btn.show") }}
+            {{ t("btn.order_summary") }}</span
           >
           <span class="flex items-center gap-2 font-display text-lg"
             >{{ money.format(amounts.total)
@@ -111,6 +114,8 @@ import { pricing } from "~/data/cart";
 import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
 import type { Order } from "~/types/order";
+
+const { t } = useI18n();
 
 // Always open at the top, whatever page (or open drawer) the visitor came from.
 onMounted(() => window.scrollTo({ top: 0, left: 0, behavior: "instant" }));

@@ -69,14 +69,18 @@
             <span class="label">{{ p.label }}</span>
             <span class="block text-xs text-mute">{{ p.note }}</span>
           </span>
-          <span class="shrink-0 font-mono text-sm">{{ money.format(product.price + p.delta) }}</span>
+          <span class="shrink-0 font-mono text-sm">{{
+            money.format(product.price + p.delta)
+          }}</span>
         </span>
       </LazyVRadioInput>
     </fieldset>
 
     <div class="space-y-3">
       <div ref="cta" class="flex gap-2">
-        <LazyVButton variant="primary" size="lg"
+        <LazyVButton
+          variant="primary"
+          size="lg"
           class="flex-1"
           :disabled="added"
           @click="acquire"
@@ -88,10 +92,11 @@
             :class="added ? 'animate-icon-pop' : 'icon-bob'"
             aria-hidden="true"
           />
-          {{ added ? "Added to order" : "Add to cart" }}
+          {{ added ? t("btn.added_to_order") : t("btn.add_to_cart") }}
         </LazyVButton>
-        
-        <LazyVButton variant="icon"
+
+        <LazyVButton
+          variant="icon"
           class="h-12 w-12"
           :aria-pressed="wished"
           :aria-label="wished ? 'Remove from wishlist' : 'Add to wishlist'"
@@ -112,9 +117,7 @@
       class="rounded-card border border-line bg-raised p-4"
       aria-label="Delivery assurance"
     >
-      <p class="eyebrow mb-2 !text-paper">
-        PrintPro logistics assurance
-      </p>
+      <p class="eyebrow mb-2 !text-paper">PrintPro logistics assurance</p>
       <ul class="space-y-1.5 text-sm text-mute">
         <li
           v-for="a in detail.assurance"
@@ -142,12 +145,13 @@
         <p class="truncate text-sm font-medium">{{ product.name }}</p>
         <p class="meta">{{ money.format(total) }}</p>
       </div>
-      <LazyVButton variant="primary"
+      <LazyVButton
+        variant="primary"
         class="shrink-0"
         :disabled="added"
         @click="acquire"
       >
-        {{ added ? "Added" : "Add to cart" }}
+        {{ added ? t("btn.added") : t("btn.add_to_cart") }}
       </LazyVButton>
     </div>
   </Transition>
@@ -155,6 +159,8 @@
 
 <script lang="ts" setup>
 import type { DetailedProduct, ProductDetail } from "~/types/product";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   product: DetailedProduct;

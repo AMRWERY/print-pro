@@ -6,7 +6,7 @@
         variant="tertiary"
         to="/cart"
         class="text-sm underline-offset-4 hover:underline"
-        >Edit cart</LazyVButton
+        >{{ t("btn.edit_cart") }}</LazyVButton
       >
     </div>
 
@@ -26,6 +26,7 @@
             class="thumb-contain"
             loading="lazy"
           />
+
           <media-placeholder
             v-else
             :icon="e.product.icon"
@@ -86,8 +87,7 @@
     <p class="flex items-end justify-between gap-3 border-t border-line pt-4">
       <span class="eyebrow !text-paper">Total</span>
       <span class="font-display text-3xl font-semibold" aria-live="polite"
-        >{{ money.format(amounts.total) }}
-        <span class="meta">EGP</span></span
+        >{{ money.format(amounts.total) }} <span class="meta">EGP</span></span
       >
     </p>
 
@@ -107,6 +107,8 @@
 <script lang="ts" setup>
 import type { CartEntry } from "~/composables/useCartTotals";
 import type { CheckoutAmounts } from "~/types/checkout";
+
+const { t } = useI18n();
 
 defineProps<{ entries: CartEntry[]; amounts: CheckoutAmounts }>();
 

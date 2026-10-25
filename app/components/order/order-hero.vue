@@ -29,8 +29,8 @@
           </h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
             Order <span class="font-mono text-paper">#{{ order.id }}</span> has
-            been placed and queued for checking and packing. A confirmation is on
-            its way to <span class="text-paper">{{ order.email }}</span
+            been placed and queued for checking and packing. A confirmation is
+            on its way to <span class="text-paper">{{ order.email }}</span
             >.
           </p>
         </div>
@@ -80,15 +80,18 @@
         :to="{ path: '/track', query: { order: order.id } }"
         icon="lucide:map-pin"
         icon-class="icon-bob"
-        >Track order</LazyVButton
+        >{{ t("btn.track_order") }}</LazyVButton
       >
 
       <LazyVButton variant="secondary" icon="lucide:file-down" @click="print"
-        >Download invoice (PDF)</LazyVButton
+        >{{ t("btn.download_invoice") }} (PDF)</LazyVButton
       >
 
-      <LazyVButton variant="secondary" to="/products" icon="lucide:layout-grid"
-        >Continue exploring catalog</LazyVButton
+      <LazyVButton
+        variant="secondary"
+        to="/products"
+        icon="lucide:layout-grid"
+        >{{ t("btn.continue_exploring_catalog") }}</LazyVButton
       >
 
       <LazyVButton
@@ -96,7 +99,7 @@
         :href="orderSupport.phoneHref"
         icon="lucide:phone"
         icon-class="icon-wiggle"
-        >Concierge {{ orderSupport.phone }}</LazyVButton
+        >{{ t("btn.concierge") }} {{ orderSupport.phone }}</LazyVButton
       >
     </div>
   </header>
@@ -105,6 +108,8 @@
 <script lang="ts" setup>
 import { estimatedHandover, formatWhen, orderSupport } from "~/data/order";
 import type { Order } from "~/types/order";
+
+const { t } = useI18n();
 
 const props = defineProps<{ order: Order }>();
 

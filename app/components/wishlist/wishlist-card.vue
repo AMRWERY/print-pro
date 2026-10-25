@@ -38,7 +38,7 @@
         class="absolute start-3 top-3 backdrop-blur"
       />
 
-      <LazyVCheckboxImput
+      <LazyVCheckboxInput
         v-if="!readonly"
         :model-value="selected"
         :label="'Select ' + product.name"
@@ -93,7 +93,8 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <LazyVButton variant="primary"
+          <LazyVButton
+            variant="primary"
             class="flex-1"
             :disabled="moved"
             @click="move"
@@ -105,11 +106,18 @@
               :class="moved ? 'animate-icon-pop' : 'icon-bob'"
               aria-hidden="true"
             />
-            {{ moved ? "Added" : readonly ? "Add to cart" : "Move to cart" }}
+            {{
+              moved
+                ? t("btn.added")
+                : readonly
+                  ? t("btn.add_to_cart")
+                  : t("btn.move_to_cart")
+            }}
           </LazyVButton>
-          <LazyVButton variant="icon"
+
+          <LazyVButton
+            variant="icon"
             v-if="!readonly"
-           
             :aria-label="`Remove ${product.name} from registry`"
             @click="emit('remove')"
           >
@@ -145,6 +153,8 @@
 import { studioTags } from "~/data/wishlist";
 import type { DetailedProduct } from "~/types/product";
 
+const { t } = useI18n();
+
 const props = defineProps<{
   product: DetailedProduct;
   selected: boolean;
@@ -152,6 +162,7 @@ const props = defineProps<{
   list?: boolean;
   readonly?: boolean;
 }>();
+
 const emit = defineEmits<{
   "update:selected": [value: boolean];
   tag: [value: string];

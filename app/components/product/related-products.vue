@@ -11,7 +11,7 @@
           to="/products"
           class="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider"
         >
-          View all
+          {{ t("btn.view_all") }}
           <Icon
             name="lucide:arrow-right"
             size="14"
@@ -37,6 +37,8 @@
 
 <script lang="ts" setup>
 import type { Product } from "~/types/home";
+
+const { t } = useI18n();
 
 defineProps<{ items: Product[] }>();
 </script>

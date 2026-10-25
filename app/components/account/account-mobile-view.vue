@@ -2,10 +2,13 @@
   <div class="space-y-4 font-sans text-paper">
     <!-- Top Mobile App Header Bar -->
     <header
-      class="flex items-center justify-between rounded-control border border-line bg-surface p-3 font-mono text-xs">
+      class="flex items-center justify-between rounded-control border border-line bg-surface p-3 font-mono text-xs"
+    >
       <div class="flex items-center gap-2">
         <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75"
+          />
           <span class="relative inline-flex h-2 w-2 rounded-full bg-success" />
         </span>
         <span class="font-bold text-success">ACCOUNT ONLINE</span>
@@ -17,44 +20,74 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <LazyVButton variant="plain" class="relative text-mute hover:text-paper" aria-label="Notifications"
-          @click="showNotifications = !showNotifications">
+        <LazyVButton
+          variant="plain"
+          class="relative text-mute hover:text-paper"
+          aria-label="Notifications"
+          @click="showNotifications = !showNotifications"
+        >
           <Icon name="lucide:bell" size="18" />
           <span class="absolute -top-1 -end-1 pip rounded-full" />
         </LazyVButton>
 
-        <img :src="profile.avatarUrl" :alt="profile.name"
-          class="h-8 w-8 rounded-full border border-line object-cover" />
+        <img
+          :src="profile.avatarUrl"
+          :alt="profile.name"
+          class="h-8 w-8 rounded-full border border-line object-cover"
+        />
       </div>
     </header>
 
     <!-- Subnav Segmented Pill Tabs -->
     <div
       class="grid grid-cols-3 gap-1 rounded-control border border-line bg-surface p-1 font-mono text-xs font-semibold"
-      role="tablist" aria-label="Mobile sections">
-      <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'overview'"
-        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition" :class="mobileTab === 'overview'
+      role="tablist"
+      aria-label="Mobile sections"
+    >
+      <LazyVButton
+        variant="plain"
+        role="tab"
+        :aria-selected="mobileTab === 'overview'"
+        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition"
+        :class="
+          mobileTab === 'overview'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
-          " @click="mobileTab = 'overview'">
+        "
+        @click="mobileTab = 'overview'"
+      >
         <span class="h-1.5 w-1.5 rounded-full bg-accent" />
-        OVERVIEW
+        {{ t("btn.overview") }}
       </LazyVButton>
 
-      <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'active'"
-        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition" :class="mobileTab === 'active'
+      <LazyVButton
+        variant="plain"
+        role="tab"
+        :aria-selected="mobileTab === 'active'"
+        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition"
+        :class="
+          mobileTab === 'active'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
-          " @click="mobileTab = 'active'">
-        ACTIVE ({{ activeOrderCount }})
+        "
+        @click="mobileTab = 'active'"
+      >
+        {{ t("btn.active") }} ({{ activeOrderCount }})
       </LazyVButton>
 
-      <LazyVButton variant="plain" role="tab" :aria-selected="mobileTab === 'registry'"
-        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition" :class="mobileTab === 'registry'
+      <LazyVButton
+        variant="plain"
+        role="tab"
+        :aria-selected="mobileTab === 'registry'"
+        class="flex items-center justify-center gap-1.5 rounded-tight py-2 transition"
+        :class="
+          mobileTab === 'registry'
             ? 'bg-ink text-accent shadow-sm'
             : 'text-mute hover:text-paper'
-          " @click="mobileTab = 'registry'">
-        REGISTRY ({{ registryItems.length }})
+        "
+        @click="mobileTab = 'registry'"
+      >
+        {{ t("btn.registry") }} ({{ registryItems.length }})
       </LazyVButton>
     </div>
 
@@ -62,16 +95,26 @@
     <section class="card-compact">
       <div class="flex items-start justify-between gap-3">
         <div class="flex items-center gap-3">
-          <div class="relative h-14 w-14 shrink-0 overflow-hidden rounded-control border border-line">
-            <img :src="profile.avatarUrl" :alt="profile.name" class="h-full w-full object-cover" />
-            <span class="absolute bottom-1 end-1 h-2.5 w-2.5 rounded-full border-2 border-surface bg-accent" />
+          <div
+            class="relative h-14 w-14 shrink-0 overflow-hidden rounded-control border border-line"
+          >
+            <img
+              :src="profile.avatarUrl"
+              :alt="profile.name"
+              class="h-full w-full object-cover"
+            />
+            <span
+              class="absolute bottom-1 end-1 h-2.5 w-2.5 rounded-full border-2 border-surface bg-accent"
+            />
           </div>
 
           <div class="space-y-0.5">
             <h2 class="font-display text-lg font-bold text-paper">
               {{ profile.name }}
             </h2>
-            <p class="font-mono text-1xs text-mute tracking-wider truncate max-w-[200px]">
+            <p
+              class="font-mono text-1xs text-mute tracking-wider truncate max-w-[200px]"
+            >
               {{ profile.affiliation }}
             </p>
             <div class="flex items-center gap-2 font-mono text-2xs">
@@ -89,25 +132,31 @@
 
       <!-- Quick Action Buttons -->
       <div class="mt-4 grid grid-cols-3 gap-2 font-mono text-xs font-semibold">
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           class="flex items-center justify-center gap-1.5 rounded-control bg-accent py-2 text-onaccent shadow-sm transition hover:brightness-110 active:scale-95"
-          @click="$emit('new-order')">
+          @click="$emit('new-order')"
+        >
           <Icon name="lucide:plus" size="14" />
-          <span>NEW ORDER</span>
+          <span>{{ t("btn.new_order") }}</span>
         </LazyVButton>
 
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           class="flex items-center justify-center gap-1.5 rounded-control border border-line bg-raised py-2 text-mute transition hover:border-accent hover:text-paper active:scale-95"
-          @click="$emit('open-crate', inTransitOrder)">
+          @click="$emit('open-crate', inTransitOrder)"
+        >
           <Icon name="lucide:plane" size="14" />
           <span>#948201</span>
         </LazyVButton>
 
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           class="flex items-center justify-center gap-1.5 rounded-control border border-line bg-raised py-2 text-mute transition hover:border-accent hover:text-paper active:scale-95"
-          @click="$emit('open-escrow')">
+          @click="$emit('open-escrow')"
+        >
           <Icon name="lucide:vault" size="14" />
-          <span>CREDIT</span>
+          <span>{{ t("btn.credit") }}</span>
         </LazyVButton>
       </div>
     </section>
@@ -144,10 +193,14 @@
 
     <!-- Active In-Transit Shipment Card -->
     <article v-if="inTransitOrder" class="card-compact space-y-3">
-      <div class="flex items-center justify-between border-b border-line pb-2.5">
+      <div
+        class="flex items-center justify-between border-b border-line pb-2.5"
+      >
         <div class="flex items-center gap-1.5 font-mono text-xs">
-          <span class="rounded-control bg-accent/20 px-2 py-0.5 font-bold text-accent">
-            {{ inTransitOrder.crateId || 'ORDER #LP-948201' }}
+          <span
+            class="rounded-control bg-accent/20 px-2 py-0.5 font-bold text-accent"
+          >
+            {{ inTransitOrder.crateId || "ORDER #LP-948201" }}
           </span>
           <span class="flex items-center gap-1 text-1xs text-accent">
             <span class="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
@@ -161,9 +214,7 @@
       </div>
 
       <div>
-        <h3 class="title-sm">
-          Photocopier &amp; printer order
-        </h3>
+        <h3 class="title-sm">Photocopier &amp; printer order</h3>
         <p class="font-mono text-2xs text-mute tracking-wider mt-0.5">
           CARRIER: INSURED COURIER (PALLET #88)
         </p>
@@ -171,12 +222,24 @@
 
       <!-- Equipment Thumbnails -->
       <div class="flex items-center gap-2">
-        <div class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5">
-          <img src="/img/prod-01.png" alt="Photocopier" class="h-8 w-8 object-contain" />
+        <div
+          class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5"
+        >
+          <img
+            src="/img/prod-01.png"
+            alt="Photocopier"
+            class="h-8 w-8 object-contain"
+          />
           <span class="font-mono text-2xs text-paper">Kopira Pro A3 35</span>
         </div>
-        <div class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5">
-          <img src="/img/prod-03.png" alt="Toner" class="h-8 w-8 object-contain" />
+        <div
+          class="flex items-center gap-2 rounded-control border border-line bg-ink/40 p-1.5"
+        >
+          <img
+            src="/img/prod-03.png"
+            alt="Toner"
+            class="h-8 w-8 object-contain"
+          />
           <span class="font-mono text-2xs text-paper">Kopira Toner...</span>
         </div>
       </div>
@@ -199,16 +262,21 @@
       </div>
 
       <!-- Delivery strip -->
-      <div class="flex items-center justify-between border-t border-line pt-2.5 font-mono text-xs">
+      <div
+        class="flex items-center justify-between border-t border-line pt-2.5 font-mono text-xs"
+      >
         <div class="flex items-center gap-3 text-1xs text-mute">
           <span>🚚 Out for delivery</span>
           <span class="text-success font-semibold">✔ Sealed</span>
         </div>
 
-        <LazyVButton variant="plain" class="inline-flex items-center gap-1 text-accent font-semibold hover:underline"
-          @click="$emit('open-telemetry', inTransitOrder)">
+        <LazyVButton
+          variant="plain"
+          class="inline-flex items-center gap-1 text-accent font-semibold hover:underline"
+          @click="$emit('open-telemetry', inTransitOrder)"
+        >
           <Icon name="lucide:activity" size="12" />
-          <span>TRACKING</span>
+          <span>{{ t("btn.tracking") }}</span>
         </LazyVButton>
       </div>
     </article>
@@ -218,23 +286,39 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 font-mono text-xs">
           <span class="font-bold text-paper">SAVED ITEMS</span>
-          <span class="rounded-control bg-raised px-1.5 py-0.2 text-2xs text-mute">
+          <span
+            class="rounded-control bg-raised px-1.5 py-0.2 text-2xs text-mute"
+          >
             {{ registryItems.length }} RESERVED
           </span>
         </div>
 
-        <NuxtLinkLocale to="/wishlist" class="font-mono text-xs text-accent font-semibold hover:underline">
+        <nuxt-link-locale
+          to="/wishlist"
+          class="font-mono text-xs text-accent font-semibold hover:underline"
+        >
           VIEW ALL &rarr;
-        </NuxtLinkLocale>
+        </nuxt-link-locale>
       </div>
 
       <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
-        <article v-for="item in registryItems" :key="item.id"
-          class="w-64 shrink-0 rounded-control border border-line bg-ink/30 p-3 space-y-2">
-          <div class="relative aspect-video w-full overflow-hidden rounded-control border border-line bg-surface">
-            <img v-if="item.image" :src="item.image" :alt="item.name" class="h-full w-full object-cover" />
+        <article
+          v-for="item in registryItems"
+          :key="item.id"
+          class="w-64 shrink-0 rounded-control border border-line bg-ink/30 p-3 space-y-2"
+        >
+          <div
+            class="relative aspect-video w-full overflow-hidden rounded-control border border-line bg-surface"
+          >
+            <img
+              v-if="item.image"
+              :src="item.image"
+              :alt="item.name"
+              class="h-full w-full object-cover"
+            />
             <span
-              class="absolute top-1 start-1 rounded bg-black/70 px-1.5 py-0.5 font-mono text-3xs font-bold text-yellow">
+              class="absolute top-1 start-1 rounded bg-black/70 px-1.5 py-0.5 font-mono text-3xs font-bold text-yellow"
+            >
               {{ item.category }}
             </span>
           </div>
@@ -253,11 +337,13 @@
               {{ money.format(item.price) }}
             </span>
 
-            <LazyVButton variant="plain"
+            <LazyVButton
+              variant="plain"
               class="inline-flex items-center gap-1 rounded-control bg-surface border border-line px-2 py-1 font-mono text-2xs font-bold text-paper hover:border-accent hover:text-accent"
-              @click="$emit('add-registry', item)">
+              @click="$emit('add-registry', item)"
+            >
               <Icon name="lucide:shopping-bag" size="11" />
-              <span>ADD TO CART</span>
+              <span>{{ t("btn.add_to_cart") }}</span>
             </LazyVButton>
           </div>
         </article>
@@ -274,19 +360,19 @@
         <span class="text-cyan text-1xs font-bold">SIGNATURE REQUIRED</span>
       </div>
 
-      <h3 class="title-sm">
-        Head office — Cairo
-      </h3>
+      <h3 class="title-sm">Head office — Cairo</h3>
       <p class="text-xs text-mute leading-relaxed">
         12 Tahrir Street, Dokki, Cairo<br />
         Loading bay at the rear, weekdays 08:00 – 17:00
       </p>
 
       <div class="pt-2">
-        <LazyVButton variant="plain"
+        <LazyVButton
+          variant="plain"
           class="w-full rounded-control border border-line bg-raised py-2 meta font-semibold transition hover:border-accent hover:text-paper"
-          @click="$emit('change-dock')">
-          CHANGE ADDRESS
+          @click="$emit('change-dock')"
+        >
+          {{ t("btn.change_address") }}
         </LazyVButton>
       </div>
     </section>
@@ -299,24 +385,47 @@
       </div>
 
       <div class="space-y-2">
-        <div v-for="arc in archivedOrders" :key="arc.id" class="rounded-control border border-line bg-ink/30 p-3">
-          <div class="flex items-center justify-between font-mono text-xs cursor-pointer"
-            @click="toggleArchive(arc.id)">
+        <div
+          v-for="arc in archivedOrders"
+          :key="arc.id"
+          class="rounded-control border border-line bg-ink/30 p-3"
+        >
+          <div
+            class="flex items-center justify-between font-mono text-xs cursor-pointer"
+            @click="toggleArchive(arc.id)"
+          >
             <div>
-              <p class="font-bold text-paper">{{ arc.id }} • {{ arc.title.split('+')[0]?.trim() }}</p>
-              <p class="text-2xs text-mute">{{ arc.date }} • {{ arc.items.length }} ITEMS</p>
+              <p class="font-bold text-paper">
+                {{ arc.id }} • {{ arc.title.split("+")[0]?.trim() }}
+              </p>
+              <p class="text-2xs text-mute">
+                {{ arc.date }} • {{ arc.items.length }} ITEMS
+              </p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="font-display font-semibold text-paper">{{ money.format(arc.amount) }}</span>
-              <Icon name="lucide:chevron-down" size="14" class="transition-transform text-mute"
-                :class="openArchives[arc.id] && 'rotate-180'" />
+              <span class="font-display font-semibold text-paper">{{
+                money.format(arc.amount)
+              }}</span>
+              <Icon
+                name="lucide:chevron-down"
+                size="14"
+                class="transition-transform text-mute"
+                :class="openArchives[arc.id] && 'rotate-180'"
+              />
             </div>
           </div>
 
-          <div v-if="openArchives[arc.id]" class="mt-2 border-t border-line/60 pt-2 text-xs text-mute space-y-1">
+          <div
+            v-if="openArchives[arc.id]"
+            class="mt-2 border-t border-line/60 pt-2 text-xs text-mute space-y-1"
+          >
             <p>{{ arc.title }}</p>
-            <p v-if="arc.benchVerified" class="text-success">{{ arc.benchVerified }}</p>
-            <p v-if="arc.calibrationLog" class="font-mono text-2xs">{{ arc.calibrationLog }}</p>
+            <p v-if="arc.benchVerified" class="text-success">
+              {{ arc.benchVerified }}
+            </p>
+            <p v-if="arc.calibrationLog" class="font-mono text-2xs">
+              {{ arc.calibrationLog }}
+            </p>
           </div>
         </div>
       </div>
@@ -333,7 +442,9 @@
       </div>
 
       <div class="space-y-2.5 font-mono text-xs">
-        <div class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5">
+        <div
+          class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5"
+        >
           <Icon name="lucide:activity" size="14" class="bullet-icon" />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
@@ -346,8 +457,14 @@
           </div>
         </div>
 
-        <div class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5">
-          <Icon name="lucide:credit-card" size="14" class="text-cyan shrink-0 mt-0.5" />
+        <div
+          class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5"
+        >
+          <Icon
+            name="lucide:credit-card"
+            size="14"
+            class="text-cyan shrink-0 mt-0.5"
+          />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
               <span class="font-bold text-paper">Account credit applied</span>
@@ -359,8 +476,14 @@
           </div>
         </div>
 
-        <div class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5">
-          <Icon name="lucide:bookmark" size="14" class="text-yellow shrink-0 mt-0.5" />
+        <div
+          class="flex items-start gap-2.5 rounded-control border border-line bg-ink/20 p-2.5"
+        >
+          <Icon
+            name="lucide:bookmark"
+            size="14"
+            class="text-yellow shrink-0 mt-0.5"
+          />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
               <span class="font-bold text-paper">Saved item back in stock</span>
@@ -382,6 +505,8 @@ import type {
   RegistryItem,
   RequisitionOrder,
 } from "~/types/account";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   profile: AtelierProfile;

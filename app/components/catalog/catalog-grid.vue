@@ -12,7 +12,9 @@
       caption="BAY TRAY: EMPTY"
       :meta="['FACET INTERSECTION: 0', 'TRAY STATUS: VACANT']"
     >
-      <LazyVButton variant="primary" @click="catalog.reset()">Reset all filters</LazyVButton>
+      <LazyVButton variant="primary" @click="catalog.reset()">{{
+        t("btn.reset_all_filters")
+      }}</LazyVButton>
     </LazyVEmptyState>
 
     <TransitionGroup
@@ -29,6 +31,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const catalog = useCatalog();
 </script>
 

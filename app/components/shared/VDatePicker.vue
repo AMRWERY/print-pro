@@ -268,18 +268,18 @@
                   size="sm"
                   :disabled="todayDisabled"
                   @click="pick(todayIso)"
-                  >Today</LazyVButton
+                  >{{ t("btn.today") }}</LazyVButton
                 >
                 <LazyVButton
                   v-if="clearable"
                   variant="tertiary"
                   size="sm"
                   @click="clear"
-                  >Clear</LazyVButton
+                  >{{ t("btn.clear") }}</LazyVButton
                 >
-                <LazyVButton variant="tertiary" size="sm" @click="close()"
-                  >Close</LazyVButton
-                >
+                <LazyVButton variant="tertiary" size="sm" @click="close()">{{
+                  t("btn.close")
+                }}</LazyVButton>
               </div>
             </div>
           </div>
@@ -290,6 +290,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { Cell } from "~/types/shared/VDatePicker";
+
 /**
  * Date picker with the same vee-validate behaviour as <LazyVInput>. The value is an ISO
  * date string ("2026-10-12"), or "" when empty, so it round-trips with plain `ref("")`.
@@ -303,7 +305,8 @@
  * - Opens as a bottom sheet on phones and a popover (flipping above when needed) elsewhere.
  * - Follows the site locale (month names, digits, first day of the week).
  */
-import type { Cell } from "~/types/shared/VDatePicker";
+
+const { t } = useI18n();
 
 defineOptions({ inheritAttrs: false });
 

@@ -36,9 +36,7 @@
             @click="emit('pick', p.name)"
           >
             <span class="truncate">{{ p.brand }} {{ p.name }}</span>
-            <span class="shrink-0 meta">{{
-              money.format(p.price)
-            }}</span>
+            <span class="shrink-0 meta">{{ money.format(p.price) }}</span>
           </LazyVButton>
         </li>
       </ul>
@@ -114,7 +112,7 @@
         @mousedown.prevent
         @click="emit('clear-recent')"
       >
-        Clear search history
+        {{ t("btn.clear_search_history") }}
       </LazyVButton>
     </div>
   </div>
@@ -122,6 +120,8 @@
 
 <script lang="ts" setup>
 import type { CatalogProduct } from "~/types/catalog";
+
+const { t } = useI18n();
 
 defineProps<{
   id: string;

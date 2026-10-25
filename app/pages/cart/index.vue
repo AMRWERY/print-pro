@@ -8,9 +8,7 @@
           <p class="eyebrow-accent">
             <span class="pip" aria-hidden="true" />Your order
           </p>
-          <h1 class="max-w-3xl text-3xl sm:text-5xl">
-            Your cart
-          </h1>
+          <h1 class="max-w-3xl text-3xl sm:text-5xl">Your cart</h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
             Review your printers, photocopiers and supplies, adjust quantities
             and continue to checkout.
@@ -30,12 +28,13 @@
         title="Your cart is empty"
         description="Add printers, photocopiers or supplies from the catalog, or move products from your wishlist."
       >
-        <LazyVButton variant="primary" to="/products"
-          >Browse the catalog</LazyVButton
-        >
-        <LazyVButton variant="secondary" to="/wishlist"
-          >Open wishlist</LazyVButton
-        >
+        <LazyVButton variant="primary" to="/products">{{
+          t("btn.browse_the_catalog")
+        }}</LazyVButton>
+
+        <LazyVButton variant="secondary" to="/wishlist">{{
+          t("btn.open_wishlist")
+        }}</LazyVButton>
       </LazyVEmptyState>
 
       <div
@@ -47,7 +46,7 @@
           <div
             class="flex flex-wrap items-center justify-between gap-3 card p-3"
           >
-            <LazyVCheckboxImput
+            <LazyVCheckboxInput
               :model-value="allSelected"
               :indeterminate="selectedEntries.length > 0 && !allSelected"
               label-class="items-center"
@@ -55,15 +54,16 @@
             >
               Select all ({{ entries.length }}
               {{ entries.length === 1 ? "item" : "items" }})
-            </LazyVCheckboxImput>
+            </LazyVCheckboxInput>
             <div class="flex flex-wrap items-center gap-4 text-sm">
               <LazyVButton
                 variant="tertiary"
                 class="inline-flex items-center gap-1.5 disabled:opacity-40"
                 :disabled="!selectedEntries.length"
                 @click="batchLater"
-                ><Icon name="lucide:clock" size="14" aria-hidden="true" />Batch
-                save</LazyVButton
+                ><Icon name="lucide:clock" size="14" aria-hidden="true" />{{
+                  t("btn.save")
+                }}</LazyVButton
               >
 
               <LazyVButton
@@ -75,18 +75,17 @@
                   name="lucide:trash-2"
                   size="14"
                   aria-hidden="true"
-                />Batch clear</LazyVButton
+                />{{ t('btn.batch_clear') }}</LazyVButton
               >
 
               <LazyVButton
                 variant="tertiary"
                 class="inline-flex items-center gap-1.5"
                 @click="exportInvoice"
-                ><Icon
-                  name="lucide:file-down"
-                  size="14"
-                  aria-hidden="true"
-                />Export pro-forma invoice (PDF)</LazyVButton
+                ><Icon name="lucide:file-down" size="14" aria-hidden="true" />{{
+                  t("btn.export_pro_forma_invoice")
+                }}
+                (PDF)</LazyVButton
               >
             </div>
           </div>
@@ -160,6 +159,7 @@ import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
 import type { DetailedProduct } from "~/types/product";
 
+const { t } = useI18n();
 const cart = useCartStore();
 const localePath = useLocalePath();
 const wishlist = useWishlistStore();
@@ -256,8 +256,7 @@ const companions = computed(() => {
 
 useSeoMeta({
   title: "Cart",
-  description:
-    "Review your items, adjust quantities and continue to checkout.",
+  description: "Review your items, adjust quantities and continue to checkout.",
   robots: "noindex",
 });
 </script>

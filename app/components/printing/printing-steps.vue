@@ -54,15 +54,21 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const { file } = usePrintConfig();
 const reduce = usePreferredReducedMotion();
 
 const steps = [
-  { id: "upload", label: "Upload", hint: "File check" },
-  { id: "dimensions", label: "Size & paper", hint: "Size · paper" },
-  { id: "engine", label: "Colour & sides", hint: "Colour · sides" },
-  { id: "finishing", label: "Binding & finishing", hint: "Binding · finish" },
-  { id: "fulfilment", label: "Delivery", hint: "Courier · pickup" },
+  { id: "upload", label: "Upload", hint: t("btn.file_check") },
+  { id: "dimensions", label: "Size & paper", hint: t("btn.size_paper") },
+  { id: "engine", label: "Colour & sides", hint: t("btn.colour_sides") },
+  {
+    id: "finishing",
+    label: "Binding & finishing",
+    hint: t("btn.binding_finishing"),
+  },
+  { id: "fulfilment", label: "Delivery", hint: t("btn.courier_pickup") },
 ];
 
 const active = ref("upload");
@@ -71,19 +77,19 @@ const active = ref("upload");
 const stickyTop = ref(0);
 const measureHeader = () => {
   const header = document.querySelector<HTMLElement>("header.sticky");
-  stickyTop.value = header ? Math.round(header.getBoundingClientRect().height) : 0;
+  stickyTop.value = header
+    ? Math.round(header.getBoundingClientRect().height)
+    : 0;
 };
 // Steps 2-5 have sensible defaults, so only the upload can be "not done yet".
 const done = (id: string) => id === "upload" && !!file.value;
 
 const go = (id: string) => {
   active.value = id;
-  document
-    .getElementById(id)
-    ?.scrollIntoView({
-      behavior: reduce.value === "reduce" ? "auto" : "smooth",
-      block: "start",
-    });
+  document.getElementById(id)?.scrollIntoView({
+    behavior: reduce.value === "reduce" ? "auto" : "smooth",
+    block: "start",
+  });
   history.replaceState(null, "", `#${id}`);
 };
 

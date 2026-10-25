@@ -11,7 +11,7 @@
           to="/products"
           class="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider"
         >
-          View all products
+          {{ t("btn.view_all_products") }}
           <Icon
             name="lucide:arrow-right"
             size="14"
@@ -43,7 +43,7 @@
                 <p class="font-display text-2xl font-semibold">
                   {{ money.format(a.price) }}
                 </p>
-                <LazyVButton variant="secondary">{{ a.action }}</LazyVButton>
+                <LazyVButton variant="secondary">{{ t(a.action) }}</LazyVButton>
               </div>
             </div>
           </article>
@@ -55,6 +55,8 @@
 
 <script lang="ts" setup>
 import { arrivals } from "~/data/home";
+
+const { t } = useI18n();
 
 const money = useMoney();
 </script>

@@ -11,7 +11,8 @@
     >
       <div class="animate-rise space-y-6">
         <p class="eyebrow inline-flex items-center gap-2">
-          <span class="h-px w-6 bg-accent" />Printers · Photocopiers · Inks &amp; Toner
+          <span class="h-px w-6 bg-accent" />Printers · Photocopiers · Inks
+          &amp; Toner
         </p>
         <h1
           id="hero-title"
@@ -22,12 +23,12 @@
         </h1>
         <p class="max-w-xl text-base text-mute">
           Printers and photocopiers for homes, offices and print rooms, plus the
-          genuine ink and toner to keep them running, delivered and installed
-          by our technicians.
+          genuine ink and toner to keep them running, delivered and installed by
+          our technicians.
         </p>
         <div class="flex flex-wrap gap-3">
           <LazyVButton variant="primary" to="/products">
-            Shop the catalog
+            {{ t("btn.shop_the_catalog") }}
             <Icon
               name="lucide:arrow-right"
               size="16"
@@ -40,13 +41,16 @@
             variant="secondary"
             icon="lucide:calendar-clock"
             @click="conciergeOpen = true"
-            >Talk to a technician</LazyVButton
+            >{{ t("btn.talk_to_a_technician") }}</LazyVButton
           >
         </div>
         <dl class="grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">
           <div v-for="s in heroStats" :key="s.label">
             <dt class="sr-only">{{ s.label }}</dt>
-            <dd class="font-display text-start text-2xl font-semibold" dir="ltr">
+            <dd
+              class="font-display text-start text-2xl font-semibold"
+              dir="ltr"
+            >
               {{ s.value }}
             </dd>
             <dd class="text-xs text-mute">{{ s.label }}</dd>
@@ -72,5 +76,6 @@
 <script lang="ts" setup>
 import { heroStats } from "~/data/home";
 
+const { t } = useI18n();
 const conciergeOpen = ref(false);
 </script>

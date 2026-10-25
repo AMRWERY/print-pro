@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
 const { y } = useWindowScroll();
+
 const visible = computed(() => y.value > 600);
 
 const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });

@@ -18,7 +18,7 @@
       aria-label="Loading your order"
     >
       <LazyVSkeletonLoader class="h-40" />
-    
+
       <LazyVSkeletonLoader class="h-40" />
     </div>
 
@@ -33,11 +33,11 @@
         </div>
         <div class="space-y-6">
           <order-items :items="active.items" />
-       
+
           <order-ledger :amounts="active.amounts" :payment="active.payment" />
-         
+
           <order-consignee :order="active" />
-        
+
           <order-support :order-id="active.id" />
         </div>
       </div>
@@ -51,9 +51,9 @@
       title="Enter an order number to start"
       description="Your order number is in the confirmation email and on the confirmation page. Orders placed on this device also appear above."
     >
-      <LazyVButton variant="primary" to="/products"
-        >Browse the catalog</LazyVButton
-      >
+      <LazyVButton variant="primary" to="/products">{{
+        t("btn.browse_the_catalog")
+      }}</LazyVButton>
     </LazyVEmptyState>
   </div>
 </template>
@@ -67,8 +67,10 @@ import {
 } from "~/data/tracking";
 import type { Order } from "~/types/order";
 
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+
 const orders = useOrderStore();
 
 const crumbs = [

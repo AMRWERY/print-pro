@@ -76,14 +76,14 @@
               variant="secondary"
               icon="lucide:replace"
               @click="uploader?.open()"
-              >Replace</LazyVButton
+              >{{ t("btn.replace") }}</LazyVButton
             >
             <LazyVButton
               size="sm"
               variant="tertiary"
               icon="lucide:trash-2"
               @click="clearFile"
-              >Remove</LazyVButton
+              >{{ t("btn.remove") }}</LazyVButton
             >
           </div>
         </div>
@@ -94,6 +94,8 @@
 
 <script lang="ts" setup>
 import { FILE_ACCEPT, MAX_FILE_MB } from "~/data/printing";
+
+const { t } = useI18n();
 
 const {
   file,

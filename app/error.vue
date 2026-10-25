@@ -32,9 +32,9 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3">
-          <LazyVButton variant="primary" icon="lucide:house" @click="go('/')"
-            >Go to home page</LazyVButton
-          >
+          <LazyVButton variant="primary" icon="lucide:house" @click="go('/')">{{
+            t("btn.go_to_home_page")
+          }}</LazyVButton>
         </div>
 
         <p class="text-xs text-mute">
@@ -55,7 +55,7 @@
 const props = defineProps<{ error: NuxtError }>();
 
 const localePath = useLocalePath();
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const { theme } = useTheme();
 
 const code = computed(() => props.error.statusCode ?? 500);

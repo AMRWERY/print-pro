@@ -20,17 +20,15 @@
       </LazyVButton>
     </TransitionGroup>
 
-    <LazyVButton
-      variant="plain"
-      class="link-accent"
-      @click="catalog.reset()"
-    >
-      Reset all
+    <LazyVButton variant="plain" class="link-accent" @click="catalog.reset()">
+      {{ t("btn.reset_all") }}
     </LazyVButton>
   </div>
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const catalog = useCatalog();
 </script>
 

@@ -16,9 +16,7 @@
         <div
           class="relative w-full max-w-2xl overflow-hidden rounded-panel border border-line bg-surface shadow-2xl shadow-black/60 font-mono text-xs"
         >
-          <div
-            class="modal-head"
-          >
+          <div class="modal-head">
             <div class="flex items-center gap-2">
               <span class="pip rounded-full" />
               <h2
@@ -44,9 +42,7 @@
               class="border-b border-line pb-4 flex flex-wrap items-start justify-between gap-4"
             >
               <div>
-                <p class="title-md">
-                  PRINTPRO
-                </p>
+                <p class="title-md">PRINTPRO</p>
                 <p class="text-1xs text-mute mt-0.5">
                   SALES &amp; SERVICE // support@printpro.com
                 </p>
@@ -68,9 +64,8 @@
             <!-- Content preview -->
             <div class="space-y-3 font-sans text-xs text-mute leading-relaxed">
               <p>
-                This document is the official record of your order, its
-                delivery and any service work carried out under your business
-                account.
+                This document is the official record of your order, its delivery
+                and any service work carried out under your business account.
               </p>
 
               <div
@@ -84,15 +79,11 @@
                 </div>
                 <div class="flex justify-between text-1xs">
                   <span>Pre-dispatch test</span>
-                  <span class="text-success font-semibold"
-                    >PASSED</span
-                  >
+                  <span class="text-success font-semibold">PASSED</span>
                 </div>
                 <div class="flex justify-between text-1xs">
                   <span>Test page quality</span>
-                  <span class="text-success font-semibold"
-                    >PASSED</span
-                  >
+                  <span class="text-success font-semibold">PASSED</span>
                 </div>
                 <div class="flex justify-between text-1xs">
                   <span>Packaging condition</span>
@@ -115,9 +106,7 @@
             </div>
           </div>
 
-          <div
-            class="modal-foot"
-          >
+          <div class="modal-foot">
             <span class="text-mute text-1xs"
               >Issued by PrintPro customer service</span
             >
@@ -127,7 +116,7 @@
                 class="rounded-control border border-line px-4 py-1.5 font-bold text-mute hover:text-paper"
                 @click="$emit('close')"
               >
-                CLOSE
+                {{ t("btn.close") }}
               </LazyVButton>
 
               <LazyVButton
@@ -136,7 +125,7 @@
                 @click="printDoc"
               >
                 <Icon name="lucide:printer" size="13" />
-                PRINT / EXPORT PDF
+                {{ t("btn.print_export") }} PDF
               </LazyVButton>
             </div>
           </div>
@@ -147,6 +136,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 defineProps<{
   open: boolean;
   title?: string;

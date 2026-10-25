@@ -54,15 +54,11 @@
         :loading="loading"
         icon="lucide:radar"
         class="md:mt-[1.625rem]"
-        >Track order</LazyVButton
+        >{{ t("btn.track_order") }}</LazyVButton
       >
     </form>
 
-    <p
-      v-if="error"
-      class="callout-accent"
-      role="alert"
-    >
+    <p v-if="error" class="callout-accent" role="alert">
       <Icon
         name="lucide:circle-alert"
         size="16"
@@ -89,6 +85,8 @@
 <script lang="ts" setup>
 import type { Order } from "~/types/order";
 import type { Validatable } from "~/types/track-order";
+
+const { t } = useI18n();
 
 defineProps<{ recent: Order[]; error?: string; loading?: boolean }>();
 

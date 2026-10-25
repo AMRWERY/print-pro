@@ -22,7 +22,11 @@
             class="icon-wiggle"
             aria-hidden="true"
           />
-          {{ history.isSaved(query) ? "Search saved" : "Save current search" }}
+          {{
+            history.isSaved(query)
+              ? t("btn.search_saved")
+              : t("btn.save_current_search")
+          }}
         </LazyVButton>
       </section-heading>
 
@@ -44,9 +48,7 @@
             <p class="text-sm text-mute">
               We’ll flag new lots and price changes that match this search.
             </p>
-            <div
-              class="mt-auto flex items-center justify-between pt-3 meta"
-            >
+            <div class="mt-auto flex items-center justify-between pt-3 meta">
               <span>Saved {{ formatDate(s.at) }}</span>
               <nuxt-link-locale
                 :to="{ path: '/search', query: { q: s.q } }"
@@ -87,6 +89,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 defineProps<{ query: string }>();
 
 const history = useSearchHistory();
@@ -103,14 +107,14 @@ const defaults = [
     eyebrow: "Supplies · reorder",
     title: "Corex Toner Black 210",
     body: "Get a reminder to reorder when your toner is about to run out.",
-    action: "Set a reminder +",
+    action: t("btn.set_reminder"),
     highlight: false,
   },
   {
     eyebrow: "Installation included",
     title: "Free installation on photocopiers",
     body: "Every photocopier bought from PrintPro is delivered, installed and connected to your network by our technicians.",
-    action: "See how it works",
+    action: t("btn.see_how_it_works"),
     highlight: true,
   },
 ];

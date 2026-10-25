@@ -96,11 +96,14 @@
         />
       </fieldset>
 
-      <LazyVButton variant="primary" size="lg" block
+      <LazyVButton
+        variant="primary"
+        size="lg"
+        block
         type="submit"
         class="sm:w-auto sm:min-w-56"
       >
-        Continue to delivery
+        {{ t("btn.continue_to_delivery") }}
         <Icon
           name="lucide:arrow-right"
           size="16"
@@ -114,6 +117,8 @@
 
 <script lang="ts" setup>
 import { countries } from "~/data/checkout";
+
+const { t } = useI18n();
 
 const state = useCheckoutState();
 const f = state.form;

@@ -3,7 +3,8 @@
     class="flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-line py-3"
   >
     <label class="flex cursor-pointer items-center gap-2 text-sm">
-      <LazyVButton variant="plain"
+      <LazyVButton
+        variant="plain"
         role="switch"
         :aria-checked="cmp.highlight"
         class="relative h-6 w-11 shrink-0 rounded-full border border-line transition-colors duration-200"
@@ -14,8 +15,9 @@
           class="absolute start-0.5 top-0.5 h-4 w-4 rounded-full bg-paper transition-transform duration-200"
           :class="cmp.highlight && 'translate-x-5 rtl:-translate-x-5'"
         />
-        <span class="sr-only">Highlight differences</span>
+        <span class="sr-only">{{ t("btn.highlight_differences") }}</span>
       </LazyVButton>
+
       <span>Highlight differences only</span>
       <span
         class="rounded-control bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent"
@@ -23,9 +25,12 @@
       >
     </label>
 
-    <LazyVCheckboxImput v-model="cmp.hideIdentical" label-class="items-center">Hide identical specs</LazyVCheckboxImput>
+    <LazyVCheckboxInput v-model="cmp.hideIdentical" label-class="items-center"
+      >Hide identical specs</LazyVCheckboxInput
+    >
 
-    <LazyVButton variant="tertiary"
+    <LazyVButton
+      variant="tertiary"
       class="inline-flex items-center gap-1.5 text-sm"
       @click="cmp.toggleAll()"
     >
@@ -38,7 +43,7 @@
         size="16"
         aria-hidden="true"
       />
-      {{ cmp.allCollapsed ? "Expand specs" : "Collapse specs" }}
+      {{ cmp.allCollapsed ? t("btn.expand_specs") : t("btn.collapse_specs") }}
     </LazyVButton>
 
     <div class="ms-auto flex flex-wrap items-center gap-3">
@@ -65,6 +70,7 @@
       <LazyVButton variant="secondary" class="h-9 !px-3 text-xs" @click="print">
         <Icon name="lucide:file-down" size="14" aria-hidden="true" />Export PDF
       </LazyVButton>
+
       <LazyVButton variant="secondary" class="h-9 !px-3 text-xs" @click="share">
         <Icon
           :key="`s-${copied}`"
@@ -73,9 +79,11 @@
           :class="copied && 'animate-icon-pop'"
           aria-hidden="true"
         />
-        {{ copied ? "Link copied" : "Share" }}
+        {{ copied ? t("btn.link_copied") : t("btn.share") }}
       </LazyVButton>
-      <LazyVButton variant="secondary"
+
+      <LazyVButton
+        variant="secondary"
         class="h-9 !px-3 text-xs"
         @click="emit('clear')"
       >
@@ -90,7 +98,9 @@ import type { useComparison } from "~/composables/useComparison";
 import { MAX_COMPARE } from "~/data/compare";
 import { allProducts } from "~/data/product-details";
 
+const { t } = useI18n();
 const props = defineProps<{ cmp: ReturnType<typeof useComparison> }>();
+
 const emit = defineEmits<{ add: [id: string]; clear: [] }>();
 
 const max = MAX_COMPARE;

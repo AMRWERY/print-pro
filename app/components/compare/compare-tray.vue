@@ -14,12 +14,16 @@
       <p class="text-sm">
         <span class="font-medium">{{ store.ids.length }}</span> to compare
       </p>
-      <LazyVButton variant="primary"
+      <LazyVButton
+        variant="primary"
         :to="{ path: '/compare', query: { ids: store.ids.join(',') } }"
         class="h-9 !px-3 text-xs"
-        >Compare now</LazyVButton>
-      <LazyVButton variant="icon" size="sm"
-       
+        >{{ t("btn.compare_now") }}</LazyVButton
+      >
+
+      <LazyVButton
+        variant="icon"
+        size="sm"
         aria-label="Clear comparison list"
         @click="store.clear()"
       >
@@ -30,7 +34,9 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
 const route = useRoute();
+
 const store = useCompareStore();
 
 // Not needed on the comparison page itself, and it would crowd a product's sticky buy bar.

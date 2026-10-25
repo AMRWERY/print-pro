@@ -17,8 +17,8 @@
             Recovery link sent
           </h1>
           <p class="text-sm text-mute">
-            If <span class="text-paper">{{ email }}</span> belongs to an account,
-            you'll receive a one-time link valid for 15 minutes. Check
+            If <span class="text-paper">{{ email }}</span> belongs to an
+            account, you'll receive a one-time link valid for 15 minutes. Check
             your spam folder if it doesn't arrive.
           </p>
         </div>
@@ -43,7 +43,7 @@
             :to="{ path: '/reset-password', query: { token: sent.token } }"
             icon-end="lucide:arrow-right"
             icon-end-class="icon-nudge rtl:-scale-x-100"
-            >Open reset link</LazyVButton
+            >{{ t("btn.open_reset_link") }}</LazyVButton
           >
         </div>
 
@@ -52,7 +52,7 @@
           to="/auth"
           icon="lucide:arrow-left"
           icon-class="rtl:-scale-x-100"
-          >Back to sign in</LazyVButton
+          >{{ t("btn.back_to_sign_in") }}</LazyVButton
         >
       </template>
 
@@ -60,8 +60,7 @@
       <template v-else>
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2">
-            <span class="pip" aria-hidden="true" />Account
-            recovery
+            <span class="pip" aria-hidden="true" />Account recovery
           </p>
           <h1 id="forgot-title" class="font-display text-3xl sm:text-4xl">
             Reset your password
@@ -85,6 +84,7 @@
             inputmode="email"
             icon="lucide:mail"
           />
+
           <LazyVButton
             type="submit"
             variant="primary"
@@ -93,7 +93,7 @@
             :loading="loading"
             icon-end="lucide:arrow-right"
             icon-end-class="icon-nudge rtl:-scale-x-100"
-            >Send recovery link</LazyVButton
+            >{{ t("btn.send_recovery_link") }}</LazyVButton
           >
         </form>
 
@@ -105,14 +105,14 @@
             to="/auth"
             icon="lucide:arrow-left"
             icon-class="rtl:-scale-x-100"
-            >Back to sign in</LazyVButton
+            >{{ t("btn.back_to_sign_in") }}</LazyVButton
           >
 
           <LazyVButton
             variant="tertiary"
             href="tel:+18004925866"
             icon="lucide:headset"
-            >Need help? +1 (800) 492-5866</LazyVButton
+            >{{ t("btn.need_help") }} +1 (800) 492-5866</LazyVButton
           >
         </div>
       </template>
@@ -123,6 +123,7 @@
 <script lang="ts" setup>
 import type { Validatable } from "~/types/auth";
 
+const { t } = useI18n();
 const auth = useAuthStore();
 
 const email = ref("");

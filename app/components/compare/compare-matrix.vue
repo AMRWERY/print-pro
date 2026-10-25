@@ -64,9 +64,9 @@
                 >{{ s.deltas }}
                 {{ s.deltas === 1 ? "delta" : "deltas" }} detected</span
               >
-              <span v-else class="meta"
-                >All specs identical</span
-              >
+              <span v-else class="meta">{{
+                t("btn.all_specs_identical")
+              }}</span>
             </span>
             <Icon
               name="lucide:chevron-down"
@@ -141,6 +141,8 @@
 
 <script lang="ts" setup>
 import type { useComparison } from "~/composables/useComparison";
+
+const { t } = useI18n();
 
 const props = defineProps<{ cmp: ReturnType<typeof useComparison> }>();
 

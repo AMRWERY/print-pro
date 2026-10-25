@@ -110,7 +110,9 @@
             </div>
 
             <!-- Handover notes -->
-            <div class="space-y-2 rounded-control border border-line bg-ink/40 p-4">
+            <div
+              class="space-y-2 rounded-control border border-line bg-ink/40 p-4"
+            >
               <p class="flex items-center gap-1.5 font-semibold text-paper">
                 <Icon
                   name="lucide:shield-check"
@@ -126,7 +128,9 @@
                   Check the packaging before signing and note any damage on the
                   delivery receipt.
                 </li>
-                <li>Photocopiers and large printers are installed by a technician.</li>
+                <li>
+                  Photocopiers and large printers are installed by a technician.
+                </li>
               </ul>
             </div>
           </div>
@@ -134,10 +138,12 @@
           <div
             class="flex items-center justify-between gap-3 border-t border-line px-5 py-3"
           >
-            <span class="text-xs text-mute">Need help? support@printpro.com</span>
-            <LazyVButton variant="secondary" @click="$emit('close')"
-              >Close</LazyVButton
+            <span class="text-xs text-mute"
+              >Need help? support@printpro.com</span
             >
+            <LazyVButton variant="secondary" @click="$emit('close')">{{
+              t("btn.close")
+            }}</LazyVButton>
           </div>
         </div>
       </div>
@@ -147,6 +153,8 @@
 
 <script lang="ts" setup>
 import type { RequisitionOrder } from "~/types/account";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   open: boolean;
@@ -158,7 +166,11 @@ defineEmits<{
 }>();
 
 const steps = [
-  { label: "Order confirmed", note: "We have your order", icon: "lucide:clipboard-check" },
+  {
+    label: "Order confirmed",
+    note: "We have your order",
+    icon: "lucide:clipboard-check",
+  },
   { label: "Packed", note: "Checked and sealed", icon: "lucide:package" },
   { label: "On the way", note: "With the courier", icon: "lucide:truck" },
   { label: "Delivered", note: "Signed for", icon: "lucide:home" },

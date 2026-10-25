@@ -6,7 +6,12 @@
       :class="open ? 'border-accent' : 'border-line'"
       @submit.prevent="submit()"
     >
-      <Icon name="lucide:search" size="22" class="ms-2 shrink-0 text-accent" aria-hidden="true" />
+      <Icon
+        name="lucide:search"
+        size="22"
+        class="ms-2 shrink-0 text-accent"
+        aria-hidden="true"
+      />
       <LazyVInput
         ref="input"
         v-model="draft"
@@ -23,25 +28,42 @@
         aria-autocomplete="list"
         :aria-expanded="open"
         :aria-controls="uid + '-panel'"
-        :aria-activedescendant="activeIndex >= 0 ? uid + '-panel-opt-' + activeIndex : undefined"
+        :aria-activedescendant="
+          activeIndex >= 0 ? uid + '-panel-opt-' + activeIndex : undefined
+        "
         @focus="open = true"
         @input="onInput"
         @keydown.down.prevent="move(1)"
         @keydown.up.prevent="move(-1)"
         @keydown.enter="onEnter"
       />
-      <LazyVButton variant="icon" size="sm" v-if="draft" class="border-transparent" aria-label="Clear search" @click="clear">
+      <LazyVButton
+        variant="icon"
+        size="sm"
+        v-if="draft"
+        class="border-transparent"
+        aria-label="Clear search"
+        @click="clear"
+      >
         <Icon name="lucide:x" size="16" aria-hidden="true" />
       </LazyVButton>
-   
+
       <LazyVButton variant="primary" type="submit" class="shrink-0">
-        <span class="hidden sm:inline">Search</span>
-        <Icon name="lucide:arrow-right" size="16" class="icon-nudge rtl:-scale-x-100 sm:hidden" aria-hidden="true" />
+        <span class="hidden sm:inline">{{ t("btn.search") }}</span>
+        <Icon
+          name="lucide:arrow-right"
+          size="16"
+          class="icon-nudge rtl:-scale-x-100 sm:hidden"
+          aria-hidden="true"
+        />
       </LazyVButton>
     </form>
 
     <Transition name="drop">
-      <div v-show="open" class="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden card shadow-xl shadow-black/30">
+      <div
+        v-show="open"
+        class="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden card shadow-xl shadow-black/30"
+      >
         <search-suggestions
           :id="`${uid}-panel`"
           :matches="matches"
@@ -56,6 +78,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const catalog = useCatalog();
 const history = useSearchHistory();
 const uid = useId();

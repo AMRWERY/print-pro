@@ -34,15 +34,22 @@
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <LazyVButton variant="primary" :to="redirect || '/account'">Continue</LazyVButton>
-        
-          <LazyVButton variant="secondary" to="/account" icon="lucide:layout-dashboard">Account dashboard</LazyVButton>
-         
+          <LazyVButton variant="primary" :to="redirect || '/account'">{{
+            t("btn.continue")
+          }}</LazyVButton>
+
+          <LazyVButton
+            variant="secondary"
+            to="/account"
+            icon="lucide:layout-dashboard"
+            >{{ t("btn.account_dashboard") }}</LazyVButton
+          >
+
           <LazyVButton
             variant="secondary"
             icon="lucide:log-out"
             @click="auth.logout()"
-            >Sign out</LazyVButton
+            >{{ t("btn.sign_out") }}</LazyVButton
           >
         </div>
       </template>
@@ -101,22 +108,19 @@
           />
 
           <div class="flex flex-wrap items-center justify-between gap-3">
-            <LazyVCheckboxImput
-              v-model="remember"
-              label-class="items-center"
-              >Remember this device</LazyVCheckboxImput
+            <LazyVCheckboxInput v-model="remember" label-class="items-center"
+              >Remember this device</LazyVCheckboxInput
             >
 
-            <LazyVButton variant="tertiary" to="/auth/forgot-password" size="sm"
-              >Forgot password?</LazyVButton
+            <LazyVButton
+              variant="tertiary"
+              to="/auth/forgot-password"
+              size="sm"
+              >{{ t("btn.forgot_password") }}</LazyVButton
             >
           </div>
 
-          <p
-            v-if="error"
-            class="callout-accent"
-            role="alert"
-          >
+          <p v-if="error" class="callout-accent" role="alert">
             <Icon
               name="lucide:circle-alert"
               size="16"
@@ -135,7 +139,11 @@
             icon-end="lucide:arrow-right"
             icon-end-class="icon-nudge rtl:-scale-x-100"
           >
-            {{ lockedFor > 0 ? `Try again in ${lockedFor}s` : "Sign in" }}
+            {{
+              lockedFor > 0
+                ? `${t("btn.try_again_in")} ${lockedFor}s`
+                : t("btn.sign_in")
+            }}
           </LazyVButton>
         </form>
 
@@ -145,14 +153,11 @@
             variant="tertiary"
             to="/auth/register"
             class="!text-accent"
-            >Create an account</LazyVButton
+            >{{ t("btn.create_an_account") }}</LazyVButton
           >
         </p>
 
-        <p
-          class="callout"
-          role="note"
-        >
+        <p class="callout" role="note">
           <Icon
             name="lucide:info"
             size="14"
@@ -170,9 +175,11 @@
 <script lang="ts" setup>
 import type { Validatable } from "~/types/auth";
 
-const auth = useAuthStore();
+const { t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
+
+const auth = useAuthStore();
 
 const ready = ref(false);
 

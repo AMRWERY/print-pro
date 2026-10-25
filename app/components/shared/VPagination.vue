@@ -48,7 +48,7 @@
               class="icon-nudge rtl:-scale-x-100"
               aria-hidden="true"
             />
-            Prev
+            {{ t("btn.prev") }}
           </LazyVButton>
         </li>
 
@@ -80,7 +80,7 @@
             :disabled="page >= pageCount"
             @click="go(page + 1)"
           >
-            Next
+            {{ t("btn.Next") }}
             <Icon
               name="lucide:chevron-right"
               size="14"
@@ -101,6 +101,9 @@
 //                 show-per-page scroll-to="#results" />
 //
 // It owns no data. Page numbers collapse to "1 … 4 5 6 … 9" for long ranges.
+
+const { t } = useI18n();
+
 const props = withDefaults(
   defineProps<{
     page: number;

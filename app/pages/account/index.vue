@@ -45,12 +45,15 @@
               title="Welcome to PrintPro"
               description="Your account is ready. Add a delivery address, save products for later, or place your first order for supplies."
             >
-              <LazyVButton variant="primary" @click="openCalibrationModal = true"
-                >Order supplies</LazyVButton
+              <LazyVButton
+                variant="primary"
+                @click="openCalibrationModal = true"
+                >{{ t("btn.order_supplies") }}</LazyVButton
               >
-              <LazyVButton variant="secondary" to="/products"
-                >Browse the catalog</LazyVButton
-              >
+
+              <LazyVButton variant="secondary" to="/products">{{
+                t("btn.browse_the_catalog")
+              }}</LazyVButton>
             </LazyVEmptyState>
 
             <!-- Orders -->
@@ -174,10 +177,12 @@ import type {
   RequisitionOrder,
 } from "~/types/account";
 
+const { t } = useI18n();
+const localePath = useLocalePath();
+
 const cart = useCartStore();
 const docks = useDockStore();
 const money = useMoney();
-const localePath = useLocalePath();
 const { profile, orders: ownOrders } = useAccount();
 
 const operatingMode = ref<OperatingMode>("standard");

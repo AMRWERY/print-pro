@@ -24,8 +24,11 @@
           checkout.
         </p>
       </div>
-      <LazyVButton variant="secondary" icon="lucide:plus" @click="$emit('add')"
-        >Add port</LazyVButton
+      <LazyVButton
+        variant="secondary"
+        icon="lucide:plus"
+        @click="$emit('add')"
+        >{{ t("btn.add_port") }}</LazyVButton
       >
     </header>
 
@@ -38,9 +41,9 @@
       title="No delivery addresses yet"
       description="Add a delivery address so checkout can fill it in for you."
     >
-      <LazyVButton variant="primary" icon="lucide:plus" @click="$emit('add')"
-        >Add your first address</LazyVButton
-      >
+      <LazyVButton variant="primary" icon="lucide:plus" @click="$emit('add')">{{
+        t("btn.add_your_first_address")
+      }}</LazyVButton>
     </LazyVEmptyState>
 
     <TransitionGroup
@@ -97,10 +100,14 @@
             variant="primary"
             icon="lucide:trash-2"
             @click="confirmRemove(dock.id)"
-            >Remove</LazyVButton
+            >{{ t("btn.remove") }}</LazyVButton
           >
-          <LazyVButton size="sm" variant="tertiary" @click="confirming = null"
-            >Keep</LazyVButton
+
+          <LazyVButton
+            size="sm"
+            variant="tertiary"
+            @click="confirming = null"
+            >{{ t("btn.keep") }}</LazyVButton
           >
         </div>
         <div
@@ -112,16 +119,18 @@
             variant="tertiary"
             icon="lucide:pencil"
             @click="$emit('edit', dock)"
-            >Edit</LazyVButton
+            >{{ t("btn.edit") }}</LazyVButton
           >
+
           <LazyVButton
             v-if="!dock.isPrimary"
             size="sm"
             variant="tertiary"
             icon="material-symbols-light:kid-star-outline-sharp"
             @click="$emit('primary', dock)"
-            >Make primary</LazyVButton
+            >{{ t("btn.make_primary") }}</LazyVButton
           >
+
           <LazyVButton
             size="sm"
             variant="tertiary"
@@ -129,7 +138,7 @@
             class="ms-auto"
             :aria-label="`Remove ${dock.name}`"
             @click="confirming = dock.id"
-            >Remove</LazyVButton
+            >{{ t("btn.remove") }}</LazyVButton
           >
         </div>
       </li>
@@ -139,6 +148,8 @@
 
 <script lang="ts" setup>
 import type { ReceivingDock } from "~/types/account";
+
+const { t } = useI18n();
 
 defineProps<{ docks: ReceivingDock[] }>();
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-page page-stack">
-      <v-breadcrumb :items="crumbs" />
+      <LazyVBreadcrumb :items="crumbs" />
 
       <!-- A shared wishlist opened from a link -->
       <div
@@ -14,12 +14,13 @@
           viewing a shared wishlist ({{ items.length }} items).
         </p>
         <div class="flex gap-2">
-          <LazyVButton variant="primary" size="sm" @click="saveShared"
-            >Save to my wishlist</LazyVButton
-          >
-          <LazyVButton variant="secondary" size="sm" @click="closeShared"
-            >Close</LazyVButton
-          >
+          <LazyVButton variant="primary" size="sm" @click="saveShared">{{
+            t("btn.save_to_my_wishlist")
+          }}</LazyVButton>
+
+          <LazyVButton variant="secondary" size="sm" @click="closeShared">{{
+            t("btn.close")
+          }}</LazyVButton>
         </div>
       </div>
 
@@ -49,9 +50,9 @@
         title="Your wishlist is empty"
         description="Tap the heart on any product to save it here. Group items by location, share the list with your team and move everything to the cart when you are ready."
       >
-        <LazyVButton variant="primary" to="/products"
-          >Browse the catalog</LazyVButton
-        >
+        <LazyVButton variant="primary" to="/products">{{
+          t("btn.browse_the_catalog")
+        }}</LazyVButton>
       </LazyVEmptyState>
 
       <template v-else>
@@ -102,7 +103,7 @@
             variant="plain"
             class="text-accent hover:underline"
             @click="category = 'all'"
-            >Show all items</LazyVButton
+            >{{ t("btn.show_all_items") }}</LazyVButton
           >
         </p>
       </template>
@@ -125,8 +126,10 @@ import { findProduct } from "~/data/product-details";
 import { sampleRegistry, wishlistAssurances } from "~/data/wishlist";
 import type { DetailedProduct } from "~/types/product";
 
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+
 const wl = useWishlistStore();
 const cart = useCartStore();
 

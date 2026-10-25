@@ -9,7 +9,7 @@
   </LazyVButton>
 
   <div v-else ref="root" class="relative">
-    <VButton
+    <LazyVButton
       variant="icon"
       class="font-mono text-md font-bold"
       aria-haspopup="menu"
@@ -18,7 +18,7 @@
       @click="open = !open"
     >
       {{ initials }}
-    </VButton>
+    </LazyVButton>
 
     <Transition name="menu">
       <div
@@ -43,7 +43,7 @@
             icon="lucide:user"
             role="menuitem"
             @click="open = false"
-            >Profile</LazyVButton
+            >{{ t("btn.profile") }}</LazyVButton
           >
 
           <LazyVButton
@@ -53,7 +53,7 @@
             icon="lucide:log-out"
             role="menuitem"
             @click="signOut"
-            >Sign out</LazyVButton
+            >{{ t("btn.sign_out") }}</LazyVButton
           >
         </div>
       </div>
@@ -62,6 +62,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const auth = useAuthStore();
 const localePath = useLocalePath();
 

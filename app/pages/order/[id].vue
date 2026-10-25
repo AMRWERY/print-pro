@@ -20,10 +20,13 @@
       title="We can't find that order"
       description="Orders are saved in the browser they were placed in. Open this link on that device, or start a new order."
     >
-      <LazyVButton variant="primary" to="/products"
-        >Browse the catalog</LazyVButton
-      >
-      <LazyVButton variant="secondary" to="/cart">Go to cart</LazyVButton>
+      <LazyVButton variant="primary" to="/products">{{
+        t("btn.browse_the_catalog")
+      }}</LazyVButton>
+      
+      <LazyVButton variant="secondary" to="/cart">{{
+        t("btn.go_to_cart")
+      }}</LazyVButton>
     </LazyVEmptyState>
 
     <template v-else>
@@ -32,12 +35,15 @@
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div class="space-y-6">
           <order-timeline :order="order" />
+
           <order-items :items="order.items" />
+          
           <order-ledger :amounts="order.amounts" :payment="order.payment" />
         </div>
 
         <div class="space-y-6 lg:sticky lg:top-6 lg:self-start">
           <order-consignee :order="order" />
+
           <order-support :order-id="order.id" />
         </div>
       </div>
@@ -46,10 +52,12 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
 const route = useRoute();
 const orders = useOrderStore();
 
 const ready = ref(false);
+
 onMounted(async () => {
   await nextTick(); // let the store read this browser's saved orders
   ready.value = true;

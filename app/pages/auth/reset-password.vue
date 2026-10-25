@@ -27,9 +27,9 @@
           </p>
         </div>
 
-        <LazyVButton variant="primary" to="/auth/forgot-password"
-          >Request a new link</LazyVButton
-        >
+        <LazyVButton variant="primary" to="/auth/forgot-password">{{
+          t("btn.request_a_new_link")
+        }}</LazyVButton>
       </template>
 
       <!-- New password -->
@@ -37,8 +37,7 @@
         <div class="space-y-2">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <p class="eyebrow flex items-center gap-2">
-              <span class="pip" aria-hidden="true" />Password
-              reset
+              <span class="pip" aria-hidden="true" />Password reset
             </p>
             <p
               class="rounded-control border border-line px-2 py-0.5 meta"
@@ -82,11 +81,7 @@
             icon="lucide:shield-check"
           />
 
-          <p
-            v-if="error"
-            class="callout-accent"
-            role="alert"
-          >
+          <p v-if="error" class="callout-accent" role="alert">
             <Icon
               name="lucide:circle-alert"
               size="16"
@@ -103,7 +98,7 @@
             :loading="loading"
             icon-end="lucide:arrow-right"
             icon-end-class="icon-nudge rtl:-scale-x-100"
-            >Update password</LazyVButton
+            >{{ t("btn.update_password") }}</LazyVButton
           >
         </form>
 
@@ -112,7 +107,7 @@
           to="/auth"
           icon="lucide:arrow-left"
           icon-class="rtl:-scale-x-100"
-          >Back to sign in</LazyVButton
+          >{{ t("btn.back_to_sign_in") }}</LazyVButton
         >
       </template>
     </section>
@@ -120,9 +115,11 @@
 </template>
 
 <script lang="ts" setup>
-const auth = useAuthStore();
+const { t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
+
+const auth = useAuthStore();
 
 const token = computed(() =>
   String(

@@ -104,7 +104,7 @@
           class="shrink-0"
           :loading="applying"
           :disabled="!draft.trim()"
-          >Apply</LazyVButton
+          >{{ t("btn.apply") }}</LazyVButton
         >
       </form>
 
@@ -127,7 +127,7 @@
           class="text-xs"
           @click="emit('voucher', '')"
         >
-          Remove
+          {{ t("btn.remove") }}
         </LazyVButton>
       </div>
     </div>
@@ -140,8 +140,9 @@
         :disabled="!totals.units"
         @click="emit('checkout')"
       >
-        <Icon name="lucide:lock" size="16" aria-hidden="true" />Secure
-        checkout
+        <Icon name="lucide:lock" size="16" aria-hidden="true" />{{
+          t("btn.secure_checkout")
+        }}
         <Icon
           name="lucide:arrow-right"
           size="16"
@@ -157,7 +158,7 @@
         :disabled="!totals.units"
       >
         <Icon name="lucide:smartphone" size="14" aria-hidden="true" />Pay with
-        Vodafone Cash / Instapay
+        {{ t("btn.vodafone_cash_instapay") }}
       </LazyVButton>
 
       <p
@@ -177,7 +178,7 @@
           size="14"
           class="rtl:-scale-x-100"
           aria-hidden="true"
-        />Continue exploring equipment catalog</LazyVButton
+        />{{ t("btn.continue_exploring_equipment_catalog") }}</LazyVButton
       >
     </div>
 
@@ -201,6 +202,8 @@
 <script lang="ts" setup>
 import { cartAssurances, pricing, vouchers } from "~/data/cart";
 import type { useCartTotals } from "~/composables/useCartTotals";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   totals: ReturnType<typeof useCartTotals>;

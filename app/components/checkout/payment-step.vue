@@ -1,10 +1,7 @@
 <template>
   <LazyVStepper :n="3" title="Payment" :summary="summary">
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
-      <p
-        class="callout"
-        role="note"
-      >
+      <p class="callout" role="note">
         <Icon
           name="lucide:info"
           size="14"
@@ -46,7 +43,9 @@
           name="cardName"
           label="Name on card"
           required
-          :rules="requiredText('Enter the name exactly as printed on the card.')"
+          :rules="
+            requiredText('Enter the name exactly as printed on the card.')
+          "
           autocomplete="cc-name"
         />
         <LazyVInput
@@ -115,7 +114,9 @@
             :icon="copied ? 'lucide:check' : 'lucide:copy'"
             @click="copy(VODAFONE_CASH_NUMBER)"
           >
-            <span aria-live="polite">{{ copied ? "Copied" : "Copy number" }}</span>
+            <span aria-live="polite">{{
+              copied ? t("btn.copied") : t("btn.copy_number")
+            }}</span>
           </LazyVButton>
         </div>
 
@@ -145,7 +146,9 @@
             </ol>
             <p class="text-xs">
               Or send to
-              <span dir="ltr" class="font-mono text-paper">{{ INSTAPAY_ADDRESS }}</span>
+              <span dir="ltr" class="font-mono text-paper">{{
+                INSTAPAY_ADDRESS
+              }}</span>
             </p>
           </div>
         </div>
@@ -157,11 +160,14 @@
         </p>
       </div>
 
-      <LazyVButton variant="primary" size="lg" block
+      <LazyVButton
+        variant="primary"
+        size="lg"
+        block
         type="submit"
         class="sm:w-auto sm:min-w-56"
       >
-        Review order
+        {{ t("btn.review_order") }}
         <Icon
           name="lucide:arrow-right"
           size="16"
@@ -177,11 +183,14 @@
 import { useQRCode } from "@vueuse/integrations/useQRCode";
 import { paymentMethods } from "~/data/checkout";
 
+const { t } = useI18n();
+
 const instapayQr = useQRCode(INSTAPAY_QR_PAYLOAD, {
   width: 352,
   margin: 0,
   errorCorrectionLevel: "M",
 });
+
 const { copy, copied } = useClipboard({ copiedDuring: 2000 });
 
 const state = useCheckoutState();

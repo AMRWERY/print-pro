@@ -16,7 +16,7 @@
             class="icon-bob"
             aria-hidden="true"
           />
-          Download all
+          {{ t("btn.download_all") }}
         </LazyVButton>
       </section-heading>
 
@@ -35,9 +35,7 @@
             </span>
             <span class="min-w-0">
               <span class="label">{{ d.title }}</span>
-              <span class="block meta">{{
-                d.meta
-              }}</span>
+              <span class="block meta">{{ d.meta }}</span>
               <span
                 class="mt-1 inline-flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
               >
@@ -59,6 +57,8 @@
 
 <script lang="ts" setup>
 import type { DocumentLink } from "~/types/product";
+
+const { t } = useI18n();
 
 defineProps<{ items: DocumentLink[] }>();
 </script>

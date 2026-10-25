@@ -8,10 +8,7 @@
         aria-modal="true"
         aria-label="Filter products"
       >
-        <div
-          class="modal-backdrop"
-          @click="emit('close')"
-        />
+        <div class="modal-backdrop" @click="emit('close')" />
         <div
           class="sheet-panel absolute inset-x-0 bottom-0 flex max-h-[88vh] flex-col rounded-t-panel border-t border-line bg-surface"
         >
@@ -19,8 +16,8 @@
             class="flex items-center justify-between border-b border-line px-4 py-3"
           >
             <h2 class="font-display text-xl">Filters</h2>
-            <LazyVButton variant="icon"
-             
+            <LazyVButton
+              variant="icon"
               aria-label="Close filters"
               @click="emit('close')"
             >
@@ -31,16 +28,17 @@
             <catalog-filters />
           </div>
           <div class="grid grid-cols-[auto_1fr] gap-2 border-t border-line p-4">
-            <LazyVButton variant="secondary"
-             
+            <LazyVButton
+              variant="secondary"
               :disabled="!catalog.chips.length"
               @click="catalog.reset()"
             >
-              Reset
+              {{ t("btn.reset") }}
             </LazyVButton>
+
             <LazyVButton variant="primary" @click="emit('close')">
-              Show {{ catalog.total }}
-              {{ catalog.total === 1 ? "result" : "results" }}
+              {{ t("btn.show") }} {{ catalog.total }}
+              {{ catalog.total === 1 ? t("btn.result") : t("btn.results") }}
             </LazyVButton>
           </div>
         </div>
@@ -50,6 +48,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const props = defineProps<{ open: boolean }>();
 
 const emit = defineEmits<{ close: [] }>();

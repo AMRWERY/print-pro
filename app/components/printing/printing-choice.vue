@@ -44,9 +44,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { PrintOption } from "~/types/printing";
+
 // Option cards that behave like a radio group (one value) or a checkbox group (many values).
 // Arrow keys move through a radio group, as users expect.
-import type { PrintOption } from "~/types/printing";
 
 const props = withDefaults(
   defineProps<{

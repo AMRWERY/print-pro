@@ -2,30 +2,32 @@
   <div class="space-y-3">
     <div class="grid grid-cols-2 gap-2">
       <LazyVInput
-          v-model="catalog.filters.priceMin"
-          type="number"
-          name="priceMin"
-          label="Min ($)"
-          label-class="eyebrow mb-1 block"
-          inputmode="numeric"
-          min="0"
-          placeholder="0"
-          input-class="font-mono"
-        />
+        v-model="catalog.filters.priceMin"
+        type="number"
+        name="priceMin"
+        label="Min ($)"
+        label-class="eyebrow mb-1 block"
+        inputmode="numeric"
+        min="0"
+        placeholder="0"
+        input-class="font-mono"
+      />
+
       <LazyVInput
-          v-model="catalog.filters.priceMax"
-          type="number"
-          name="priceMax"
-          label="Max ($)"
-          label-class="eyebrow mb-1 block"
-          inputmode="numeric"
-          min="0"
-          placeholder="Any"
-          input-class="font-mono"
-        />
+        v-model="catalog.filters.priceMax"
+        type="number"
+        name="priceMax"
+        label="Max ($)"
+        label-class="eyebrow mb-1 block"
+        inputmode="numeric"
+        min="0"
+        placeholder="Any"
+        input-class="font-mono"
+      />
     </div>
     <div class="grid grid-cols-2 gap-2">
-      <LazyVButton variant="plain"
+      <LazyVButton
+        variant="plain"
         v-for="p in pricePresets"
         :key="p.label"
         class="rounded-control border px-2 py-1.5 font-mono text-xs transition duration-200"

@@ -8,7 +8,7 @@
         class="link-accent"
         @click="catalog.reset()"
       >
-        Reset
+        {{ t("btn.reset") }}
       </LazyVButton>
     </div>
 
@@ -37,11 +37,7 @@
       />
     </filter-group>
 
-    <filter-group
-      v-for="g in catalog.attrGroups"
-      :key="g.key"
-      :title="g.label"
-    >
+    <filter-group v-for="g in catalog.attrGroups" :key="g.key" :title="g.label">
       <filter-option
         v-for="o in g.options"
         :key="o.value"
@@ -67,7 +63,11 @@
         :aria-expanded="showAllBrands"
         @click="showAllBrands = !showAllBrands"
       >
-        {{ showAllBrands ? "Show fewer" : `Show all ${catalog.brands.length}` }}
+        {{
+          showAllBrands
+            ? t("btn.show_fewer")
+            : `${t("btn.show_all")} ${catalog.brands.length}`
+        }}
       </LazyVButton>
     </filter-group>
 
@@ -114,7 +114,7 @@
           class="meta tracking-wider hover:text-paper"
           @click="catalog.filters.minRating = null"
         >
-          Any rating
+          {{ t("btn.any_rating") }}
         </LazyVButton>
       </div>
     </filter-group>
@@ -136,6 +136,8 @@
 
 <script lang="ts" setup>
 import { ratingOptions } from "~/data/catalog";
+
+const { t } = useI18n();
 
 const catalog = useCatalog();
 

@@ -4,7 +4,9 @@
   >
     <li v-for="(f, i) in items" :key="f.q" v-reveal="{ delay: i * 60 }">
       <h3>
-        <LazyVButton variant="plain" block
+        <LazyVButton
+          variant="plain"
+          block
           class="flex items-center justify-between gap-4 p-4 text-start text-sm font-medium transition-colors duration-200 hover:bg-raised sm:text-base"
           :aria-expanded="openIndex === i"
           :aria-controls="`${uid}-${i}`"

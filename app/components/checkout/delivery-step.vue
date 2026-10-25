@@ -21,9 +21,7 @@
             <span class="min-w-0 flex-1">
               <span class="label">{{ o.label }}</span>
               <span class="block text-xs text-mute">{{ o.note }}</span>
-              <span class="mt-1 block meta">{{
-                eta(o.days)
-              }}</span>
+              <span class="mt-1 block meta">{{ eta(o.days) }}</span>
             </span>
             <span
               class="shrink-0 font-mono text-sm"
@@ -47,11 +45,14 @@
         input-class="resize-y"
       />
 
-      <LazyVButton variant="primary" size="lg" block
+      <LazyVButton
+        variant="primary"
+        size="lg"
+        block
         type="submit"
         class="sm:w-auto sm:min-w-56"
       >
-        Continue to payment
+        {{ t("btn.continue_to_payment") }}
         <Icon
           name="lucide:arrow-right"
           size="16"
@@ -65,6 +66,8 @@
 
 <script lang="ts" setup>
 import { deliveryOptions } from "~/data/checkout";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   prices: Record<"crated" | "express" | "pickup", number>;

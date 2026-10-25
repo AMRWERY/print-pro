@@ -25,7 +25,7 @@
         </div>
       </div>
       <LazyVButton variant="primary" to="/services/trade-in">
-        See how trade-in works
+        {{ t("btn.see_how_trade_in_works") }}
         <Icon
           name="lucide:arrow-right"
           size="16"
@@ -38,5 +38,5 @@
 </template>
 
 <script lang="ts" setup>
-
+const { t } = useI18n();
 </script>

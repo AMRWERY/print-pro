@@ -3,15 +3,12 @@
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div class="space-y-3">
         <p class="eyebrow-accent">
-          <span class="pip" aria-hidden="true" />Wishlist ·
-          saved products
+          <span class="pip" aria-hidden="true" />Wishlist · saved products
         </p>
-        <h1 class="max-w-3xl text-4xl sm:text-5xl">
-          Your wishlist
-        </h1>
+        <h1 class="max-w-3xl text-4xl sm:text-5xl">Your wishlist</h1>
         <p class="max-w-2xl text-sm text-mute sm:text-base">
-          Printers, photocopiers and supplies you saved for later. Group them
-          by location, share the list with your team and move everything to the
+          Printers, photocopiers and supplies you saved for later. Group them by
+          location, share the list with your team and move everything to the
           cart when you are ready.
         </p>
       </div>
@@ -60,9 +57,7 @@
         <dd class="mt-1 font-display text-2xl">
           {{ ready }} / {{ count }} <span class="text-base">Ready</span>
         </dd>
-        <dd class="meta">
-          {{ ready }}/{{ count }} items in stock
-        </dd>
+        <dd class="meta">{{ ready }}/{{ count }} items in stock</dd>
       </div>
     </dl>
 
@@ -78,7 +73,7 @@
           class="icon-bob"
           aria-hidden="true"
         />
-        Move selected to cart ({{ selectedCount }})
+        {{ t("btn.move_selected_to_cart") }} ({{ selectedCount }})
       </LazyVButton>
 
       <LazyVButton
@@ -93,7 +88,7 @@
           :class="copied && 'animate-icon-pop'"
           aria-hidden="true"
         />
-        {{ copied ? "Link copied" : "Share wishlist" }}
+        {{ copied ? t("btn.link_copied") : t("btn.share_wishlist") }}
       </LazyVButton>
 
       <LazyVButton
@@ -111,11 +106,10 @@
       >
         Clear this registry and start over?
         <LazyVButton variant="primary" size="sm" @click="startNew">
-          Yes, clear
+          {{ t("btn.yes_clear") }}
         </LazyVButton>
 
         <LazyVButton variant="secondary" size="sm" @click="confirmNew = false">
-          Cancel
         </LazyVButton>
       </span>
     </div>
@@ -123,6 +117,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const props = defineProps<{
   name: string;
   count: number;
@@ -143,6 +139,7 @@ const emit = defineEmits<{
 }>();
 
 const money = useMoney();
+
 const confirmNew = ref(false);
 const startNew = () => {
   confirmNew.value = false;

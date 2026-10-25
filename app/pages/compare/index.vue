@@ -66,9 +66,9 @@
         title="Nothing to compare yet"
         description="Use the compare button on any product card, or load one of the ready-made comparisons below."
       >
-        <LazyVButton variant="primary" to="/products"
-          >Browse the catalog</LazyVButton
-        >
+        <LazyVButton variant="primary" to="/products">{{
+          t("btn.browse_the_catalog")
+        }}</LazyVButton>
       </LazyVEmptyState>
     </div>
 
@@ -77,16 +77,16 @@
 </template>
 
 <script lang="ts" setup>
-// Named presetList so <compare-presets> resolves to the component, not this array.
 import { comparePresets as presetList, MAX_COMPARE } from "~/data/compare";
 import { findProduct } from "~/data/product-details";
 
-const categoryOf = (id: string) =>
-  (findProduct(id) as { category?: string } | undefined)?.category;
-
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const store = useCompareStore();
+
+const categoryOf = (id: string) =>
+  (findProduct(id) as { category?: string } | undefined)?.category;
 
 const crumbs = [
   { label: "Index", to: "/" },

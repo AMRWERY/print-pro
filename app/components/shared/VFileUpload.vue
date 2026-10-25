@@ -44,7 +44,7 @@
         :disabled="disabled"
         :loading="loading"
         @click.stop="open()"
-        >{{ buttonLabel }}</LazyVButton
+        >{{ buttonLabel ?? t("btn.select_local_file") }}</LazyVButton
       >
 
       <p v-if="limits" class="mt-3 font-mono text-1xs tracking-wider text-mute">
@@ -129,6 +129,8 @@
  * - Keyboard: Tab to the "Select" button and press Enter; clicking anywhere in the zone also opens the dialog.
  */
 
+const { t } = useI18n();
+
 const props = withDefaults(
   defineProps<{
     /** Controlled list of picked files (use with `list`). */
@@ -157,7 +159,6 @@ const props = withDefaults(
   {
     title: "Drag files here",
     dropTitle: "Drop to upload",
-    buttonLabel: "Select local file",
     icon: "lucide:cloud-upload",
   },
 );

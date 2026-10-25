@@ -1,14 +1,16 @@
 <template>
   <section class="card" aria-labelledby="saved-title">
     <h2 id="saved-title">
-      <LazyVButton variant="plain" block
+      <LazyVButton
+        variant="plain"
+        block
         class="flex items-center justify-between gap-3 p-4 text-start"
         :aria-expanded="open"
         :aria-controls="`${uid}-list`"
         @click="open = !open"
       >
         <span class="eyebrow !text-paper"
-          >Saved for later ({{ items.length }}
+          >{{ t("btn.saved_for_later") }} ({{ items.length }}
           {{ items.length === 1 ? "item" : "items" }})</span
         >
         <Icon
@@ -58,18 +60,21 @@
                 {{ money.format(p.price) }}
               </p>
             </div>
-            <LazyVButton variant="secondary" size="sm"
-             
+            <LazyVButton
+              variant="secondary"
+              size="sm"
               @click="emit('restore', p)"
             >
               <Icon
                 name="lucide:corner-up-left"
                 size="14"
                 aria-hidden="true"
-              />Move to cart
+              />{{ t("btn.move_to_cart") }}
             </LazyVButton>
-            <LazyVButton variant="icon" size="sm"
-             
+
+            <LazyVButton
+              variant="icon"
+              size="sm"
               :aria-label="`Remove ${p.name} from saved items`"
               @click="emit('remove', p.id)"
             >
@@ -84,6 +89,8 @@
 
 <script lang="ts" setup>
 import type { DetailedProduct } from "~/types/product";
+
+const { t } = useI18n();
 
 defineProps<{ items: DetailedProduct[] }>();
 

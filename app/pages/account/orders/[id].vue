@@ -2,7 +2,12 @@
   <div class="space-y-6">
     <LazyVBreadcrumb :items="crumbs" />
 
-    <div v-if="!order && pending" class="space-y-4" aria-busy="true" aria-label="Loading your order">
+    <div
+      v-if="!order && pending"
+      class="space-y-4"
+      aria-busy="true"
+      aria-label="Loading your order"
+    >
       <LazyVSkeletonLoader class="h-24" />
       <LazyVSkeletonLoader class="h-56" />
     </div>
@@ -10,14 +15,8 @@
     <template v-else-if="order">
       <header class="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p class="meta">
-            Placed {{ orderDateLabel(order) }}
-          </p>
-          <h1
-            class="title-lg"
-          >
-            Order {{ order.id }}
-          </h1>
+          <p class="meta">Placed {{ orderDateLabel(order) }}</p>
+          <h1 class="title-lg">Order {{ order.id }}</h1>
           <p class="mt-1 max-w-2xl text-sm text-mute">{{ order.title }}</p>
         </div>
 
@@ -46,18 +45,19 @@
       title="We couldn't find that order"
       description="It may belong to a different account, or the number may be mistyped."
     >
-      <LazyVButton variant="primary" to="/account/orders"
-        >Back to orders</LazyVButton
-      >
+      <LazyVButton variant="primary" to="/account/orders">{{
+        t("btn.back_to_orders")
+      }}</LazyVButton>
     </LazyVEmptyState>
-
   </div>
 </template>
 
 <script lang="ts" setup>
 import { allProducts } from "~/data/product-details";
 
+const { t } = useI18n();
 const route = useRoute();
+
 const cart = useCartStore();
 const { findOrder, pending } = useAccount();
 

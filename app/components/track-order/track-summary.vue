@@ -31,7 +31,7 @@
             size="sm"
             icon="lucide:file-text"
             @click="print"
-            >Print delivery note</LazyVButton
+            >{{ t("btn.print_delivery_note") }}</LazyVButton
           >
 
           <LazyVButton
@@ -39,7 +39,9 @@
             size="sm"
             :icon="copied ? 'lucide:check' : 'lucide:link'"
             @click="copyLink"
-            >{{ copied ? "Link copied" : "Copy tracking link" }}</LazyVButton
+            >{{
+              copied ? t("btn.link_copied") : t("btn.copy_tracking_link")
+            }}</LazyVButton
           >
         </div>
       </div>
@@ -82,6 +84,8 @@
 import { countryName, estimatedHandover, formatWhen } from "~/data/order";
 import type { TrackState } from "~/data/tracking";
 import type { Order } from "~/types/order";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   order: Order;

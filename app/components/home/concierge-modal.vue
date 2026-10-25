@@ -37,8 +37,8 @@
             @submit.prevent="submitBooking"
           >
             <p class="text-sm text-mute">
-              A technician walks you through choosing a machine, supplies or a print
-              job in a private 30-minute video session.
+              A technician walks you through choosing a machine, supplies or a
+              print job in a private 30-minute video session.
             </p>
 
             <LazyVSelectInput
@@ -103,12 +103,15 @@
             />
 
             <div class="flex items-center justify-end gap-3 pt-2">
-              <LazyVButton variant="tertiary" @click="$emit('close')"
-                >Cancel</LazyVButton
-              >
+              <LazyVButton variant="tertiary" @click="$emit('close')">{{
+                t("btn.cancel")
+              }}</LazyVButton>
 
-              <LazyVButton type="submit" variant="primary" :loading="submitting"
-                >Confirm session</LazyVButton
+              <LazyVButton
+                type="submit"
+                variant="primary"
+                :loading="submitting"
+                >{{ t("btn.confirm_session") }}</LazyVButton
               >
             </div>
           </form>
@@ -119,6 +122,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const toast = useToast();
 const auth = useAuthStore();
 

@@ -33,13 +33,14 @@
         </p>
       </div>
 
-      <LazyVButton variant="tertiary"
+      <LazyVButton
+        variant="tertiary"
         v-if="done && !current"
         class="text-sm underline-offset-4 hover:underline"
         :aria-label="`Edit ${title}`"
         @click="state.edit(n)"
       >
-        Edit
+        {{ t("btn.edit") }}
       </LazyVButton>
     </header>
 
@@ -57,11 +58,13 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
 const props = defineProps<{ n: number; title: string; summary?: string }>();
 
 const state = useCheckoutState();
 const uid = useId();
 
 const current = computed(() => state.step === props.n);
+
 const done = computed(() => state.completed.includes(props.n));
 </script>

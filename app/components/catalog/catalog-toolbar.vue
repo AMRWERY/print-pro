@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-wrap items-center justify-between gap-3">
-    <LazyVButton variant="secondary"
+    <LazyVButton
+      variant="secondary"
       class="h-10 !px-3 lg:hidden"
       aria-haspopup="dialog"
       @click="emit('open-filters')"
@@ -11,7 +12,7 @@
         class="icon-wiggle"
         aria-hidden="true"
       />
-      Filters
+      {{ t("btn.filters") }}
       <span
         v-if="catalog.chips.length"
         class="grid h-5 min-w-5 place-items-center rounded-full bg-accent px-1 font-mono text-xs font-bold text-onaccent"
@@ -33,11 +34,15 @@
 </template>
 
 <script lang="ts" setup>
-import { perPageOptions } from "~/data/catalog";
+const { t } = useI18n();
 
 const emit = defineEmits<{ "open-filters": [] }>();
 
 const catalog = useCatalog();
-const sortOptions = computed(() => catalog.sortOptions.map((s) => ({ value: s.key, label: s.label })));
+
+const sortOptions = computed(() =>
+  catalog.sortOptions.map((s) => ({ value: s.key, label: s.label })),
+);
+
 const uid = useId();
 </script>

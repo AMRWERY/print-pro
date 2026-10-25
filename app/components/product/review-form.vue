@@ -11,10 +11,7 @@
       <legend class="text-sm font-medium">
         Your rating <span class="text-accent" aria-hidden="true">*</span>
       </legend>
-      <div
-        class="flex w-fit gap-0.5"
-        @mouseleave="hovered = 0"
-      >
+      <div class="flex w-fit gap-0.5" @mouseleave="hovered = 0">
         <label
           v-for="n in 5"
           :key="n"
@@ -33,13 +30,15 @@
             @change="ratingError = ''"
           />
           <Icon
-            :name="n <= (hovered || rating) ? 'material-symbols-light:kid-star-sharp' : 'material-symbols-light:kid-star-outline-sharp'"
+            :name="
+              n <= (hovered || rating)
+                ? 'material-symbols-light:kid-star-sharp'
+                : 'material-symbols-light:kid-star-outline-sharp'
+            "
             size="28"
             class="transition-transform duration-150 motion-reduce:transition-none"
             :class="
-              n <= (hovered || rating)
-                ? 'scale-110 text-yellow'
-                : 'text-mute'
+              n <= (hovered || rating) ? 'scale-110 text-yellow' : 'text-mute'
             "
             aria-hidden="true"
           />
@@ -95,13 +94,18 @@
     />
 
     <div class="flex justify-end">
-      <LazyVButton type="submit" :loading="saving">Submit review</LazyVButton>
+      <LazyVButton type="submit" :loading="saving">{{
+        t("btn.submit_review")
+      }}</LazyVButton>
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const props = defineProps<{ productId: string }>();
+
 const emit = defineEmits<{ submitted: [] }>();
 
 const store = useReviewStore();
@@ -131,9 +135,7 @@ const submit = async () => {
   const result = await validate();
   if (!result.valid || ratingError.value) {
     await nextTick();
-    document
-      .querySelector<HTMLElement>('[aria-invalid="true"]')
-      ?.focus();
+    document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
     return;
   }
 

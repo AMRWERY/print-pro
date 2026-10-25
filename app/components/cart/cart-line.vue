@@ -4,7 +4,7 @@
     :class="!selected && 'opacity-70'"
   >
     <div class="flex items-start gap-3 sm:contents">
-      <LazyVCheckboxImput
+      <LazyVCheckboxInput
         :model-value="selected"
         :label="'Select ' + product.name"
         hide-label
@@ -91,7 +91,8 @@
       <div
         class="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-3 text-sm"
       >
-        <LazyVButton variant="tertiary"
+        <LazyVButton
+          variant="tertiary"
           class="inline-flex items-center gap-1.5"
           :aria-pressed="inRegistry"
           @click="emit('registry')"
@@ -103,22 +104,26 @@
             :class="inRegistry && 'animate-icon-pop fill-accent text-accent'"
             aria-hidden="true"
           />
-          {{ inRegistry ? "In registry" : "Save for registry" }}
+          {{ inRegistry ? t("btn.in_registry") : t("btn.save_for_registry") }}
         </LazyVButton>
 
-        <LazyVButton variant="tertiary"
+        <LazyVButton
+          variant="tertiary"
           class="inline-flex items-center gap-1.5"
           @click="emit('later')"
         >
           <Icon name="lucide:clock" size="14" aria-hidden="true" />Save for
-          later
+          {{ t("btn.later") }}
         </LazyVButton>
 
-        <LazyVButton variant="tertiary"
+        <LazyVButton
+          variant="tertiary"
           class="inline-flex items-center gap-1.5 hover:!text-accent"
           @click="emit('remove')"
         >
-          <Icon name="lucide:trash-2" size="14" aria-hidden="true" />De-allocate
+          <Icon name="lucide:trash-2" size="14" aria-hidden="true" />{{
+            t("btn.de_allocate")
+          }}
         </LazyVButton>
       </div>
     </div>
@@ -127,6 +132,8 @@
 
 <script lang="ts" setup>
 import type { CartEntry } from "~/composables/useCartTotals";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   entry: CartEntry;

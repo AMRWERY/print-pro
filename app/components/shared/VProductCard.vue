@@ -34,13 +34,15 @@
       />
 
       <div class="absolute end-3 top-3 z-10 flex flex-col gap-2">
-        <LazyVButton variant="icon" size="sm"
+        <LazyVButton
+          variant="icon"
+          size="sm"
           class="bg-ink/70 backdrop-blur"
           :aria-pressed="wished"
           :aria-label="
             wished
-              ? `Remove ${product.name} from wishlist`
-              : `Add ${product.name} to wishlist`
+              ? `${t('btn.remove')} ${product.name} ${t('btn.from_wishlist')}`
+              : `${t('btn.add')} ${product.name} ${t('btn.to_wishlist')}`
           "
           @click="wishlist.toggle(product.id)"
         >
@@ -52,15 +54,18 @@
             aria-hidden="true"
           />
         </LazyVButton>
-        <LazyVButton variant="icon" size="sm"
+
+        <LazyVButton
+          variant="icon"
+          size="sm"
           class="bg-ink/70 backdrop-blur"
           :aria-pressed="compared"
           :aria-label="
             compared
-              ? `Remove ${product.name} from comparison`
+              ? `${t('btn.remove')} ${product.name} ${t('btn.from_comparison')}`
               : compare.full
-                ? 'Comparison is full (4 products)'
-                : `Compare ${product.name}`
+                ? `${t('btn.comparison_is_full')} (4 ${t('btn.products')})`
+                : `${t('btn.compare')} ${product.name}`
           "
           :disabled="!compared && compare.full"
           @click="compare.toggle(product.id)"
@@ -120,7 +125,8 @@
           </p>
         </div>
         <div class="relative z-10 flex min-w-[9rem] grow items-center gap-2">
-          <LazyVButton variant="primary"
+          <LazyVButton
+            variant="primary"
             class="w-full whitespace-nowrap"
             :disabled="added"
             @click="acquire"
@@ -132,7 +138,9 @@
               :class="added ? 'animate-icon-pop' : 'icon-bob'"
               aria-hidden="true"
             />
-            <span aria-live="polite">{{ added ? "Added" : "Add to cart" }}</span>
+            <span aria-live="polite">{{
+              added ? t("btn.added") : t("btn.add_to_cart")
+            }}</span>
           </LazyVButton>
         </div>
       </div>
@@ -142,6 +150,8 @@
 
 <script lang="ts" setup>
 import type { Product } from "~/data/home";
+
+const { t } = useI18n();
 
 const props = defineProps<{ product: Product }>();
 const money = useMoney();
@@ -161,6 +171,7 @@ const { start } = useTimeoutFn(
   1800,
   { immediate: false },
 );
+
 const acquire = async () => {
   await simulateRequest();
   cart.add(props.product.id, props.product.price);

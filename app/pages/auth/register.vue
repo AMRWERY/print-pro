@@ -36,8 +36,7 @@
           Create your account
         </h1>
         <p class="text-sm text-mute">
-          Create an account to save products, place orders and track
-          delivery.
+          Create an account to save products, place orders and track delivery.
         </p>
       </div>
 
@@ -46,7 +45,7 @@
           <legend class="eyebrow mb-3 sm:col-span-2">
             01 · Identity &amp; organisation
           </legend>
-          
+
           <LazyVInput
             v-model="form.name"
             name="name"
@@ -134,29 +133,25 @@
 
         <fieldset class="space-y-3">
           <legend class="eyebrow mb-1">03 · Agreements</legend>
-          <LazyVCheckboxImput
+          <LazyVCheckboxInput
             v-model="form.terms"
             name="terms"
             :rules="mustAccept('Accept the terms to create your account.')"
           >
             I agree to the
-            <LazyVButton variant="tertiary" to="/" class="!text-accent"
-              >terms of sale</LazyVButton
-            >
+            <LazyVButton variant="tertiary" to="/" class="!text-accent">{{
+              t("btn.terms_of_sale")
+            }}</LazyVButton>
             and the delivery and returns conditions.
-          </LazyVCheckboxImput>
+          </LazyVCheckboxInput>
 
-          <LazyVCheckboxImput v-model="form.newsletter">
+          <LazyVCheckboxInput v-model="form.newsletter">
             Send me the monthly newsletter with offers and new arrivals
             <span class="text-mute">(optional)</span>.
-          </LazyVCheckboxImput>
+          </LazyVCheckboxInput>
         </fieldset>
 
-        <p
-          v-if="error"
-          class="callout-accent"
-          role="alert"
-        >
+        <p v-if="error" class="callout-accent" role="alert">
           <Icon
             name="lucide:circle-alert"
             size="16"
@@ -170,7 +165,7 @@
               variant="tertiary"
               to="/auth"
               class="!text-accent"
-              >Sign in instead</LazyVButton
+              >{{ t("btn.sign_in_instead") }}</LazyVButton
             ></span
           >
         </p>
@@ -183,21 +178,18 @@
           :loading="loading"
           icon-end="lucide:arrow-right"
           icon-end-class="icon-nudge rtl:-scale-x-100"
-          >Create account</LazyVButton
+          >{{ t("btn.create_account") }}</LazyVButton
         >
       </form>
 
       <p class="text-center text-sm text-mute">
         Already have an account?
-        <LazyVButton variant="tertiary" to="/auth" class="!text-accent"
-          >Sign in</LazyVButton
-        >
+        <LazyVButton variant="tertiary" to="/auth" class="!text-accent">{{
+          t("btn.sign_in")
+        }}</LazyVButton>
       </p>
 
-      <p
-        class="callout"
-        role="note"
-      >
+      <p class="callout" role="note">
         <Icon
           name="lucide:info"
           size="14"
@@ -215,8 +207,10 @@
 import { tiers } from "~/data/auth";
 import type { Tier } from "~/types/auth";
 
-const auth = useAuthStore();
+const { t } = useI18n();
 const localePath = useLocalePath();
+
+const auth = useAuthStore();
 
 const form = reactive({
   name: "",

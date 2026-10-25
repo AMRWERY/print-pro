@@ -3,7 +3,8 @@
     class="relative flex flex-col gap-3 border-s border-line p-4"
     role="columnheader"
   >
-    <LazyVButton variant="icon"
+    <LazyVButton
+      variant="icon"
       class="absolute end-3 top-3 z-10 h-8 w-8 bg-ink/70 backdrop-blur"
       :aria-label="`Remove ${product.name} from comparison`"
       @click="emit('remove')"
@@ -80,10 +81,7 @@
     </ul>
 
     <div class="mt-auto space-y-2 pt-1">
-      <LazyVButton variant="primary" block
-        :disabled="added"
-        @click="acquire"
-      >
+      <LazyVButton variant="primary" block :disabled="added" @click="acquire">
         <Icon
           :key="`a-${added}`"
           :name="added ? 'lucide:check' : 'lucide:shopping-bag'"
@@ -91,12 +89,12 @@
           :class="added ? 'animate-icon-pop' : 'icon-bob'"
           aria-hidden="true"
         />
-        {{ added ? "Added" : profile.primary }}
+        {{ added ? t("btn.added") : t(profile.primary) }}
       </LazyVButton>
 
-      <LazyVButton variant="secondary" block
-        :to="`/product/${product.id}`"
-        >{{ profile.secondary }}</LazyVButton>
+      <LazyVButton variant="secondary" block :to="`/product/${product.id}`">{{
+        t(profile.secondary)
+      }}</LazyVButton>
     </div>
   </div>
 </template>
@@ -104,6 +102,8 @@
 <script lang="ts" setup>
 import { compareData } from "~/data/compare";
 import type { DetailedProduct } from "~/types/product";
+
+const { t } = useI18n();
 
 const props = defineProps<{ product: DetailedProduct }>();
 
@@ -118,8 +118,8 @@ const profile = computed(
       origin: props.product.brand,
       bench: undefined,
       highlights: props.product.specs,
-      primary: "Add to cart",
-      secondary: "View details",
+      primary: t("btn.add_to_cart"),
+      secondary: t("btn.view_details"),
     },
 );
 

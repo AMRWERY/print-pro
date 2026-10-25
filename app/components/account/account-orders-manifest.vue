@@ -1,14 +1,21 @@
 <template>
   <section class="card-roomy" aria-labelledby="orders-manifest-title">
     <!-- Header with controls -->
-    <header class="flex flex-col gap-4 border-b border-line pb-4 sm:flex-row sm:items-center sm:justify-between">
+    <header
+      class="flex flex-col gap-4 border-b border-line pb-4 sm:flex-row sm:items-center sm:justify-between"
+    >
       <div>
         <div class="flex items-center gap-2">
           <span class="pip rounded-full" aria-hidden="true" />
-          <h2 id="orders-manifest-title" class="font-display text-lg font-bold text-paper sm:text-xl">
+          <h2
+            id="orders-manifest-title"
+            class="font-display text-lg font-bold text-paper sm:text-xl"
+          >
             Recent orders
           </h2>
-          <span class="rounded-full bg-raised px-2 py-0.5 font-mono text-1xs text-mute">
+          <span
+            class="rounded-full bg-raised px-2 py-0.5 font-mono text-1xs text-mute"
+          >
             {{ orders.length }} Active
           </span>
         </div>
@@ -20,34 +27,48 @@
       <!-- Action buttons -->
       <div class="flex flex-wrap items-center gap-2">
         <div class="relative min-w-36">
-          <LazyVInput v-model="searchQuery" name="manifest-search" type="search" label="Filter orders" hide-label placeholder="Filter by order #" />
+          <LazyVInput
+            v-model="searchQuery"
+            name="manifest-search"
+            type="search"
+            label="Filter orders"
+            hide-label
+            placeholder="Filter by order #"
+          />
         </div>
 
-        <LazyVButton variant="plain"
-          class="chip-link"
-          @click="exportLedger">
+        <LazyVButton variant="plain" class="chip-link" @click="exportLedger">
           <Icon name="lucide:download" size="13" aria-hidden="true" />
-          <span>EXPORT CSV</span>
+          <span>{{ t("btn.export_csv") }}</span>
         </LazyVButton>
       </div>
     </header>
 
     <!-- Orders list -->
     <div class="mt-4 space-y-4">
-      <article v-for="order in filteredOrders" :key="order.id"
-        class="rounded-card border border-line bg-ink/30 p-4 transition duration-200 hover:border-accent/30">
+      <article
+        v-for="order in filteredOrders"
+        :key="order.id"
+        class="rounded-card border border-line bg-ink/30 p-4 transition duration-200 hover:border-accent/30"
+      >
         <!-- Top order info bar -->
-        <div class="flex flex-wrap items-start justify-between gap-3 border-b border-line/60 pb-3">
+        <div
+          class="flex flex-wrap items-start justify-between gap-3 border-b border-line/60 pb-3"
+        >
           <div class="space-y-1">
             <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
               <span class="font-bold text-accent">{{ order.id }}</span>
               <span class="text-line">•</span>
-              <span class="rounded-control px-2 py-0.5 text-2xs font-semibold tracking-wider" :class="order.status === 'in-transit'
-                ? 'border border-accent/40 bg-accent-soft text-accent'
-                : order.status === 'delivered'
-                  ? 'border border-success/40 bg-success-soft text-success'
-                  : 'border border-line bg-raised text-mute'
-                ">
+              <span
+                class="rounded-control px-2 py-0.5 text-2xs font-semibold tracking-wider"
+                :class="
+                  order.status === 'in-transit'
+                    ? 'border border-accent/40 bg-accent-soft text-accent'
+                    : order.status === 'delivered'
+                      ? 'border border-success/40 bg-success-soft text-success'
+                      : 'border border-line bg-raised text-mute'
+                "
+              >
                 {{ order.statusLabel }}
               </span>
               <span v-if="order.badgeLabel" class="text-mute">
@@ -59,7 +80,8 @@
               TRACKING: <span class="text-paper">{{ order.waybill }}</span>
             </p>
             <p v-else-if="order.serial" class="font-mono text-1xs text-mute">
-              Serial: <span class="text-paper">{{ order.serial }}</span> • {{ order.date }}
+              Serial: <span class="text-paper">{{ order.serial }}</span> •
+              {{ order.date }}
             </p>
             <p v-else-if="order.date" class="font-mono text-1xs text-mute">
               Order Date: <span class="text-paper">{{ order.date }}</span>
@@ -74,7 +96,9 @@
         </div>
 
         <!-- Order Items & Description -->
-        <div class="mt-3 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div
+          class="mt-3 flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+        >
           <div class="space-y-2">
             <h3 class="font-display text-base font-semibold text-paper">
               {{ order.title }}
@@ -82,27 +106,50 @@
 
             <!-- Item thumbnails -->
             <div class="flex items-center gap-2">
-              <div v-for="(item, idx) in order.items" :key="idx"
+              <div
+                v-for="(item, idx) in order.items"
+                :key="idx"
                 class="relative h-12 w-12 overflow-hidden rounded-control border border-line bg-surface"
-                :title="item.name">
-                <img v-if="item.thumb" :src="item.thumb" :alt="item.name" class="h-full w-full object-contain p-1" />
-                <div v-else class="grid h-full w-full place-items-center bg-raised text-mute">
+                :title="item.name"
+              >
+                <img
+                  v-if="item.thumb"
+                  :src="item.thumb"
+                  :alt="item.name"
+                  class="h-full w-full object-contain p-1"
+                />
+                <div
+                  v-else
+                  class="grid h-full w-full place-items-center bg-raised text-mute"
+                >
                   <Icon :name="item.icon || 'lucide:box'" size="16" />
                 </div>
-                <span v-if="item.quantity && item.quantity > 1"
-                  class="absolute bottom-0 end-0 rounded-tl bg-accent px-1 font-mono text-3xs font-bold text-onaccent">
+                <span
+                  v-if="item.quantity && item.quantity > 1"
+                  class="absolute bottom-0 end-0 rounded-tl bg-accent px-1 font-mono text-3xs font-bold text-onaccent"
+                >
                   x{{ item.quantity }}
                 </span>
               </div>
             </div>
 
             <!-- Route metadata -->
-            <div v-if="order.dispatchedFrom || order.traceTelemetry || order.benchVerified || order.calibrationLog"
-              class="space-y-0.5 font-mono text-1xs text-mute">
+            <div
+              v-if="
+                order.dispatchedFrom ||
+                order.traceTelemetry ||
+                order.benchVerified ||
+                order.calibrationLog
+              "
+              class="space-y-0.5 font-mono text-1xs text-mute"
+            >
               <p v-if="order.dispatchedFrom">
-                Dispatched: <span class="text-paper">{{ order.dispatchedFrom }}</span>
-                <span v-if="order.destination"> → Destination: <span class="text-paper">{{ order.destination
-                    }}</span></span>
+                Dispatched:
+                <span class="text-paper">{{ order.dispatchedFrom }}</span>
+                <span v-if="order.destination">
+                  → Destination:
+                  <span class="text-paper">{{ order.destination }}</span></span
+                >
               </p>
               <p v-if="order.traceTelemetry" class="text-cyan">
                 STATUS: {{ order.traceTelemetry }}
@@ -118,16 +165,39 @@
         </div>
 
         <!-- Delivery bar for in-transit order -->
-        <div v-if="order.flight"
-          class="mt-3 rounded-control border border-line/60 bg-ink/70 p-2.5 font-mono text-1xs text-mute space-y-2">
+        <div
+          v-if="order.flight"
+          class="mt-3 rounded-control border border-line/60 bg-ink/70 p-2.5 font-mono text-1xs text-mute space-y-2"
+        >
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex flex-wrap items-center gap-3">
-              <span class="font-bold text-paper">COURIER: {{ order.flight.code }} ({{ order.flight.route }})</span>
-              <span>DISTANCE: <span class="text-paper">{{ order.flight.altitude }}</span></span>
-              <span>PARCELS: <span class="text-paper">{{ order.flight.cargoTemp }}</span></span>
-              <span>WEIGHT: <span class="text-paper">{{ order.flight.humidity }}</span></span>
+              <span class="font-bold text-paper"
+                >COURIER: {{ order.flight.code }} ({{
+                  order.flight.route
+                }})</span
+              >
+              <span
+                >DISTANCE:
+                <span class="text-paper">{{
+                  order.flight.altitude
+                }}</span></span
+              >
+              <span
+                >PARCELS:
+                <span class="text-paper">{{
+                  order.flight.cargoTemp
+                }}</span></span
+              >
+              <span
+                >WEIGHT:
+                <span class="text-paper">{{
+                  order.flight.humidity
+                }}</span></span
+              >
             </div>
-            <span class="inline-flex items-center gap-1.5 font-bold text-success">
+            <span
+              class="inline-flex items-center gap-1.5 font-bold text-success"
+            >
               <span class="status-dot" />
               STATUS: {{ order.flight.status }}
             </span>
@@ -135,15 +205,27 @@
 
           <!-- Stepper stages -->
           <div class="grid grid-cols-4 gap-1 pt-1">
-            <div v-for="(st, sidx) in order.flight.stages" :key="st" class="space-y-1">
-              <div class="h-1 rounded-full transition duration-300" :class="sidx <= order.flight.currentStageIndex
-                ? 'bg-accent'
-                : 'bg-line'
-                " />
-              <p class="truncate text-2xs" :class="sidx === order.flight.currentStageIndex
-                ? 'font-bold text-accent'
-                : 'text-mute'
-                ">
+            <div
+              v-for="(st, sidx) in order.flight.stages"
+              :key="st"
+              class="space-y-1"
+            >
+              <div
+                class="h-1 rounded-full transition duration-300"
+                :class="
+                  sidx <= order.flight.currentStageIndex
+                    ? 'bg-accent'
+                    : 'bg-line'
+                "
+              />
+              <p
+                class="truncate text-2xs"
+                :class="
+                  sidx === order.flight.currentStageIndex
+                    ? 'font-bold text-accent'
+                    : 'text-mute'
+                "
+              >
                 {{ st }}
               </p>
             </div>
@@ -151,65 +233,85 @@
         </div>
 
         <!-- Card bottom action buttons -->
-        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-3">
+        <div
+          class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-3"
+        >
           <div class="flex flex-wrap items-center gap-2">
             <template v-if="order.status === 'in-transit'">
-              <LazyVButton variant="plain"
+              <LazyVButton
+                variant="plain"
                 class="inline-flex items-center gap-1.5 rounded-control bg-accent px-3 py-1.5 font-mono text-xs font-semibold text-onaccent shadow-sm transition hover:brightness-110 active:scale-95"
-                @click="$emit('open-telemetry', order)">
+                @click="$emit('open-telemetry', order)"
+              >
                 <span class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-white" />
+                  <span
+                    class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"
+                  />
+                  <span
+                    class="relative inline-flex h-2 w-2 rounded-full bg-white"
+                  />
                 </span>
-                TRACK DELIVERY
+                {{ t("btn.track_delivery") }}
               </LazyVButton>
-              <LazyVButton variant="plain"
+
+              <LazyVButton
+                variant="plain"
                 class="chip-link"
-                @click="$emit('view-waybill', order)">
+                @click="$emit('view-waybill', order)"
+              >
                 <Icon name="lucide:file-text" size="13" />
-                DELIVERY NOTE
+                {{ t("btn.delivery_note") }}
               </LazyVButton>
             </template>
 
             <template v-else-if="order.status === 'delivered'">
-              <LazyVButton variant="plain"
+              <LazyVButton
+                variant="plain"
                 class="chip-link"
-                @click="$emit('view-calibration-cert', order)">
+                @click="$emit('view-calibration-cert', order)"
+              >
                 <Icon name="lucide:award" size="13" />
-                SERVICE REPORT (PDF)
+                {{ t("btn.service_report") }} (PDF)
               </LazyVButton>
-              <LazyVButton variant="plain"
+
+              <LazyVButton
+                variant="plain"
                 class="chip-link"
-                @click="$emit('reorder-consumables', order)">
+                @click="$emit('reorder-consumables', order)"
+              >
                 <Icon name="lucide:refresh-cw" size="13" />
-                RE-ORDER SUPPLIES
+                {{ t("btn.re_order_supplies") }}
               </LazyVButton>
             </template>
 
             <template v-else>
-              <LazyVButton variant="plain"
+              <LazyVButton
+                variant="plain"
                 class="chip-link"
-                @click="$emit('view-dossier', order)">
+                @click="$emit('view-dossier', order)"
+              >
                 <Icon name="lucide:archive" size="13" />
-                VIEW ORDER DOCUMENT
+                {{ t("btn.view_order_document") }}
               </LazyVButton>
             </template>
           </div>
 
-          <span class="meta">
-            Manufacturer warranty active
-          </span>
+          <span class="meta"> Manufacturer warranty active </span>
         </div>
       </article>
     </div>
 
     <!-- Footer -->
     <footer
-      class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3 meta">
+      class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3 meta"
+    >
       <span>Showing {{ filteredOrders.length }} of 24 Total Orders</span>
-      <LazyVButton variant="plain" class="inline-flex items-center gap-1 text-accent transition hover:underline"
-        @click="$emit('view-fiscal-archive')">
-        View all orders
+      <LazyVButton
+        variant="plain"
+        class="inline-flex items-center gap-1 text-accent transition hover:underline"
+        @click="$emit('view-fiscal-archive')"
+      >
+        {{ t("btn.view_all_orders") }}
         <Icon name="lucide:arrow-right" size="13" />
       </LazyVButton>
     </footer>
@@ -218,6 +320,8 @@
 
 <script lang="ts" setup>
 import type { RequisitionOrder } from "~/types/account";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   orders: RequisitionOrder[];

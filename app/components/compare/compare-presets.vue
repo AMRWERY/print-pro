@@ -27,7 +27,7 @@
             <span
               class="mt-auto flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
             >
-              Load comparison
+              {{ t("btn.load_comparison") }}
               <Icon
                 name="lucide:arrow-right"
                 size="12"
@@ -44,6 +44,8 @@
 
 <script lang="ts" setup>
 import { comparePresets as presets } from "~/data/compare";
+
+const { t } = useI18n();
 
 const emit = defineEmits<{ load: [ids: string[]] }>();
 </script>
