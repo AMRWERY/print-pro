@@ -19,13 +19,13 @@
             class="inline-flex items-center gap-1.5 rounded-control border border-success/30 bg-success-soft px-2.5 py-1 text-success"
           >
             <Icon name="lucide:check-circle" size="13" aria-hidden="true" />
-            Verified business account
+            {{ t("account.verified_business_account") }}
           </span>
 
           <span
             class="hidden items-center gap-1.5 rounded-control border border-line bg-raised px-2.5 py-1 text-mute sm:inline-flex"
           >
-            ACCOUNT ID:
+            {{ t("account.account_id") }}
             <span class="text-paper font-semibold">{{
               profile.metrologyId
             }}</span>
@@ -34,7 +34,7 @@
 
         <div>
           <h1 id="account-greeting" class="title-lg lg:text-4xl">
-            Welcome back, {{ profile.name }}.
+            {{ t("account.welcome_back") }} {{ profile.name }}.
           </h1>
           <p class="mt-1 text-sm text-mute">
             {{ profile.title }} —
@@ -52,14 +52,14 @@
         <div class="space-y-1">
           <p class="eyebrow flex items-center gap-1.5 text-mute">
             <Icon name="lucide:shield-check" size="13" class="text-accent" />
-            CREDIT AVAILABLE
+            {{ t("account.credit_available") }}
           </p>
           <div class="title-lg">
             {{ money.format(profile.escrowAvailable) }}
           </div>
           <p class="flex items-center gap-1.5 font-mono text-1xs text-success">
             <Icon name="lucide:zap" size="11" aria-hidden="true" />
-            Available to spend now
+            {{ t("account.available_to_spend_now") }}
           </p>
         </div>
 
@@ -140,18 +140,20 @@
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:credit-card" size="12" class="text-accent" />
-          CREDIT LIMIT
+          {{ t("account.credit_limit") }}
         </dt>
         <dd class="font-display text-base font-semibold text-paper">
-          {{ money.format(profile.escrowLimit) }} LIMIT
+          {{ money.format(profile.escrowLimit) }} {{ t("account.limit") }}
         </dd>
-        <dd class="font-mono text-1xs text-accent">Business credit terms</dd>
+        <dd class="font-mono text-1xs text-accent">
+          {{ t("account.business_credit_terms") }}
+        </dd>
       </div>
 
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:refresh-cw" size="12" class="text-cyan" />
-          LAST ACTIVITY
+          {{ t("account.last_activity") }}
         </dt>
         <dd class="font-display text-base font-semibold text-paper">
           {{ profile.auditSyncTime }}
@@ -164,7 +166,7 @@
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:map-pin" size="12" class="text-yellow" />
-          DEFAULT DELIVERY ADDRESS
+          {{ t("account.default_delivery_address") }}
         </dt>
         <dd class="font-display text-base font-semibold text-paper truncate">
           {{ profile.cleanroomDock }}
@@ -177,7 +179,7 @@
       <div class="bg-surface p-3.5 space-y-1">
         <dt class="eyebrow flex items-center gap-1.5 text-mute">
           <Icon name="lucide:key" size="12" class="text-success" />
-          SECURITY AUTHORIZATION
+          {{ t("account.security_authorization") }}
         </dt>
         <dd class="font-display text-base font-semibold text-paper truncate">
           {{ profile.securityAuth }}

@@ -11,11 +11,13 @@
           />
           <span class="relative inline-flex h-2 w-2 rounded-full bg-success" />
         </span>
-        <span class="font-bold text-success">ACCOUNT ONLINE</span>
+        <span class="font-bold text-success">{{
+          t("account.account_online")
+        }}</span>
         <span class="text-line">|</span>
         <span class="flex items-center gap-1 text-mute">
           <Icon name="lucide:lock" size="12" />
-          256-BIT
+          {{ t("account.bit") }}
         </span>
       </div>
 
@@ -118,9 +120,11 @@
               {{ profile.affiliation }}
             </p>
             <div class="flex items-center gap-2 font-mono text-2xs">
-              <span class="text-accent font-semibold">OPERATIONS MANAGER</span>
+              <span class="text-accent font-semibold">{{
+                t("account.operations_manager")
+              }}</span>
               <span class="text-mute">•</span>
-              <span class="text-mute">BER ⇄ JFK OK</span>
+              <span class="text-mute">BER ⇄ JFK {{ t("account.ready") }}</span>
             </div>
           </div>
         </div>
@@ -165,29 +169,33 @@
     <div class="grid grid-cols-3 gap-2 font-mono text-xs">
       <div class="card p-2.5 space-y-1">
         <div class="flex items-center justify-between text-mute text-2xs">
-          <span>TRANSIT</span>
+          <span>{{ t("account.transit") }}</span>
           <span class="h-1.5 w-1.5 rounded-full bg-accent" />
         </div>
         <p class="title-sm">EGP 18.2K</p>
-        <p class="text-2xs text-mute leading-tight">LH-400 • 1 SEAL</p>
+        <p class="text-2xs text-mute leading-tight">{{ t("account.seal") }}</p>
       </div>
 
       <div class="card p-2.5 space-y-1">
         <div class="flex items-center justify-between text-mute text-2xs">
-          <span>CREDIT</span>
+          <span>{{ t("account.credit") }}</span>
           <Icon name="lucide:shield-check" size="10" class="text-cyan" />
         </div>
         <p class="title-sm">EGP 32.5K</p>
-        <p class="text-2xs text-success leading-tight">AUTO-CLEAR ON</p>
+        <p class="text-2xs text-success leading-tight">
+          {{ t("account.auto_clear_on") }}
+        </p>
       </div>
 
       <div class="card p-2.5 space-y-1">
         <div class="flex items-center justify-between text-mute text-2xs">
-          <span>REGISTRY</span>
+          <span>{{ t("account.registry") }}</span>
           <Icon name="lucide:bookmark" size="10" class="text-mute" />
         </div>
-        <p class="title-sm">8 Units</p>
-        <p class="text-2xs text-accent leading-tight">2 ALLOCATED</p>
+        <p class="title-sm">{{ t("account.units") }}</p>
+        <p class="text-2xs text-accent leading-tight">
+          {{ t("account.allocated") }}
+        </p>
       </div>
     </div>
 
@@ -204,7 +212,7 @@
           </span>
           <span class="flex items-center gap-1 text-1xs text-accent">
             <span class="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
-            LIVE
+            {{ t("account.live") }}
           </span>
         </div>
 
@@ -214,9 +222,9 @@
       </div>
 
       <div>
-        <h3 class="title-sm">Photocopier &amp; printer order</h3>
+        <h3 class="title-sm">{{ t("account.photocopier_printer_order") }}</h3>
         <p class="font-mono text-2xs text-mute tracking-wider mt-0.5">
-          CARRIER: INSURED COURIER (PALLET #88)
+          {{ t("account.carrier_insured_courier_pallet") }}
         </p>
       </div>
 
@@ -254,10 +262,12 @@
         </div>
 
         <div class="grid grid-cols-4 text-center font-mono text-3xs">
-          <span class="text-mute">Confirmed</span>
-          <span class="text-mute">Packed</span>
-          <span class="font-bold text-accent">On the way</span>
-          <span class="text-mute">Delivered</span>
+          <span class="text-mute">{{ t("account.confirmed") }}</span>
+          <span class="text-mute">{{ t("account.packed") }}</span>
+          <span class="font-bold text-accent">{{
+            t("account.on_the_way")
+          }}</span>
+          <span class="text-mute">{{ t("account.delivered") }}</span>
         </div>
       </div>
 
@@ -267,7 +277,9 @@
       >
         <div class="flex items-center gap-3 text-1xs text-mute">
           <span>🚚 Out for delivery</span>
-          <span class="text-success font-semibold">✔ Sealed</span>
+          <span class="text-success font-semibold"
+            >✔ {{ t("account.sealed") }}</span
+          >
         </div>
 
         <LazyVButton
@@ -285,11 +297,13 @@
     <section class="card-compact space-y-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 font-mono text-xs">
-          <span class="font-bold text-paper">SAVED ITEMS</span>
+          <span class="font-bold text-paper">{{
+            t("account.saved_items")
+          }}</span>
           <span
             class="rounded-control bg-raised px-1.5 py-0.2 text-2xs text-mute"
           >
-            {{ registryItems.length }} RESERVED
+            {{ registryItems.length }} {{ t("account.reserved") }}
           </span>
         </div>
 
@@ -297,7 +311,7 @@
           to="/wishlist"
           class="font-mono text-xs text-accent font-semibold hover:underline"
         >
-          VIEW ALL &rarr;
+          {{ t("account.view_all") }}
         </nuxt-link-locale>
       </div>
 
@@ -355,15 +369,17 @@
       <div class="flex items-center justify-between font-mono text-xs">
         <span class="flex items-center gap-1.5 text-mute">
           <Icon name="lucide:map-pin" size="13" class="text-accent" />
-          DEFAULT DELIVERY ADDRESS
+          {{ t("account.default_delivery_address") }}
         </span>
-        <span class="text-cyan text-1xs font-bold">SIGNATURE REQUIRED</span>
+        <span class="text-cyan text-1xs font-bold">{{
+          t("account.signature_required")
+        }}</span>
       </div>
 
-      <h3 class="title-sm">Head office — Cairo</h3>
+      <h3 class="title-sm">{{ t("account.head_office_cairo") }}</h3>
       <p class="text-xs text-mute leading-relaxed">
-        12 Tahrir Street, Dokki, Cairo<br />
-        Loading bay at the rear, weekdays 08:00 – 17:00
+        {{ t("account.imbaba") }}<br />
+        {{ t("account.loading_bay_rear") }} 08:00 – 17:00
       </p>
 
       <div class="pt-2">
@@ -380,8 +396,8 @@
     <!-- Collapsible past orders -->
     <section class="card-compact space-y-3">
       <div class="flex items-center justify-between font-mono text-xs">
-        <span class="font-bold text-paper">PAST ORDERS</span>
-        <span class="text-mute">ORDER HISTORY</span>
+        <span class="font-bold text-paper">{{ t("account.past_orders") }}</span>
+        <span class="text-mute">{{ t("account.order_history") }}</span>
       </div>
 
       <div class="space-y-2">
@@ -399,7 +415,7 @@
                 {{ arc.id }} • {{ arc.title.split("+")[0]?.trim() }}
               </p>
               <p class="text-2xs text-mute">
-                {{ arc.date }} • {{ arc.items.length }} ITEMS
+                {{ arc.date }} • {{ arc.items.length }} {{ t("account.items") }}
               </p>
             </div>
             <div class="flex items-center gap-2">
@@ -434,10 +450,12 @@
     <!-- Real-Time Activity Log Stream -->
     <section class="card-compact space-y-3">
       <div class="flex items-center justify-between font-mono text-xs">
-        <span class="font-bold text-paper">REAL-TIME ACTIVITY LOG</span>
+        <span class="font-bold text-paper">{{
+          t("account.real_time_activity_log")
+        }}</span>
         <span class="text-success flex items-center gap-1 text-2xs">
           <span class="status-dot" />
-          LIVE UPDATES
+          {{ t("account.live_updates") }}
         </span>
       </div>
 
@@ -448,11 +466,17 @@
           <Icon name="lucide:activity" size="14" class="bullet-icon" />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-bold text-paper">Delivery update</span>
+              <span class="font-bold text-paper">{{
+                t("account.delivery_update")
+              }}</span>
               <span class="text-mute text-2xs">08:42 EDT</span>
             </div>
             <p class="font-sans text-1xs text-mute">
-              Your order left the warehouse and is with the courier.
+              {{
+                t(
+                  "account.your_order_left_the_warehouse_and_is_with_the_courier",
+                )
+              }}
             </p>
           </div>
         </div>
@@ -467,11 +491,16 @@
           />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-bold text-paper">Account credit applied</span>
-              <span class="text-mute text-2xs">YESTERDAY</span>
+              <span class="font-bold text-paper">{{
+                t("account.account_credit_applied")
+              }}</span>
+              <span class="text-mute text-2xs">{{
+                t("account.yesterday")
+              }}</span>
             </div>
             <p class="font-sans text-1xs text-mute">
-              Payment of EGP 12,450.00 confirmed for order #LP-948201.
+              {{ t("account.payment_of") }} EGP 12,450.00
+              {{ t("account.confirmed_for_order") }} #LP-948201.
             </p>
           </div>
         </div>
@@ -486,11 +515,16 @@
           />
           <div class="space-y-0.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-bold text-paper">Saved item back in stock</span>
-              <span class="text-mute text-2xs">NOV 02</span>
+              <span class="font-bold text-paper">{{
+                t("account.saved_item_back_in_stock")
+              }}</span>
+              <span class="text-mute text-2xs"
+                >{{ t("account.november") }} 02</span
+              >
             </div>
             <p class="font-sans text-1xs text-mute">
-              Corex Toner Black 210 is back in stock and ready to order.
+              Corex Toner Black 210
+              {{ t("account.is_back_in_stock_and_ready_to_order") }}
             </p>
           </div>
         </div>

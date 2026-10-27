@@ -7,17 +7,19 @@
         <div class="flex items-center gap-2">
           <span class="pip rounded-full animate-pulse" aria-hidden="true" />
           <h2 id="audit-stream-title" class="title-sm sm:text-lg">
-            Account activity
+            {{ t("account.account_activity") }}
           </h2>
         </div>
-        <p class="mt-0.5 text-xs text-mute">Recent activity on your account</p>
+        <p class="mt-0.5 text-xs text-mute">
+          {{ t("account.recent_activity_on_your_account") }}
+        </p>
       </div>
 
       <span
         class="inline-flex items-center gap-1.5 rounded-control bg-accent/20 px-2 py-0.5 font-mono text-2xs font-bold text-accent"
       >
         <span class="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
-        LIVE
+        {{ t("account.live") }}
       </span>
     </header>
 
