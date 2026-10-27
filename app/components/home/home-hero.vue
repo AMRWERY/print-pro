@@ -11,20 +11,23 @@
     >
       <div class="animate-rise space-y-6">
         <p class="eyebrow inline-flex items-center gap-2">
-          <span class="h-px w-6 bg-accent" />Printers · Photocopiers · Inks
-          &amp; Toner
+          <span class="h-px w-6 bg-accent" />{{
+            t("home.printers_photocopiers_inks_and_toner")
+          }}
         </p>
         <h1
           id="hero-title"
           class="text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl"
         >
-          Print, copy and keep going.
-          <span class="text-accent">Without the downtime.</span>
+          {{ t("home.print_copy_and_keep_going") }}
+          <span class="text-accent">{{ t("home.without_the_downtime") }}</span>
         </h1>
         <p class="max-w-xl text-base text-mute">
-          Printers and photocopiers for homes, offices and print rooms, plus the
-          genuine ink and toner to keep them running, delivered and installed by
-          our technicians.
+          {{
+            t(
+              "home.printers_photocopiers_and_the_genuine_supplies_that_keep_them_running_delivered_and_installed_by_our_technicians",
+            )
+          }}
         </p>
         <div class="flex flex-wrap gap-3">
           <LazyVButton variant="primary" to="/products">
@@ -62,7 +65,7 @@
         <media-placeholder
           src="/img/hero-img.png"
           fit="cover"
-          label="A photocopier and a printer in a bright office"
+          :label="t('home.a_photocopier_and_a_printer_in_a_bright_office')"
           size="140"
           class="h-[360px] sm:h-[440px] lg:h-[520px] w-full rounded-panel border border-line"
         />
@@ -77,5 +80,6 @@
 import { heroStats } from "~/data/home";
 
 const { t } = useI18n();
+
 const conciergeOpen = ref(false);
 </script>

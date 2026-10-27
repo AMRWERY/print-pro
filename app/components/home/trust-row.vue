@@ -7,5 +7,5 @@
 </template>
 
 <script lang="ts" setup>
-import { trust } from '~/data/home'
+import { trust } from "~/data/home";
 </script>

@@ -7,7 +7,9 @@
       v-reveal:fade
       class="container-page flex flex-col gap-4 py-6 lg:flex-row lg:items-center lg:gap-10"
     >
-      <p class="eyebrow shrink-0">Direct manufacturer partners</p>
+      <p class="eyebrow shrink-0">
+        {{ t("home.direct_manufacturer_partners") }}
+      </p>
 
       <!-- Infinite carousel. Fades out at both edges; pauses on hover / keyboard focus. -->
       <div
@@ -40,6 +42,8 @@
 
 <script lang="ts" setup>
 import { partners } from "~/data/home";
+
+const { t } = useI18n();
 
 // Repeated so one half is always wider than the strip, even on large screens.
 const loop = [...partners, ...partners];

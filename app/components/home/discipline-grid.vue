@@ -3,9 +3,13 @@
     <div class="container-page space-y-8">
       <section-heading
         id="disciplines-title"
-        eyebrow="Shop by category"
-        title="Everything for printing and copying"
-        body="Printers, photocopiers and the genuine supplies that keep them running."
+        :eyebrow="t('home.shop_by_category')"
+        :title="t('home.everything_for_printing_and_copying')"
+        :body="
+          t(
+            'home.printers_photocopiers_and_the_genuine_supplies_that_keep_them_running',
+          )
+        "
       />
 
       <ul class="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3">
@@ -18,9 +22,7 @@
             :to="c.to"
             class="group card flex h-full flex-col gap-3 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent"
           >
-            <span
-              class="flex items-center justify-between meta"
-            >
+            <span class="flex items-center justify-between meta">
               0{{ i + 1 }} /
               {{ c.label.split(" ")[0]!.toUpperCase() }}
               <Icon
@@ -52,4 +54,6 @@
 
 <script lang="ts" setup>
 import { categories } from "~/data/home";
+
+const { t } = useI18n();
 </script>

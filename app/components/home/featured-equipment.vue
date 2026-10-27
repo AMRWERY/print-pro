@@ -3,8 +3,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="featured-title"
-        eyebrow="Popular right now"
-        title="Featured products"
+        :eyebrow="t('home.popular_right_now')"
+        :title="t('home.featured_products')"
       >
         <div
           role="group"
@@ -49,6 +49,8 @@
 
 <script lang="ts" setup>
 import { featured, featuredFilters } from "~/data/home";
+
+const { t } = useI18n();
 
 const active = ref<(typeof featuredFilters)[number]["key"]>("all");
 

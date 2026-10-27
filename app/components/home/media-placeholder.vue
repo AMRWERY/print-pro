@@ -1,6 +1,10 @@
 <template>
   <!-- Real photo on white (reads the same in both themes) -->
-  <div v-if="src" class="overflow-hidden" :class="fit === 'cover' ? 'bg-raised' : 'bg-white'">
+  <div
+    v-if="src"
+    class="overflow-hidden"
+    :class="fit === 'cover' ? 'bg-raised' : 'bg-white'"
+  >
     <img
       :src="src"
       :alt="alt ?? label"

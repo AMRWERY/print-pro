@@ -20,7 +20,7 @@
                 id="concierge-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"
               >
-                Talk to a technician
+                {{ t("home.talk_to_a_technician") }}
               </h2>
             </div>
             <LazyVButton
@@ -37,8 +37,11 @@
             @submit.prevent="submitBooking"
           >
             <p class="text-sm text-mute">
-              A technician walks you through choosing a machine, supplies or a
-              print job in a private 30-minute video session.
+              {{
+                t(
+                  "home.a_technician_walks_you_through_choosing_a_machine_supplies_or_a_print_job_in_a_private_30_minute_video_session",
+                )
+              }}
             </p>
 
             <LazyVSelectInput

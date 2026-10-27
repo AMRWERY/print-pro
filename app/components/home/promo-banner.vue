@@ -16,11 +16,10 @@
         </span>
         <div>
           <h2 id="promo-title" class="text-xl">
-            Trade in your old printer or photocopier
+            {{ t("home.trade_in_your_old_printer_or_photocopier") }}
           </h2>
           <p class="text-sm text-mute">
-            Get credit toward a new machine. We assess your old one, collect it
-            and take care of the swap.
+            {{ t("home.get_credit_toward_a_new_machine") }}
           </p>
         </div>
       </div>
