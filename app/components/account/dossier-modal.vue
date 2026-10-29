@@ -23,7 +23,7 @@
                 id="dossier-modal-title"
                 class="font-bold tracking-wider text-paper text-sm"
               >
-                {{ title || "ORDER DOCUMENT" }}
+                {{ title || t("account.order_document") }}
               </h2>
             </div>
             <LazyVButton
@@ -44,10 +44,10 @@
               <div>
                 <p class="title-md">PRINTPRO</p>
                 <p class="text-1xs text-mute mt-0.5">
-                  SALES &amp; SERVICE // support@printpro.com
+                  {{ t("account.sales_service") }} // support@printpro.com
                 </p>
                 <p class="text-1xs text-accent mt-1">
-                  ISSUED TO: Amr Mohamed • Delta Architects
+                  {{ t("account.issued_to") }}: Amr Mohamed
                 </p>
               </div>
 
@@ -55,17 +55,22 @@
                 <span
                   class="rounded border border-line bg-ink px-2.5 py-1 text-mute text-2xs"
                 >
-                  REFERENCE: PP-2026-CAI
+                  {{ t("account.reference") }} PP-2026-CAI
                 </span>
-                <p class="text-1xs text-mute mt-1">Date: 28 OCT 2026</p>
+                <p class="text-1xs text-mute mt-1">
+                  {{ t("account.date") }}: 28 OCT 2026
+                </p>
               </div>
             </div>
 
             <!-- Content preview -->
             <div class="space-y-3 font-sans text-xs text-mute leading-relaxed">
               <p>
-                This document is the official record of your order, its delivery
-                and any service work carried out under your business account.
+                {{
+                  t(
+                    "account.this_document_is_the_official_record_of_your_order_its_delivery_and_any_service_work_carried_out_under_your_business_account",
+                  )
+                }}
               </p>
 
               <div
@@ -74,30 +79,34 @@
                 <div
                   class="flex justify-between border-b border-line/40 pb-1.5 text-paper font-bold"
                 >
-                  <span>CHECK</span>
-                  <span>RESULT</span>
+                  <span>{{ t("account.check") }}</span>
+                  <span>{{ t("account.result") }}</span>
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>Pre-dispatch test</span>
-                  <span class="text-success font-semibold">PASSED</span>
+                  <span>{{ t("account.pre_dispatch_test") }}</span>
+                  <span class="text-success font-semibold">{{
+                    t("account.passed")
+                  }}</span>
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>Test page quality</span>
-                  <span class="text-success font-semibold">PASSED</span>
+                  <span>{{ t("account.test_page_quality") }}</span>
+                  <span class="text-success font-semibold">{{
+                    t("account.passed")
+                  }}</span>
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>Packaging condition</span>
-                  <span class="text-paper">Sealed</span>
+                  <span>{{ t("account.packaging_condition") }}</span>
+                  <span class="text-paper">{{ t("account.sealed") }}</span>
                 </div>
                 <div class="flex justify-between text-1xs">
-                  <span>Delivery condition</span>
-                  <span class="text-success font-semibold"
-                    >No damage reported</span
-                  >
+                  <span>{{ t("account.delivery_condition") }}</span>
+                  <span class="text-success font-semibold">{{
+                    t("account.no_damage_reported")
+                  }}</span>
                 </div>
               </div>
 
-              <p>Document reference:</p>
+              <p>{{ t("account.document_reference") }}</p>
               <p
                 class="rounded-control bg-ink/70 p-2 font-mono text-1xs text-accent break-all"
               >
@@ -107,9 +116,9 @@
           </div>
 
           <div class="modal-foot">
-            <span class="text-mute text-1xs"
-              >Issued by PrintPro customer service</span
-            >
+            <span class="text-mute text-1xs">{{
+              t("account.issued_by_our_customer_service")
+            }}</span>
             <div class="flex items-center gap-2">
               <LazyVButton
                 variant="plain"

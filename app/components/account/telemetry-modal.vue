@@ -30,7 +30,8 @@
                 id="telemetry-modal-title"
                 class="font-bold tracking-wider text-accent text-sm"
               >
-                Delivery tracking · {{ order?.id ?? "Order" }}
+                {{ t("account.delivery_tracking") }} ·
+                {{ order?.id ?? t("account.order") }}
               </h2>
             </div>
 
@@ -50,14 +51,16 @@
               class="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line bg-ink/50 p-3"
             >
               <div>
-                <p class="eyebrow text-mute">Courier</p>
+                <p class="eyebrow text-mute">{{ t("account.courier") }}</p>
                 <p class="title-sm">
-                  {{ order?.badgeLabel ?? "Insured courier delivery" }}
+                  {{
+                    order?.badgeLabel ?? t("account.insured_courier_delivery")
+                  }}
                 </p>
                 <p class="text-xs text-mute">
-                  Tracking number:
+                  {{ t("account.tracking_number") }}
                   <span class="text-paper" dir="ltr">{{
-                    order?.waybill ?? "Pending"
+                    order?.waybill ?? t("account.pending")
                   }}</span>
                 </p>
               </div>
@@ -66,17 +69,20 @@
                   class="inline-flex items-center gap-1.5 rounded-control bg-success-soft px-2 py-1 text-xs font-semibold text-success"
                 >
                   <Icon name="lucide:truck" size="13" aria-hidden="true" />
-                  {{ order?.statusLabel ?? "On the way" }}
+                  {{ order?.statusLabel ?? t("account.on_the_way") }}
                 </span>
                 <p class="mt-1 text-xs text-mute">
-                  Delivering to {{ order?.destination ?? "your address" }}
+                  {{ t("account.delivering_to") }}
+                  {{ order?.destination ?? t("account.your_address") }}
                 </p>
               </div>
             </div>
 
             <!-- Progress -->
             <div class="space-y-2">
-              <p class="eyebrow text-mute">Delivery progress</p>
+              <p class="eyebrow text-mute">
+                {{ t("account.delivery_progress") }}
+              </p>
               <ol class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 <li
                   v-for="(s, i) in steps"
@@ -120,16 +126,29 @@
                   class="text-success"
                   aria-hidden="true"
                 />
-                On delivery
+                {{ t("account.on_delivery") }}
               </p>
               <ul class="list-disc space-y-1 ps-5 text-xs text-mute">
-                <li>Someone must be present to sign for the delivery.</li>
                 <li>
-                  Check the packaging before signing and note any damage on the
-                  delivery receipt.
+                  {{
+                    t(
+                      "account.someone_must_be_present_to_sign_for_the_delivery",
+                    )
+                  }}
                 </li>
                 <li>
-                  Photocopiers and large printers are installed by a technician.
+                  {{
+                    t(
+                      "account.check_the_packaging_before_signing_and_note_any_damage_on_the_delivery_receipt",
+                    )
+                  }}
+                </li>
+                <li>
+                  {{
+                    t(
+                      "account.photocopiers_and_large_printers_are_installed_by_technician",
+                    )
+                  }}
                 </li>
               </ul>
             </div>
@@ -139,7 +158,7 @@
             class="flex items-center justify-between gap-3 border-t border-line px-5 py-3"
           >
             <span class="text-xs text-mute"
-              >Need help? support@printpro.com</span
+              >{{ t("account.need_help") }} support@printpro.com</span
             >
             <LazyVButton variant="secondary" @click="$emit('close')">{{
               t("btn.close")
