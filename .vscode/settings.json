@@ -29,5 +29,6 @@
         "stabilisation",
         "synchronisation",
         "synchronise"
-    ]
+    ],
+    "i18n-ally.keystyle": "nested"
 }

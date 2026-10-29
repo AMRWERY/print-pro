@@ -24,7 +24,7 @@
                 id="cleanroom-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"
               >
-                Book a service visit
+                {{ t("account.book_service_visit") }}
               </h2>
             </div>
             <LazyVButton
@@ -78,12 +78,18 @@
               <div
                 class="flex items-center justify-between font-mono font-semibold text-paper"
               >
-                <span>ACCOUNT TYPE</span>
-                <span class="text-success">BUSINESS ACCOUNT (ACTIVE)</span>
+                <span>{{ t("account.account_type") }}</span>
+                <span class="text-success">{{
+                  t("account.business_account")
+                }}</span>
               </div>
               <p>
-                Visits for {{ name }} are covered by your maintenance terms. A
-                technician will confirm the time by phone.
+                {{ t("account.visits_for") }} {{ name }}
+                {{
+                  t(
+                    "account.are_covered_by_your_maintenance_terms_technician_will_confirm_the_time_by_phone",
+                  )
+                }}
               </p>
             </div>
 
@@ -91,7 +97,7 @@
               <LazyVButton variant="tertiary" @click="$emit('close')">{{
                 t("btn.cancel")
               }}</LazyVButton>
-              
+
               <LazyVButton
                 type="submit"
                 variant="primary"

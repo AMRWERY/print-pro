@@ -1,8 +1,9 @@
 <template>
   <aside class="card-compact text-sm" aria-label="Workspace navigation">
     <h2 class="eyebrow mb-3 flex items-center gap-2 text-mute">
-      <Icon name="lucide:layout-grid" size="14" aria-hidden="true" />Workspace
-      navigation
+      <Icon name="lucide:layout-grid" size="14" aria-hidden="true" />{{
+        t("account.workspace_navigation")
+      }}
     </h2>
     <nav aria-label="Account sections">
       <ul class="space-y-1">
@@ -46,6 +47,7 @@
 <script lang="ts" setup>
 import { accountNav, isAccountNavActive } from "~/data/account-nav";
 
+const { t } = useI18n();
 const route = useRoute();
 
 const props = defineProps<{ orderCount?: number; registryCount?: number }>();

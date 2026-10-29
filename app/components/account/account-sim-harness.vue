@@ -14,7 +14,7 @@
             <span class="ping-ring" />
             <span class="relative inline-flex pip rounded-full" />
           </span>
-          DEMO ACCOUNT // SELECT ACCOUNT TYPE:
+          {{ t("account.demo_account_select_account_type") }}
         </span>
       </div>
 
@@ -48,12 +48,12 @@
       >
         <span class="flex items-center gap-1.5">
           <span class="h-1.5 w-1.5 rounded-full bg-success" />
-          DEMO MODE
+          {{ t("account.demo_mode") }}
         </span>
         <span class="text-line">|</span>
         <span class="flex items-center gap-1.5">
           <Icon name="lucide:shield-check" size="13" class="text-cyan" />
-          256-BIT CRYPTO SIGN
+          {{ t("account.bit_crypto_sign") }}
         </span>
       </div>
     </div>

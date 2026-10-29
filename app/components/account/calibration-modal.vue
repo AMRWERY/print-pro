@@ -23,7 +23,7 @@
                 id="calibration-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-accent"
               >
-                Order supplies
+                {{ t("account.order_supplies") }}
               </h2>
             </div>
             <LazyVButton
@@ -83,7 +83,7 @@
             <div
               class="flex items-center justify-between rounded-control border border-line bg-ink/30 p-3 text-xs text-mute"
             >
-              <span class="font-mono">Estimated total</span>
+              <span class="font-mono">{{ t("account.estimated_total") }}</span>
               <span class="title-sm">EGP 1,450.00</span>
             </div>
 

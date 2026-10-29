@@ -7,16 +7,18 @@
         <div class="flex items-center gap-2">
           <span class="h-2 w-2 rounded-full bg-yellow" aria-hidden="true" />
           <h2 id="registry-section-title" class="title-sm sm:text-lg">
-            Saved items
+            {{ t("account.saved_items") }}
           </h2>
         </div>
-        <p class="mt-0.5 text-xs text-mute">Products you saved for later</p>
+        <p class="mt-0.5 text-xs text-mute">
+          {{ t("account.products_you_saved_for_later") }}
+        </p>
       </div>
 
       <span
         class="rounded-control border border-line bg-raised px-2 py-0.5 font-mono text-2xs text-mute"
       >
-        {{ items.length }} PRESENT ITEMS
+        {{ items.length }} {{ t("account.present_items") }}
       </span>
     </header>
 
@@ -78,7 +80,7 @@
         to="/wishlist"
         class="inline-flex items-center gap-1 text-accent transition hover:underline"
       >
-        <span>OPEN REGISTRY LEDGER</span>
+        <span>{{ t("account.open_registry_ledger") }}</span>
         <Icon name="lucide:arrow-right" size="13" />
       </nuxt-link-locale>
     </footer>

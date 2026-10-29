@@ -11,16 +11,20 @@
             id="orders-manifest-title"
             class="font-display text-lg font-bold text-paper sm:text-xl"
           >
-            Recent orders
+            {{ t("account.recent_orders") }}
           </h2>
           <span
             class="rounded-full bg-raised px-2 py-0.5 font-mono text-1xs text-mute"
           >
-            {{ orders.length }} Active
+            {{ orders.length }} {{ t("account.active") }}
           </span>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          Printers, photocopiers and supplies, with delivery tracking
+          {{
+            t(
+              "account.printers_photocopiers_and_supplies_with_delivery_tracking",
+            )
+          }}
         </p>
       </div>
 
@@ -77,14 +81,17 @@
             </div>
 
             <p v-if="order.waybill" class="font-mono text-1xs text-mute">
-              TRACKING: <span class="text-paper">{{ order.waybill }}</span>
+              {{ t("account.tracking") }}
+              <span class="text-paper">{{ order.waybill }}</span>
             </p>
             <p v-else-if="order.serial" class="font-mono text-1xs text-mute">
-              Serial: <span class="text-paper">{{ order.serial }}</span> •
+              {{ t("account.serial") }}
+              <span class="text-paper">{{ order.serial }}</span> •
               {{ order.date }}
             </p>
             <p v-else-if="order.date" class="font-mono text-1xs text-mute">
-              Order Date: <span class="text-paper">{{ order.date }}</span>
+              {{ t("account.order_date") }}
+              <span class="text-paper">{{ order.date }}</span>
             </p>
           </div>
 
@@ -144,18 +151,18 @@
               class="space-y-0.5 font-mono text-1xs text-mute"
             >
               <p v-if="order.dispatchedFrom">
-                Dispatched:
+                {{ t("account.dispatched") }}
                 <span class="text-paper">{{ order.dispatchedFrom }}</span>
                 <span v-if="order.destination">
-                  → Destination:
+                  → {{ t("account.destination") }}
                   <span class="text-paper">{{ order.destination }}</span></span
                 >
               </p>
               <p v-if="order.traceTelemetry" class="text-cyan">
-                STATUS: {{ order.traceTelemetry }}
+                {{ t("account.status") }} {{ order.traceTelemetry }}
               </p>
               <p v-if="order.benchVerified" class="text-success">
-                Tested: {{ order.benchVerified }}
+                {{ t("account.tested") }} {{ order.benchVerified }}
               </p>
               <p v-if="order.calibrationLog" class="text-mute">
                 {{ order.calibrationLog }}
@@ -172,24 +179,24 @@
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex flex-wrap items-center gap-3">
               <span class="font-bold text-paper"
-                >COURIER: {{ order.flight.code }} ({{
+                >{{ t("account.courier") }} {{ order.flight.code }} ({{
                   order.flight.route
                 }})</span
               >
               <span
-                >DISTANCE:
+                >{{ t("account.distance") }}
                 <span class="text-paper">{{
                   order.flight.altitude
                 }}</span></span
               >
               <span
-                >PARCELS:
+                >{{ t("account.parcels") }}
                 <span class="text-paper">{{
                   order.flight.cargoTemp
                 }}</span></span
               >
               <span
-                >WEIGHT:
+                >{{ t("account.weight") }}
                 <span class="text-paper">{{
                   order.flight.humidity
                 }}</span></span
@@ -199,7 +206,7 @@
               class="inline-flex items-center gap-1.5 font-bold text-success"
             >
               <span class="status-dot" />
-              STATUS: {{ order.flight.status }}
+              {{ t("account.status") }} {{ order.flight.status }}
             </span>
           </div>
 
@@ -296,7 +303,9 @@
             </template>
           </div>
 
-          <span class="meta"> Manufacturer warranty active </span>
+          <span class="meta">{{
+            t("account.manufacturer_warranty_active")
+          }}</span>
         </div>
       </article>
     </div>
@@ -305,7 +314,10 @@
     <footer
       class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3 meta"
     >
-      <span>Showing {{ filteredOrders.length }} of 24 Total Orders</span>
+      <span
+        >{{ t("account.showing") }} {{ filteredOrders.length }}
+        {{ t("account.of_total_orders") }}</span
+      >
       <LazyVButton
         variant="plain"
         class="inline-flex items-center gap-1 text-accent transition hover:underline"

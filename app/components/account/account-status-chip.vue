@@ -11,6 +11,8 @@
 <script lang="ts" setup>
 import type { RequisitionOrder } from "~/types/account";
 
+const { t } = useI18n();
+
 // Colour is never the only signal: every status also carries an icon and text.
 const props = defineProps<{
   status: RequisitionOrder["status"];
@@ -24,27 +26,27 @@ const tones: Record<
   "in-transit": {
     cls: "border-accent/40 bg-accent-soft text-accent",
     icon: "lucide:plane",
-    text: "In transit",
+    text: t("account.in_transit"),
   },
   processing: {
     cls: "border-yellow/40 bg-yellow-soft text-yellow",
     icon: "lucide:loader",
-    text: "Processing",
+    text: t("account.processing"),
   },
   delivered: {
     cls: "border-success/40 bg-success-soft text-success",
     icon: "lucide:check-circle",
-    text: "Delivered",
+    text: t("account.delivered"),
   },
   archived: {
     cls: "border-line bg-raised text-mute",
     icon: "lucide:archive",
-    text: "Completed",
+    text: t("account.completed"),
   },
   recalled: {
     cls: "border-magenta/40 bg-magenta-soft text-magenta",
     icon: "lucide:undo-2",
-    text: "Refunded",
+    text: t("account.refunded"),
   },
 };
 
