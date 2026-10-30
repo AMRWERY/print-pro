@@ -4,7 +4,7 @@
       <auth-aside
         eyebrow="Your account"
         tag="Orders, delivery and service"
-        title="Track orders, reorder supplies and manage your machines."
+        :title="t('auth.track_orders_reorder_supplies_and_manage_your_machines')"
         icon="lucide:printer"
         :stats="[
           { label: t('auth.orders'), value: 'Tracked' },

@@ -4,19 +4,19 @@
       <auth-aside
         eyebrow="Form 1984-PrintPro"
         tag="Business account"
-        title="Create your PrintPro account."
-        body="Register your business, school or home office to order printers, photocopiers, ink and toner with tracked delivery."
+        :title="t('auth.create_your_account')"
+        :body="t('auth.register_your_business_school_or_home_office_to_order_printers_photocopiers_ink_and_toner_with_tracked_delivery')"
         icon="lucide:printer"
         :points="[
           {
             icon: 'lucide:shield-check',
             title: t('auth.service_and_maintenance'),
-            body: 'Book technician visits and manage maintenance contracts online.',
+            body: t('auth.book_technician_visits_and_manage_maintenance_contracts_online'),
           },
           {
             icon: 'lucide:package-check',
             title: t('auth.supplies_on_repeat'),
-            body: 'Reorder the right ink and toner for your machines in one click.',
+            body: t('auth.reorder_the_right_ink_and_toner_for_your_machines_in_one_click'),
           },
         ]"
         :stats="[

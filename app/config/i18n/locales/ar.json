@@ -388,6 +388,10 @@
     "password_reset": "إعادة تعيين كلمة المرور",
     "link_expires_in": "تنتهي صلاحية الرابط خلال",
     "set_new_password": "تعيين كلمة مرور جديدة",
-    "choose_strong_password_for_your_account": "اختر كلمة مرور قوية لحسابك."
+    "choose_strong_password_for_your_account": "اختر كلمة مرور قوية لحسابك.",
+    "register_your_business_school_or_home_office_to_order_printers_photocopiers_ink_and_toner_with_tracked_delivery": "سجل شركتك أو مدرستك أو مكتبك المنزلي لطلب الطابعات وآلات التصوير والحبر وخراطيش التونر مع خدمة تتبع التوصيل.",
+    "book_technician_visits_and_manage_maintenance_contracts_online": "احجز زيارات الفنيين وادِر عقود الصيانة عبر الإنترنت.",
+    "reorder_the_right_ink_and_toner_for_your_machines_in_one_click": "أعد طلب الحبر والتونر المناسب لأجهزتك بضغطة زر واحدة.",
+    "track_orders_reorder_supplies_and_manage_your_machines": "تتبع الطلبات، وأعد طلب المستلزمات، وادِر أجهزتك."
   }
 }
