@@ -10,19 +10,19 @@
         :points="[
           {
             icon: 'lucide:shield-check',
-            title: 'Service and maintenance',
+            title: t('auth.service_and_maintenance'),
             body: 'Book technician visits and manage maintenance contracts online.',
           },
           {
             icon: 'lucide:package-check',
-            title: 'Supplies on repeat',
+            title: t('auth.supplies_on_repeat'),
             body: 'Reorder the right ink and toner for your machines in one click.',
           },
         ]"
         :stats="[
-          { label: 'Genuine supplies', value: '100%' },
-          { label: 'Dispatch', value: 'Same day' },
-          { label: 'Transit', value: 'Insured' },
+          { label: t('auth.genuine_supplies'), value: '100%' },
+          { label: t('auth.dispatch'), value: 'Same day' },
+          { label: t('auth.transit'), value: 'Insured' },
         ]"
       />
     </template>
@@ -30,20 +30,24 @@
     <section class="card space-y-5 p-6 sm:p-8" aria-labelledby="register-title">
       <div class="space-y-2">
         <p class="eyebrow flex items-center gap-2">
-          <span class="pip" aria-hidden="true" />Create account
+          <span class="pip" aria-hidden="true" />{{ t("auth.create_account") }}
         </p>
         <h1 id="register-title" class="font-display text-3xl sm:text-4xl">
-          Create your account
+          {{ t("auth.create_your_account") }}
         </h1>
         <p class="text-sm text-mute">
-          Create an account to save products, place orders and track delivery.
+          {{
+            t(
+              "auth.create_an_account_to_save_products_place_orders_and_track_delivery",
+            )
+          }}
         </p>
       </div>
 
       <form class="space-y-6" novalidate @submit.prevent="submit">
         <fieldset class="grid gap-4 sm:grid-cols-2">
           <legend class="eyebrow mb-3 sm:col-span-2">
-            01 · Identity &amp; organisation
+            01 · {{ t("auth.identity_organisation") }}
           </legend>
 
           <LazyVInput
@@ -81,7 +85,7 @@
         </fieldset>
 
         <fieldset class="space-y-3">
-          <legend class="eyebrow mb-1">Account type</legend>
+          <legend class="eyebrow mb-1">{{ t("auth.account_type") }}</legend>
           <div class="grid gap-2 sm:grid-cols-3">
             <LazyVRadioInput
               v-for="t in tiers"
@@ -103,7 +107,7 @@
         </fieldset>
 
         <fieldset class="space-y-4">
-          <legend class="eyebrow mb-3">02 · Password</legend>
+          <legend class="eyebrow mb-3">02 · {{ t("auth.password") }}</legend>
           <div class="grid gap-4 sm:grid-cols-2">
             <LazyVInput
               v-model="form.password"
@@ -132,22 +136,17 @@
         </fieldset>
 
         <fieldset class="space-y-3">
-          <legend class="eyebrow mb-1">03 · Agreements</legend>
+          <legend class="eyebrow mb-1">03 · {{ t("auth.agreements") }}</legend>
           <LazyVCheckboxInput
             v-model="form.terms"
             name="terms"
             :rules="mustAccept('Accept the terms to create your account.')"
           >
-            I agree to the
+            {{ t("auth.agree_to_the") }}
             <LazyVButton variant="tertiary" to="/" class="!text-accent">{{
               t("btn.terms_of_sale")
             }}</LazyVButton>
-            and the delivery and returns conditions.
-          </LazyVCheckboxInput>
-
-          <LazyVCheckboxInput v-model="form.newsletter">
-            Send me the monthly newsletter with offers and new arrivals
-            <span class="text-mute">(optional)</span>.
+            {{ t("auth.and_the_delivery_and_returns_conditions") }}
           </LazyVCheckboxInput>
         </fieldset>
 
@@ -183,12 +182,11 @@
       </form>
 
       <p class="text-center text-sm text-mute">
-        Already have an account?
+        {{ t("auth.already_have_an_account") }}
         <LazyVButton variant="tertiary" to="/auth" class="!text-accent">{{
           t("btn.sign_in")
         }}</LazyVButton>
       </p>
-
     </section>
   </auth-shell>
 </template>
@@ -237,7 +235,8 @@ const submit = async () => {
     exists.value = created.reason === "exists";
     error.value = exists.value
       ? "An account with that email already exists."
-      : created.message || "We couldn't create the account. Check your details and try again.";
+      : created.message ||
+        "We couldn't create the account. Check your details and try again.";
     loading.value = false;
     return;
   }

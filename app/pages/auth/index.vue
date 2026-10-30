@@ -7,9 +7,9 @@
         title="Track orders, reorder supplies and manage your machines."
         icon="lucide:printer"
         :stats="[
-          { label: 'Orders', value: 'Tracked' },
-          { label: 'Supplies', value: 'Genuine' },
-          { label: 'Service', value: 'On site' },
+          { label: t('auth.orders'), value: 'Tracked' },
+          { label: t('auth.supplies'), value: 'Genuine' },
+          { label: t('auth.service'), value: 'On site' },
         ]"
       />
     </template>
@@ -19,17 +19,15 @@
       <template v-if="ready && auth.isSignedIn">
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2 text-success">
-            <Icon
-              name="lucide:circle-check"
-              size="14"
-              aria-hidden="true"
-            />Signed in
+            <Icon name="lucide:circle-check" size="14" aria-hidden="true" />{{
+              t("auth.signed_in")
+            }}
           </p>
           <h1 id="login-title" class="font-display text-3xl">
-            Welcome back, {{ auth.user?.name.split(" ")[0] }}.
+            {{ t("auth.welcome_back") }} {{ auth.user?.name.split(" ")[0] }}.
           </h1>
           <p class="text-sm text-mute">
-            You're signed in as {{ auth.user?.email }}.
+            {{ t("auth.you_are_signed_in_as") }} {{ auth.user?.email }}.
           </p>
         </div>
 
@@ -57,13 +55,17 @@
       <template v-else>
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2">
-            <span class="pip" aria-hidden="true" />Your account
+            <span class="pip" aria-hidden="true" />{{ t("auth.your_account") }}
           </p>
           <h1 id="login-title" class="font-display text-3xl sm:text-4xl">
-            Sign in
+            {{ t("auth.sign_in") }}
           </h1>
           <p class="text-sm text-mute">
-            Access your equipment orders, saved registry and delivery tracking.
+            {{
+              t(
+                "auth.access_your_equipment_orders_saved_registry_and_delivery_tracking",
+              )
+            }}
           </p>
         </div>
 
@@ -108,9 +110,9 @@
           />
 
           <div class="flex flex-wrap items-center justify-between gap-3">
-            <LazyVCheckboxInput v-model="remember" label-class="items-center"
-              >Remember this device</LazyVCheckboxInput
-            >
+            <LazyVCheckboxInput v-model="remember" label-class="items-center">{{
+              t("auth.remember_this_device")
+            }}</LazyVCheckboxInput>
 
             <LazyVButton
               variant="tertiary"
@@ -148,7 +150,7 @@
         </form>
 
         <p class="text-center text-sm text-mute">
-          New to PrintPro?
+          {{ t("auth.new_account") }}
           <LazyVButton
             variant="tertiary"
             to="/auth/register"
@@ -156,7 +158,6 @@
             >{{ t("btn.create_an_account") }}</LazyVButton
           >
         </p>
-
       </template>
     </section>
   </auth-shell>

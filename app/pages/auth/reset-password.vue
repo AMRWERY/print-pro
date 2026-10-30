@@ -8,7 +8,7 @@
         aria-label="Checking your link"
       >
         <LazyVSkeletonLoader variant="line" class="!h-8 w-2/3" />
-      
+
         <LazyVSkeletonLoader class="h-24" />
       </div>
 
@@ -16,15 +16,19 @@
       <template v-else-if="!state.valid">
         <div class="space-y-2">
           <p class="eyebrow-accent">
-            <Icon name="lucide:link-2-off" size="14" aria-hidden="true" />Link
-            not valid
+            <Icon name="lucide:link-2-off" size="14" aria-hidden="true" />{{
+              t("auth.link_not_valid")
+            }}
           </p>
           <h1 id="reset-title" class="font-display text-3xl">
-            This reset link has expired
+            {{ t("auth.this_reset_link_has_expired") }}
           </h1>
           <p class="text-sm text-mute">
-            Reset links work once and last 15 minutes. Request a new one to
-            continue.
+            {{
+              t(
+                "auth.reset_links_work_once_and_last_minutes_request_new_one_to_continue",
+              )
+            }}
           </p>
         </div>
 
@@ -38,20 +42,22 @@
         <div class="space-y-2">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <p class="eyebrow flex items-center gap-2">
-              <span class="pip" aria-hidden="true" />Password reset
+              <span class="pip" aria-hidden="true" />{{
+                t("auth.password_reset")
+              }}
             </p>
             <p
               class="rounded-control border border-line px-2 py-0.5 meta"
               role="timer"
             >
-              Link expires in {{ remaining }}
+              {{ t("auth.link_expires_in") }} {{ remaining }}
             </p>
           </div>
           <h1 id="reset-title" class="font-display text-3xl sm:text-4xl">
-            Set a new password
+            {{ t("auth.set_new_password") }}
           </h1>
           <p class="text-sm text-mute">
-            Choose a strong password for your account.
+            {{ t("auth.choose_strong_password_for_your_account") }}
           </p>
         </div>
 
@@ -132,7 +138,9 @@ const token = computed(() =>
 
 const ready = ref(false);
 
-const checked = ref<{ valid: true; expires: number } | { valid: false }>({ valid: false });
+const checked = ref<{ valid: true; expires: number } | { valid: false }>({
+  valid: false,
+});
 
 onMounted(async () => {
   checked.value = await auth.tokenState(token.value);
