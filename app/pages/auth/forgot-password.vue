@@ -5,8 +5,9 @@
       <template v-if="sent">
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2 text-success">
-            <Icon name="lucide:mail-check" size="14" aria-hidden="true" />Check
-            your inbox
+            <Icon name="lucide:mail-check" size="14" aria-hidden="true" />{{
+              t("auth.check_your_inbox")
+            }}
           </p>
           <h1
             id="forgot-title"
@@ -14,33 +15,40 @@
             tabindex="-1"
             class="font-display text-3xl focus:outline-none"
           >
-            Recovery link sent
+            {{ t("auth.recovery_link_sent") }}
           </h1>
           <p class="text-sm text-mute">
-            If <span class="text-paper">{{ email }}</span> belongs to an
-            account, you'll receive a one-time link valid for 15 minutes. Check
-            your spam folder if it doesn't arrive.
+            {{ t("auth.if") }} <span class="text-paper">{{ email }}</span>
+            {{
+              t(
+                "auth.belongs_to_an_account_you_receive_one_time_link_valid_for_minutes_check_your_spam_folder_if_it_does_not_arrive",
+              )
+            }}
           </p>
         </div>
 
+        <!-- Only outside production, where no mail service is connected and the API returns the link's token. -->
         <div
+          v-if="sent.token"
           class="space-y-3 rounded-card border border-yellow/40 bg-yellow-soft p-4 text-sm"
           role="note"
         >
           <p class="flex items-center gap-2 font-medium">
-            <Icon
-              name="lucide:flask-conical"
-              size="16"
-              aria-hidden="true"
-            />Demo mode
+            <Icon name="lucide:flask-conical" size="16" aria-hidden="true" />{{
+              t("auth.demo_mode")
+            }}
           </p>
           <p class="text-mute">
-            No email is sent from this demo. Use the link below to continue.
+            {{
+              t(
+                "auth.no_email_is_sent_from_this_demo_use_the_link_below_to_continue",
+              )
+            }}
           </p>
           <LazyVButton
             variant="primary"
             size="sm"
-            :to="{ path: '/reset-password', query: { token: sent.token } }"
+            :to="{ path: '/auth/reset-password', query: { token: sent.token } }"
             icon-end="lucide:arrow-right"
             icon-end-class="icon-nudge rtl:-scale-x-100"
             >{{ t("btn.open_reset_link") }}</LazyVButton
@@ -60,14 +68,19 @@
       <template v-else>
         <div class="space-y-2">
           <p class="eyebrow flex items-center gap-2">
-            <span class="pip" aria-hidden="true" />Account recovery
+            <span class="pip" aria-hidden="true" />{{
+              t("auth.account_recovery")
+            }}
           </p>
           <h1 id="forgot-title" class="font-display text-3xl sm:text-4xl">
-            Reset your password
+            {{ t("auth.reset_your_password") }}
           </h1>
           <p class="text-sm text-mute">
-            Enter your account email. We'll send a one-time link, valid for 15
-            minutes, to set a new password.
+            {{
+              t(
+                "auth.belongs_to_an_account_you_receive_one_time_link_valid_for_minutes_check_your_spam_folder_if_it_does_not_arrive",
+              )
+            }}
           </p>
         </div>
 
@@ -129,7 +142,7 @@ const auth = useAuthStore();
 const email = ref("");
 const emailField = ref<Validatable>();
 const loading = ref(false);
-const sent = ref<{ token: string; expires: number } | null>(null);
+const sent = ref<{ token?: string; expires: number } | null>(null);
 const heading = ref<HTMLElement>();
 
 const submit = async () => {
@@ -137,9 +150,8 @@ const submit = async () => {
   if (!check?.valid) return;
 
   loading.value = true;
-  await new Promise((r) => setTimeout(r, 500)); // there is no mail server; keep the feedback brief
   // The same answer whether or not the email is registered, so this form can't be used to find accounts.
-  sent.value = auth.requestReset(email.value);
+  sent.value = await auth.requestReset(email.value);
   loading.value = false;
 
   await nextTick();

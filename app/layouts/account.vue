@@ -10,7 +10,7 @@
 
     <main id="main" class="flex-1">
       <div class="container-page py-6 lg:py-8">
-        <!-- Accounts live in this browser, so wait until the session is read -->
+        <!-- Wait until this browser's saved session has been read -->
         <div
           v-if="!ready"
           class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]"

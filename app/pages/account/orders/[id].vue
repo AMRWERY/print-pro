@@ -53,15 +53,25 @@
 </template>
 
 <script lang="ts" setup>
-import { allProducts } from "~/data/product-details";
 
+const catalog = useCatalogStore();
+onMounted(() => catalog.ensureCatalog());
 const { t } = useI18n();
 const route = useRoute();
 
 const cart = useCartStore();
-const { findOrder, pending } = useAccount();
+const { findOrder, pending, sourceOrder, loadSource } = useAccount();
 
 const order = computed(() => findOrder(String(route.params.id)));
+
+// The list rows only carry totals; fetch the full order (lines, amounts, delivery) for the detail panels.
+watch(
+  order,
+  (o) => {
+    if (o && !sourceOrder(o)) loadSource(o);
+  },
+  { immediate: true },
+);
 
 const crumbs = computed(() => [
   { label: "Atelier workspace", to: "/account" },
@@ -77,7 +87,7 @@ const reorder = async () => {
   if (!o) return;
   let added = 0;
   for (const item of o.items) {
-    const product = allProducts.find(
+    const product = catalog.all.find(
       (p) => p.id === item.sku || p.sku === item.sku || p.name === item.name,
     );
     if (!product) continue;

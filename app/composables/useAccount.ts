@@ -1,53 +1,12 @@
 import { defaultAtelierProfile } from "~/data/account";
-import { trackingStages, trackingState } from "~/data/tracking";
 import type { AtelierProfile, RequisitionOrder } from "~/types/account";
-import type { Order } from "~/types/order";
 
-const upper = (s: string) => s.toUpperCase();
-
-/** An order placed through checkout, in the shape the account screens use. */
-export const toRequisition = (o: Order, now: Date): RequisitionOrder => {
-  const state = trackingState(o, trackingStages(o, now));
-  const status: RequisitionOrder["status"] =
-    state.state === "delivered"
-      ? "delivered"
-      : state.state === "in-transit"
-        ? "in-transit"
-        : "processing";
-
-  const names = o.items.map((i) => i.name);
-  return {
-    id: `#${o.id}`,
-    title:
-      names.length > 2
-        ? `${names[0]} + ${names.length - 1} more items`
-        : names.join(" + "),
-    status,
-    statusLabel: upper(state.label),
-    badgeLabel: upper(o.delivery.label),
-    waybill: `LP-${o.pin}`,
-    destination: `${o.address.city}`.toUpperCase(),
-    amount: o.amounts.total,
-    placedAt: o.createdAt,
-    real: true,
-    items: o.items.map((i) => ({
-      name: i.name,
-      thumb: i.image,
-      icon: i.icon,
-      sku: i.sku,
-      quantity: i.qty,
-    })),
-  };
-};
-
-/**
- * What the signed-in studio sees across the account area: its profile, and its orders
- * (checkout orders first, then the demo history).
- */
+/** What the signed-in customer sees across the account area: their profile and their orders from the API. */
 export const useAccount = () => {
   const auth = useAuthStore();
   const orderStore = useOrderStore();
   const wishlist = useWishlistStore();
+  const account = useAccountStore();
 
   // Re-evaluated every minute so an order's status moves on while a page is open.
   const now = ref(new Date());
@@ -69,34 +28,46 @@ export const useAccount = () => {
     };
   });
 
-  // Order history comes from the API; `pending` is true until it has loaded.
-  const { data: history, status } = useFetch<RequisitionOrder[]>(
-    "/api/account/orders",
-    { key: "account-orders", lazy: true },
+  // Order history comes from the API, for a signed-in customer only; it is fetched in the browser
+  // (a signed-out visitor never triggers the request).
+  if (import.meta.client)
+    watch(
+      () => auth.isSignedIn,
+      (signedIn) => {
+        if (signedIn) account.ensureOrders();
+      },
+      { immediate: true },
+    );
+  const pending = computed(
+    () => auth.isSignedIn && (account.status === "pending" || account.status === "idle"),
   );
-  const pending = computed(() => status.value === "pending");
+  const error = computed(() => (auth.isSignedIn && account.status === "error" ? account.error : ""));
 
-  const orders = computed<RequisitionOrder[]>(() => [
-    ...orderStore.orders.map((o) => toRequisition(o, now.value)),
-    ...(history.value ?? []),
-  ]);
+  const orders = computed<RequisitionOrder[]>(() => account.orders);
 
   const findOrder = (slug: string) => {
     const id = slug.startsWith("#") ? slug : `#${slug}`;
     return orders.value.find((o) => o.id === id);
   };
 
-  /** The checkout order behind a requisition, when it has one. */
+  /** The full order behind a requisition, once it has been loaded (see `loadSource`). */
   const sourceOrder = (req: RequisitionOrder) =>
     orderStore.get(req.id.replace(/^#/, ""));
+
+  /** Fetches the full order for its owner (no PIN needed while signed in). */
+  const loadSource = (req: RequisitionOrder) =>
+    orderStore.load(req.id.replace(/^#/, ""));
 
   return {
     auth,
     profile,
     orders,
     pending,
+    error,
+    refresh: account.refresh,
     findOrder,
     sourceOrder,
+    loadSource,
     registryCount: computed(() => wishlist.ids.length),
     now,
   };

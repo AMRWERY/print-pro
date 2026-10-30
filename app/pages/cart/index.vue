@@ -155,10 +155,12 @@
 
 <script lang="ts" setup>
 import { companionIds } from "~/data/cart";
-import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
 import type { DetailedProduct } from "~/types/product";
 
+const catalog = useCatalogStore();
+const { findProduct } = catalog;
+onMounted(() => catalog.ensureCatalog());
 const { t } = useI18n();
 const cart = useCartStore();
 const localePath = useLocalePath();

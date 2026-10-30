@@ -105,16 +105,14 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  deliveryOptions,
-  deliveryPrices,
-  paymentMethods,
-} from "~/data/checkout";
+import { deliveryPrices } from "~/data/checkout";
 import { pricing } from "~/data/cart";
-import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
-import type { Order } from "~/types/order";
+import type { OrderRequest } from "~/stores/orderStore";
 
+const catalog = useCatalogStore();
+const { findProduct } = catalog;
+onMounted(() => catalog.ensureCatalog());
 const { t } = useI18n();
 
 // Always open at the top, whatever page (or open drawer) the visitor came from.
@@ -141,16 +139,19 @@ const entries = computed<CartEntry[]>(() => {
 
 // ---- every cost is visible from the first step ----
 const code = computed(() => cart.voucher);
-const totals = useCartTotals(entries, code);
+const totals = useCartTotals(entries, code, computed(() => f.delivery));
 
 const discounted = computed(
   () => totals.subtotal - totals.volumeDiscount - totals.voucherDiscount,
 );
 
 const prices = computed(() => ({
-  crated: discounted.value >= pricing.freeFreightFrom ? 0 : pricing.freight,
-  express: deliveryPrices.express,
-  pickup: deliveryPrices.pickup,
+  crated:
+    totals.freeShipping || discounted.value >= pricing.freeFreightFrom
+      ? 0
+      : pricing.freight,
+  express: totals.freeShipping ? 0 : deliveryPrices.express,
+  pickup: totals.freeShipping ? 0 : deliveryPrices.pickup,
 }));
 
 const amounts = computed(() => {
@@ -171,65 +172,44 @@ const amounts = computed(() => {
 
 const showSummary = ref(false);
 
-// ---- placing the order (simulated: there is no payment backend) ----
+// ---- placing the order (the server prices it again and takes the stock) ----
 const placing = ref(false);
 const orders = useOrderStore();
 const localePath = useLocalePath();
+const toast = useToast();
 
-const buildOrder = (): Order => {
-  const id = `LP-${Date.now().toString(36).toUpperCase()}`;
-  const delivery = deliveryOptions.find((o) => o.id === f.delivery)!;
-  const payment = paymentMethods.find((m) => m.id === f.payment)!;
-  const digits = id.replace(/\D/g, "").padEnd(8, "7").slice(0, 8);
-
-  return {
-    id,
-    createdAt: new Date().toISOString(),
+// Card details stay in this form: only the last four digits go to the API, for the receipt.
+const orderRequest = (): OrderRequest => ({
+  items: entries.value.map((e) => ({
+    id: e.line.id,
+    qty: e.line.qty,
+    ...(e.line.option ? { option: e.line.option } : {}),
+  })),
+  voucher: cart.voucher.trim() || undefined,
+  contact: {
     name: f.fullName.trim(),
     company: f.company.trim() || undefined,
     email: f.email.trim(),
     phone: f.phone.trim(),
-    address: {
-      line1: f.line1.trim(),
-      line2: f.line2.trim() || undefined,
-      city: f.city.trim(),
-      region: f.region.trim(),
-      postal: f.postal.trim(),
-      country: f.country,
-    },
-    delivery: {
-      id: delivery.id,
-      label: delivery.label,
-      note: delivery.note,
-      days: delivery.days,
-    },
-    payment: {
-      id: payment.id,
-      label: payment.label,
-      last4:
-        payment.id === "card"
-          ? f.cardNumber.replace(/\D/g, "").slice(-4)
-          : undefined,
-    },
-    notes: f.notes.trim() || undefined,
-    items: entries.value.map((e) => ({
-      key: e.line.key,
-      id: e.product.id,
-      name: e.product.name,
-      brand: e.product.brand,
-      qty: e.line.qty,
-      unitPrice: e.line.unitPrice,
-      option: e.line.option,
-      sku: e.product.sku,
-      icon: e.product.icon,
-      image: e.product.image,
-      imageAlt: e.product.imageAlt,
-      specs: e.product.specs,
-    })),
-    amounts: { ...amounts.value },
-    pin: `${digits.slice(0, 4)}-${digits.slice(4)}`,
-  };
-};
+  },
+  address: {
+    line1: f.line1.trim(),
+    line2: f.line2.trim() || undefined,
+    city: f.city.trim(),
+    region: f.region.trim(),
+    postal: f.postal.trim(),
+    country: f.country,
+  },
+  delivery: f.delivery,
+  payment: {
+    id: f.payment,
+    last4:
+      f.payment === "card"
+        ? f.cardNumber.replace(/\D/g, "").slice(-4) || undefined
+        : undefined,
+  },
+  notes: f.notes.trim() || undefined,
+});
 
 const place = async () => {
   const bad = await state.firstInvalidStep();
@@ -240,14 +220,24 @@ const place = async () => {
   }
 
   placing.value = true;
-  await new Promise((r) => setTimeout(r, 1200)); // no payment backend: simulate the request
+  const result = await orders.place(orderRequest());
 
-  const order = buildOrder();
-  orders.add(order);
+  if (!result.ok) {
+    placing.value = false;
+    toast.error(
+      result.reason === "stock"
+        ? t("orders.place_stock_error", "Some items are no longer available in that quantity")
+        : result.reason === "invalid"
+          ? t("orders.place_invalid_error", "We couldn't place this order")
+          : t("orders.place_failed_error", "The order wasn't placed"),
+      { description: result.message || undefined },
+    );
+    return;
+  }
 
   // Leave first, then empty the cart, so the checkout never flashes its "nothing to check out" state.
   const purchased = entries.value.map((e) => e.line.key);
-  await navigateTo(localePath(`/order/${order.id}`));
+  await navigateTo(localePath(`/order/${result.order.id}`));
   cart.remove(purchased);
   cart.checkoutKeys = [];
   if (!cart.lines.length) cart.voucher = "";

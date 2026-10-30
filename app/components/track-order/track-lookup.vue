@@ -8,7 +8,7 @@
         Track your order
       </h1>
       <p class="mt-1 text-sm text-mute">
-        Enter your order number and the postal code or email used at checkout.
+        {{ t("orders.track_lookup_hint", "Enter your order number and the PIN from your confirmation. If you're signed in, your own orders don't need a PIN.") }}
       </p>
     </div>
 
@@ -38,13 +38,13 @@
         ref="verifyField"
         v-model="verify"
         name="trackVerify"
-        label="Postal code or email"
-        required
-        :rules="
-          requiredText('Enter the postal code or email used for the order.')
-        "
+        :label="t('orders.track_pin_label', 'Order PIN')"
+        :required="!auth.isSignedIn"
+        :optional="auth.isSignedIn"
+        :rules="auth.isSignedIn ? undefined : requiredText(t('orders.track_pin_required', 'Enter the PIN from your order confirmation.'))"
         autocomplete="off"
-        placeholder="12311 or you@company.com"
+        :placeholder="t('orders.track_pin_placeholder', 'e.g. 4821-9307')"
+        input-class="font-mono"
       />
 
       <LazyVButton
@@ -87,6 +87,7 @@ import type { Order } from "~/types/order";
 import type { Validatable } from "~/types/track-order";
 
 const { t } = useI18n();
+const auth = useAuthStore();
 
 defineProps<{ recent: Order[]; error?: string; loading?: boolean }>();
 

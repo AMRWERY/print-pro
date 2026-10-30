@@ -19,4 +19,6 @@ export interface CartLine {
   /** Price per unit at the time it was added (includes any package option). */
   unitPrice: number;
   option?: string;
+  /** The product's price without the option, so a later price change can be applied to the line. */
+  base?: number;
 }

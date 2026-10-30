@@ -225,9 +225,9 @@
 
 <script lang="ts" setup>
 import { pricing } from "~/data/cart";
-import { findProduct } from "~/data/product-details";
 import type { CartEntry } from "~/composables/useCartTotals";
 
+const { findProduct } = useCatalogStore();
 const { t } = useI18n();
 
 /** More lines than this and the drawer hands over to the cart page. */

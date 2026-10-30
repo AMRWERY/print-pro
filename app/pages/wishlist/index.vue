@@ -122,10 +122,12 @@
 
 <script lang="ts" setup>
 import { categoryOptions } from "~/data/catalog";
-import { findProduct } from "~/data/product-details";
 import { sampleRegistry, wishlistAssurances } from "~/data/wishlist";
 import type { DetailedProduct } from "~/types/product";
 
+const catalog = useCatalogStore();
+const { findProduct } = catalog;
+onMounted(() => catalog.ensureCatalog());
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();

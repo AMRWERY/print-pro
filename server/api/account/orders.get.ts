@@ -1,6 +1,1 @@
-import { demoOrderHistory } from "../../../app/data/account-orders";
-
-export default defineEventHandler(async () => {
-  await simulateLatency();
-  return demoOrderHistory();
-});
+export default defineEventHandler((event) => forward(event, "/api/account/orders"));

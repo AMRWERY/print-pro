@@ -34,6 +34,25 @@
     <div id="results" class="scroll-mt-28">
       <table-skeleton-loader v-if="pending" :rows="5" />
 
+      <LazyVEmptyState
+        v-else-if="error"
+        icon="lucide:cloud-off"
+        eyebrow="ORDERS :: UNAVAILABLE"
+        tag="ERROR"
+        tag-tone="warning"
+        :title="t('account.orders_load_error_title', 'We couldn’t load your orders')"
+        :description="
+          t(
+            'account.orders_load_error_description',
+            'Your order history is temporarily unavailable. Your orders are safe; try again in a moment.',
+          )
+        "
+      >
+        <LazyVButton variant="primary" @click="refresh()">{{
+          t("account.orders_load_error_retry", "Try again")
+        }}</LazyVButton>
+      </LazyVEmptyState>
+
       <template v-else-if="filtered.length">
         <orders-table :orders="pageRows" />
 
@@ -94,7 +113,7 @@
 <script lang="ts" setup>
 const { t } = useI18n();
 
-const { orders, pending } = useAccount();
+const { orders, pending, error, refresh } = useAccount();
 
 const search = ref("");
 const status = ref("all");

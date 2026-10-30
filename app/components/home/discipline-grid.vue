@@ -37,7 +37,7 @@
             <span
               class="mt-auto flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
             >
-              {{ c.meta }}
+              {{ meta(c) }}
               <Icon
                 name="lucide:arrow-right"
                 size="12"
@@ -56,4 +56,10 @@
 import { categories } from "~/data/home";
 
 const { t } = useI18n();
+
+// "12 models" counts what the live catalog lists (before it loads, the built-in catalog).
+useCatalogProducts();
+const catalog = useCatalogStore();
+const meta = (c: (typeof categories)[number]) =>
+  `${catalog.all.filter((p) => (p as { category?: string }).category === c.category).length} ${c.noun}`;
 </script>

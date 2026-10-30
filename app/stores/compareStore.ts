@@ -1,10 +1,6 @@
 import { skipHydrate } from "pinia";
 import { MAX_COMPARE } from "~/data/compare";
-import { findProduct } from "~/data/product-details";
 import type { CatalogCategory } from "~/types/catalog";
-
-const categoryOf = (id: string) =>
-  (findProduct(id) as { category?: CatalogCategory } | undefined)?.category;
 
 export const useCompareStore = defineStore("compare", () => {
   // initOnMounted keeps SSR and the first client render identical (both empty).
@@ -13,12 +9,23 @@ export const useCompareStore = defineStore("compare", () => {
   });
 
   const toast = useToast();
+  const catalog = useCatalogStore();
 
-  // Drop ids of products that no longer exist (saved by an older version of the catalogue).
-  onMounted(() => {
-    const known = ids.value.filter((id) => findProduct(id));
-    if (known.length !== ids.value.length) ids.value = known;
-  });
+  const categoryOf = (id: string) =>
+    (catalog.findProduct(id) as { category?: CatalogCategory } | undefined)?.category;
+
+  // Drop ids of products that are gone or hidden, once the live catalog has loaded.
+  watch(
+    () => [catalog.products, ids.value.length] as const,
+    () => {
+      if (!catalog.ready) return;
+      const known = ids.value.filter((id) => catalog.findProduct(id));
+      if (known.length !== ids.value.length) ids.value = known;
+    },
+    { immediate: true },
+  );
+  if (import.meta.client)
+    watch(() => ids.value.length, (n) => n && catalog.ensureCatalog(), { immediate: true });
 
   const full = computed(() => ids.value.length >= MAX_COMPARE);
   

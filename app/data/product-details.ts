@@ -1,6 +1,5 @@
 import { catalogProducts, categoryOptions } from "~/data/catalog";
 import { defaultCompanionProducts, defaultRegistryItems } from "~/data/account";
-import { featured } from "~/data/home";
 import type {
   CatalogCategory,
   CatalogProduct,
@@ -64,7 +63,7 @@ accountProducts.push({
   image: "/img/hero-img.png",
 });
 
-const base: DetailedProduct[] = [...catalogProducts, ...featured];
+const base: DetailedProduct[] = [...catalogProducts];
 
 export const allProducts: DetailedProduct[] = [
   ...base,

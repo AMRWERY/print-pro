@@ -8,6 +8,7 @@
         aria-label="Checking your link"
       >
         <LazyVSkeletonLoader variant="line" class="!h-8 w-2/3" />
+      
         <LazyVSkeletonLoader class="h-24" />
       </div>
 
@@ -131,8 +132,10 @@ const token = computed(() =>
 
 const ready = ref(false);
 
+const checked = ref<{ valid: true; expires: number } | { valid: false }>({ valid: false });
+
 onMounted(async () => {
-  await nextTick(); // let the store read this browser's saved reset tokens
+  checked.value = await auth.tokenState(token.value);
   ready.value = true;
 });
 
@@ -142,8 +145,8 @@ const now = ref(Date.now());
 useIntervalFn(() => (now.value = Date.now()), 1000);
 
 const state = computed(() => {
-  void now.value;
-  return auth.tokenState(token.value);
+  const c = checked.value;
+  return c.valid && c.expires > now.value ? c : ({ valid: false } as const);
 });
 
 const remaining = computed(() => {

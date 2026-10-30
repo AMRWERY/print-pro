@@ -7,6 +7,7 @@
     :title="page.label"
     :description="page.description"
   />
+  <catalog-load-error v-else-if="error" @retry="refresh" />
   <catalog-skeleton-loader v-else />
 </template>
 
@@ -26,7 +27,7 @@ if (!categoryPages[slug.value]) {
   });
 }
 
-const { products: all } = useCatalogProducts();
+const { products: all, error, refresh } = useCatalogProducts();
 const products = computed(() =>
   all.value?.filter((p) => page.value.scope.includes(p.category)),
 );

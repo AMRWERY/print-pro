@@ -22,7 +22,7 @@
       </section-heading>
 
       <ul class="grid gap-4 md:grid-cols-3">
-        <li v-for="(a, i) in arrivals" :key="a.id" v-reveal="{ delay: i * 90 }">
+        <li v-for="(a, i) in items" :key="a.id" v-reveal="{ delay: i * 90 }">
           <article
             class="group card flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:border-mute/50"
           >
@@ -57,6 +57,16 @@
 import { arrivals } from "~/data/home";
 
 const { t } = useI18n();
+
+// Prices come from the live catalog; an arrival that is hidden in admin is left out.
+useCatalogProducts();
+const { findProduct } = useCatalogStore();
+const items = computed(() =>
+  arrivals.flatMap((a) => {
+    const p = findProduct(a.id);
+    return p ? [{ ...a, price: p.price }] : [];
+  }),
+);
 
 const money = useMoney();
 </script>

@@ -78,8 +78,10 @@
 
 <script lang="ts" setup>
 import { comparePresets as presetList, MAX_COMPARE } from "~/data/compare";
-import { findProduct } from "~/data/product-details";
 
+const catalog = useCatalogStore();
+const { findProduct } = catalog;
+onMounted(() => catalog.ensureCatalog());
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();

@@ -190,6 +190,7 @@ const acquire = async () => {
   await simulateRequest();
   cart.add(props.product.id, total.value, {
     option: selected.value.delta ? selected.value.label : undefined,
+    base: props.product.price,
   });
   toast.success("Added to cart", {
     description: props.product.name,

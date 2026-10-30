@@ -27,6 +27,10 @@ const redirects = Object.fromEntries(
 );
 
 export default defineNuxtConfig({
+  runtimeConfig: {
+    // Where the PrintPro API lives (server-only). Override with NUXT_API_BASE.
+    apiBase: "http://localhost:4000",
+  },
   routeRules: redirects,
   modules: [
     "@pinia/nuxt",

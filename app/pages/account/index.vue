@@ -37,7 +37,7 @@
           <div class="space-y-6">
             <!-- Empty state for New Member Mode -->
             <LazyVEmptyState
-              v-if="operatingMode === 'new-member'"
+              v-if="showWelcome"
               icon="lucide:sparkles"
               eyebrow="ACCOUNT :: NEW_CUSTOMER"
               tag="0 ORDERS"
@@ -167,7 +167,6 @@ import {
   defaultRegistryItems,
   highVolumeExtraOrders,
 } from "~/data/account";
-import { allProducts } from "~/data/product-details";
 import type {
   AtelierProfile,
   CompanionProduct,
@@ -177,13 +176,15 @@ import type {
   RequisitionOrder,
 } from "~/types/account";
 
+const catalog = useCatalogStore();
+onMounted(() => catalog.ensureCatalog());
 const { t } = useI18n();
 const localePath = useLocalePath();
 
 const cart = useCartStore();
 const docks = useDockStore();
 const money = useMoney();
-const { profile, orders: ownOrders } = useAccount();
+const { profile, orders: ownOrders, pending: ordersPending, error: ordersError } = useAccount();
 
 const operatingMode = ref<OperatingMode>("standard");
 
@@ -218,6 +219,16 @@ const currentProfile = computed<AtelierProfile>(() => {
   }
   return base;
 });
+
+// A new customer (or the "new member" demo mode) has nothing to list yet.
+const showWelcome = computed(
+  () =>
+    operatingMode.value === "new-member" ||
+    (operatingMode.value === "standard" &&
+      !ordersPending.value &&
+      !ordersError.value &&
+      !ownOrders.value.length),
+);
 
 const currentOrders = computed<RequisitionOrder[]>(() => {
   if (operatingMode.value === "new-member") return [];
@@ -371,7 +382,7 @@ const addCompanionItem = (prod: CompanionProduct) => {
 const reorderItems = (order: RequisitionOrder) => {
   let added = 0;
   for (const item of order.items) {
-    const product = allProducts.find(
+    const product = catalog.all.find(
       (p) => p.id === item.sku || p.sku === item.sku || p.name === item.name,
     );
     if (!product) continue;

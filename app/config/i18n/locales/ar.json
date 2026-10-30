@@ -343,5 +343,18 @@
     "check_the_packaging_before_signing_and_note_any_damage_on_the_delivery_receipt": "يرجى فحص التغليف قبل التوقيع وتسجيل أي تلفيات في إيصال الاستلام.",
     "photocopiers_and_large_printers_are_installed_by_technician": "يتم تركيب آلات التصوير والطابعات الكبيرة بواسطة فني متخصص.",
     "need_help": "هل تحتاج إلى مساعدة؟"
+  },
+  "auth": {
+    "strength": "القوة:",
+    "met": "(مستوفى)",
+    "not_met": "(غير مستوفى)",
+    "check_your_inbox": "تحقق من صندوق الوارد",
+    "recovery_link_sent": "تم إرسال رابط الاستعادة",
+    "if": "إذا كان",
+    "belongs_to_an_account_you_receive_one_time_link_valid_for_minutes_check_your_spam_folder_if_it_does_not_arrive": "ينتمي إلى حساب، فستتلقى رابطاً للاستخدام مرة واحدة صالحة لمدة 15 دقيقة. تحقق من مجلد البريد العشوائي إذا لم يصل.",
+    "demo_mode": "الوضع التجريبي",
+    "no_email_is_sent_from_this_demo_use_the_link_below_to_continue": "لن يتم إرسال أي بريد إلكتروني في هذا العرض التجريبي. استخدم الرابط أدناه للمتابعة.",
+    "account_recovery": "استعادة الحساب",
+    "reset_your_password": "إعادة تعيين كلمة المرور"
   }
 }

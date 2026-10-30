@@ -48,16 +48,26 @@
 </template>
 
 <script lang="ts" setup>
-import { featured, featuredFilters } from "~/data/home";
+import { featuredFilters, featuredIds } from "~/data/home";
+import type { DetailedProduct } from "~/types/product";
 
 const { t } = useI18n();
+
+// Live catalog: admin price/name edits show here, and a product hidden in admin drops out.
+useCatalogProducts();
+const { findProduct } = useCatalogStore();
+const featured = computed(() =>
+  featuredIds
+    .map((id) => findProduct(id))
+    .filter((p): p is DetailedProduct => !!p),
+);
 
 const active = ref<(typeof featuredFilters)[number]["key"]>("all");
 
 const visible = computed(() =>
   active.value === "all"
-    ? featured
-    : featured.filter((p) => p.group === active.value),
+    ? featured.value
+    : featured.value.filter((p) => p.group === active.value),
 );
 </script>
 

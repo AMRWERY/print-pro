@@ -62,7 +62,7 @@ export interface RequisitionOrder {
   amount: number;
   /** ISO timestamp the order was placed. */
   placedAt?: string;
-  /** True for orders placed through checkout on this device (the rest are demo history). */
+  /** True for orders placed through checkout (they come from the API). */
   real?: boolean;
   items: {
     name: string;

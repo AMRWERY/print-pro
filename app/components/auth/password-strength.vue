@@ -17,7 +17,7 @@
         />
       </div>
       <p class="meta">
-        Strength: <span :class="text">{{ label }}</span>
+        {{ t("auth.strength") }} <span :class="text">{{ label }}</span>
       </p>
     </div>
 
@@ -38,13 +38,17 @@
           aria-hidden="true"
         />
         {{ c.label }}
-        <span class="sr-only">{{ c.passed ? "(met)" : "(not met)" }}</span>
+        <span class="sr-only">{{
+          c.passed ? t("auth.met") : t("auth.not_met")
+        }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 const props = defineProps<{ password: string }>();
 
 const checks = computed(() => passwordChecks(props.password));

@@ -96,8 +96,8 @@
 <script lang="ts" setup>
 import type { useComparison } from "~/composables/useComparison";
 import { MAX_COMPARE } from "~/data/compare";
-import { allProducts } from "~/data/product-details";
 
+const catalog = useCatalogStore();
 const { t } = useI18n();
 const props = defineProps<{ cmp: ReturnType<typeof useComparison> }>();
 
@@ -110,7 +110,7 @@ const options = computed(() => {
   const picked = new Set(props.cmp.products.map((p) => p.id));
   const category = (props.cmp.products[0] as { category?: string } | undefined)
     ?.category;
-  return allProducts.filter(
+  return catalog.all.filter(
     (p, i, all) =>
       !picked.has(p.id) &&
       all.findIndex((q) => q.id === p.id) === i &&

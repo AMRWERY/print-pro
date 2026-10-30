@@ -189,16 +189,6 @@
         }}</LazyVButton>
       </p>
 
-      <p class="callout" role="note">
-        <Icon
-          name="lucide:info"
-          size="14"
-          class="mt-0.5 shrink-0"
-          aria-hidden="true"
-        />
-        Demo accounts are saved in this browser only. Passwords are salted and
-        hashed, never stored as typed.
-      </p>
     </section>
   </auth-shell>
 </template>
@@ -244,8 +234,10 @@ const submit = async () => {
 
   const created = await auth.register({ ...form });
   if (!created.ok) {
-    exists.value = true;
-    error.value = "An account with that email already exists.";
+    exists.value = created.reason === "exists";
+    error.value = exists.value
+      ? "An account with that email already exists."
+      : created.message || "We couldn't create the account. Check your details and try again.";
     loading.value = false;
     return;
   }

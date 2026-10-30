@@ -1,15 +1,10 @@
-import { catalogProducts } from "~/data/catalog";
 import type { CatalogCategory } from "~/types/catalog";
-import type { Product } from "~/types/home";
 
 export const promoItems = [
   "Free delivery on orders over EGP 2,500",
   "Installation and setup included with every photocopier",
   "Genuine ink and toner, matched to your model",
 ];
-
-const countIn = (category: CatalogCategory) =>
-  catalogProducts.filter((p) => p.category === category).length;
 
 export const categories = [
   {
@@ -18,7 +13,8 @@ export const categories = [
     terms: ["printer", "printers"],
     icon: "lucide:printer",
     blurb: "Inkjet, laser and large-format printers for home, office and print room.",
-    meta: `${countIn("printers")} models`,
+    category: "printers" as CatalogCategory,
+    noun: "models",
   },
   {
     label: "Photocopiers",
@@ -26,7 +22,8 @@ export const categories = [
     terms: ["copier", "copiers", "photocopier", "photocopiers"],
     icon: "lucide:copy",
     blurb: "A4 and A3 multifunction machines, from small office to production.",
-    meta: `${countIn("copiers")} models`,
+    category: "copiers" as CatalogCategory,
+    noun: "models",
   },
   {
     label: "Inks & Toner",
@@ -34,7 +31,8 @@ export const categories = [
     terms: ["ink", "inks", "toner", "toners"],
     icon: "lucide:droplets",
     blurb: "Genuine ink, toner and drum units matched to your machine.",
-    meta: `${countIn("inks-toner")} supplies`,
+    category: "inks-toner" as CatalogCategory,
+    noun: "supplies",
   },
 ];
 
@@ -53,9 +51,8 @@ export const featuredFilters = [
   { key: "ink", label: "Inks & Toner" },
 ] as const;
 
-const byId = (id: string) => catalogProducts.find((p) => p.id === id)!;
-
-export const featured: Product[] = [
+/** The products on the home page rail; each is looked up in the live catalog, so hidden ones drop out. */
+export const featuredIds = [
   "printa-tank-500",
   "corex-laser-450c",
   "nordjet-lf-44",
@@ -65,7 +62,7 @@ export const featured: Product[] = [
   "printa-ink-black",
   "corex-toner-210-hy",
   "kopira-toner-a3-black",
-].map(byId);
+];
 
 export const arrivals = [
   {
@@ -73,7 +70,6 @@ export const arrivals = [
     tag: "Just in · A3 colour",
     name: "Nordjet Pro A3 Colour Inkjet",
     note: "Pigment inks · Wi-Fi and Ethernet",
-    price: byId("nordjet-pro-a3").price,
     action: "btn.view_printer",
     icon: "lucide:printer",
     image: "/img/prod-04.png",
@@ -84,7 +80,6 @@ export const arrivals = [
     tag: "Back in stock · A3 mono",
     name: "Kopira Pro A3 35 ppm Mono",
     note: "Copy, print, scan and fax · installation included",
-    price: byId("kopira-pro-a3-35").price,
     action: "btn.view_photocopier",
     icon: "lucide:copy",
     image: "/img/prod-04.png",
@@ -95,7 +90,6 @@ export const arrivals = [
     tag: "Best value · High-yield",
     name: "Corex Toner Black 210 High-Yield",
     note: "6,000 pages · lowers the cost per page",
-    price: byId("corex-toner-210-hy").price,
     action: "btn.add_toner",
     icon: "lucide:droplets",
     image: "/img/prod-04.png",

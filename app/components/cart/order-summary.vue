@@ -86,13 +86,11 @@
         @submit.prevent="apply"
       >
         <LazyVInput
-          ref="voucherInput"
           v-model="draft"
           class="flex-1"
           name="voucher"
           label="Voucher code"
           hide-label
-          :rules="voucherRule"
           autocomplete="off"
           autocapitalize="characters"
           placeholder="OFFICE-2026"
@@ -107,6 +105,15 @@
           >{{ t("btn.apply") }}</LazyVButton
         >
       </form>
+
+      <p v-if="voucherError && !applied" class="callout-accent" role="alert">
+        <Icon
+          name="lucide:circle-alert"
+          size="16"
+          class="bullet-icon"
+          aria-hidden="true"
+        />{{ t("orders.voucher_not_valid", "That code doesn't apply to this cart. Check it for typos or try another.") }}
+      </p>
 
       <div
         v-if="applied"
@@ -200,7 +207,7 @@
 </template>
 
 <script lang="ts" setup>
-import { cartAssurances, pricing, vouchers } from "~/data/cart";
+import { cartAssurances, pricing } from "~/data/cart";
 import type { useCartTotals } from "~/composables/useCartTotals";
 
 const { t } = useI18n();
@@ -217,27 +224,25 @@ const emit = defineEmits<{ voucher: [code: string]; checkout: [] }>();
 const money = useMoney();
 const draft = ref("");
 
-const applied = computed(
-  () => !!props.code && !!vouchers[props.code.toUpperCase()],
-);
-
-const voucherInput = ref<{ validate: () => Promise<{ valid: boolean }> }>();
-
-// vee-validate rule: empty is fine (Apply stays disabled); unknown codes explain themselves.
-const voucherRule = (v: unknown) =>
-  !v || vouchers[String(v).trim().toUpperCase()]
-    ? true
-    : "That code isn't recognised. Check it for typos, or try OFFICE-2026.";
+// Only codes the server accepted are ever stored on the cart.
+const applied = computed(() => !!props.code);
 
 const applying = ref(false);
+const voucherError = ref(false);
+
+watch(draft, () => (voucherError.value = false));
 
 const apply = async () => {
-  const result = await voucherInput.value?.validate();
-  if (!result?.valid) return;
   const c = draft.value.trim().toUpperCase();
+  if (!c) return;
   applying.value = true;
-  await simulateRequest(500);
+  voucherError.value = false;
+  const accepted = await props.totals.check(c);
   applying.value = false;
+  if (!accepted) {
+    voucherError.value = true;
+    return;
+  }
   draft.value = "";
   emit("voucher", c);
 };

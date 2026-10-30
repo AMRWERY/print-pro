@@ -1,6 +1,6 @@
 <template>
   <div class="container-page space-y-6 py-6 lg:py-10">
-    <!-- Orders are kept in this browser, so wait until they are loaded before deciding. -->
+    <!-- Wait for the order (from this tab's cache or the API) before deciding it is missing. -->
     <div
       v-if="!ready"
       class="space-y-4"
@@ -18,14 +18,14 @@
       tag="404 NOT FOUND"
       tag-tone="warning"
       title="We can't find that order"
-      description="Orders are saved in the browser they were placed in. Open this link on that device, or start a new order."
+      :description="t('orders.order_not_found_description', 'We couldn’t find that order, or it needs its PIN. Open the link from your confirmation, or track it with the order number and PIN.')"
     >
       <LazyVButton variant="primary" to="/products">{{
         t("btn.browse_the_catalog")
       }}</LazyVButton>
       
-      <LazyVButton variant="secondary" to="/cart">{{
-        t("btn.go_to_cart")
+      <LazyVButton variant="secondary" to="/track">{{
+        t("btn.track_order")
       }}</LazyVButton>
     </LazyVEmptyState>
 
@@ -56,14 +56,25 @@ const { t } = useI18n();
 const route = useRoute();
 const orders = useOrderStore();
 
+const id = computed(() => String(route.params.id));
 const ready = ref(false);
 
-onMounted(async () => {
-  await nextTick(); // let the store read this browser's saved orders
-  ready.value = true;
-});
+const queryPin = () => {
+  const q = route.query.pin;
+  return String(Array.isArray(q) ? q[0] : (q ?? "")) || undefined;
+};
 
-const order = computed(() => orders.get(String(route.params.id)));
+// An order placed in this tab is cached with its PIN, so the page opens instantly and survives a refresh.
+const order = computed(() => orders.get(id.value));
+
+onMounted(async () => {
+  await nextTick(); // let the store read this tab's saved orders
+  const cached = orders.get(id.value);
+  if (!cached) await orders.load(id.value, queryPin());
+  ready.value = true;
+  // Pick up anything the team changed since it was placed.
+  if (cached) orders.load(id.value, cached.pin);
+});
 
 useSeoMeta({
   title: "Order Confirmed",

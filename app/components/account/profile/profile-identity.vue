@@ -91,6 +91,7 @@
 
 <script lang="ts" setup>
 const { t } = useI18n();
+const toast = useToast();
 
 const auth = useAuthStore();
 
@@ -141,13 +142,17 @@ const save = async () => {
     return;
   }
   saving.value = true;
-  auth.updateProfile({
+  const res = await auth.updateProfile({
     name: name.value.trim(),
     title: title.value.trim(),
     studio: studio.value.trim(),
     phone: phone.value.trim(),
   });
   saving.value = false;
+  if (!res.ok) {
+    toast.error(t("orders.profile_not_saved", "Your changes couldn't be saved. Try again."));
+    return;
+  }
   saved.value = true;
   clearSaved();
 };

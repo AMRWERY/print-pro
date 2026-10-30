@@ -10,7 +10,7 @@
       @open="show"
     />
 
-    <!-- Orders are kept in this browser, so wait until they are loaded. -->
+    <!-- Wait for this tab's saved orders and the API before showing an empty state. -->
     <div
       v-if="!ready && route.query.order"
       class="space-y-4"
@@ -49,7 +49,7 @@
       eyebrow="QUERY :: TRACKING_IDLE"
       tag="AWAITING ID"
       title="Enter an order number to start"
-      description="Your order number is in the confirmation email and on the confirmation page. Orders placed on this device also appear above."
+      :description="t('orders.track_idle_description', 'Your order number and PIN are on the confirmation page. Orders placed in this tab also appear above.')"
     >
       <LazyVButton variant="primary" to="/products">{{
         t("btn.browse_the_catalog")
@@ -60,7 +60,6 @@
 
 <script lang="ts" setup>
 import {
-  matchesVerification,
   trackingEvents,
   trackingStages,
   trackingState,
@@ -72,12 +71,19 @@ const route = useRoute();
 const router = useRouter();
 
 const orders = useOrderStore();
+const auth = useAuthStore();
 
 const crumbs = [
   { label: "Index", to: "/" },
   { label: "Orders", to: "/account/orders" },
   { label: "Track order" },
 ];
+
+/** Why a lookup came back empty: the API being unreachable is not "no such order". */
+const notFoundMessage = () =>
+  orders.loadFailed
+    ? t("orders.track_failed", "We couldn't reach the order system. Try again in a moment.")
+    : t("orders.track_not_found", "We couldn't find that order. Check the order number and PIN.");
 
 const ready = ref(false);
 const active = ref<Order | null>(null);
@@ -106,33 +112,26 @@ const show = (o: Order) => {
 const lookup = async ({ id, verify }: { id: string; verify: string }) => {
   loading.value = true;
   error.value = "";
-  await new Promise((r) => setTimeout(r, 500)); // there is no server to ask; keep the feedback honest but brief
-
-  const order = orders.get(id.trim().toUpperCase());
-  if (!order) {
-    error.value =
-      "We couldn't find that order on this device. Check the number, or open the link from your confirmation on the device you ordered from.";
-  } else if (!matchesVerification(order, verify)) {
-    error.value =
-      "That postal code or email doesn't match this order. Use the same one you entered at checkout.";
-  } else {
-    show(order);
-  }
+  // The API finds the order for its owner (signed in) or for anyone with the PIN; a wrong PIN looks like a missing order.
+  const order = await orders.load(id.trim().toUpperCase(), verify.trim() || undefined);
+  if (order) show(order);
+  else error.value = notFoundMessage();
   loading.value = false;
 };
 
 onMounted(async () => {
-  await nextTick(); // let the store read this browser's saved orders
+  await nextTick(); // let the store read this tab's saved orders
   ready.value = true;
 
-  // /track?order=LP-… opens straight away for orders saved on this device.
+  // /track?order=LP-… opens straight away for an order cached in this tab, or looked up with ?pin= / the owner's session.
   const q = route.query.order;
   if (q) {
-    const o = orders.get(String(Array.isArray(q) ? q[0] : q).toUpperCase());
+    const id = String(Array.isArray(q) ? q[0] : q).toUpperCase();
+    const pinQ = route.query.pin;
+    const pin = String(Array.isArray(pinQ) ? pinQ[0] : (pinQ ?? ""));
+    const o = orders.get(id) ?? (pin || auth.isSignedIn ? await orders.load(id, pin || undefined) : null);
     if (o) active.value = o;
-    else
-      error.value =
-        "We couldn't find that order on this device. Enter the order number and postal code or email below.";
+    else error.value = pin || auth.isSignedIn ? notFoundMessage() : t("orders.track_need_pin", "Enter the order number and PIN to look up this order.");
   }
 });
 

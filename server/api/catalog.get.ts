@@ -1,6 +1,1 @@
-import { catalogProducts } from "../../app/data/catalog";
-
-export default defineEventHandler(async () => {
-  await simulateLatency();
-  return catalogProducts;
-});
+export default defineEventHandler((event) => forward(event, "/api/catalog"));

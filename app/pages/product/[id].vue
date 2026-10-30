@@ -51,29 +51,39 @@
 const route = useRoute();
 const id = computed(() => String(route.params.id));
 
-// Same page component is reused when navigating between products; the URL is reactive so it refetches.
-const { data, error } = useFetch(() => `/api/products/${id.value}`, {
-  lazy: true,
-});
+const catalog = useCatalogStore();
 
+const notFound = (id: string) =>
+  createError({
+    statusCode: catalog.productState(id).code || 404,
+    statusMessage: "Product not found",
+    fatal: true,
+  });
+
+// Same page component is reused when navigating between products; the id is reactive so it reloads.
+// Called before any await, so on the server the visitor's request context is available.
+const first = catalog.loadProduct(id.value);
+if (import.meta.server) {
+  // Wait on the server so the HTML has the product (and a missing one is a real 404).
+  if (!(await first)) throw notFound(id.value);
+}
+
+watch(id, (next) => {
+  catalog.loadProduct(next);
+});
+// On the client a failed load (hidden or unknown product) ends in the error page.
 watch(
-  error,
-  (e) => {
-    if (e)
-      showError(
-        createError({
-          statusCode: e.statusCode ?? 404,
-          statusMessage: "Product not found",
-          fatal: true,
-        }),
-      );
+  () => catalog.productState(id.value).status,
+  (status) => {
+    if (status === "error") showError(notFound(id.value));
   },
-  { immediate: true },
+  { immediate: import.meta.client },
 );
 
-const product = computed(() => data.value?.product);
-const detail = computed(() => data.value?.detail);
-const related = computed(() => data.value?.related ?? []);
+const page = computed(() => catalog.productPage(id.value));
+const product = computed(() => page.value?.product);
+const detail = computed(() => page.value?.detail);
+const related = computed(() => page.value?.related ?? []);
 const crumbs = computed(
   () =>
     detail.value?.crumbs ?? [

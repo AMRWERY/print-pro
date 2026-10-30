@@ -1,5 +1,4 @@
 import { compareData, compareSections, derivedSpecs } from "~/data/compare";
-import { findProduct } from "~/data/product-details";
 import type { MatrixRow, MatrixSection, SpecValue } from "~/types/compare";
 import type { CatalogCategory } from "~/types/catalog";
 import type { DetailedProduct } from "~/types/product";
@@ -12,6 +11,7 @@ const MISSING: SpecValue = { value: "—" };
  */
 export const useComparison = (ids: Ref<string[]>) => {
   const money = useMoney();
+  const { findProduct } = useCatalogStore();
 
   const products = computed(() =>
     ids.value

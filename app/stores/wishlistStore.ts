@@ -1,5 +1,4 @@
 import { skipHydrate } from "pinia";
-import { findProduct } from "~/data/product-details";
 // initOnMounted keeps SSR and the first client render identical (both empty).
 export const useWishlistStore = defineStore("wishlist", () => {
   const ids = useLocalStorage<string[]>("wishlist-ids", [], {
@@ -18,17 +17,27 @@ export const useWishlistStore = defineStore("wishlist", () => {
     initOnMounted: true,
   });
 
-  // Drop products that no longer exist (saved by an older version of the catalogue).
-  onMounted(() => {
-    const known = ids.value.filter((id) => findProduct(id));
-    if (known.length !== ids.value.length) ids.value = known;
-    const staleTags = Object.keys(tags.value).filter((id) => !findProduct(id));
-    if (staleTags.length) {
-      const next = { ...tags.value };
-      for (const id of staleTags) delete next[id];
-      tags.value = next;
-    }
-  });
+  const catalog = useCatalogStore();
+
+  // Drop products that are gone or hidden, once the live catalog has loaded.
+  watch(
+    () => [catalog.products, ids.value.length] as const,
+    () => {
+      if (!catalog.ready) return;
+      const known = ids.value.filter((id) => catalog.findProduct(id));
+      if (known.length !== ids.value.length) ids.value = known;
+      const staleTags = Object.keys(tags.value).filter((id) => !catalog.findProduct(id));
+      if (staleTags.length) {
+        const next = { ...tags.value };
+        for (const id of staleTags) delete next[id];
+        tags.value = next;
+      }
+    },
+    { immediate: true },
+  );
+  // Only a wishlist with something in it needs the catalog (client only: the ids live in this browser).
+  if (import.meta.client)
+    watch(() => ids.value.length, (n) => n && catalog.ensureCatalog(), { immediate: true });
 
   const has = (id: string) => ids.value.includes(id);
 
