@@ -297,7 +297,7 @@ import type { Cell } from "~/types/shared/VDatePicker";
  * date string ("2026-10-12"), or "" when empty, so it round-trips with plain `ref("")`.
  *
  *   <LazyVDatePicker v-model="date" name="date" label="Session date" required
- *     :min="tomorrow" :rules="requiredText('Pick a date.')" />
+ *     :min="tomorrow" rules="required" />
  *
  * - Month, year and decade views; slide animation that follows the reading direction.
  * - Full keyboard support: arrows, PageUp/PageDown (Shift = year), Home/End, Enter, Esc.

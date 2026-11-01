@@ -70,12 +70,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           ...en.messages,
           required: "{field} is required",
         },
-        names: {
-          email: "Email",
-          password: "Password",
-          name: "Customer Name",
-          phone: "Phone",
-        },
+        names: validationNames.en,
       },
       ar: {
         ...ar,
@@ -83,12 +78,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           ...ar.messages,
           required: "{field} مطلوب",
         },
-        names: {
-          email: "البريد الإلكتروني",
-          password: "كلمة المرور",
-          name: "اسم العميل",
-          phone: "رقم الهاتف",
-        },
+        names: validationNames.ar,
       },
     }),
     validateOnBlur: true,

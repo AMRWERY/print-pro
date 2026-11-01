@@ -66,7 +66,7 @@
             v-model="password"
             name="password"
             type="password"
-            label="New password"
+            :label="t('inputs.new_password')"
             required
             revealable
             :rules="strongPasswordRule"
@@ -80,7 +80,7 @@
             v-model="confirm"
             name="confirm"
             type="password"
-            label="Confirm new password"
+            :label="t('inputs.confirm_new_password')"
             required
             revealable
             :rules="matchesRule(() => password)"

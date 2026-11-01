@@ -11,7 +11,7 @@
         <LazyVQuantityStepper
           v-model="config.copies"
           :max="99"
-          label="Number of copies"
+          :label="t('inputs.number_of_copies')"
         />
       </div>
       <p
@@ -34,9 +34,7 @@
     </div>
 
     <div class="mt-6">
-      <p class="eyebrow mb-3 text-mute">
-        Print size
-      </p>
+      <p class="eyebrow mb-3 text-mute">Print size</p>
       <printing-choice
         v-model="config.size"
         label="Print size"
@@ -63,16 +61,17 @@
           v-model="config.customW"
           name="custom-width"
           type="number"
-          label="Width (inches)"
+          :label="t('inputs.width_inches')"
           required
           :rules="widthRule"
           :hint="`Up to ${CUSTOM_MAX_WIDTH} inches (roll width).`"
         />
+
         <LazyVInput
           v-model="config.customL"
           name="custom-length"
           type="number"
-          label="Length (inches)"
+          :label="t('inputs.length_inches')"
           required
           :rules="lengthRule"
           hint="Up to 200 inches."
@@ -91,6 +90,8 @@ import {
   sizes,
   volumeRate,
 } from "~/data/printing";
+
+const { t } = useI18n();
 
 const { config } = usePrintConfig();
 const money = useMoney();

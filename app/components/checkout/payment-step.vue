@@ -41,18 +41,17 @@
           v-model="f.cardName"
           class="sm:col-span-2"
           name="cardName"
-          label="Name on card"
+          :label="t('inputs.name_on_card')"
           required
-          :rules="
-            requiredText('Enter the name exactly as printed on the card.')
-          "
+          rules="required"
           autocomplete="cc-name"
         />
+
         <LazyVInput
           v-model="f.cardNumber"
           class="sm:col-span-2"
           name="cardNumber"
-          label="Card number"
+          :label="t('inputs.card_number')"
           required
           :rules="cardNumberRule"
           :format="formatCardNumber"
@@ -61,10 +60,11 @@
           placeholder="1234 5678 9012 3456"
           input-class="font-mono"
         />
+
         <LazyVInput
           v-model="f.cardExpiry"
           name="cardExpiry"
-          label="Expiry"
+          :label="t('inputs.expiry')"
           required
           :rules="cardExpiryRule"
           :format="formatExpiry"
@@ -74,11 +74,12 @@
           maxlength="5"
           input-class="font-mono"
         />
+
         <LazyVInput
           v-model="f.cardCvc"
           name="cardCvc"
           type="password"
-          label="Security code"
+          :label="t('inputs.security_code')"
           required
           :rules="cardCvcRule"
           inputmode="numeric"

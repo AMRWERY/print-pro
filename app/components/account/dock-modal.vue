@@ -42,20 +42,16 @@
               ref="first"
               v-model="name"
               name="dock-name"
-              label="Address name"
+              :label="t('inputs.address_name')"
               required
-              :rules="
-                requiredText(
-                  'Name this address so you can pick it at checkout.',
-                )
-              "
+              rules="required"
               placeholder="e.g. Head office"
             />
 
             <LazyVTextarea
               v-model="address"
               name="dock-address"
-              label="Physical delivery address"
+              :label="t('inputs.physical_delivery_address')"
               required
               rows="3"
               :rules="
@@ -71,14 +67,14 @@
               <LazyVSelectInput
                 v-model="securityClearance"
                 name="dock-clearance"
-                label="Receiving hours"
+                :label="t('inputs.receiving_hours')"
                 :options="clearances"
               />
 
               <LazyVInput
                 v-model="bondedAgent"
                 name="dock-agent"
-                label="Contact person"
+                :label="t('inputs.contact_person')"
                 optional
                 placeholder="e.g. Mona, reception"
               />
@@ -87,7 +83,7 @@
             <LazyVInput
               v-model="climateSpecs"
               name="dock-climate"
-              label="Delivery instructions"
+              :label="t('inputs.delivery_instructions')"
               optional
               placeholder="e.g. Use the loading bay at the rear"
             />
@@ -95,7 +91,7 @@
             <LazyVCheckboxInput
               v-model="primary"
               name="dock-primary"
-              label="Use as my default delivery address"
+              :label="t('inputs.use_as_my_default_delivery_address')"
             />
 
             <div class="flex items-center justify-end gap-3 pt-2">

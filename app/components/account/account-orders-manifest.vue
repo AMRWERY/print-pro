@@ -35,9 +35,9 @@
             v-model="searchQuery"
             name="manifest-search"
             type="search"
-            label="Filter orders"
+            :label="t('inputs.filter_orders')"
             hide-label
-            placeholder="Filter by order #"
+            :placeholder="t('inputs.filter_by_order')"
           />
         </div>
 

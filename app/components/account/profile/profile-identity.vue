@@ -27,16 +27,16 @@
       <LazyVInput
         v-model="name"
         name="profile-name"
-        label="Full name"
+        :label="t('inputs.full_name')"
         required
         autocomplete="name"
-        :rules="requiredText('Enter your full name.')"
+        rules="required"
       />
 
       <LazyVInput
         v-model="title"
         name="profile-title"
-        label="Job title"
+        :label="t('inputs.job_title')"
         optional
         autocomplete="organization-title"
       />
@@ -44,17 +44,17 @@
       <LazyVInput
         v-model="studio"
         name="profile-studio"
-        label="Company"
+        :label="t('inputs.company')"
         required
         autocomplete="organization"
-        :rules="requiredText('Enter your company name.')"
+        rules="required"
       />
 
       <LazyVInput
         v-model="phone"
         name="profile-phone"
         type="tel"
-        label="Phone"
+        :label="t('inputs.phone')"
         optional
         autocomplete="tel"
         :rules="phoneOptional"
@@ -65,7 +65,7 @@
         :model-value="auth.user?.email"
         name="profile-email"
         type="email"
-        label="Email"
+        :label="t('inputs.email')"
         disabled
         hint="Your sign-in email can't be changed here."
         class="sm:col-span-2"
@@ -91,8 +91,8 @@
 
 <script lang="ts" setup>
 const { t } = useI18n();
-const toast = useToast();
 
+const toast = useToast();
 const auth = useAuthStore();
 
 const name = ref(auth.user?.name ?? "");
@@ -150,7 +150,12 @@ const save = async () => {
   });
   saving.value = false;
   if (!res.ok) {
-    toast.error(t("orders.profile_not_saved", "Your changes couldn't be saved. Try again."));
+    toast.error(
+      t(
+        "orders.profile_not_saved",
+        "Your changes couldn't be saved. Try again.",
+      ),
+    );
     return;
   }
   saved.value = true;

@@ -9,6 +9,7 @@
       aria-label="Loading your order"
     >
       <LazyVSkeletonLoader class="h-24" />
+      
       <LazyVSkeletonLoader class="h-56" />
     </div>
 

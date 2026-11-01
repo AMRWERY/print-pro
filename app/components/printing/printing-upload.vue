@@ -7,7 +7,7 @@
   >
     <LazyVFileUpload
       ref="uploader"
-      title="Drag your PDF, TIFF or image file here"
+      :title="t('inputs.drag_file_here')"
       drop-title="Drop your file"
       :description="`or browse your computer. Supports PDF, TIFF, PSD, JPEG and PNG up to ${MAX_FILE_MB} MB. For sharp prints use 300 dpi at the final size.`"
       hint="Demo build: your file is checked in this browser and isn’t uploaded anywhere."
@@ -78,6 +78,7 @@
               @click="uploader?.open()"
               >{{ t("btn.replace") }}</LazyVButton
             >
+
             <LazyVButton
               size="sm"
               variant="tertiary"

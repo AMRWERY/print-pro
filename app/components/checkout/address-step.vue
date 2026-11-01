@@ -6,7 +6,7 @@
         <LazyVInput
           v-model="f.email"
           name="email"
-          label="Email"
+          :label="t('inputs.email')"
           type="email"
           required
           :rules="emailRule"
@@ -14,10 +14,11 @@
           autocomplete="email"
           inputmode="email"
         />
+
         <LazyVInput
           v-model="f.phone"
           name="phone"
-          label="Phone"
+          :label="t('inputs.phone')"
           type="tel"
           required
           :rules="phoneRule"
@@ -32,65 +33,72 @@
         <LazyVInput
           v-model="f.fullName"
           name="fullName"
-          label="Full name"
+          :label="t('inputs.full_name')"
           required
-          :rules="requiredText('Enter the recipient\'s full name.')"
+          rules="required"
           autocomplete="name"
         />
+
         <LazyVInput
           v-model="f.company"
           name="company"
-          label="Company"
+          :label="t('inputs.company')"
           optional
           autocomplete="organization"
         />
+
         <LazyVInput
           v-model="f.line1"
           class="sm:col-span-2"
           name="line1"
-          label="Street address"
+          :label="t('inputs.street_address')"
           required
-          :rules="requiredText('Enter the street address for delivery.')"
+          rules="required"
           autocomplete="address-line1"
         />
+
         <LazyVInput
           v-model="f.line2"
           class="sm:col-span-2"
           name="line2"
-          label="Apartment, suite, loading dock"
+          :label="t('inputs.apartment_suite_loading_dock')"
           optional
           autocomplete="address-line2"
         />
+
         <LazyVInput
           v-model="f.city"
           name="city"
-          label="City"
+          :label="t('inputs.city')"
           required
-          :rules="requiredText('Enter the city.')"
+          rules="required"
           autocomplete="address-level2"
         />
+
         <LazyVInput
           v-model="f.region"
           name="region"
-          label="State / region"
+          :label="t('inputs.state_region')"
           required
-          :rules="requiredText('Enter the state, province or region.')"
+          rules="required"
           autocomplete="address-level1"
         />
+
         <LazyVInput
           v-model="f.postal"
           name="postal"
-          label="Postal / ZIP code"
+          :label="t('inputs.postal_zip_code')"
           required
           :rules="minLengthText(3, 'Enter the postal or ZIP code.')"
           autocomplete="postal-code"
         />
+
         <LazyVSelectInput
           v-model="f.country"
           name="country"
-          label="Country"
+          :label="t('inputs.country')"
           required
-          :rules="requiredText('Choose the delivery country.')"
+          rules="required"
           :options="countryOptions"
           autocomplete="country"
         />
@@ -121,6 +129,7 @@ import { countries } from "~/data/checkout";
 const { t } = useI18n();
 
 const state = useCheckoutState();
+
 const f = state.form;
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));

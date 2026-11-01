@@ -37,7 +37,7 @@
       <LazyVTextarea
         v-model="state.form.notes"
         name="notes"
-        label="Delivery notes"
+        :label="t('inputs.delivery_notes')"
         optional
         hint="Dock hours, access codes or handling instructions."
         rows="2"

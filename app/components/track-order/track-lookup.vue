@@ -8,7 +8,12 @@
         Track your order
       </h1>
       <p class="mt-1 text-sm text-mute">
-        {{ t("orders.track_lookup_hint", "Enter your order number and the PIN from your confirmation. If you're signed in, your own orders don't need a PIN.") }}
+        {{
+          t(
+            "orders.track_lookup_hint",
+            "Enter your order number and the PIN from your confirmation. If you're signed in, your own orders don't need a PIN.",
+          )
+        }}
       </p>
     </div>
 
@@ -21,13 +26,9 @@
         ref="idField"
         v-model="orderId"
         name="trackOrder"
-        label="Order number"
+        :label="t('inputs.order_number')"
         required
-        :rules="
-          requiredText(
-            'Enter the order number from your confirmation, for example LP-1A2B3C.',
-          )
-        "
+        rules="required"
         autocomplete="off"
         autocapitalize="characters"
         placeholder="LP-XXXXXX"
@@ -38,12 +39,12 @@
         ref="verifyField"
         v-model="verify"
         name="trackVerify"
-        :label="t('orders.track_pin_label', 'Order PIN')"
+        :label="t('inputs.track_pin_label')"
         :required="!auth.isSignedIn"
         :optional="auth.isSignedIn"
-        :rules="auth.isSignedIn ? undefined : requiredText(t('orders.track_pin_required', 'Enter the PIN from your order confirmation.'))"
+        :rules="auth.isSignedIn ? undefined : 'required'"
         autocomplete="off"
-        :placeholder="t('orders.track_pin_placeholder', 'e.g. 4821-9307')"
+        placeholder="e.g. 4821-9307"
         input-class="font-mono"
       />
 
@@ -87,6 +88,7 @@ import type { Order } from "~/types/order";
 import type { Validatable } from "~/types/track-order";
 
 const { t } = useI18n();
+
 const auth = useAuthStore();
 
 defineProps<{ recent: Order[]; error?: string; loading?: boolean }>();

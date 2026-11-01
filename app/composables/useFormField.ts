@@ -17,7 +17,11 @@ export const useFormField = (props: FieldProps, emit: (v: unknown) => void) => {
   const { value, errorMessage, validate, handleChange, setValue } =
     useField<unknown>(fieldName, toRef(props, "rules") as never, {
       initialValue: props.modelValue,
-      label: props.label,
+      // A label would override the localised `names` entry in messages, so only
+      // pass it for fields that have no entry there.
+      label: computed(() =>
+        props.name && props.name in validationNames.en ? undefined : props.label,
+      ),
       validateOnValueUpdate: false,
       keepValueOnUnmount: false,
     });

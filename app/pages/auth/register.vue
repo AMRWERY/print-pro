@@ -53,9 +53,9 @@
           <LazyVInput
             v-model="form.name"
             name="name"
-            label="Full name"
+            :label="t('inputs.full_name')"
             required
-            :rules="requiredText('Enter your full name.')"
+            rules="required"
             autocomplete="name"
             placeholder="e.g. Elena Rostova"
           />
@@ -63,19 +63,19 @@
           <LazyVInput
             v-model="form.studio"
             name="studio"
-            label="Company or organisation"
+            :label="t('inputs.company_or_organisation')"
             required
-            :rules="requiredText('Enter your company or organisation name.')"
+            rules="required"
             autocomplete="organization"
             placeholder="e.g. Delta Architects"
-          />
-
-          <LazyVInput
+            />
+            
+            <LazyVInput
             v-model="form.email"
             class="sm:col-span-2"
             name="email"
             type="email"
-            label="Email"
+            :label="t('inputs.email')"
             required
             rules="required|email"
             autocomplete="email"
@@ -113,7 +113,7 @@
               v-model="form.password"
               name="password"
               type="password"
-              label="Password"
+              :label="t('inputs.password')"
               required
               revealable
               :rules="strongPasswordRule"
@@ -124,7 +124,7 @@
               v-model="form.confirm"
               name="confirm"
               type="password"
-              label="Confirm password"
+              :label="t('inputs.confirm_password')"
               required
               revealable
               :rules="matchesRule(() => form.password)"

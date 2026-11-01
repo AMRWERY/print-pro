@@ -8,6 +8,7 @@
       aria-label="Loading your order"
     >
       <LazyVSkeletonLoader class="h-56" />
+
       <LazyVSkeletonLoader class="h-40" />
     </div>
 
@@ -18,12 +19,12 @@
       tag="404 NOT FOUND"
       tag-tone="warning"
       title="We can't find that order"
-      :description="t('orders.order_not_found_description', 'We couldn’t find that order, or it needs its PIN. Open the link from your confirmation, or track it with the order number and PIN.')"
+      description="We couldn’t find that order, or it needs its PIN. Open the link from your confirmation, or track it with the order number and PIN."
     >
       <LazyVButton variant="primary" to="/products">{{
         t("btn.browse_the_catalog")
       }}</LazyVButton>
-      
+
       <LazyVButton variant="secondary" to="/track">{{
         t("btn.track_order")
       }}</LazyVButton>
@@ -37,7 +38,7 @@
           <order-timeline :order="order" />
 
           <order-items :items="order.items" />
-          
+
           <order-ledger :amounts="order.amounts" :payment="order.payment" />
         </div>
 

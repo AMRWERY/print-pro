@@ -4,7 +4,7 @@
       v-model="query"
       name="headerSearch"
       type="search"
-      label="Search printers, photocopiers, ink and toner"
+      :label="t('inputs.search_printers_photocopiers_ink_and_toner')"
       hide-label
       icon="lucide:search"
       autocomplete="off"
@@ -15,8 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-const query = ref("");
+const { t } = useI18n();
+
 const localePath = useLocalePath();
+
+const query = ref("");
 
 const submit = () => {
   const q = query.value.trim();

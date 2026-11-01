@@ -4,7 +4,8 @@
     role="group"
     :aria-label="label"
   >
-    <LazyVButton variant="plain"
+    <LazyVButton
+      variant="plain"
       class="grid h-9 w-9 place-items-center transition-colors duration-200 hover:text-accent disabled:opacity-40"
       :disabled="modelValue <= min"
       :aria-label="`Decrease ${label}`"
@@ -26,8 +27,9 @@
       input-class="h-9 w-12 border-x border-line bg-transparent text-center font-mono text-sm [appearance:textfield] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       @update:model-value="(n) => set(Number(n))"
     />
-    
-    <LazyVButton variant="plain"
+
+    <LazyVButton
+      variant="plain"
       class="grid h-9 w-9 place-items-center transition-colors duration-200 hover:text-accent disabled:opacity-40"
       :disabled="modelValue >= max"
       :aria-label="`Increase ${label}`"

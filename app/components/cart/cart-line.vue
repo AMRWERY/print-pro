@@ -6,7 +6,7 @@
     <div class="flex items-start gap-3 sm:contents">
       <LazyVCheckboxInput
         :model-value="selected"
-        :label="'Select ' + product.name"
+        :label="t('inputs.select') + ' ' + product.name"
         hide-label
         class="grid h-8 w-8 shrink-0 place-items-center sm:order-1"
         @update:model-value="(v) => emit('update:selected', !!v)"
@@ -70,7 +70,7 @@
 
           <LazyVQuantityStepper
             :model-value="line.qty"
-            :label="`Quantity of ${product.name}`"
+            :label="`${t('inputs.quantity_of')} ${e.product.name}`"
             @update:model-value="(n) => emit('qty', n)"
           />
         </div>

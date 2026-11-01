@@ -4,7 +4,9 @@
       <auth-aside
         eyebrow="Your account"
         tag="Orders, delivery and service"
-        :title="t('auth.track_orders_reorder_supplies_and_manage_your_machines')"
+        :title="
+          t('auth.track_orders_reorder_supplies_and_manage_your_machines')
+        "
         icon="lucide:printer"
         :stats="[
           { label: t('auth.orders'), value: 'Tracked' },
@@ -88,7 +90,7 @@
             v-model="email"
             name="email"
             type="email"
-            label="Email"
+            :label="t('inputs.email')"
             required
             rules="required|email"
             autocomplete="email"
@@ -101,10 +103,10 @@
             v-model="password"
             name="password"
             type="password"
-            label="Password"
+            :label="t('inputs.password')"
             required
             revealable
-            :rules="requiredText('Enter your password.')"
+            rules="required"
             autocomplete="current-password"
             icon="lucide:key-round"
           />

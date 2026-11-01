@@ -24,7 +24,7 @@
       <LazyVSelectInput
         v-model="catalog.sort"
         name="catalogSort"
-        label="Sort products"
+        :label="t('inputs.sort_products')"
         hide-label
         :options="sortOptions"
         input-class="!w-auto py-2 pe-8"

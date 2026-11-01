@@ -6,12 +6,6 @@ import type { PasswordCheck, Rule } from "~/types/validators";
 const text = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 const digits = (v: unknown) => String(v ?? "").replace(/\D/g, "");
 
-/** A required text field with your own message. */
-export const requiredText =
-  (message: string): Rule =>
-    (v) =>
-      text(v) ? true : message;
-
 export const emailRule: Rule = (v) => {
   const s = text(v);
   if (!s) return "Enter your email so we can send the order confirmation.";

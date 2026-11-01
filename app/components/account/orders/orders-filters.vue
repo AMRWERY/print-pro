@@ -5,22 +5,24 @@
         v-model="search"
         name="order-search"
         type="search"
-        label="Search orders"
+        :label="t('inputs.search_orders')"
         hide-label
         icon="lucide:search"
         placeholder="Search by order #, item or waybill"
       />
+
       <LazyVSelectInput
         v-model="quarter"
         name="order-quarter"
-        label="Quarter"
+        :label="t('inputs.quarter')"
         hide-label
         :options="quarterOptions"
       />
+
       <LazyVSelectInput
         v-model="port"
         name="order-port"
-        label="Receiving port"
+        :label="t('inputs.receiving_port')"
         hide-label
         :options="portOptions"
       />

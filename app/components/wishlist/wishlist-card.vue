@@ -41,7 +41,7 @@
       <LazyVCheckboxInput
         v-if="!readonly"
         :model-value="selected"
-        :label="'Select ' + product.name"
+        :label="t('inputs.select') + ' ' + product.name"
         hide-label
         class="absolute end-3 top-3 grid h-8 w-8 place-items-center rounded-control bg-ink/70 backdrop-blur"
         @update:model-value="(v) => emit('update:selected', !!v)"
@@ -135,7 +135,7 @@
           <LazyVSelectInput
             :model-value="tag"
             name="studioTag"
-            label="Location tag"
+            :label="t('inputs.location_tag')"
             inline
             label-class="eyebrow shrink-0"
             class="min-w-0 flex-1"

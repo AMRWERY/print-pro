@@ -7,6 +7,7 @@ const KEY: InjectionKey<ReturnType<typeof createCheckout>> = Symbol("checkout");
  * vee-validate form created here (by `name`), so each field owns its rules and message.
  * `form` holds the values (they are also read by the summary and review).
  */
+
 const createCheckout = () => {
   const formCtx = useForm();
 

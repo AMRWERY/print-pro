@@ -89,7 +89,7 @@
           v-model="draft"
           class="flex-1"
           name="voucher"
-          label="Voucher code"
+          :label="t('inputs.voucher_code')"
           hide-label
           autocomplete="off"
           autocapitalize="characters"
@@ -112,7 +112,12 @@
           size="16"
           class="bullet-icon"
           aria-hidden="true"
-        />{{ t("orders.voucher_not_valid", "That code doesn't apply to this cart. Check it for typos or try another.") }}
+        />{{
+          t(
+            "orders.voucher_not_valid",
+            "That code doesn't apply to this cart. Check it for typos or try another.",
+          )
+        }}
       </p>
 
       <div

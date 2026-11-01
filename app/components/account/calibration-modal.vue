@@ -42,14 +42,14 @@
             <LazyVSelectInput
               v-model="form.standard"
               name="cal-standard"
-              label="Supply type"
+              :label="t('inputs.supply_type')"
               :options="standards"
             />
 
             <LazyVSelectInput
               v-model="form.substrate"
               name="cal-substrate"
-              label="Machine model"
+              :label="t('inputs.machine_model')"
               :options="substrates"
             />
 
@@ -57,16 +57,16 @@
               <LazyVInput
                 v-model="form.tolerance"
                 name="cal-tolerance"
-                label="Quantity"
+                :label="t('inputs.quantity')"
                 required
-                :rules="requiredText('Enter how many you need, e.g. 2.')"
+                rules="required"
                 placeholder="e.g. 2"
               />
 
               <LazyVSelectInput
                 v-model="form.station"
                 name="cal-station"
-                label="Delivery address"
+                :label="t('inputs.delivery_address')"
                 :options="stations"
               />
             </div>
@@ -74,7 +74,7 @@
             <LazyVTextarea
               v-model="form.notes"
               name="cal-notes"
-              label="Notes for our team"
+              :label="t('inputs.notes_for_our_team')"
               optional
               rows="3"
               placeholder="Preferred delivery time, colours needed, or anything else we should know"

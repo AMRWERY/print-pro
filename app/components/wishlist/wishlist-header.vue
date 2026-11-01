@@ -26,7 +26,7 @@
           <LazyVInput
             :model-value="name"
             name="registryName"
-            label="Registry name"
+            :label="t('inputs.registry_name')"
             hide-label
             variant="bare"
             maxlength="40"

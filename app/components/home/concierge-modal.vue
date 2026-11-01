@@ -23,6 +23,7 @@
                 {{ t("home.talk_to_a_technician") }}
               </h2>
             </div>
+            
             <LazyVButton
               variant="icon"
               icon="lucide:x"
@@ -47,7 +48,7 @@
             <LazyVSelectInput
               v-model="topic"
               name="concierge-topic"
-              label="What do you need help with?"
+              :label="t('inputs.what_do_you_need_help_with')"
               :options="topics"
             />
 
@@ -55,18 +56,18 @@
               <LazyVDatePicker
                 v-model="date"
                 name="concierge-date"
-                label="Session date"
+                :label="t('inputs.session_date')"
                 required
                 :min="earliest"
                 :is-date-disabled="isWeekend"
                 hint="Monday to Friday"
-                :rules="requiredText('Pick a session date.')"
+                rules="required"
               />
 
               <LazyVSelectInput
                 v-model="slot"
                 name="concierge-slot"
-                label="Time"
+                :label="t('inputs.time')"
                 :options="slots"
               />
             </div>
@@ -75,21 +76,17 @@
               <LazyVInput
                 v-model="name"
                 name="concierge-name"
-                label="Your name"
+                :label="t('inputs.your_name')"
                 required
                 autocomplete="name"
-                :rules="
-                  requiredText(
-                    'Enter your name so the technician can greet you.',
-                  )
-                "
+                rules="required"
               />
 
               <LazyVInput
                 v-model="email"
                 name="concierge-email"
                 type="email"
-                label="Email"
+                :label="t('inputs.email')"
                 required
                 autocomplete="email"
                 :rules="emailRule"
@@ -99,7 +96,7 @@
             <LazyVTextarea
               v-model="notes"
               name="concierge-notes"
-              label="Anything we should prepare?"
+              :label="t('inputs.anything_we_should_prepare')"
               optional
               rows="3"
               placeholder="Models you are comparing, a print size, or a problem you are seeing"

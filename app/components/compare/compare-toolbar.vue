@@ -59,7 +59,7 @@
         <LazyVSelectInput
           :model-value="''"
           name="addProduct"
-          label="Add a product to compare"
+          :label="t('inputs.add_product_to_compare')"
           hide-label
           :options="addOptions"
           input-class="!w-auto py-1.5 pe-8 text-xs"

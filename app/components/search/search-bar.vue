@@ -17,7 +17,7 @@
         v-model="draft"
         class="min-w-0 flex-1"
         name="siteSearch"
-        label="Search the catalog"
+        :label="t('inputs.search_the_catalog')"
         hide-label
         variant="bare"
         input-class="w-full bg-transparent px-1 py-2 text-base text-paper placeholder:text-mute focus:outline-none sm:text-lg"
@@ -37,6 +37,7 @@
         @keydown.up.prevent="move(-1)"
         @keydown.enter="onEnter"
       />
+
       <LazyVButton
         variant="icon"
         size="sm"

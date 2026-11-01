@@ -90,7 +90,7 @@
             v-model="email"
             name="email"
             type="email"
-            label="Email"
+            :label="t('inputs.email')"
             required
             rules="required|email"
             autocomplete="email"
@@ -137,6 +137,7 @@
 import type { Validatable } from "~/types/auth";
 
 const { t } = useI18n();
+
 const auth = useAuthStore();
 
 const email = ref("");

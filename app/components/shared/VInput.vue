@@ -88,6 +88,7 @@
  * - `class` styles the wrapper; `inputClass` styles the control. Native attrs
  *   (autocomplete, placeholder, min, max, @keydown…) go to the control.
  */
+
 defineOptions({ inheritAttrs: false });
 
 type FieldType =

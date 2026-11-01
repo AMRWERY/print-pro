@@ -18,7 +18,7 @@
       class="pb-4"
       type="search"
       name="catalogQuery"
-      label="Filter by name, model or SKU"
+      :label="t('inputs.filter_by_name_model_or_sku')"
       hide-label
       icon="lucide:search"
       autocomplete="off"
@@ -93,7 +93,7 @@
           :key="r"
           :model-value="catalog.filters.minRating"
           :value="r"
-          :name="uid + '-rating'"
+          :name="`${uid}-rating`"
           label-class="items-center py-1.5"
           @update:model-value="catalog.filters.minRating = r"
         >

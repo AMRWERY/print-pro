@@ -114,7 +114,7 @@
                   <div class="mt-auto flex items-center justify-between gap-3">
                     <LazyVQuantityStepper
                       :model-value="e.line.qty"
-                      :label="`Quantity of ${e.product.name}`"
+                      :label="`${t('inputs.quantity_of')} ${e.product.name}`"
                       @update:model-value="(n) => cart.setQty(e.line.key, n)"
                     />
                     <p class="font-mono text-sm font-medium">

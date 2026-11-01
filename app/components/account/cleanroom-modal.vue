@@ -43,7 +43,7 @@
             <LazyVSelectInput
               v-model="location"
               name="room-location"
-              label="Visit location"
+              :label="t('inputs.visit_location')"
               :options="locations"
             />
 
@@ -51,16 +51,16 @@
               <LazyVDatePicker
                 v-model="bookingDate"
                 name="room-date"
-                label="Session date"
+                :label="t('inputs.session_date')"
                 required
                 :min="tomorrow"
-                :rules="requiredText('Pick a session date.')"
+                rules="required"
               />
 
               <LazyVSelectInput
                 v-model="slot"
                 name="room-slot"
-                label="Time slot"
+                :label="t('inputs.time_slot')"
                 :options="slots"
               />
             </div>
@@ -68,7 +68,7 @@
             <LazyVSelectInput
               v-model="equipmentType"
               name="room-equipment"
-              label="Type of visit"
+              :label="t('inputs.type_of_visit')"
               :options="equipment"
             />
 

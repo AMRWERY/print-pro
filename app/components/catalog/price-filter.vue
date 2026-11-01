@@ -5,7 +5,7 @@
         v-model="catalog.filters.priceMin"
         type="number"
         name="priceMin"
-        label="Min ($)"
+        :label="t('inputs.min')"
         label-class="eyebrow mb-1 block"
         inputmode="numeric"
         min="0"
@@ -17,7 +17,7 @@
         v-model="catalog.filters.priceMax"
         type="number"
         name="priceMax"
-        label="Max ($)"
+        :label="t('inputs.max')"
         label-class="eyebrow mb-1 block"
         inputmode="numeric"
         min="0"
@@ -47,6 +47,8 @@
 
 <script lang="ts" setup>
 import { pricePresets } from "~/data/catalog";
+
+const { t } = useI18n();
 
 type Preset = (typeof pricePresets)[number];
 

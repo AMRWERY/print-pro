@@ -27,7 +27,7 @@
         v-model="current"
         name="current-password"
         type="password"
-        label="Current password"
+        :label="t('inputs.current_password')"
         required
         revealable
         autocomplete="current-password"
@@ -38,7 +38,7 @@
           v-model="next"
           name="new-password"
           type="password"
-          label="New password"
+          :label="t('inputs.new_password')"
           required
           revealable
           autocomplete="new-password"
@@ -50,7 +50,7 @@
         v-model="confirm"
         name="confirm-new-password"
         type="password"
-        label="Confirm new password"
+        :label="t('inputs.confirm_new_password')"
         required
         revealable
         autocomplete="new-password"

@@ -50,7 +50,7 @@
           <LazyVSelectInput
             :model-value="sort"
             name="wishlistSort"
-            label="Sort"
+            :label="t('inputs.sort')"
             inline
             label-class="eyebrow"
             :options="sortOptions"

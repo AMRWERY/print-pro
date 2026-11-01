@@ -62,16 +62,16 @@
     <LazyVInput
       v-model="author"
       name="review-author"
-      label="Your name"
+      :label="t('inputs.your_name')"
       required
       autocomplete="name"
-      :rules="requiredText('Enter the name to show beside your review.')"
+      rules="required"
     />
 
     <LazyVInput
       v-model="title"
       name="review-title"
-      label="Headline"
+      :label="t('inputs.headline')"
       optional
       maxlength="80"
       placeholder="Sum up your experience"
@@ -80,7 +80,7 @@
     <LazyVTextarea
       v-model="body"
       name="review-body"
-      label="Your review"
+      :label="t('inputs.your_review')"
       required
       rows="4"
       maxlength="1000"
