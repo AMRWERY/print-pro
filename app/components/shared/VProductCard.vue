@@ -13,7 +13,8 @@
           :alt="product.imageAlt ?? product.name"
           loading="lazy"
           decoding="async"
-          class="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-105"
+          class="h-full w-full transition duration-500 group-hover:scale-105"
+          :class="product.image?.startsWith('/api/media/') ? 'object-cover' : 'object-contain p-2'"
         />
         <!-- Tint that lifts on hover/focus. Only on devices that can hover, so touch screens never stay dimmed. -->
         <div

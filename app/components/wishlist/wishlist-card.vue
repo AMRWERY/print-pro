@@ -16,7 +16,8 @@
         <img
           :src="product.image"
           :alt="product.imageAlt ?? product.name"
-          class="h-full w-full object-contain p-2"
+          class="h-full w-full"
+          :class="product.image?.startsWith('/api/media/') ? 'object-cover' : 'object-contain p-2'"
           loading="lazy"
           decoding="async"
         />
