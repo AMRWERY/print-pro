@@ -423,7 +423,8 @@ export const getProductDetail = (product: DetailedProduct): ProductDetail => {
 
   const cp = product as Partial<CatalogProduct>;
   const category: CatalogCategory = cp.category ?? "printers";
-  const copy = perCategory[category];
+  // These records are for the built-in products; any other category falls back to the printers wording.
+  const copy = perCategory[category as keyof typeof perCategory] ?? perCategory.printers;
   const specGroups: SpecGroup[] = cp.attrs
     ? attrSpecGroups(product as CatalogProduct)
     : [
