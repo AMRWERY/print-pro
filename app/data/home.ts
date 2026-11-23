@@ -1,39 +1,7 @@
-import type { CatalogCategory } from "~/types/catalog";
-
 export const promoItems = [
   "Free delivery on orders over EGP 2,500",
   "Installation and setup included with every photocopier",
   "Genuine ink and toner, matched to your model",
-];
-
-export const categories = [
-  {
-    label: "Printers",
-    to: "/products/printers",
-    terms: ["printer", "printers"],
-    icon: "lucide:printer",
-    blurb: "Inkjet, laser and large-format printers for home, office and print room.",
-    category: "printers" as CatalogCategory,
-    noun: "models",
-  },
-  {
-    label: "Photocopiers",
-    to: "/products/photocopiers",
-    terms: ["copier", "copiers", "photocopier", "photocopiers"],
-    icon: "lucide:copy",
-    blurb: "A4 and A3 multifunction machines, from small office to production.",
-    category: "copiers" as CatalogCategory,
-    noun: "models",
-  },
-  {
-    label: "Inks & Toner",
-    to: "/products/inks-toner",
-    terms: ["ink", "inks", "toner", "toners"],
-    icon: "lucide:droplets",
-    blurb: "Genuine ink, toner and drum units matched to your machine.",
-    category: "inks-toner" as CatalogCategory,
-    noun: "supplies",
-  },
 ];
 
 export const partners = ["Printa", "Corex", "Nordjet", "Kopira", "Vantix"];
@@ -148,7 +116,7 @@ export const footerColumns = [
     title: "Printers & Copiers",
     links: [
       { label: "Printers", to: "/products/printers" },
-      { label: "Photocopiers", to: "/products/photocopiers" },
+      { label: "Photocopiers", to: "/products/copiers" },
       { label: "Choosing a printer", to: "/guides/choosing-a-printer" },
       { label: "Choosing a photocopier", to: "/guides/choosing-a-photocopier" },
     ],

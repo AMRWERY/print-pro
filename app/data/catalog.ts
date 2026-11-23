@@ -10,12 +10,6 @@ import type {
   SortKey,
 } from "~/types/catalog";
 
-export const categoryOptions: { key: CatalogCategory; label: string }[] = [
-  { key: "printers", label: "Printers" },
-  { key: "copiers", label: "Photocopiers" },
-  { key: "inks-toner", label: "Inks & Toner" },
-];
-
 export const dispatchOptions: { key: DispatchKey; label: string }[] = [
   { key: "in-stock", label: "In stock · ships today" },
   { key: "consignment", label: "Certified refurbished" },
@@ -283,53 +277,31 @@ export const catalogProducts: CatalogProduct[] = baseProducts.map((p) =>
       },
 );
 
-/** Generic category pages: /products/<slug>. "scope" limits which products are listed. */
-export const categoryPages: Record<
-  string,
-  { label: string; description: string; scope: CatalogCategory[] }
-> = {
-  printers: {
-    label: "Printers",
-    description: "Inkjet, laser and large-format printers for the home, the office and the print room.",
-    scope: ["printers"],
-  },
-  photocopiers: {
-    label: "Photocopiers",
-    description: "A4 and A3 multifunction photocopiers, from small-office machines to production systems.",
-    scope: ["copiers"],
-  },
-  "inks-toner": {
-    label: "Inks & Toner",
-    description: "Genuine ink, toner and drum units, matched to your printer or photocopier model.",
-    scope: ["inks-toner"],
-  },
-};
-
-/** Extra words people search for that don't appear in product text. */
-export const categoryKeywords: Record<CatalogCategory, string> = {
-  printers: "printer printers print printing inkjet laser plotter wide format",
-  copiers: "copier copiers photocopier photocopiers copy copying mfp multifunction scanner scan fax",
-  "inks-toner": "ink inks toner toners cartridge cartridges drum refill supplies consumables",
+/** Extra words people search for that don't appear in product text, by product group. */
+export const groupKeywords: Record<string, string> = {
+  printer: "printer printers print printing inkjet laser plotter wide format",
+  copier: "copier copiers photocopier photocopiers copy copying mfp multifunction scanner scan fax",
+  ink: "ink inks toner toners cartridge cartridges drum refill supplies consumables",
 };
 
 // Category-specific filters. They only show when exactly one category is selected.
 const yesNo = (v: boolean) => (v ? "yes" : "no");
 
-export const attrFilterDefs: Record<CatalogCategory, AttrFilterDef[]> = {
-  printers: [
+export const attrFilterDefs: Record<"printer" | "copier" | "supply", AttrFilterDef[]> = {
+  printer: [
     { key: "technology", label: "Technology", options: [{ value: "inkjet", label: "Inkjet" }, { value: "laser", label: "Laser" }, { value: "large-format", label: "Large-format" }] },
     { key: "colour", label: "Colour", options: [{ value: "colour", label: "Colour" }, { value: "mono", label: "Black & white" }] },
     { key: "maxPaper", label: "Largest paper size", options: [{ value: "A4", label: "A4" }, { value: "A3", label: "A3" }, { value: "A2", label: "A2" }, { value: "A1", label: "A1" }, { value: "A0", label: "A0" }] },
     { key: "connectivity", label: "Connectivity", options: [{ value: "wifi", label: "Wi-Fi" }, { value: "ethernet", label: "Ethernet" }, { value: "usb", label: "USB" }] },
     { key: "duplex", label: "Two-sided printing", options: [{ value: "yes", label: "Automatic duplex" }] },
   ],
-  copiers: [
+  copier: [
     { key: "speed", label: "Speed", options: [{ value: "up-to-25", label: "Up to 25 ppm" }, { value: "26-45", label: "26 – 45 ppm" }, { value: "46-plus", label: "46 ppm and above" }] },
     { key: "paper", label: "Paper size", options: [{ value: "A4", label: "A4" }, { value: "A3", label: "A3" }] },
     { key: "colour", label: "Colour", options: [{ value: "colour", label: "Colour" }, { value: "mono", label: "Black & white" }] },
     { key: "functions", label: "Functions", options: [{ value: "copy", label: "Copy" }, { value: "print", label: "Print" }, { value: "scan", label: "Scan" }, { value: "fax", label: "Fax" }] },
   ],
-  "inks-toner": [
+  supply: [
     { key: "kind", label: "Type", options: [{ value: "ink", label: "Ink" }, { value: "toner", label: "Toner" }, { value: "drum", label: "Drum unit" }] },
     { key: "colour", label: "Colour", options: [{ value: "black", label: "Black" }, { value: "cyan", label: "Cyan" }, { value: "magenta", label: "Magenta" }, { value: "yellow", label: "Yellow" }, { value: "multi", label: "Multi-colour set" }] },
     { key: "compatibleBrand", label: "Fits brand", options: [{ value: "Printa", label: "Printa" }, { value: "Corex", label: "Corex" }, { value: "Nordjet", label: "Nordjet" }, { value: "Kopira", label: "Kopira" }, { value: "Vantix", label: "Vantix" }] },
@@ -338,7 +310,8 @@ export const attrFilterDefs: Record<CatalogCategory, AttrFilterDef[]> = {
 
 /** The values a product has for one filter attribute (empty when it does not have that attribute). */
 export const attrValues = (p: CatalogProduct, key: string): string[] => {
-  if (p.category === "printers") {
+  if (!p.attrs) return [];
+  if (p.group === "printer") {
     const a = p.attrs as PrinterAttrs;
     if (key === "technology") return [a.technology];
     if (key === "colour") return [a.colour];
@@ -346,7 +319,7 @@ export const attrValues = (p: CatalogProduct, key: string): string[] => {
     if (key === "connectivity") return a.connectivity;
     if (key === "duplex") return a.duplex ? [yesNo(true)] : [];
   }
-  if (p.category === "copiers") {
+  if (p.group === "copier") {
     const a = p.attrs as CopierAttrs;
     if (key === "speed")
       return [a.ppm <= 25 ? "up-to-25" : a.ppm <= 45 ? "26-45" : "46-plus"];
@@ -354,7 +327,7 @@ export const attrValues = (p: CatalogProduct, key: string): string[] => {
     if (key === "colour") return [a.colour];
     if (key === "functions") return a.functions;
   }
-  if (p.category === "inks-toner") {
+  if (p.group === "ink") {
     const a = p.attrs as InkAttrs;
     if (key === "kind") return [a.kind];
     if (key === "colour") return [a.colour];

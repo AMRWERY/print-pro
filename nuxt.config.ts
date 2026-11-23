@@ -9,6 +9,7 @@ const movedPages: Record<string, string> = {
   "/products/tripods": "/products",
   "/products/accessories": "/products",
   "/products/paper-ink": "/products/inks-toner",
+  "/products/photocopiers": "/products/copiers",
   "/services/bench-calibration": "/services/maintenance-contracts",
   "/services/studio-financing": "/services/financing",
   "/services/shipping-freight": "/services/shipping-delivery",

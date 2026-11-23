@@ -53,13 +53,14 @@
 </template>
 
 <script lang="ts" setup>
-import { categories } from "~/data/home";
-
 const { t } = useI18n();
+const { categories } = useStorefrontCategories();
 
 // "12 models" counts what the live catalog lists (before it loads, the built-in catalog).
 useCatalogProducts();
 const catalog = useCatalogStore();
-const meta = (c: (typeof categories)[number]) =>
-  `${catalog.all.filter((p) => (p as { category?: string }).category === c.category).length} ${c.noun}`;
+const meta = (c: { category: string; noun: string }) => {
+  const n = catalog.all.filter((p) => (p as { category?: string }).category === c.category).length;
+  return n ? `${n} ${c.noun}` : "Coming soon";
+};
 </script>

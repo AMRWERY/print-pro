@@ -1,5 +1,4 @@
 import type {
-  CatalogCategory,
   CatalogProduct,
   CopierAttrs,
   InkAttrs,
@@ -16,8 +15,9 @@ import type { DetailedProduct } from "~/types/product";
 export const MAX_COMPARE = 4;
 
 /** Rows to compare, per category. Products are only compared within one category. */
-export const compareSections: Record<CatalogCategory, CompareSectionDef[]> = {
-  printers: [
+/** Rows to compare, by product group. A "general" product only has the core rows. */
+export const compareSections: Record<"printer" | "copier" | "ink", CompareSectionDef[]> = {
+  printer: [
     {
       key: "print",
       title: "Printing",
@@ -41,7 +41,7 @@ export const compareSections: Record<CatalogCategory, CompareSectionDef[]> = {
       ],
     },
   ],
-  copiers: [
+  copier: [
     {
       key: "performance",
       title: "Performance",
@@ -73,7 +73,7 @@ export const compareSections: Record<CatalogCategory, CompareSectionDef[]> = {
       ],
     },
   ],
-  "inks-toner": [
+  ink: [
     {
       key: "supply",
       title: "Supply",
@@ -96,7 +96,7 @@ const colourLabel = (c: "colour" | "mono") => (c === "colour" ? "Colour" : "Blac
 export const derivedSpecs = (p: DetailedProduct): Record<string, SpecValue> => {
   const cp = p as Partial<CatalogProduct>;
   if (!cp.attrs) return {};
-  if (cp.category === "printers") {
+  if (cp.group === "printer") {
     const a = cp.attrs as PrinterAttrs;
     return {
       technology: v(cap(a.technology.replace("-", " "))),
@@ -108,7 +108,7 @@ export const derivedSpecs = (p: DetailedProduct): Record<string, SpecValue> => {
       ),
     };
   }
-  if (cp.category === "copiers") {
+  if (cp.group === "copier") {
     const a = cp.attrs as CopierAttrs;
     return {
       ppm: v(`${a.ppm} ppm`),
@@ -118,6 +118,7 @@ export const derivedSpecs = (p: DetailedProduct): Record<string, SpecValue> => {
       functions: v(a.functions.map(cap).join(", ")),
     };
   }
+  if (cp.group !== "ink") return {};
   const a = cp.attrs as InkAttrs;
   return {
     kind: v(cap(a.kind)),

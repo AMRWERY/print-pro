@@ -41,7 +41,7 @@ export const infoPages: InfoPage[] = [
     ],
     cta: {
       label: "Browse photocopiers",
-      to: "/products/photocopiers",
+      to: "/products/copiers",
       text: "Photocopiers can be bought with a three-year maintenance contract in one step.",
     },
   },
@@ -126,7 +126,7 @@ export const infoPages: InfoPage[] = [
     ],
     cta: {
       label: "Find machines you can lease",
-      to: "/products/photocopiers",
+      to: "/products/copiers",
       text: "Look for the lease price on product pages to see what you can finance.",
     },
   },
@@ -245,7 +245,7 @@ export const infoPages: InfoPage[] = [
     ],
     cta: {
       label: "Browse photocopiers",
-      to: "/products/photocopiers",
+      to: "/products/copiers",
       text: "Filter by speed, paper size, colour and functions.",
     },
   },

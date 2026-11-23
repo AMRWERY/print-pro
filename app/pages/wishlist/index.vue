@@ -121,7 +121,6 @@
 </template>
 
 <script lang="ts" setup>
-import { categoryOptions } from "~/data/catalog";
 import { sampleRegistry, wishlistAssurances } from "~/data/wishlist";
 import type { DetailedProduct } from "~/types/product";
 
@@ -173,9 +172,12 @@ const category = ref("all");
 const sort = ref("price-desc");
 const view = ref<"grid" | "list">("grid");
 
-const categoryOf = (p: DetailedProduct) =>
-  categoryOptions.find((o) => o.key === (p as { category?: string }).category)
-    ?.label ?? "Other";
+const categoryStore = useCategoriesStore();
+void categoryStore.ensure();
+const categoryOf = (p: DetailedProduct) => {
+  const key = (p as { category?: string }).category;
+  return key ? categoryStore.label(key) : "Other";
+};
 
 const categories = computed(() => {
   const counts = new Map<string, number>();

@@ -9,8 +9,7 @@ import type {
 import {
   attrFilterDefs,
   attrValues,
-  categoryKeywords,
-  categoryOptions,
+  groupKeywords,
   dispatchOptions,
   perPageOptions,
   sortOptions,
@@ -37,11 +36,10 @@ const toggle = <T>(list: T[], value: T) => {
 };
 
 // Every word must appear somewhere in the product text ("canon printer").
-const matchesQuery = (p: CatalogProduct, query: string) => {
+const matchesQuery = (p: CatalogProduct, query: string, category: string) => {
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (!words.length) return true;
-  const category = categoryOptions.find((o) => o.key === p.category)?.label ?? "";
-  const haystack = [p.name, p.brand, p.blurb, p.sku, category, categoryKeywords[p.category], ...p.specs]
+  const haystack = [p.name, p.brand, p.blurb, p.sku, category, groupKeywords[p.group] ?? "", ...p.specs]
     .join(" ")
     .toLowerCase();
   // "printers" should also find "printer": try the singular of plural-looking words.
@@ -52,13 +50,14 @@ const matchesQuery = (p: CatalogProduct, query: string) => {
 
 const createCatalog = (products: CatalogProduct[]) => {
   const { format: money } = useMoney();
+  const categoryStore = useCategoriesStore();
   const filters = reactive<CatalogFilters>(emptyFilters());
   const sort = ref<SortKey>("featured");
   const perPage = ref<number>(perPageOptions[0]);
   const page = ref(1);
 
   const matches = (p: CatalogProduct) => {
-    if (!matchesQuery(p, filters.query)) return false;
+    if (!matchesQuery(p, filters.query, categoryStore.label(p.category))) return false;
     if (filters.categories.length && !filters.categories.includes(p.category))
       return false;
     if (filters.brands.length && !filters.brands.includes(p.brand))
@@ -113,9 +112,11 @@ const createCatalog = (products: CatalogProduct[]) => {
   const dispatchCounts = countBy((p) => p.dispatch);
   const brandCounts = countBy((p) => p.brand);
 
-  const categories = categoryOptions
-    .map((o) => ({ ...o, count: categoryCounts.get(o.key) ?? 0 }))
-    .filter((o) => o.count > 0);
+  const categories = computed(() =>
+    categoryStore.items
+      .map((c) => ({ key: c.key, label: c.name, count: categoryCounts.get(c.key) ?? 0 }))
+      .filter((o) => o.count > 0),
+  );
   const dispatches = dispatchOptions.map((o) => ({
     ...o,
     count: dispatchCounts.get(o.key) ?? 0,
@@ -132,7 +133,9 @@ const createCatalog = (products: CatalogProduct[]) => {
     return present.size === 1 ? [...present][0]! : null;
   });
   const attrGroups = computed(() =>
-    activeCategory.value ? attrFilterDefs[activeCategory.value] : [],
+    activeCategory.value
+      ? (attrFilterDefs[categoryStore.kindOf(activeCategory.value) as keyof typeof attrFilterDefs] ?? [])
+      : [],
   );
   watch(activeCategory, () => (filters.attrs = {}));
 
@@ -156,7 +159,7 @@ const createCatalog = (products: CatalogProduct[]) => {
     for (const c of filters.categories)
       out.push({
         key: `cat-${c}`,
-        label: categoryOptions.find((o) => o.key === c)?.label ?? c,
+        label: categoryStore.label(c),
         remove: () => toggle(filters.categories, c),
       });
     for (const b of filters.brands)
@@ -214,7 +217,7 @@ const createCatalog = (products: CatalogProduct[]) => {
   /** Quick matches for the search box. Empty input suggests the top-rated items. */
   const suggest = (query: string, limit = 4) =>
     products
-      .filter((p) => matchesQuery(p, query))
+      .filter((p) => matchesQuery(p, query, categoryStore.label(p.category)))
       .sort((a, b) => b.rating - a.rating || b.reviews - a.reviews)
       .slice(0, limit);
 

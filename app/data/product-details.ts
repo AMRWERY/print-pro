@@ -1,4 +1,4 @@
-import { catalogProducts, categoryOptions } from "~/data/catalog";
+import { catalogProducts } from "~/data/catalog";
 import { defaultCompanionProducts, defaultRegistryItems } from "~/data/account";
 import type {
   CatalogCategory,
@@ -74,14 +74,9 @@ export const allProducts: DetailedProduct[] = [
 export const findProduct = (id: string): DetailedProduct | undefined =>
   allProducts.find((p) => p.id === id);
 
-const categoryCrumb = (category: CatalogCategory) => {
-  const to = {
-    printers: "/products/printers",
-    copiers: "/products/photocopiers",
-    "inks-toner": "/products/inks-toner",
-  }[category];
-  return { label: categoryOptions.find((o) => o.key === category)!.label, to };
-};
+// Only the built-in products use this (the live catalog's pages come from the API).
+const categoryLabels: Record<string, string> = { printers: "Printers", copiers: "Photocopiers", "inks-toner": "Inks & Toner" };
+const categoryCrumb = (category: CatalogCategory) => ({ label: categoryLabels[category] ?? category, to: `/products/${category}` });
 
 const yes = (v: boolean) => (v ? "Yes" : "No");
 const list = (v: string[]) =>
@@ -285,7 +280,7 @@ const richDetails: Record<string, ProductDetail> = {
     subtitle: "A3 colour photocopier with touchscreen and scan-to-cloud",
     crumbs: [
       { label: "Index", to: "/" },
-      { label: "Photocopiers", to: "/products/photocopiers" },
+      { label: "Photocopiers", to: "/products/copiers" },
       { label: "A3 colour" },
       { label: "Kopira Pro A3 30 ppm Colour" },
     ],

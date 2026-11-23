@@ -1,6 +1,5 @@
 import { compareData, compareSections, derivedSpecs } from "~/data/compare";
 import type { MatrixRow, MatrixSection, SpecValue } from "~/types/compare";
-import type { CatalogCategory } from "~/types/catalog";
 import type { DetailedProduct } from "~/types/product";
 
 const MISSING: SpecValue = { value: "—" };
@@ -42,8 +41,11 @@ export const useComparison = (ids: Ref<string[]>) => {
     const list = products.value;
     if (!list.length) return [];
 
-    const category = (list[0] as { category?: CatalogCategory }).category ?? "printers";
-    const defs = [{ key: "core", title: "Core facts", rows: coreRows }, ...compareSections[category]];
+    const group = (list[0] as { group?: string }).group ?? "general";
+    const defs = [
+      { key: "core", title: "Core facts", rows: coreRows },
+      ...(compareSections[group as keyof typeof compareSections] ?? []),
+    ];
     const out: MatrixSection[] = [];
 
     for (const def of defs) {

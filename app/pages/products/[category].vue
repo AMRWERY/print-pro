@@ -1,25 +1,26 @@
 <template>
   <catalog-page
-    v-if="products"
+    v-if="products && category"
     :key="slug"
     :products="products"
-    :crumb="page.label"
-    :title="page.label"
-    :description="page.description"
+    :crumb="category.name"
+    :title="category.name"
+    :description="category.abstract || `Browse ${category.name.toLowerCase()}.`"
   />
   <catalog-load-error v-else-if="error" @retry="refresh" />
   <catalog-skeleton-loader v-else />
 </template>
 
 <script lang="ts" setup>
-import { categoryPages } from "~/data/catalog";
-
 // The :key on <catalog-page> rebuilds the catalogue state when the category changes.
 const route = useRoute();
 const slug = computed(() => String(route.params.category));
 
-const page = computed(() => categoryPages[slug.value]!);
-if (!categoryPages[slug.value]) {
+// Only categories the shop shows have a page: an unknown or hidden one is a 404.
+const categories = useCategoriesStore();
+await categories.ensure();
+const category = computed(() => categories.byKey.get(slug.value));
+if (!category.value) {
   throw createError({
     statusCode: 404,
     statusMessage: "Category not found",
@@ -28,12 +29,10 @@ if (!categoryPages[slug.value]) {
 }
 
 const { products: all, error, refresh } = useCatalogProducts();
-const products = computed(() =>
-  all.value?.filter((p) => page.value.scope.includes(p.category)),
-);
+const products = computed(() => all.value?.filter((p) => p.category === slug.value));
 
 useSeoMeta({
-  title: () => `${page.value.label}`,
-  description: () => page.value.description,
+  title: () => category.value?.name ?? "Category",
+  description: () => category.value?.abstract ?? "",
 });
 </script>

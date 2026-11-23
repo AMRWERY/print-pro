@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import { categories } from "~/data/home";
-
+const { categories } = useStorefrontCategories();
 const matchesSearch = useCategorySearchMatch();
 </script>
