@@ -47,7 +47,7 @@ export default {
       },
       fontFamily: {
         display: [
-          '"Reem Kufi"',
+          "Poppins",
           '"IBM Plex Sans Arabic"',
           "ui-sans-serif",
           "system-ui",
