@@ -11,7 +11,7 @@
       >
         <span class="eyebrow !text-paper"
           >{{ t("btn.saved_for_later") }} ({{ items.length }}
-          {{ items.length === 1 ? "item" : "items" }})</span
+          {{ items.length === 1 ? t("cart.item") : t("cart.items") }})</span
         >
         <Icon
           name="lucide:chevron-down"

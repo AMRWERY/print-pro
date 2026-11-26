@@ -58,7 +58,7 @@
       </div>
 
       <p v-if="line.option" class="text-sm text-mute">
-        <span class="eyebrow">Config</span> {{ line.option }}
+        <span class="eyebrow">{{ t("cart.config") }}</span> {{ line.option }}
       </p>
       <ul class="flex flex-wrap gap-1.5" aria-label="Key specifications">
         <li v-for="s in product.specs" :key="s" class="chip">{{ s }}</li>
@@ -66,7 +66,7 @@
 
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div class="flex items-center gap-3">
-          <span class="eyebrow">Allocation</span>
+          <span class="eyebrow">{{ t("cart.allocation") }}</span>
 
           <LazyVQuantityStepper
             :model-value="line.qty"
@@ -83,7 +83,8 @@
             {{ line.qty }} × {{ money.format(line.unitPrice) }}
           </p>
           <p v-if="product.lease" class="meta">
-            Lease: {{ money.format(product.lease * line.qty) }} / mo
+            {{ t("cart.lease") }} {{ money.format(product.lease * line.qty) }} /
+            {{ t("cart.month") }}
           </p>
         </div>
       </div>
@@ -112,8 +113,9 @@
           class="inline-flex items-center gap-1.5"
           @click="emit('later')"
         >
-          <Icon name="lucide:clock" size="14" aria-hidden="true" />Save for
-          {{ t("btn.later") }}
+          <Icon name="lucide:clock" size="14" aria-hidden="true" />{{
+            t("btn.save_for_later")
+          }}
         </LazyVButton>
 
         <LazyVButton

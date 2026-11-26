@@ -19,10 +19,10 @@
             class="flex items-center justify-between gap-3 border-b border-line px-4 py-3"
           >
             <h2 id="cart-drawer-title" class="font-display text-xl">
-              Your cart
+              {{ t("cart.your_cart") }}
               <span class="font-mono text-sm text-mute"
                 >({{ cart.count }}
-                {{ cart.count === 1 ? "unit" : "units" }})</span
+                {{ cart.count === 1 ? t("cart.unit") : t("cart.units") }})</span
               >
             </h2>
             <LazyVButton
@@ -129,11 +129,11 @@
               <!-- Free freight progress -->
               <div v-if="remaining > 0" class="space-y-1.5">
                 <p class="text-xs text-mute">
-                  Add
+                  {{ t("btn.add") }}
                   <span class="font-medium text-paper">{{
                     money.format(remaining)
                   }}</span>
-                  more for free delivery.
+                  {{ t("cart.more_for_free_delivery") }}
                 </p>
                 <div
                   class="h-1.5 overflow-hidden rounded-full bg-raised"
@@ -154,11 +154,13 @@
                   name="lucide:circle-check"
                   size="14"
                   aria-hidden="true"
-                />Free delivery unlocked.
+                />{{ t("cart.free_delivery_unlocked") }}
               </p>
 
               <p class="flex items-end justify-between gap-3">
-                <span class="eyebrow !text-paper">Subtotal</span>
+                <span class="eyebrow !text-paper">{{
+                  t("cart.subtotal")
+                }}</span>
                 <span
                   class="font-display text-2xl font-semibold"
                   aria-live="polite"
@@ -166,7 +168,11 @@
                 >
               </p>
               <p class="text-xs text-mute">
-                Freight, discounts and tax are calculated on the cart page.
+                {{
+                  t(
+                    "cart.freight_discounts_and_tax_are_calculated_on_the_cart_page",
+                  )
+                }}
               </p>
 
               <!-- More than four lines: the full cart lives on the cart page -->
@@ -175,8 +181,9 @@
                   class="rounded-control border border-line bg-raised p-2 text-center text-xs text-mute"
                   role="status"
                 >
-                  Showing {{ MAX_VISIBLE }} of {{ entries.length }} items.
-                  {{ hiddenCount }} more in your cart.
+                  {{ t("cart.showing") }} {{ MAX_VISIBLE }} {{ t("cart.of") }}
+                  {{ entries.length }} {{ t("cart.items") }} {{ hiddenCount }}
+                  {{ t("cart.more_in_your_cart") }}
                 </p>
                 <LazyVButton
                   variant="primary"
@@ -227,8 +234,9 @@
 import { pricing } from "~/data/cart";
 import type { CartEntry } from "~/composables/useCartTotals";
 
-const { findProduct } = useCatalogStore();
 const { t } = useI18n();
+
+const { findProduct } = useCatalogStore();
 
 /** More lines than this and the drawer hands over to the cart page. */
 const MAX_VISIBLE = 4;

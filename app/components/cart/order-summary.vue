@@ -1,7 +1,9 @@
 <template>
   <aside class="card space-y-4 p-5" aria-labelledby="summary-title">
     <div class="flex items-center justify-between gap-2">
-      <h2 id="summary-title" class="font-display text-2xl">Order summary</h2>
+      <h2 id="summary-title" class="font-display text-2xl">
+        {{ t("cart.order_summary") }}
+      </h2>
       <span
         class="inline-flex items-center gap-1 rounded-control border border-line px-2 py-0.5 meta"
         ><Icon
@@ -9,16 +11,17 @@
           size="12"
           class="text-success"
           aria-hidden="true"
-        />Business account verified</span
+        />{{ t("cart.business_account_verified") }}</span
       >
     </div>
 
     <dl class="space-y-2 text-sm">
       <div class="flex justify-between gap-4">
         <dt class="text-mute">
-          Cart subtotal ({{ selectedCount }}
-          {{ selectedCount === 1 ? "item" : "items" }}, {{ totals.units }}
-          {{ totals.units === 1 ? "unit" : "units" }})
+          {{ t("cart.cart_subtotal") }} ({{ selectedCount }}
+          {{ selectedCount === 1 ? t("cart.item") : t("cart.items") }},
+          {{ totals.units }}
+          {{ totals.units === 1 ? t("cart.unit") : t("cart.units") }})
         </dt>
         <dd class="font-mono">{{ money.format(totals.subtotal) }}</dd>
       </div>
@@ -26,7 +29,7 @@
         v-if="totals.volumeDiscount"
         class="flex justify-between gap-4 text-accent"
       >
-        <dt>Volume discount (ink & toner)</dt>
+        <dt>{{ t("cart.volume_discount") }}</dt>
         <dd class="font-mono">−{{ money.format(totals.volumeDiscount) }}</dd>
       </div>
       <div
@@ -37,7 +40,7 @@
         <dd class="font-mono">−{{ money.format(totals.voucherDiscount) }}</dd>
       </div>
       <div class="flex justify-between gap-4">
-        <dt class="text-mute">Delivery (insured)</dt>
+        <dt class="text-mute">{{ t("cart.delivery_insured") }}</dt>
         <dd
           class="font-mono"
           :class="!totals.freight && totals.units && 'text-success'"
@@ -53,7 +56,9 @@
       </div>
       <div class="flex justify-between gap-4">
         <dt class="text-mute">
-          Estimated sales tax ({{ (pricing.taxRate * 100).toFixed(1) }}%)
+          {{ t("cart.estimated_sales_tax") }} ({{
+            (pricing.taxRate * 100).toFixed(1)
+          }}%)
         </dt>
         <dd class="font-mono">{{ money.format(totals.tax) }}</dd>
       </div>
@@ -61,7 +66,7 @@
 
     <div class="rounded-card border border-line bg-raised p-4">
       <p class="flex items-end justify-between gap-3">
-        <span class="eyebrow !text-paper">Total payable</span>
+        <span class="eyebrow !text-paper">{{ t("cart.total_payable") }}</span>
         <span class="font-display text-3xl font-semibold" aria-live="polite"
           >{{ money.format(totals.payable) }}
           <span class="meta">EGP</span></span
@@ -71,14 +76,16 @@
         v-if="totals.leaseMonthly"
         class="mt-2 flex justify-between gap-3 meta"
       >
-        <span>Commercial lease equivalent</span
-        ><span>{{ money.format(totals.leaseMonthly) }} / mo</span>
+        <span>{{ t("cart.commercial_lease_equivalent") }}</span
+        ><span
+          >{{ money.format(totals.leaseMonthly) }} / {{ t("cart.month") }}</span
+        >
       </p>
     </div>
 
     <!-- Voucher -->
     <div class="space-y-2">
-      <p class="eyebrow">Voucher or offer code</p>
+      <p class="eyebrow">{{ t("cart.voucher_or_offer_code") }}</p>
       <form
         v-if="!applied"
         class="flex items-start gap-2"
@@ -96,6 +103,7 @@
           placeholder="OFFICE-2026"
           input-class="font-mono"
         />
+
         <LazyVButton
           variant="secondary"
           type="submit"
