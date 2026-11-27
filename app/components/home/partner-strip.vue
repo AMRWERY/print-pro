@@ -1,5 +1,5 @@
 <template>
-  <section
+  <section v-if="partners.length"
     class="border-b border-line bg-surface"
     :aria-label="t('home.direct_manufacturer_partners')"
   >

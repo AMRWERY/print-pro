@@ -1,5 +1,5 @@
 <template>
-  <section class="section" aria-labelledby="disciplines-title">
+  <section v-if="shown.length" class="section" aria-labelledby="disciplines-title">
     <div class="container-page space-y-8">
       <section-heading
         id="disciplines-title"
@@ -12,40 +12,21 @@
         "
       />
 
-      <ul class="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3">
+      <ul class="grid grid-cols-1 gap-x-6 gap-y-10 xl:grid-cols-2">
         <li
-          v-for="(c, i) in categories"
-          :key="c.label"
-          v-reveal="{ delay: (i % 4) * 70 }"
+          v-for="(c, i) in shown"
+          :key="c.category"
+          v-reveal="{ delay: (i % 2) * 80 }"
+          class="space-y-4"
         >
-          <nuxt-link-locale
-            :to="c.to"
-            class="group card flex h-full flex-col gap-3 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-accent"
+
+          <ul
+            class="grid grid-cols-1 gap-4 min-[520px]:grid-cols-2"
           >
-            <span class="flex items-center justify-between meta">
-              0{{ i + 1 }} /
-              {{ c.label.split(" ")[0]!.toUpperCase() }}
-              <Icon
-                :name="c.icon"
-                size="20"
-                class="icon-lift text-mute transition-colors duration-200 group-hover:text-accent"
-                aria-hidden="true"
-              />
-            </span>
-            <span class="font-display text-xl">{{ c.label }}</span>
-            <span class="text-sm text-mute">{{ c.blurb }}</span>
-            <span
-              class="mt-auto flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
-            >
-              {{ meta(c) }}
-              <Icon
-                name="lucide:arrow-right"
-                size="12"
-                class="icon-nudge rtl:-scale-x-100"
-                aria-hidden="true"
-              />
-            </span>
-          </nuxt-link-locale>
+            <li v-for="p in productsOf(c.category)" :key="p.id" class="flex">
+              <LazyVProductCard :product="p" class="w-full" />
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -56,11 +37,12 @@
 const { t } = useI18n();
 const { categories } = useStorefrontCategories();
 
-// "12 models" counts what the live catalog lists (before it loads, the built-in catalog).
 useCatalogProducts();
 const catalog = useCatalogStore();
-const meta = (c: { category: string; noun: string }) => {
-  const n = catalog.all.filter((p) => (p as { category?: string }).category === c.category).length;
-  return n ? `${n} ${c.noun}` : t("home_ui.coming_soon");
-};
+// Two products from each category (the first two the catalog lists).
+const productsOf = (category: string) =>
+  catalog.all.filter((p) => (p as { category?: string }).category === category).slice(0, 2);
+
+// Categories with no products yet stay out of the section.
+const shown = computed(() => categories.value.filter((c) => productsOf(c.category).length));
 </script>

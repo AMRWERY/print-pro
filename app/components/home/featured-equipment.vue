@@ -1,5 +1,5 @@
 <template>
-  <section class="section" aria-labelledby="featured-title">
+  <section v-if="featured.length" class="section" aria-labelledby="featured-title">
     <div class="container-page space-y-8">
       <section-heading
         id="featured-title"
