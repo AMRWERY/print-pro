@@ -5,7 +5,7 @@
       v-if="!ready"
       class="space-y-4"
       aria-busy="true"
-      aria-label="Loading your order"
+      :aria-label="t('order_ui.loading_order')"
     >
       <LazyVSkeletonLoader class="h-56" />
 
@@ -15,11 +15,11 @@
     <LazyVEmptyState
       v-else-if="!order"
       icon="lucide:file-search"
-      eyebrow="QUERY :: ORDER_LOOKUP"
-      tag="404 NOT FOUND"
+      :eyebrow="t('order_ui.lookup_eyebrow')"
+      :tag="t('order_ui.not_found_tag')"
       tag-tone="warning"
-      title="We can't find that order"
-      description="We couldn’t find that order, or it needs its PIN. Open the link from your confirmation, or track it with the order number and PIN."
+      :title="t('order_ui.not_found_title')"
+      :description="t('order_ui.not_found_description')"
     >
       <LazyVButton variant="primary" to="/products">{{
         t("btn.browse_the_catalog")
@@ -78,9 +78,8 @@ onMounted(async () => {
 });
 
 useSeoMeta({
-  title: "Order Confirmed",
-  description:
-    "Your order is confirmed. Track its progress and review the details.",
+  title: () => t("order_ui.seo_title"),
+  description: () => t("order_ui.seo_description"),
   robots: "noindex",
 });
 </script>

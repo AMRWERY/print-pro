@@ -38,7 +38,7 @@
             <LazyVButton
               variant="plain"
               class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
-              aria-label="Close delivery tracking"
+              :aria-label="t('acct_ui.close_delivery_tracking')"
               @click="$emit('close')"
             >
               <Icon name="lucide:x" size="18" />
@@ -184,16 +184,16 @@ defineEmits<{
   (e: "close"): void;
 }>();
 
-const steps = [
+const steps = computed(() => [
   {
-    label: "Order confirmed",
-    note: "We have your order",
+    label: t("acct_ui.step_confirmed"),
+    note: t("acct_ui.step_confirmed_note"),
     icon: "lucide:clipboard-check",
   },
-  { label: "Packed", note: "Checked and sealed", icon: "lucide:package" },
-  { label: "On the way", note: "With the courier", icon: "lucide:truck" },
-  { label: "Delivered", note: "Signed for", icon: "lucide:home" },
-];
+  { label: t("account.packed"), note: t("acct_ui.step_packed_note"), icon: "lucide:package" },
+  { label: t("acct_ui.step_on_the_way"), note: t("acct_ui.step_on_the_way_note"), icon: "lucide:truck" },
+  { label: t("account.delivered"), note: t("acct_ui.step_delivered_note"), icon: "lucide:home" },
+]);
 
 // Where the order is in the steps above.
 const current = computed(() => {

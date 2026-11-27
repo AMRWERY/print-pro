@@ -2,12 +2,12 @@
   <div
     class="overflow-x-auto card"
     role="region"
-    aria-label="Comparison matrix (scrolls sideways on small screens)"
+    :aria-label="t('compare_ui.matrix_region')"
     tabindex="0"
   >
     <div
       role="table"
-      :aria-label="`Comparison of ${cmp.products.length} products`"
+      :aria-label="t('compare_ui.table_label', { n: cmp.products.length })"
       :style="{ minWidth }"
     >
       <!-- Product header row -->
@@ -20,15 +20,22 @@
           role="columnheader"
           class="sticky start-0 z-10 flex flex-col gap-2 bg-surface p-4"
         >
-          <p class="eyebrow text-accent">Summary</p>
+          <p class="eyebrow text-accent">{{ t("compare_ui.summary") }}</p>
           <p class="font-display text-xl leading-snug">
-            Side-by-side comparison
+            {{ t("compare_ui.side_by_side") }}
           </p>
           <p class="text-xs text-mute">
-            {{ cmp.products.length }}
-            {{ cmp.products.length === 1 ? "product" : "products" }} ·
-            <span class="text-paper">{{ cmp.totalDeltas }}</span> differences
-            detected
+            {{
+              cmp.products.length === 1
+                ? t("compare_ui.product_one", { n: cmp.products.length })
+                : t("compare_ui.product_other", { n: cmp.products.length })
+            }}
+            ·
+            <i18n-t keypath="compare_ui.differences_detected" tag="span">
+              <template #count>
+                <span class="text-paper">{{ cmp.totalDeltas }}</span>
+              </template>
+            </i18n-t>
           </p>
         </div>
         <compare-product-head
@@ -61,8 +68,11 @@
               <span
                 v-if="s.deltas"
                 class="rounded-control bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent"
-                >{{ s.deltas }}
-                {{ s.deltas === 1 ? "delta" : "deltas" }} detected</span
+                >{{
+                  s.deltas === 1
+                    ? t("compare_ui.delta_detected", { n: s.deltas })
+                    : t("compare_ui.deltas_detected", { n: s.deltas })
+                }}</span
               >
               <span v-else class="meta">{{
                 t("btn.all_specs_identical")
@@ -107,7 +117,7 @@
                   v-else-if="!r.delta && cmp.products.length > 1"
                   class="meta tracking-wider"
                 >
-                  Identical spec
+                  {{ t("compare_ui.identical_spec") }}
                 </p>
               </div>
               <div

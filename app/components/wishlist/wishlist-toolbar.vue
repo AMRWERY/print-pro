@@ -4,7 +4,7 @@
       <div
         class="flex flex-wrap gap-2"
         role="group"
-        aria-label="Filter by category"
+        :aria-label="t('wishlist_ui.filter_by_category')"
       >
         <LazyVButton
           variant="plain"
@@ -27,7 +27,7 @@
         <div
           class="inline-flex rounded-control border border-line p-0.5"
           role="group"
-          aria-label="Layout"
+          :aria-label="t('wishlist_ui.layout')"
         >
           <LazyVButton
             variant="plain"
@@ -71,7 +71,7 @@
         label-class="items-center"
         @update:model-value="(v) => emit('select-all', !!v)"
       >
-        Select all ({{ shown }})
+        {{ t("wishlist_ui.select_all", { n: shown }) }}
       </LazyVCheckboxInput>
 
       <LazyVButton
@@ -80,8 +80,9 @@
         :disabled="!selectedCount"
         @click="emit('batch-remove')"
       >
-        <Icon name="lucide:trash-2" size="14" aria-hidden="true" />Batch remove
-        ({{ selectedCount }})
+        <Icon name="lucide:trash-2" size="14" aria-hidden="true" />{{
+          t("wishlist_ui.batch_remove", { n: selectedCount })
+        }}
       </LazyVButton>
     </div>
   </div>
@@ -89,6 +90,8 @@
 
 <script lang="ts" setup>
 import { wishlistSortOptions } from "~/data/wishlist";
+
+const { t } = useI18n();
 
 defineProps<{
   categories: { key: string; label: string; count: number }[];
@@ -116,8 +119,16 @@ const sortOptions = wishlistSortOptions.map((s) => ({
   label: s.label,
 }));
 
-const views = [
-  { key: "grid" as const, label: "Grid view", icon: "lucide:layout-grid" },
-  { key: "list" as const, label: "Detailed spec list", icon: "lucide:list" },
-];
+const views = computed(() => [
+  {
+    key: "grid" as const,
+    label: t("wishlist_ui.grid_view"),
+    icon: "lucide:layout-grid",
+  },
+  {
+    key: "list" as const,
+    label: t("wishlist_ui.spec_list_view"),
+    icon: "lucide:list",
+  },
+]);
 </script>

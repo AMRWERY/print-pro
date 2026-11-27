@@ -2,10 +2,10 @@
   <section class="card-roomy space-y-4" aria-labelledby="lookup-title">
     <div>
       <p class="eyebrow-accent">
-        <span class="pip" aria-hidden="true" />Order tracking
+        <span class="pip" aria-hidden="true" />{{ t("track_ui.order_tracking") }}
       </p>
       <h1 id="lookup-title" class="font-display text-3xl sm:text-4xl">
-        Track your order
+        {{ t("track_ui.track_your_order") }}
       </h1>
       <p class="mt-1 text-sm text-mute">
         {{
@@ -44,7 +44,7 @@
         :optional="auth.isSignedIn"
         :rules="auth.isSignedIn ? undefined : 'required'"
         autocomplete="off"
-        placeholder="e.g. 4821-9307"
+        :placeholder="t('track_ui.pin_placeholder')"
         input-class="font-mono"
       />
 
@@ -69,7 +69,7 @@
     </p>
 
     <div v-if="recent.length" class="flex flex-wrap items-center gap-2">
-      <span class="eyebrow">Your recent orders</span>
+      <span class="eyebrow">{{ t("track_ui.recent_orders") }}</span>
       <LazyVButton
         v-for="o in recent"
         :key="o.id"

@@ -30,7 +30,7 @@
             <LazyVButton
               variant="icon"
               icon="lucide:x"
-              aria-label="Close dialog"
+              :aria-label="t('acct_ui.close_dialog')"
               @click="$emit('close')"
             />
           </div>
@@ -132,27 +132,27 @@ const emit = defineEmits<{
 const { profile } = useAccount();
 const name = computed(() => profile.value.name);
 
-const locations = [
-  { value: "Head office", label: "Head office (Cairo)" },
-  { value: "Branch office", label: "Branch office (Giza)" },
-];
+const locations = computed(() => [
+  { value: "Head office", label: t("acct_ui.branch_cairo") },
+  { value: "Branch office", label: t("acct_ui.branch_giza") },
+]);
 
-const slots = [
-  { value: "09:00 - 13:00", label: "Morning session: 09:00 - 13:00" },
-  { value: "14:00 - 18:00", label: "Afternoon session: 14:00 - 18:00" },
-  { value: "Full day", label: "Full day: 09:00 - 17:00" },
-];
+const slots = computed(() => [
+  { value: "09:00 - 13:00", label: t("acct_ui.slot_morning") },
+  { value: "14:00 - 18:00", label: t("acct_ui.slot_afternoon") },
+  { value: "Full day", label: t("acct_ui.slot_full_day") },
+]);
 
-const equipment = [
-  { value: "service", label: "Scheduled servicing" },
-  { value: "repair", label: "Repair call-out" },
-  { value: "install", label: "Installation and setup" },
-];
+const equipment = computed(() => [
+  { value: "service", label: t("acct_ui.visit_service") },
+  { value: "repair", label: t("acct_ui.visit_repair") },
+  { value: "install", label: t("acct_ui.visit_install") },
+]);
 
-const location = ref(locations[0]!.value);
+const location = ref(locations.value[0]!.value);
 const bookingDate = ref("");
-const slot = ref(slots[0]!.value);
-const equipmentType = ref(equipment[0]!.value);
+const slot = ref(slots.value[0]!.value);
+const equipmentType = ref(equipment.value[0]!.value);
 
 const { validate } = useForm();
 const submitting = ref(false);

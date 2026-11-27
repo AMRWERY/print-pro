@@ -160,8 +160,8 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Reset Password",
-  description: "Reset your account password.",
+  title: () => t("auth_ui.forgot_seo_title"),
+  description: () => t("auth_ui.forgot_seo_description"),
   robots: "noindex",
 });
 </script>

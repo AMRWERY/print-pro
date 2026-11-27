@@ -23,7 +23,7 @@
       <!-- Preview, queue and price stay in view while you configure -->
       <aside
         class="space-y-4 lg:sticky lg:top-28"
-        aria-label="Order preview and price"
+        :aria-label="t('printing_ui.aside_label')"
       >
         <printing-preview />
 
@@ -38,15 +38,16 @@
 <script lang="ts" setup>
 providePrintConfig();
 
-const crumbs = [
-  { label: "Index", to: "/" },
-  { label: "Print Lab" },
-  { label: "Print configurator" },
-];
+const { t } = useI18n();
+
+const crumbs = computed(() => [
+  { label: t("track_ui.crumb_index"), to: "/" },
+  { label: t("printing_ui.crumb_print_lab") },
+  { label: t("printing_ui.crumb_configurator") },
+]);
 
 useSeoMeta({
-  title: "Print Lab — PrintPro",
-  description:
-    "Configure your print job: size, paper, colour, binding and delivery, with a live price.",
+  title: () => t("printing_ui.seo_title"),
+  description: () => t("printing_ui.seo_description"),
 });
 </script>

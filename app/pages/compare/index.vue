@@ -5,19 +5,18 @@
 
       <header v-reveal class="space-y-4">
         <p class="eyebrow-accent">
-          <span class="pip" aria-hidden="true" />Compare products
+          <span class="pip" aria-hidden="true" />{{ t("compare_ui.compare_products") }}
         </p>
         <h1 class="max-w-4xl text-3xl sm:text-5xl">
-          Compare printers, photocopiers and supplies
+          {{ t("compare_ui.page_title") }}
         </h1>
         <p class="max-w-3xl text-sm text-mute sm:text-base">
-          Put up to four products from one category side by side. Differences
-          are highlighted so you can see what actually separates them.
+          {{ t("compare_ui.page_description") }}
         </p>
         <div
           class="flex flex-wrap gap-2"
           role="group"
-          aria-label="Comparison presets"
+          :aria-label="t('compare_ui.presets')"
         >
           <LazyVButton
             variant="plain"
@@ -48,8 +47,9 @@
           v-if="cmp.products.length === 1"
           class="flex items-center gap-2 rounded-card border border-line bg-raised p-3 text-sm text-mute"
         >
-          <Icon name="lucide:info" size="16" aria-hidden="true" />Add at least
-          one more product to see the differences.
+          <Icon name="lucide:info" size="16" aria-hidden="true" />{{
+            t("compare_ui.add_one_more")
+          }}
         </p>
 
         <compare-matrix
@@ -61,10 +61,10 @@
       <LazyVEmptyState
         v-else
         icon="lucide:git-compare"
-        eyebrow="MATRIX :: COMPARE_NULL"
-        tag="0 PRODUCTS"
-        title="Nothing to compare yet"
-        description="Use the compare button on any product card, or load one of the ready-made comparisons below."
+        :eyebrow="t('compare_ui.empty_eyebrow')"
+        :tag="t('compare_ui.empty_tag')"
+        :title="t('compare_ui.empty_title')"
+        :description="t('compare_ui.empty_description')"
       >
         <LazyVButton variant="primary" to="/products">{{
           t("btn.browse_the_catalog")
@@ -90,11 +90,11 @@ const store = useCompareStore();
 const categoryOf = (id: string) =>
   (findProduct(id) as { category?: string } | undefined)?.category;
 
-const crumbs = [
-  { label: "Index", to: "/" },
-  { label: "Products", to: "/products" },
-  { label: "Compare products" },
-];
+const crumbs = computed(() => [
+  { label: t("catalog_ui.index"), to: "/" },
+  { label: t("catalog_ui.products"), to: "/products" },
+  { label: t("compare_ui.compare_products") },
+]);
 
 // The URL (?ids=a,b,c) is the source of truth so a comparison can be shared.
 const ids = computed(() => {
@@ -125,8 +125,8 @@ onMounted(() => {
 });
 
 useSeoMeta({
-  title: "Compare products",
-  description: "Compare printers, photocopiers and supplies side by side.",
+  title: t("compare_ui.compare_products"),
+  description: t("compare_ui.seo_description"),
   robots: "noindex",
 });
 </script>

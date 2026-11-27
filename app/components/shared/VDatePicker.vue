@@ -36,7 +36,7 @@
           aria-hidden="true"
         />
         <span class="min-w-0 flex-1 truncate" :class="!selected && 'text-mute'">
-          {{ selected ? longLabel(selected) : placeholder }}
+          {{ selected ? longLabel(selected) : (placeholder ?? t("common_ui.select_a_date")) }}
         </span>
         <Icon
           name="lucide:chevron-down"
@@ -50,7 +50,7 @@
         v-if="clearable && selected && !disabled"
         variant="plain"
         class="absolute end-9 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-control text-mute transition-colors duration-200 hover:text-paper"
-        aria-label="Clear date"
+        :aria-label="t('common_ui.clear_date')"
         @click="clear"
       >
         <Icon name="lucide:x" size="14" aria-hidden="true" />
@@ -92,7 +92,7 @@
             ref="panelEl"
             role="dialog"
             aria-modal="true"
-            :aria-label="label ? `Choose ${label}` : 'Choose a date'"
+            :aria-label="label ? t('common_ui.choose_label', { label }) : t('common_ui.choose_a_date')"
             class="picker-panel pointer-events-auto absolute inset-x-0 bottom-0 overflow-hidden rounded-t-panel border border-line bg-surface shadow-2xl shadow-black/60 sm:inset-x-auto sm:bottom-auto sm:w-80 sm:rounded-panel"
             :style="popStyle"
             @keydown="onKeydown"
@@ -123,7 +123,7 @@
                   v-if="view === 'days'"
                   type="button"
                   class="rounded-control px-2 py-1 transition-colors duration-200 hover:bg-raised"
-                  aria-label="Choose month"
+                  :aria-label="t('common_ui.choose_month')"
                   @click="setView('months')"
                 >
                   {{ monthName(cursorM) }}
@@ -132,7 +132,7 @@
                   v-if="view !== 'years'"
                   type="button"
                   class="rounded-control px-2 py-1 transition-colors duration-200 hover:bg-raised"
-                  aria-label="Choose year"
+                  :aria-label="t('common_ui.choose_year')"
                   @click="setView('years')"
                 >
                   {{ num(cursorY) }}
@@ -334,7 +334,7 @@ const props = withDefaults(
     /** 0 = Sunday … 6 = Saturday. Defaults to the locale's first day. */
     weekStart?: number;
   }>(),
-  { placeholder: "Select a date", shortcuts: true },
+  { shortcuts: true },
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: string] }>();
@@ -551,9 +551,9 @@ const cellClass = (c: Cell) => {
 const presets = computed(() => {
   if (!props.shortcuts) return [];
   return [
-    { label: "Tomorrow", iso: addDays(todayIso, 1) },
-    { label: "In a week", iso: addDays(todayIso, 7) },
-    { label: "In a month", iso: addMonths(todayIso, 1) },
+    { label: t("common_ui.tomorrow"), iso: addDays(todayIso, 1) },
+    { label: t("common_ui.in_a_week"), iso: addDays(todayIso, 7) },
+    { label: t("common_ui.in_a_month"), iso: addMonths(todayIso, 1) },
   ].filter((p) => !isDisabled(p.iso));
 });
 
@@ -709,14 +709,18 @@ const onKeydown = (e: KeyboardEvent) => {
 const prevLabel = computed(
   () =>
     ({
-      days: "Previous month",
-      months: "Previous year",
-      years: "Previous years",
+      days: t("common_ui.previous_month"),
+      months: t("common_ui.previous_year"),
+      years: t("common_ui.previous_years"),
     })[view.value],
 );
 const nextLabel = computed(
   () =>
-    ({ days: "Next month", months: "Next year", years: "Next years" })[
+    ({
+      days: t("common_ui.next_month"),
+      months: t("common_ui.next_year"),
+      years: t("common_ui.next_years"),
+    })[
       view.value
     ],
 );

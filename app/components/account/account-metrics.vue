@@ -1,7 +1,7 @@
 <template>
   <section
     class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-    aria-label="Account summary"
+    :aria-label="t('acct_ui.account_summary')"
   >
     <!-- Card 1: ORDERS THIS YEAR -->
     <article
@@ -18,7 +18,7 @@
 
       <div class="mt-2 flex items-baseline gap-2">
         <span class="font-display text-2xl font-bold tracking-tight text-paper">
-          {{ orderCount }} Orders
+          {{ t("acct_ui.orders_count", { n: orderCount }) }}
         </span>
       </div>
 
@@ -67,8 +67,7 @@
 
       <div class="mt-2 flex items-baseline gap-2">
         <span class="font-display text-2xl font-bold tracking-tight text-paper">
-          {{ activeTransitCount }} Order{{ activeTransitCount > 1 ? "s" : "" }}
-          {{ t("account.on_the_way") }}
+          {{ t("acct_ui.orders_on_the_way", { n: activeTransitCount }, activeTransitCount) }}
         </span>
       </div>
 

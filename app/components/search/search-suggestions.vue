@@ -12,12 +12,12 @@
           class="text-accent"
           aria-hidden="true"
         />
-        Predictive matches
+        {{ t("search_ui.predictive_matches") }}
       </h3>
       <ul
         v-if="matches.length"
         role="listbox"
-        aria-label="Predictive matches"
+        :aria-label="t('search_ui.predictive_matches')"
         class="space-y-1"
       >
         <li
@@ -41,14 +41,14 @@
         </li>
       </ul>
       <p v-else class="px-2 text-sm text-mute">
-        No predictive matches yet. Try a brand or model.
+        {{ t("search_ui.no_predictive_matches") }}
       </p>
     </section>
 
     <section aria-labelledby="sg-recent">
       <h3 id="sg-recent" class="eyebrow mb-3 flex items-center gap-1.5">
         <Icon name="lucide:history" size="12" aria-hidden="true" />
-        Recent searches
+        {{ t("search_ui.recent_searches") }}
       </h3>
       <ul v-if="recent.length" class="space-y-1">
         <li v-for="r in recent" :key="r">
@@ -70,14 +70,14 @@
         </li>
       </ul>
       <p v-else class="px-2 text-sm text-mute">
-        Your recent searches will appear here.
+        {{ t("search_ui.recent_searches_empty") }}
       </p>
     </section>
 
     <section aria-labelledby="sg-trending">
       <h3 id="sg-trending" class="eyebrow mb-3 flex items-center gap-1.5">
         <Icon name="lucide:trending-up" size="12" aria-hidden="true" />
-        Popular searches
+        {{ t("search_ui.popular_searches") }}
       </h3>
       <ul class="space-y-1">
         <li v-for="t in trending" :key="t.term">
@@ -100,10 +100,11 @@
     <div
       class="flex items-center justify-between gap-3 border-t border-line pt-3 meta md:col-span-3"
     >
-      <span
-        >Press <kbd class="rounded border border-line px-1">Esc</kbd> to
-        dismiss</span
-      >
+      <i18n-t keypath="search_ui.press_esc_to_dismiss" tag="span">
+        <template #key
+          ><kbd class="rounded border border-line px-1">Esc</kbd></template
+        >
+      </i18n-t>
 
       <LazyVButton
         variant="plain"
@@ -134,10 +135,10 @@ const emit = defineEmits<{ pick: [term: string]; "clear-recent": [] }>();
 
 const money = useMoney();
 
-const trending = [
-  { term: "Toner", tag: "Supplies" },
-  { term: "A3 photocopier", tag: "Popular" },
-  { term: "Ink tank printer", tag: "Low running cost" },
-  { term: "Large-format plotter", tag: "New" },
-];
+const trending = computed(() => [
+  { term: "Toner", tag: t("search_ui.tag_supplies") },
+  { term: "A3 photocopier", tag: t("search_ui.tag_popular") },
+  { term: "Ink tank printer", tag: t("search_ui.tag_low_running_cost") },
+  { term: "Large-format plotter", tag: t("search_ui.tag_new") },
+]);
 </script>

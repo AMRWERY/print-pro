@@ -6,10 +6,10 @@
       <h1
         class="title-lg"
       >
-        Profile &amp; addresses
+        {{ t("acct_profile.page_title") }}
       </h1>
       <p class="mt-1 text-sm text-mute">
-        Your account details, sign-in security and delivery addresses.
+        {{ t("acct_profile.page_desc") }}
       </p>
     </header>
 
@@ -40,15 +40,16 @@
 <script lang="ts" setup>
 import type { ReceivingDock } from "~/types/account";
 
+const { t } = useI18n();
 const docks = useDockStore();
 
 const modalOpen = ref(false);
 const editing = ref<ReceivingDock | null>(null);
 
-const crumbs = [
-  { label: "Account", to: "/account" },
-  { label: "Profile & addresses" },
-];
+const crumbs = computed(() => [
+  { label: t("acct_ui.crumb_account"), to: "/account" },
+  { label: t("acct_profile.page_title") },
+]);
 
 const toast = useToast();
 const notify = (msg: string) => toast.success(msg);
@@ -61,18 +62,18 @@ const openDock = (dock?: ReceivingDock) => {
 const onSaved = (dock: ReceivingDock) => {
   const isNew = !docks.list.some((d) => d.id === dock.id);
   docks.save(dock);
-  notify(isNew ? `Added ${dock.name}` : `Updated ${dock.name}`);
+  notify(isNew ? t("acct_profile.added", { name: dock.name }) : t("acct_profile.updated", { name: dock.name }));
 };
 
 const makePrimary = (dock: ReceivingDock) => {
   docks.makePrimary(dock.id);
-  notify(`${dock.name} is now your default address`);
+  notify(t("acct_profile.now_default", { name: dock.name }));
 };
 
 const remove = (id: string) => {
   const gone = docks.list.find((d) => d.id === id);
   docks.remove(id);
-  if (gone) notify(`Removed ${gone.name}`);
+  if (gone) notify(t("acct_profile.removed", { name: gone.name }));
 };
 
 // "#addresses" in the sidebar scrolls to the ports once the page is in.
@@ -99,8 +100,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "Profile & addresses — PrintPro",
-  description: "Manage your account details, password and delivery addresses.",
+  title: () => `${t("acct_profile.page_title")} — PrintPro`,
+  description: () => t("acct_profile.seo_desc"),
   robots: "noindex",
 });
 </script>

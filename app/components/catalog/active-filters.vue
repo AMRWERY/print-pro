@@ -3,16 +3,16 @@
     v-if="catalog.chips.length"
     class="flex flex-wrap items-center gap-2"
     role="group"
-    aria-label="Active filters"
+    :aria-label="t('catalog_ui.active_filters')"
   >
-    <span class="eyebrow">Active</span>
+    <span class="eyebrow">{{ t("btn.active") }}</span>
     <TransitionGroup name="chip">
       <LazyVButton
         variant="plain"
         v-for="c in catalog.chips"
         :key="c.key"
         class="inline-flex items-center gap-1.5 rounded-control border border-accent/40 bg-accent-soft px-2.5 py-1 text-xs transition duration-200 hover:border-accent"
-        :aria-label="`Remove filter ${c.label}`"
+        :aria-label="t('catalog_ui.remove_filter', { label: c.label })"
         @click="c.remove()"
       >
         {{ c.label }}

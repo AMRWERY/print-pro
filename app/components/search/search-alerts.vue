@@ -6,8 +6,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="alerts-title"
-        eyebrow="Your searches"
-        title="Search history & alerts"
+        :eyebrow="t('search_ui.your_searches')"
+        :title="t('search_ui.search_history_and_alerts')"
       >
         <LazyVButton
           variant="secondary"
@@ -34,11 +34,11 @@
         <li v-for="s in history.saved.value" :key="s.q" v-reveal>
           <article class="card flex h-full flex-col gap-2 p-5">
             <p class="eyebrow flex items-center justify-between text-accent">
-              <span>Alert configured</span>
+              <span>{{ t("search_ui.alert_configured") }}</span>
               <LazyVButton
                 variant="plain"
                 class="text-mute hover:text-paper"
-                :aria-label="`Remove saved search ${s.q}`"
+                :aria-label="t('search_ui.remove_saved_search', { query: s.q })"
                 @click="history.remove(s.q)"
               >
                 <Icon name="lucide:x" size="14" aria-hidden="true" />
@@ -46,14 +46,14 @@
             </p>
             <h3 class="text-xl">“{{ s.q }}”</h3>
             <p class="text-sm text-mute">
-              We’ll flag new lots and price changes that match this search.
+              {{ t("search_ui.alert_description") }}
             </p>
             <div class="mt-auto flex items-center justify-between pt-3 meta">
-              <span>Saved {{ formatDate(s.at) }}</span>
+              <span>{{ t("search_ui.saved_on", { date: formatDate(s.at) }) }}</span>
               <nuxt-link-locale
                 :to="{ path: '/search', query: { q: s.q } }"
                 class="text-accent hover:underline"
-                >Re-execute +</nuxt-link-locale
+                >{{ t("search_ui.re_execute") }}</nuxt-link-locale
               >
             </div>
           </article>
@@ -102,20 +102,20 @@ const formatDate = (iso: string) =>
     day: "numeric",
   });
 
-const defaults = [
+const defaults = computed(() => [
   {
-    eyebrow: "Supplies · reorder",
+    eyebrow: t("search_ui.supplies_reorder"),
     title: "Corex Toner Black 210",
-    body: "Get a reminder to reorder when your toner is about to run out.",
+    body: t("search_ui.reorder_reminder_body"),
     action: t("btn.set_reminder"),
     highlight: false,
   },
   {
-    eyebrow: "Installation included",
-    title: "Free installation on photocopiers",
-    body: "Every photocopier bought from PrintPro is delivered, installed and connected to your network by our technicians.",
+    eyebrow: t("search_ui.installation_included"),
+    title: t("search_ui.free_installation_title"),
+    body: t("search_ui.free_installation_body"),
     action: t("btn.see_how_it_works"),
     highlight: true,
   },
-];
+]);
 </script>

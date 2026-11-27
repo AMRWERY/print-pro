@@ -11,7 +11,7 @@
     >
       {{ label }}
       <span v-if="required" class="text-accent" aria-hidden="true">*</span>
-      <span v-else-if="optional" class="font-normal text-mute">(optional)</span>
+      <span v-else-if="optional" class="font-normal text-mute">{{ t("common_ui.optional_hint") }}</span>
     </label>
 
     <div :class="(icon || revealable) && 'relative'">
@@ -41,7 +41,7 @@
         v-if="revealable && type === 'password'"
         variant="plain"
         class="absolute end-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-control text-mute transition-colors duration-200 hover:text-paper"
-        :aria-label="shown ? 'Hide password' : 'Show password'"
+        :aria-label="shown ? t('common_ui.hide_password') : t('common_ui.show_password')"
         :aria-pressed="shown"
         @click="shown = !shown"
       >
@@ -152,6 +152,7 @@ const {
   onBlur,
 } = useFormField(props, (v) => emit("update:modelValue", v));
 
+const { t } = useI18n();
 const shown = ref(false);
 const inputType = computed(() =>
   props.revealable && props.type === "password" && shown.value

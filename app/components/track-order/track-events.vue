@@ -1,10 +1,18 @@
 <template>
   <section class="card-roomy" aria-labelledby="events-title">
     <header class="mb-5 flex flex-wrap items-center justify-between gap-2">
-      <h2 id="events-title" class="font-display text-xl">Event history</h2>
+      <h2 id="events-title" class="font-display text-xl">
+        {{ t("track_ui.event_history") }}
+      </h2>
       <p class="meta">
-        {{ events.length }}
-        {{ events.length === 1 ? "entry" : "entries" }} recorded
+        {{
+          t(
+            events.length === 1
+              ? "track_ui.entry_recorded"
+              : "track_ui.entries_recorded",
+            { n: events.length },
+          )
+        }}
       </p>
     </header>
 
@@ -31,6 +39,8 @@
 <script lang="ts" setup>
 import { formatWhen } from "~/data/order";
 import type { TrackEvent } from "~/data/tracking";
+
+const { t } = useI18n();
 
 defineProps<{ events: TrackEvent[] }>();
 </script>

@@ -2,7 +2,7 @@
   <div
     class="container-page page-stack"
     aria-busy="true"
-    aria-label="Loading products"
+    :aria-label="t('skeleton_ui.loading_products')"
   >
     <LazyVSkeletonLoader variant="line" class="!h-3 w-1/3" />
 
@@ -34,5 +34,7 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 // Placeholder for the catalogue page (header, filter sidebar, toolbar and product grid) while products load.
 </script>

@@ -6,14 +6,21 @@
     <header class="space-y-2">
       <p class="eyebrow">
         {{ product.brand
-        }}<span v-if="product.sku"> · SKU {{ product.sku }}</span>
+        }}<span v-if="product.sku">
+          · {{ t("product_ui.sku", { sku: product.sku }) }}</span
+        >
       </p>
       <h1 class="text-3xl sm:text-4xl">{{ product.name }}</h1>
       <p class="text-sm text-mute sm:text-base">{{ detail.subtitle }}</p>
       <a
         href="#reviews"
         class="inline-flex items-center gap-1.5 meta hover:text-paper"
-        :aria-label="`Rated ${product.rating} out of 5 from ${product.reviews} reviews. Jump to reviews`"
+        :aria-label="
+          t('product_ui.rated_aria', {
+            rating: product.rating,
+            count: product.reviews,
+          })
+        "
       >
         <Icon
           name="material-symbols-light:kid-star-sharp"
@@ -21,7 +28,8 @@
           class="text-yellow"
           aria-hidden="true"
         />
-        {{ product.rating.toFixed(1) }} ({{ product.reviews }} audits)
+        {{ product.rating.toFixed(1) }}
+        ({{ t("product_ui.audits", { count: product.reviews }) }})
       </a>
     </header>
 
@@ -37,7 +45,11 @@
           <span
             class="rounded-control bg-accent px-2 py-0.5 font-mono text-xs font-bold text-onaccent"
           >
-            Save {{ money.format(detail.compareAt - product.price) }}
+            {{
+              t("product_ui.save", {
+                amount: money.format(detail.compareAt - product.price),
+              })
+            }}
           </span>
         </template>
       </p>
@@ -54,7 +66,7 @@
     </div>
 
     <fieldset v-if="detail.packages.length > 1" class="space-y-2">
-      <legend class="eyebrow mb-2">Configuration package</legend>
+      <legend class="eyebrow mb-2">{{ t("product_ui.configuration_package") }}</legend>
       <LazyVRadioInput
         v-for="p in detail.packages"
         :key="p.id"
@@ -99,7 +111,11 @@
           variant="icon"
           class="h-12 w-12"
           :aria-pressed="wished"
-          :aria-label="wished ? 'Remove from wishlist' : 'Add to wishlist'"
+          :aria-label="
+            wished
+              ? t('product_ui.remove_from_wishlist')
+              : t('product_ui.add_to_wishlist')
+          "
           @click="wished = !wished"
         >
           <Icon
@@ -115,9 +131,11 @@
 
     <aside
       class="rounded-card border border-line bg-raised p-4"
-      aria-label="Delivery assurance"
+      :aria-label="t('product_ui.delivery_assurance')"
     >
-      <p class="eyebrow mb-2 !text-paper">PrintPro logistics assurance</p>
+      <p class="eyebrow mb-2 !text-paper">
+        {{ t("product_ui.logistics_assurance") }}
+      </p>
       <ul class="space-y-1.5 text-sm text-mute">
         <li
           v-for="a in detail.assurance"
@@ -192,9 +210,9 @@ const acquire = async () => {
     option: selected.value.delta ? selected.value.label : undefined,
     base: props.product.price,
   });
-  toast.success("Added to cart", {
+  toast.success(t("product_ui.added_to_cart"), {
     description: props.product.name,
-    action: { label: "View cart", to: "/cart" },
+    action: { label: t("product_ui.view_cart"), to: "/cart" },
   });
   added.value = true;
   start();

@@ -1,16 +1,20 @@
 <template>
   <div>
     <p class="sr-only" role="status">
-      {{ catalog.total }} {{ catalog.total === 1 ? "item" : "items" }} found
+      {{
+        catalog.total === 1
+          ? t("catalog_ui.item_found", { n: catalog.total })
+          : t("catalog_ui.items_found", { n: catalog.total })
+      }}
     </p>
 
     <LazyVEmptyState
       v-if="!catalog.total"
-      eyebrow="FACET :: 0 RESULTS"
-      tag="OVER-FILTERED"
+      :eyebrow="t('catalog_ui.empty_eyebrow')"
+      :tag="t('catalog_ui.empty_tag')"
       tag-tone="accent"
-      caption="BAY TRAY: EMPTY"
-      :meta="['FACET INTERSECTION: 0', 'TRAY STATUS: VACANT']"
+      :caption="t('catalog_ui.empty_caption')"
+      :meta="[t('catalog_ui.empty_meta_facet'), t('catalog_ui.empty_meta_tray')]"
     >
       <LazyVButton variant="primary" @click="catalog.reset()">{{
         t("btn.reset_all_filters")

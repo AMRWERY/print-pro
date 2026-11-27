@@ -6,12 +6,13 @@
       <header v-reveal class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-3">
           <p class="eyebrow-accent">
-            <span class="pip" aria-hidden="true" />Your order
+            <span class="pip" aria-hidden="true" />{{ t("cart_ui.eyebrow") }}
           </p>
-          <h1 class="max-w-3xl text-3xl sm:text-5xl">Your cart</h1>
+          <h1 class="max-w-3xl text-3xl sm:text-5xl">
+            {{ t("cart.your_cart") }}
+          </h1>
           <p class="max-w-2xl text-sm text-mute sm:text-base">
-            Review your printers, photocopiers and supplies, adjust quantities
-            and continue to checkout.
+            {{ t("cart_ui.page_description") }}
           </p>
         </div>
       </header>
@@ -21,12 +22,12 @@
       <LazyVEmptyState
         v-if="!entries.length"
         icon="lucide:shopping-cart"
-        eyebrow="CART :: EMPTY"
-        tag="0 UNITS"
-        caption="0 UNITS"
-        :meta="['ITEMS: 0', 'WEIGHT: 0.00 KG']"
-        title="Your cart is empty"
-        description="Add printers, photocopiers or supplies from the catalog, or move products from your wishlist."
+        :eyebrow="t('cart_ui.page_empty_eyebrow')"
+        :tag="t('cart_ui.empty_caption')"
+        :caption="t('cart_ui.empty_caption')"
+        :meta="[t('cart_ui.empty_meta_items'), t('cart_ui.empty_meta_weight')]"
+        :title="t('cart_ui.empty_title')"
+        :description="t('cart_ui.page_empty_description')"
       >
         <LazyVButton variant="primary" to="/products">{{
           t("btn.browse_the_catalog")
@@ -52,8 +53,11 @@
               label-class="items-center"
               @update:model-value="(v) => selectAll(!!v)"
             >
-              Select all ({{ entries.length }}
-              {{ entries.length === 1 ? "item" : "items" }})
+              {{
+                entries.length === 1
+                  ? t("cart_ui.select_all_one", { n: entries.length })
+                  : t("cart_ui.select_all_other", { n: entries.length })
+              }}
             </LazyVCheckboxInput>
             <div class="flex flex-wrap items-center gap-4 text-sm">
               <LazyVButton
@@ -134,9 +138,9 @@
       <div class="container-page space-y-8">
         <section-heading
           id="companions-title"
-          eyebrow="Goes well with your order"
-          title="Supplies and accessories"
-          body="Genuine supplies that fit the machines in your cart."
+          :eyebrow="t('cart_ui.companions_eyebrow')"
+          :title="t('cart_ui.companions_title')"
+          :body="t('cart_ui.companions_body')"
         />
         <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <li
@@ -166,11 +170,11 @@ const cart = useCartStore();
 const localePath = useLocalePath();
 const wishlist = useWishlistStore();
 
-const crumbs = [
-  { label: "Index", to: "/" },
-  { label: "Products", to: "/products" },
-  { label: "Cart" },
-];
+const crumbs = computed(() => [
+  { label: t("catalog_ui.index"), to: "/" },
+  { label: t("catalog_ui.products"), to: "/products" },
+  { label: t("cart_ui.cart") },
+]);
 
 const preview = ref(false);
 
@@ -211,21 +215,29 @@ const say = (m: string) => (announcement.value = m);
 
 const removeOne = (e: CartEntry) => {
   cart.remove([e.line.key]);
-  say(`${e.product.name} removed from the cart.`);
+  say(t("cart_ui.removed_from_cart", { name: e.product.name }));
 };
 const laterOne = (e: CartEntry) => {
   cart.saveForLater([e.line.key]);
-  say(`${e.product.name} saved for later.`);
+  say(t("cart_ui.saved_for_later", { name: e.product.name }));
 };
 const batchClear = () => {
   const n = selectedEntries.value.length;
   cart.remove(selectedEntries.value.map((e) => e.line.key));
-  say(`${n} ${n === 1 ? "item" : "items"} removed.`);
+  say(
+    n === 1
+      ? t("cart_ui.items_removed_one", { n })
+      : t("cart_ui.items_removed_other", { n }),
+  );
 };
 const batchLater = () => {
   const n = selectedEntries.value.length;
   cart.saveForLater(selectedEntries.value.map((e) => e.line.key));
-  say(`${n} ${n === 1 ? "item" : "items"} saved for later.`);
+  say(
+    n === 1
+      ? t("cart_ui.items_saved_one", { n })
+      : t("cart_ui.items_saved_other", { n }),
+  );
 };
 
 const savedProducts = computed(() =>
@@ -235,7 +247,7 @@ const savedProducts = computed(() =>
 );
 const restore = (p: DetailedProduct) => {
   cart.add(p.id, p.price);
-  say(`${p.name} moved back to your cart.`);
+  say(t("cart_ui.moved_back", { name: p.name }));
 };
 
 const notice = ref("");
@@ -257,8 +269,8 @@ const companions = computed(() => {
 });
 
 useSeoMeta({
-  title: "Cart",
-  description: "Review your items, adjust quantities and continue to checkout.",
+  title: t("cart_ui.cart"),
+  description: t("cart_ui.seo_description"),
   robots: "noindex",
 });
 </script>

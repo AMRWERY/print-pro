@@ -17,11 +17,10 @@
             size="18"
             class="text-cyan"
             aria-hidden="true"
-          />Receiving ports &amp; addresses
+          />{{ t("acct_profile.ports_title") }}
         </h2>
         <p class="text-xs text-mute">
-          Where your orders are delivered. The primary port is pre-selected at
-          checkout.
+          {{ t("acct_profile.ports_desc") }}
         </p>
       </div>
       <LazyVButton
@@ -35,11 +34,11 @@
     <LazyVEmptyState
       v-if="!docks.length"
       icon="lucide:map-pin-off"
-      eyebrow="DELIVERY :: NO_ADDRESS"
-      tag="0 ADDRESSES"
-      caption="EMPTY"
-      title="No delivery addresses yet"
-      description="Add a delivery address so checkout can fill it in for you."
+      :eyebrow="t('acct_profile.empty_eyebrow')"
+      :tag="t('acct_profile.empty_tag')"
+      :caption="t('acct_profile.empty_caption')"
+      :title="t('acct_profile.empty_title')"
+      :description="t('acct_profile.empty_desc')"
     >
       <LazyVButton variant="primary" icon="lucide:plus" @click="$emit('add')">{{
         t("btn.add_your_first_address")
@@ -68,7 +67,7 @@
               name="material-symbols-light:kid-star-sharp"
               size="10"
               aria-hidden="true"
-            />Primary</span
+            />{{ t("acct_profile.primary") }}</span
           >
           <span class="rounded-control bg-raised px-2 py-0.5 text-mute">{{
             dock.typeBadge
@@ -90,10 +89,10 @@
           v-if="confirming === dock.id"
           class="mt-3 flex flex-wrap items-center gap-2 border-t border-line pt-3"
           role="alertdialog"
-          :aria-label="`Remove ${dock.name}?`"
+          :aria-label="t('acct_profile.remove_question', { name: dock.name })"
         >
           <p class="w-full text-xs text-paper">
-            Remove “{{ dock.name }}”? This can’t be undone.
+            {{ t("acct_profile.remove_confirm", { name: dock.name }) }}
           </p>
           <LazyVButton
             size="sm"
@@ -136,7 +135,7 @@
             variant="tertiary"
             icon="lucide:trash-2"
             class="ms-auto"
-            :aria-label="`Remove ${dock.name}`"
+            :aria-label="t('acct_profile.remove_named', { name: dock.name })"
             @click="confirming = dock.id"
             >{{ t("btn.remove") }}</LazyVButton
           >

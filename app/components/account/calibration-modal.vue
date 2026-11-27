@@ -29,7 +29,7 @@
             <LazyVButton
               variant="icon"
               icon="lucide:x"
-              aria-label="Close dialog"
+              :aria-label="t('acct_ui.close_dialog')"
               @click="$emit('close')"
             />
           </div>
@@ -60,7 +60,7 @@
                 :label="t('inputs.quantity')"
                 required
                 rules="required"
-                placeholder="e.g. 2"
+                :placeholder="t('acct_ui.ph_quantity')"
               />
 
               <LazyVSelectInput
@@ -77,7 +77,7 @@
               :label="t('inputs.notes_for_our_team')"
               optional
               rows="3"
-              placeholder="Preferred delivery time, colours needed, or anything else we should know"
+              :placeholder="t('acct_ui.ph_order_notes')"
             />
 
             <div
@@ -124,11 +124,11 @@ const emit = defineEmits<{
   ];
 }>();
 
-const standards = [
-  { value: "toner", label: "Toner cartridges" },
-  { value: "ink", label: "Ink bottles and cartridges" },
-  { value: "drum", label: "Drum units" },
-];
+const standards = computed(() => [
+  { value: "toner", label: t("acct_ui.supply_toner") },
+  { value: "ink", label: t("acct_ui.supply_ink") },
+  { value: "drum", label: t("acct_ui.supply_drum") },
+]);
 
 const substrates = [
   { value: "corex-laser-210", label: "Corex Laser 210 Mono" },
@@ -138,10 +138,10 @@ const substrates = [
   { value: "nordjet-lf-44", label: 'Nordjet Large-Format 44"' },
 ];
 
-const stations = [
-  { value: "head-office", label: "Head office (Cairo)" },
-  { value: "branch", label: "Branch office (Giza)" },
-];
+const stations = computed(() => [
+  { value: "head-office", label: t("acct_ui.branch_cairo") },
+  { value: "branch", label: t("acct_ui.branch_giza") },
+]);
 
 const form = reactive({
   standard: "toner",

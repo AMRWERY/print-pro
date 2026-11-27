@@ -3,7 +3,7 @@
     <a
       href="#main"
       class="sr-only z-50 rounded-control bg-accent px-4 py-2 text-onaccent focus:not-sr-only focus:absolute focus:start-4 focus:top-4"
-      >Skip to content</a
+      >{{ t("layout_ui.skip_to_content") }}</a
     >
     <announcement-bar />
     <site-header />
@@ -15,7 +15,7 @@
           v-if="!ready"
           class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]"
           aria-busy="true"
-          aria-label="Loading your account"
+          :aria-label="t('layout_ui.loading_your_account')"
         >
           <LazyVSkeletonLoader class="hidden h-96 lg:block" />
           <div class="space-y-4">
@@ -41,11 +41,11 @@
         <LazyVEmptyState
           v-else
           icon="lucide:lock"
-          eyebrow="ACCESS :: SIGNED_OUT"
-          tag="AUTH REQUIRED"
+          :eyebrow="t('layout_ui.access_signed_out')"
+          :tag="t('layout_ui.auth_required')"
           tag-tone="warning"
-          title="Sign in to see your account"
-          description="Your orders, saved items and delivery addresses are tied to your account."
+          :title="t('layout_ui.sign_in_to_see_your_account')"
+          :description="t('layout_ui.account_signed_out_description')"
         >
           <LazyVButton variant="primary" :to="signInTo">{{
             t("btn.sign_in")

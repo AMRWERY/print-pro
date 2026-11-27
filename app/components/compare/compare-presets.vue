@@ -6,9 +6,9 @@
     <div class="container-page space-y-8">
       <section-heading
         id="presets-title"
-        eyebrow="Quick comparisons"
-        title="Compare another type of product"
-        body="Load a ready-made comparison across printers, photocopiers and toner."
+        :eyebrow="t('compare_ui.quick_comparisons')"
+        :title="t('compare_ui.compare_another_title')"
+        :body="t('compare_ui.compare_another_body')"
       />
       <ul class="grid gap-4 md:grid-cols-3">
         <li v-for="(p, i) in presets" :key="p.key" v-reveal="{ delay: i * 80 }">
@@ -20,7 +20,9 @@
           >
             <span class="eyebrow flex items-center justify-between">
               {{ p.label }}
-              <span class="text-accent">{{ p.ids.length }} systems</span>
+              <span class="text-accent">{{
+                t("compare_ui.systems", { n: p.ids.length })
+              }}</span>
             </span>
             <span class="font-display text-xl leading-snug">{{ p.title }}</span>
             <span class="text-sm text-mute">{{ p.body }}</span>

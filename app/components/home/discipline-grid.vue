@@ -61,6 +61,6 @@ useCatalogProducts();
 const catalog = useCatalogStore();
 const meta = (c: { category: string; noun: string }) => {
   const n = catalog.all.filter((p) => (p as { category?: string }).category === c.category).length;
-  return n ? `${n} ${c.noun}` : "Coming soon";
+  return n ? `${n} ${c.noun}` : t("home_ui.coming_soon");
 };
 </script>

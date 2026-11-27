@@ -4,7 +4,7 @@
       <div
         class="flex gap-1.5"
         role="progressbar"
-        aria-label="Password strength"
+        :aria-label="t('auth_ui.password_strength')"
         aria-valuemin="0"
         aria-valuemax="4"
         :aria-valuenow="score"
@@ -23,7 +23,7 @@
 
     <ul
       class="grid gap-x-4 gap-y-1.5 rounded-card border border-line bg-raised p-3 text-sm sm:grid-cols-2"
-      aria-label="Password requirements"
+      :aria-label="t('auth_ui.password_requirements')"
     >
       <li
         v-for="c in checks"
@@ -58,8 +58,14 @@ const score = computed(() => checks.value.filter((c) => c.passed).length);
 // Words and colour together, never colour alone.
 const label = computed(() =>
   props.password
-    ? ["Weak", "Weak", "Fair", "Good", "Strong"][score.value]
-    : "Not entered",
+    ? [
+        t("auth_ui.weak"),
+        t("auth_ui.weak"),
+        t("auth_ui.fair"),
+        t("auth_ui.good"),
+        t("auth_ui.strong"),
+      ][score.value]
+    : t("auth_ui.not_entered"),
 );
 
 const bar = computed(() =>

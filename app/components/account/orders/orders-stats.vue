@@ -22,6 +22,7 @@
 <script lang="ts" setup>
 import type { RequisitionOrder } from "~/types/account";
 
+const { t } = useI18n();
 const props = defineProps<{ orders: RequisitionOrder[] }>();
 const money = useMoney();
 
@@ -34,30 +35,30 @@ const stats = computed(() => {
   const processing = o.filter((x) => x.status === "processing").length;
   return [
     {
-      label: "Total orders",
+      label: t("acct_orders.stat_total_orders"),
       value: String(o.length),
-      note: "All time",
+      note: t("acct_orders.stat_all_time"),
       icon: "lucide:receipt-text",
       tone: "text-accent",
     },
     {
-      label: "Settled value",
+      label: t("acct_orders.stat_settled_value"),
       value: money.format(settled),
-      note: "Excludes refunds",
+      note: t("acct_orders.stat_excludes_refunds"),
       icon: "lucide:wallet",
       tone: "text-success",
     },
     {
-      label: "In transit",
+      label: t("account.in_transit"),
       value: String(transit),
-      note: transit ? "Live tracking on" : "Nothing on the move",
+      note: transit ? t("acct_orders.stat_live_tracking") : t("acct_orders.stat_nothing_moving"),
       icon: "lucide:plane",
       tone: "text-cyan",
     },
     {
-      label: "Processing",
+      label: t("account.processing"),
       value: String(processing),
-      note: "Awaiting dispatch",
+      note: t("acct_orders.stat_awaiting_dispatch"),
       icon: "lucide:loader",
       tone: "text-yellow",
     },

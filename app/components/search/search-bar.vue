@@ -24,7 +24,7 @@
         role="combobox"
         autocomplete="off"
         enterkeyhint="search"
-        placeholder="Search printers, photocopiers, ink, toner…"
+        :placeholder="t('search_ui.search_placeholder')"
         aria-autocomplete="list"
         :aria-expanded="open"
         :aria-controls="uid + '-panel'"
@@ -43,7 +43,7 @@
         size="sm"
         v-if="draft"
         class="border-transparent"
-        aria-label="Clear search"
+        :aria-label="t('search_ui.clear_search')"
         @click="clear"
       >
         <Icon name="lucide:x" size="16" aria-hidden="true" />

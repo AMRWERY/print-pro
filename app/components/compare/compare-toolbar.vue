@@ -18,15 +18,17 @@
         <span class="sr-only">{{ t("btn.highlight_differences") }}</span>
       </LazyVButton>
 
-      <span>Highlight differences only</span>
+      <span>{{ t("compare_ui.highlight_only") }}</span>
       <span
         class="rounded-control bg-accent-soft px-2 py-0.5 font-mono text-xs text-accent"
-        >{{ cmp.totalDeltas }} deltas</span
+        >{{
+          t("compare_ui.deltas_count", { n: cmp.totalDeltas })
+        }}</span
       >
     </label>
 
     <LazyVCheckboxInput v-model="cmp.hideIdentical" label-class="items-center"
-      >Hide identical specs</LazyVCheckboxInput
+      >{{ t("compare_ui.hide_identical") }}</LazyVCheckboxInput
     >
 
     <LazyVButton
@@ -48,8 +50,12 @@
 
     <div class="ms-auto flex flex-wrap items-center gap-3">
       <p class="meta">
-        Comparing <span class="text-paper">{{ cmp.products.length }}</span> of
-        {{ max }} slots
+        <i18n-t keypath="compare_ui.comparing_slots" tag="span">
+          <template #count>
+            <span class="text-paper">{{ cmp.products.length }}</span>
+          </template>
+          <template #max>{{ max }}</template>
+        </i18n-t>
       </p>
 
       <div
@@ -68,7 +74,9 @@
       </div>
 
       <LazyVButton variant="secondary" class="h-9 !px-3 text-xs" @click="print">
-        <Icon name="lucide:file-down" size="14" aria-hidden="true" />Export PDF
+        <Icon name="lucide:file-down" size="14" aria-hidden="true" />{{
+          t("compare_ui.export_pdf")
+        }}
       </LazyVButton>
 
       <LazyVButton variant="secondary" class="h-9 !px-3 text-xs" @click="share">
@@ -87,7 +95,9 @@
         class="h-9 !px-3 text-xs"
         @click="emit('clear')"
       >
-        <Icon name="lucide:trash-2" size="14" aria-hidden="true" />Clear
+        <Icon name="lucide:trash-2" size="14" aria-hidden="true" />{{
+          t("btn.clear")
+        }}
       </LazyVButton>
     </div>
   </div>
@@ -119,7 +129,7 @@ const options = computed(() => {
 });
 
 const addOptions = computed(() => [
-  { value: "", label: "+ Add product…" },
+  { value: "", label: t("compare_ui.add_product_option") },
   ...options.value.map((p) => ({ value: p.id, label: p.brand + " " + p.name })),
 ]);
 

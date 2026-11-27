@@ -1,7 +1,7 @@
 <template>
   <aside
     class="border-b border-line bg-ink/95 px-4 py-2.5 backdrop-blur transition-colors duration-200"
-    aria-label="Demo account switcher"
+    :aria-label="t('acct_ui.demo_account_switcher')"
   >
     <div
       class="container-page flex flex-wrap items-center justify-between gap-3 text-xs"
@@ -21,7 +21,7 @@
       <div
         class="flex flex-wrap items-center gap-1.5"
         role="tablist"
-        aria-label="Account types"
+        :aria-label="t('acct_ui.account_types')"
       >
         <LazyVButton
           variant="plain"

@@ -3,7 +3,7 @@
     v-if="!auth.isSignedIn"
     variant="icon"
     to="/auth"
-    aria-label="Sign in"
+    :aria-label="t('btn.sign_in')"
   >
     <Icon name="lucide:user" size="18" class="icon-wiggle" aria-hidden="true" />
   </LazyVButton>
@@ -14,7 +14,7 @@
       class="font-mono text-md font-bold"
       aria-haspopup="menu"
       :aria-expanded="open"
-      :aria-label="`Account menu for ${auth.user?.name}`"
+      :aria-label="t('layout_ui.account_menu_for', { name: auth.user?.name ?? '' })"
       @click="open = !open"
     >
       {{ initials }}
@@ -24,7 +24,7 @@
       <div
         v-if="open"
         role="menu"
-        aria-label="Account"
+        :aria-label="t('layout_ui.account')"
         class="absolute end-0 top-full z-50 mt-2 w-64 space-y-3 card p-3 shadow-xl shadow-black/30"
       >
         <div class="space-y-0.5 border-b border-line pb-3">

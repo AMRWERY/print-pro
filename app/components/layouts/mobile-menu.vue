@@ -6,7 +6,7 @@
         class="fixed inset-0 z-50 lg:hidden"
         role="dialog"
         aria-modal="true"
-        aria-label="Main menu"
+        :aria-label="t('layout_ui.main_menu')"
       >
         <div class="modal-backdrop" @click="emit('close')" />
         <div
@@ -19,7 +19,7 @@
 
             <LazyVButton
               variant="icon"
-              aria-label="Close menu"
+              :aria-label="t('layout_ui.close_menu')"
               @click="emit('close')"
             >
               <Icon name="lucide:x" size="18" aria-hidden="true" />
@@ -28,14 +28,14 @@
           <div
             class="flex items-center justify-around gap-2 border-b border-line p-3"
             role="group"
-            aria-label="Account and preferences"
+            :aria-label="t('layout_ui.account_and_preferences')"
           >
             <LazyVButton
               variant="icon"
               aria-haspopup="dialog"
               @click="openCart"
               class="relative"
-              :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
+              :aria-label="t('layout_ui.cart_summary', { count: cart.count, total: money.format(cart.total) })"
             >
               <Icon
                 name="lucide:shopping-cart"
@@ -52,7 +52,7 @@
               variant="icon"
               to="/wishlist"
               class="relative"
-              :aria-label="`Wishlist, ${wishlist.ids.length} saved`"
+              :aria-label="t('layout_ui.wishlist_summary', { count: wishlist.ids.length })"
               @click="emit('close')"
             >
               <Icon
@@ -70,7 +70,7 @@
               v-if="!auth.isSignedIn"
               variant="icon"
               to="/auth"
-              aria-label="Sign in"
+              :aria-label="t('btn.sign_in')"
               @click="emit('close')"
             >
               <Icon
@@ -84,7 +84,7 @@
             <LazyVButton
               v-else
               variant="icon"
-              :aria-label="'Sign out ' + auth.user?.name"
+              :aria-label="t('layout_ui.sign_out_user', { name: auth.user?.name ?? '' })"
               @click="signOut"
             >
               <Icon
@@ -100,7 +100,7 @@
             <LazyVLocaleSwitcher compact />
           </div>
           <nav
-            aria-label="Product categories"
+            :aria-label="t('layout_ui.product_categories')"
             class="flex-1 overflow-y-auto p-2"
           >
             <ul>
@@ -117,7 +117,7 @@
                     class="icon-lift text-accent"
                     aria-hidden="true"
                   />
-                  <span class="flex-1">Print Lab</span>
+                  <span class="flex-1">{{ t("layout_ui.print_lab") }}</span>
                   <Icon
                     name="lucide:chevron-right"
                     size="16"

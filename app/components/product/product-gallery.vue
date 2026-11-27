@@ -13,7 +13,7 @@
           <media-placeholder
             v-else
             :icon="current.icon ?? 'lucide:image'"
-            :label="`${current.label} view`"
+            :label="t('product_ui.view_label', { label: current.label })"
             size="120"
             class="h-full w-full"
           />
@@ -35,7 +35,7 @@
       v-if="items.length > 1"
       class="grid grid-cols-3 gap-2 sm:grid-cols-6"
       role="tablist"
-      aria-label="Product views"
+      :aria-label="t('product_ui.product_views')"
     >
       <li v-for="(g, i) in items" :key="g.label" role="presentation">
         <LazyVButton
@@ -43,7 +43,7 @@
           block
           role="tab"
           :aria-selected="active === i"
-          :aria-label="`Show ${g.label} view`"
+          :aria-label="t('product_ui.show_view', { label: g.label })"
           class="block aspect-[4/3] overflow-hidden rounded-control border transition duration-200"
           :class="
             active === i
@@ -75,6 +75,8 @@
 
 <script lang="ts" setup>
 import type { GalleryItem } from "~/types/product";
+
+const { t } = useI18n();
 
 const props = defineProps<{ items: GalleryItem[] }>();
 

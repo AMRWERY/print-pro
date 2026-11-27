@@ -1,7 +1,7 @@
 <template>
   <section
     class="border-y border-line bg-surface py-12"
-    aria-label="Why buy from us"
+    :aria-label="t('home_ui.why_buy_from_us')"
   >
     <div class="container-page">
       <icon-feature-row :items="valueProps" />
@@ -11,4 +11,6 @@
 
 <script lang="ts" setup>
 import { valueProps } from "~/data/home";
+
+const { t } = useI18n();
 </script>

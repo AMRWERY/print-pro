@@ -2,7 +2,7 @@
   <div
     class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
     aria-busy="true"
-    aria-label="Loading product"
+    :aria-label="t('skeleton_ui.loading_product')"
   >
     <!-- Gallery: large viewport + thumbnail strip -->
     <div class="space-y-3">
@@ -39,5 +39,7 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 // Placeholder for the product detail hero (gallery + buy box), same column split as pages/product/[id].vue.
 </script>

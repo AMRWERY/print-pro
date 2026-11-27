@@ -3,49 +3,50 @@
     <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
       <div class="max-w-3xl space-y-3">
         <p class="eyebrow-accent">
-          <span class="pip" aria-hidden="true" />Print Lab
-          &amp; print service
+          <span class="pip" aria-hidden="true" />{{ t("printing_ui.eyebrow") }}
         </p>
         <h1
           class="font-display text-3xl font-bold tracking-tight text-paper sm:text-4xl lg:text-5xl"
         >
-          Print your documents, drawings and posters
+          {{ t("printing_ui.hero_title") }}
         </h1>
         <p class="max-w-2xl text-sm leading-relaxed text-mute sm:text-base">
-          Upload your files and configure size, paper, binding and delivery with a
-          live price. We print on our wide-format and production machines and
-          check every file before it prints.
+          {{ t("printing_ui.hero_body") }}
         </p>
       </div>
       <dl class="shrink-0 space-y-1 font-mono text-xs lg:text-end">
         <div class="flex gap-2 lg:justify-end">
-          <dt class="text-mute">Turnaround</dt>
-          <dd class="font-semibold text-paper">From 2 working days</dd>
+          <dt class="text-mute">{{ t("printing_ui.turnaround") }}</dt>
+          <dd class="font-semibold text-paper">
+            {{ t("printing_ui.turnaround_value") }}
+          </dd>
         </div>
         <div class="flex gap-2 lg:justify-end">
-          <dt class="text-mute">Sizes</dt>
-          <dd class="font-semibold text-paper">A4 to A0 and custom rolls</dd>
+          <dt class="text-mute">{{ t("printing_ui.sizes") }}</dt>
+          <dd class="font-semibold text-paper">
+            {{ t("printing_ui.sizes_value") }}
+          </dd>
         </div>
       </dl>
     </div>
 
     <ul class="grid gap-3 md:grid-cols-3">
       <li
-        v-for="t in trust"
-        :key="t.title"
+        v-for="item in trust"
+        :key="item.title"
         class="flex items-start gap-3 card-compact"
       >
         <Icon
-          :name="t.icon"
+          :name="item.icon"
           size="18"
           class="bullet-icon"
           aria-hidden="true"
         />
         <div>
           <p class="font-mono text-2xs tracking-wider text-mute">
-            {{ t.title }}
+            {{ item.title }}
           </p>
-          <p class="mt-0.5 text-sm text-paper">{{ t.body }}</p>
+          <p class="mt-0.5 text-sm text-paper">{{ item.body }}</p>
         </div>
       </li>
     </ul>
@@ -53,21 +54,23 @@
 </template>
 
 <script lang="ts" setup>
-const trust = [
+const { t } = useI18n();
+
+const trust = computed(() => [
   {
     icon: "lucide:shield-check",
-    title: "Every file checked",
-    body: "We check size and resolution before printing",
+    title: t("printing_ui.trust_files_title"),
+    body: t("printing_ui.trust_files_body"),
   },
   {
     icon: "lucide:sun",
-    title: "Colour checked",
-    body: "Printed colours compared against your file",
+    title: t("printing_ui.trust_colour_title"),
+    body: t("printing_ui.trust_colour_body"),
   },
   {
     icon: "lucide:target",
-    title: "Protected for delivery",
-    body: "Rolled or flat-packed, with tracking",
+    title: t("printing_ui.trust_delivery_title"),
+    body: t("printing_ui.trust_delivery_body"),
   },
-];
+]);
 </script>

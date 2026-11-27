@@ -1,7 +1,9 @@
 <template>
   <aside class="card space-y-4 p-5" aria-labelledby="co-summary-title">
     <div class="flex items-center justify-between gap-3">
-      <h2 id="co-summary-title" class="font-display text-xl">Order summary</h2>
+      <h2 id="co-summary-title" class="font-display text-xl">
+        {{ t("btn.order_summary") }}
+      </h2>
       <LazyVButton
         variant="tertiary"
         to="/cart"
@@ -30,7 +32,7 @@
           <media-placeholder
             v-else
             :icon="e.product.icon"
-            :label="`${e.product.name} image`"
+            :label="t('cart_ui.product_image', { name: e.product.name })"
             size="24"
             class="h-full w-full"
           />
@@ -56,13 +58,13 @@
     <dl class="space-y-2 border-t border-line pt-4 text-sm">
       <div class="flex justify-between gap-4">
         <dt class="text-mute">
-          Subtotal ({{ amounts.units }}
-          {{ amounts.units === 1 ? "unit" : "units" }})
+          {{ t("cart.subtotal") }} ({{ amounts.units }}
+          {{ amounts.units === 1 ? t("cart.unit") : t("cart.units") }})
         </dt>
         <dd class="font-mono">{{ money.format(amounts.subtotal) }}</dd>
       </div>
       <div v-if="amounts.volume" class="flex justify-between gap-4 text-accent">
-        <dt>Volume discount (ink & toner)</dt>
+        <dt>{{ t("cart.volume_discount") }}</dt>
         <dd class="font-mono">−{{ money.format(amounts.volume) }}</dd>
       </div>
       <div
@@ -73,32 +75,36 @@
         <dd class="font-mono">−{{ money.format(amounts.voucher) }}</dd>
       </div>
       <div class="flex justify-between gap-4">
-        <dt class="text-mute">Delivery</dt>
+        <dt class="text-mute">{{ t("checkout_ui.delivery") }}</dt>
         <dd class="font-mono" :class="amounts.shipping === 0 && 'text-success'">
-          {{ amounts.shipping === 0 ? "Free" : money.format(amounts.shipping) }}
+          {{
+            amounts.shipping === 0
+              ? t("checkout_ui.free")
+              : money.format(amounts.shipping)
+          }}
         </dd>
       </div>
       <div class="flex justify-between gap-4">
-        <dt class="text-mute">Estimated sales tax</dt>
+        <dt class="text-mute">{{ t("cart.estimated_sales_tax") }}</dt>
         <dd class="font-mono">{{ money.format(amounts.tax) }}</dd>
       </div>
     </dl>
 
     <p class="flex items-end justify-between gap-3 border-t border-line pt-4">
-      <span class="eyebrow !text-paper">Total</span>
+      <span class="eyebrow !text-paper">{{ t("checkout_ui.total") }}</span>
       <span class="font-display text-3xl font-semibold" aria-live="polite"
-        >{{ money.format(amounts.total) }} <span class="meta">EGP</span></span
+        >{{ money.format(amounts.total) }} <span class="meta">{{ t("cart_ui.egp") }}</span></span
       >
     </p>
 
     <ul class="space-y-2 border-t border-line pt-4 text-xs text-mute">
-      <li v-for="t in trust" :key="t.label" class="flex items-start gap-2">
+      <li v-for="item in trust" :key="item.icon" class="flex items-start gap-2">
         <Icon
-          :name="t.icon"
+          :name="item.icon"
           size="14"
           class="bullet-icon"
           aria-hidden="true"
-        />{{ t.label }}
+        />{{ item.label }}
       </li>
     </ul>
   </aside>
@@ -114,15 +120,18 @@ defineProps<{ entries: CartEntry[]; amounts: CheckoutAmounts }>();
 
 const money = useMoney();
 
-const trust = [
+const trust = computed(() => [
   {
     icon: "lucide:shield-check",
-    label: "Manufacturer warranty on every machine",
+    label: t("checkout_ui.trust_warranty"),
   },
   {
     icon: "lucide:flask-conical",
-    label: "Tested before dispatch",
+    label: t("checkout_ui.trust_tested"),
   },
-  { icon: "lucide:headset", label: "Support hotline: +1 (800) 412-5866" },
-];
+  {
+    icon: "lucide:headset",
+    label: t("checkout_ui.trust_hotline", { phone: "+1 (800) 412-5866" }),
+  },
+]);
 </script>

@@ -2,43 +2,47 @@
   <header v-reveal class="space-y-4 border-b border-line pb-6">
     <p class="eyebrow-accent">
       <span class="pip" aria-hidden="true" />
-      Printers, photocopiers &amp; supplies
+      {{ t("catalog_ui.eyebrow") }}
     </p>
-    <h1 class="text-3xl sm:text-5xl">{{ title }}</h1>
-    <p class="max-w-3xl text-sm text-mute sm:text-base">{{ description }}</p>
+    <h1 class="text-3xl sm:text-5xl">{{ heading }}</h1>
+    <p class="max-w-3xl text-sm text-mute sm:text-base">{{ lead }}</p>
     <p
       class="flex flex-wrap items-center gap-x-5 gap-y-1 meta"
       aria-live="polite"
     >
-      <span>
-        Showing
-        <span class="text-paper"
-          >{{ catalog.rangeStart }}–{{ catalog.rangeEnd }}</span
-        >
-        of <span class="text-paper">{{ catalog.total }}</span> products
-      </span>
+      <i18n-t keypath="catalog_ui.showing_range" tag="span">
+        <template #range>
+          <span class="text-paper"
+            >{{ catalog.rangeStart }}–{{ catalog.rangeEnd }}</span
+          >
+        </template>
+        <template #total>
+          <span class="text-paper">{{ catalog.total }}</span>
+        </template>
+      </i18n-t>
       <span class="inline-flex items-center gap-1.5 text-success">
         <Icon name="lucide:circle-check" size="12" aria-hidden="true" />{{
-          shipsToday
+          t("catalog_ui.ships_today", { n: shipsToday })
         }}
-        ships today
       </span>
       <span v-if="consigned" class="inline-flex items-center gap-1.5 text-cyan">
         <Icon name="lucide:badge-check" size="12" aria-hidden="true" />{{
-          consigned
+          t("catalog_ui.certified_refurbished", { n: consigned })
         }}
-        certified refurbished
       </span>
     </p>
   </header>
 </template>
 
 <script lang="ts" setup>
-withDefaults(defineProps<{ title?: string; description?: string }>(), {
-  title: "All products",
-  description:
-    "Printers, photocopiers and genuine ink and toner. Every machine is tested before dispatch.",
-});
+const { t } = useI18n();
+
+const props = defineProps<{ title?: string; description?: string }>();
+
+const heading = computed(() => props.title ?? t("catalog_ui.all_products"));
+const lead = computed(
+  () => props.description ?? t("catalog_ui.default_description"),
+);
 
 const catalog = useCatalog();
 

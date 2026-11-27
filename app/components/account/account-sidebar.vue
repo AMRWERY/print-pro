@@ -1,11 +1,11 @@
 <template>
-  <aside class="card-compact text-sm" aria-label="Workspace navigation">
+  <aside class="card-compact text-sm" :aria-label="t('account.workspace_navigation')">
     <h2 class="eyebrow mb-3 flex items-center gap-2 text-mute">
       <Icon name="lucide:layout-grid" size="14" aria-hidden="true" />{{
         t("account.workspace_navigation")
       }}
     </h2>
-    <nav aria-label="Account sections">
+    <nav :aria-label="t('acct_ui.account_sections')">
       <ul class="space-y-1">
         <li v-for="item in navItems" :key="item.key">
           <LazyVButton

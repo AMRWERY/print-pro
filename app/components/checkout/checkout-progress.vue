@@ -1,5 +1,5 @@
 <template>
-  <nav aria-label="Checkout progress">
+  <nav :aria-label="t('checkout_ui.progress')">
     <ol class="flex items-center">
       <li
         v-for="(s, i) in checkoutSteps"
@@ -11,7 +11,11 @@
           class="flex items-center gap-2 rounded-control py-1 text-start transition-colors duration-200 disabled:cursor-default"
           :disabled="!state.canOpen(s.n)"
           :aria-current="state.step === s.n ? 'step' : undefined"
-          :aria-label="`Step ${s.n}: ${s.title}${state.completed.includes(s.n) ? ' (completed)' : ''}`"
+          :aria-label="
+            state.completed.includes(s.n)
+              ? t('checkout_ui.step_completed', { n: s.n, title: s.title })
+              : t('checkout_ui.step', { n: s.n, title: s.title })
+          "
           @click="state.edit(s.n)"
         >
           <span
@@ -54,6 +58,8 @@
 
 <script lang="ts" setup>
 import { checkoutSteps } from "~/data/checkout";
+
+const { t } = useI18n();
 
 const state = useCheckoutState();
 </script>

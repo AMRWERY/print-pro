@@ -4,9 +4,9 @@
 
     <header class="flex flex-wrap items-end justify-between gap-3">
       <div>
-        <h1 class="title-lg">Orders &amp; Service</h1>
+        <h1 class="title-lg">{{ t("acct_orders.page_title") }}</h1>
         <p class="mt-1 text-sm text-mute">
-          Every order you placed with PrintPro, with live status.
+          {{ t("acct_orders.page_desc") }}
         </p>
       </div>
       <LazyVButton
@@ -37,8 +37,8 @@
       <LazyVEmptyState
         v-else-if="error"
         icon="lucide:cloud-off"
-        eyebrow="ORDERS :: UNAVAILABLE"
-        tag="ERROR"
+        :eyebrow="t('acct_orders.err_eyebrow')"
+        :tag="t('acct_orders.err_tag')"
         tag-tone="warning"
         :title="t('account.orders_load_error_title', 'We couldn’t load your orders')"
         :description="
@@ -64,14 +64,14 @@
             v-model:page="page"
             :per-page="perPage"
             :total="filtered.length"
-            item-label="orders"
+            :item-label="t('acct_orders.item_label')"
             scroll-to="#results"
-            label="Orders pagination"
+            :label="t('acct_orders.pagination')"
           />
         </div>
         <div class="mt-4 space-y-2 text-center md:hidden">
           <p class="meta">
-            Displaying {{ mobileRows.length }} of {{ filtered.length }}
+            {{ t("acct_orders.displaying", { shown: mobileRows.length, total: filtered.length }) }}
           </p>
           <LazyVButton
             v-if="mobileRows.length < filtered.length"
@@ -87,15 +87,15 @@
       <LazyVEmptyState
         v-else
         icon="lucide:receipt-text"
-        eyebrow="ORDERS :: HISTORY"
-        :tag="orders.length ? 'FILTERED' : 'EMPTY'"
+        :eyebrow="t('acct_orders.empty_eyebrow')"
+        :tag="orders.length ? t('acct_orders.empty_tag_filtered') : t('acct_orders.empty_tag_empty')"
         :title="
-          orders.length ? 'No orders match these filters' : 'No orders yet'
+          orders.length ? t('acct_orders.empty_title_filtered') : t('acct_orders.empty_title_none')
         "
         :description="
           orders.length
-            ? 'Try a different status, quarter or port, or clear the filters.'
-            : 'Orders you place show up here with live tracking and paperwork.'
+            ? t('acct_orders.empty_desc_filtered')
+            : t('acct_orders.empty_desc_none')
         "
       >
         <LazyVButton v-if="orders.length" variant="primary" @click="reset">{{
@@ -123,14 +123,14 @@ const page = ref(1);
 const mobileLimit = ref(5);
 const perPage = 5;
 
-const crumbs = [
-  { label: "Studio procurement", to: "/" },
-  { label: "Atelier workspace", to: "/account" },
-  { label: "Orders & calibrations" },
-];
+const crumbs = computed(() => [
+  { label: t("acct_ui.crumb_home"), to: "/" },
+  { label: t("acct_ui.crumb_workspace"), to: "/account" },
+  { label: t("acct_ui.crumb_orders") },
+]);
 
 const quarterOptions = computed(() => [
-  { value: "all", label: "All quarters" },
+  { value: "all", label: t("acct_orders.all_quarters") },
   ...[...new Set(orders.value.map(orderQuarter).filter(Boolean))].map((q) => ({
     value: q,
     label: q,
@@ -138,7 +138,7 @@ const quarterOptions = computed(() => [
 ]);
 
 const portOptions = computed(() => [
-  { value: "all", label: "All receiving ports" },
+  { value: "all", label: t("acct_orders.all_ports") },
   ...[
     ...new Set(
       orders.value.map((o) => o.destination).filter((d): d is string => !!d),
@@ -219,7 +219,7 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "Orders & Service — PrintPro",
-  description: "Your orders, with live status and documents.",
+  title: () => `${t("acct_orders.page_title")} — PrintPro`,
+  description: () => t("acct_orders.seo_desc"),
 });
 </script>

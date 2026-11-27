@@ -1,8 +1,8 @@
 <template>
-  <LazyVStepper :n="2" title="Delivery method" :summary="summary">
+  <LazyVStepper :n="2" :title="t('checkout_ui.delivery_method')" :summary="summary">
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <fieldset class="space-y-2">
-        <legend class="sr-only">Choose a delivery method</legend>
+        <legend class="sr-only">{{ t("checkout_ui.choose_delivery_method") }}</legend>
         <LazyVRadioInput
           v-for="o in deliveryOptions"
           :key="o.id"
@@ -27,7 +27,9 @@
               class="shrink-0 font-mono text-sm"
               :class="prices[o.id] === 0 && 'text-success'"
               >{{
-                prices[o.id] === 0 ? "Free" : money.format(prices[o.id])
+                prices[o.id] === 0
+                  ? t("checkout_ui.free")
+                  : money.format(prices[o.id])
               }}</span
             >
           </span>
@@ -39,7 +41,7 @@
         name="notes"
         :label="t('inputs.delivery_notes')"
         optional
-        hint="Dock hours, access codes or handling instructions."
+        :hint="t('checkout_ui.delivery_notes_hint')"
         rows="2"
         maxlength="300"
         input-class="resize-y"
@@ -67,7 +69,7 @@
 <script lang="ts" setup>
 import { deliveryOptions } from "~/data/checkout";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps<{
   prices: Record<"crated" | "express" | "pickup", number>;
@@ -83,12 +85,18 @@ const eta = (days: number) => {
     d.setDate(d.getDate() + 1);
     if (d.getDay() !== 0 && d.getDay() !== 6) left--; // working days only
   }
-  return `Estimated ${d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}`;
+  return t("checkout_ui.estimated", {
+    date: d.toLocaleDateString(locale.value, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    }),
+  });
 };
 
 const summary = computed(() => {
   const o = deliveryOptions.find((x) => x.id === state.form.delivery)!;
   const p = props.prices[o.id];
-  return `${o.label} · ${p === 0 ? "Free" : money.format(p)}`;
+  return `${o.label} · ${p === 0 ? t("checkout_ui.free") : money.format(p)}`;
 });
 </script>

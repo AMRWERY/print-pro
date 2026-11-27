@@ -2,19 +2,19 @@
   <div class="hidden overflow-hidden card md:block">
     <table class="w-full text-start text-sm">
       <caption class="sr-only">
-        Your orders
+        {{ t("acct_orders.your_orders") }}
       </caption>
       <thead
         class="border-b border-line bg-raised/50 font-mono text-2xs tracking-wider text-mute"
       >
         <tr>
-          <th scope="col" class="px-4 py-3 text-start font-semibold">Order</th>
-          <th scope="col" class="px-4 py-3 text-start font-semibold">Items</th>
-          <th scope="col" class="px-4 py-3 text-start font-semibold">Placed</th>
-          <th scope="col" class="px-4 py-3 text-start font-semibold">Status</th>
-          <th scope="col" class="px-4 py-3 text-end font-semibold">Total</th>
+          <th scope="col" class="px-4 py-3 text-start font-semibold">{{ t("acct_orders.col_order") }}</th>
+          <th scope="col" class="px-4 py-3 text-start font-semibold">{{ t("acct_orders.col_items") }}</th>
+          <th scope="col" class="px-4 py-3 text-start font-semibold">{{ t("acct_orders.col_placed") }}</th>
+          <th scope="col" class="px-4 py-3 text-start font-semibold">{{ t("acct_orders.col_status") }}</th>
+          <th scope="col" class="px-4 py-3 text-end font-semibold">{{ t("acct_orders.col_total") }}</th>
           <th scope="col" class="px-4 py-3">
-            <span class="sr-only">Actions</span>
+            <span class="sr-only">{{ t("acct_orders.col_actions") }}</span>
           </th>
         </tr>
       </thead>

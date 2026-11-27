@@ -6,7 +6,7 @@
       v-if="!order && pending"
       class="space-y-4"
       aria-busy="true"
-      aria-label="Loading your order"
+      :aria-label="t('acct_orders.loading_order')"
     >
       <LazyVSkeletonLoader class="h-24" />
       
@@ -16,8 +16,8 @@
     <template v-else-if="order">
       <header class="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p class="meta">Placed {{ orderDateLabel(order) }}</p>
-          <h1 class="title-lg">Order {{ order.id }}</h1>
+          <p class="meta">{{ t("acct_orders.placed_on", { date: orderDateLabel(order) }) }}</p>
+          <h1 class="title-lg">{{ t("acct_orders.order_number", { id: order.id }) }}</h1>
           <p class="mt-1 max-w-2xl text-sm text-mute">{{ order.title }}</p>
         </div>
 
@@ -40,11 +40,11 @@
     <LazyVEmptyState
       v-else
       icon="lucide:file-question"
-      eyebrow="QUERY :: ORDER_LOOKUP"
-      tag="404 NOT FOUND"
+      :eyebrow="t('acct_orders.nf_eyebrow')"
+      :tag="t('acct_orders.nf_tag')"
       tag-tone="warning"
-      title="We couldn't find that order"
-      description="It may belong to a different account, or the number may be mistyped."
+      :title="t('acct_orders.nf_title')"
+      :description="t('acct_orders.nf_desc')"
     >
       <LazyVButton variant="primary" to="/account/orders">{{
         t("btn.back_to_orders")
@@ -75,9 +75,9 @@ watch(
 );
 
 const crumbs = computed(() => [
-  { label: "Atelier workspace", to: "/account" },
-  { label: "Orders & calibrations", to: "/account/orders" },
-  { label: order.value?.id ?? "Order" },
+  { label: t("acct_ui.crumb_workspace"), to: "/account" },
+  { label: t("acct_ui.crumb_orders"), to: "/account/orders" },
+  { label: order.value?.id ?? t("acct_orders.order") },
 ]);
 
 const toast = useToast();
@@ -96,10 +96,10 @@ const reorder = async () => {
     added++;
   }
   if (added)
-    toast.success(`Added ${added} item${added === 1 ? "" : "s"} to your cart`, {
-      action: { label: "View cart", to: "/cart" },
+    toast.success(t("acct_orders.added_to_cart", { n: added }, added), {
+      action: { label: t("acct_orders.view_cart"), to: "/cart" },
     });
-  else toast.warning("These items are no longer in the catalog");
+  else toast.warning(t("acct_orders.items_unavailable"));
 };
 
 definePageMeta({
@@ -107,6 +107,6 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: () => `Order ${order.value?.id ?? ""} — PrintPro`,
+  title: () => `${t("acct_orders.order_number", { id: order.value?.id ?? "" })} — PrintPro`,
 });
 </script>

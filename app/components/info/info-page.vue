@@ -12,7 +12,9 @@
         {{ page.title }}
       </h1>
       <p class="text-lg text-mute">{{ page.summary }}</p>
-      <p v-if="page.updated" class="meta">Last updated {{ page.updated }}</p>
+      <p v-if="page.updated" class="meta">
+        {{ t("info_ui.last_updated", { date: page.updated }) }}
+      </p>
     </header>
 
     <dl v-if="page.facts?.length" v-reveal class="grid gap-3 sm:grid-cols-3">
@@ -26,7 +28,7 @@
       <nav
         v-if="page.sections.length > 2"
         class="hidden self-start lg:sticky lg:top-40 lg:block"
-        aria-label="On this page"
+        :aria-label="t('info_ui.on_this_page')"
       >
         <ul class="space-y-2 border-s border-line ps-4 text-sm">
           <li v-for="(s, i) in page.sections" :key="s.heading">
@@ -87,8 +89,8 @@
       </div>
     </div>
 
-    <nav v-if="related.length" aria-label="Related pages" class="space-y-3">
-      <h2 class="eyebrow">More in {{ groupLabel }}</h2>
+    <nav v-if="related.length" :aria-label="t('info_ui.related_pages')" class="space-y-3">
+      <h2 class="eyebrow">{{ t("info_ui.more_in_group", { group: groupLabel }) }}</h2>
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <li v-for="r in related" :key="r.slug">
           <nuxt-link-locale
@@ -108,6 +110,8 @@
 import { infoPages } from "~/data/info-pages";
 import type { InfoPage } from "~/types/info";
 
+const { t } = useI18n();
+
 const props = defineProps<{ page: InfoPage }>();
 
 /** Highlighted item in the sidebar. */
@@ -124,16 +128,16 @@ const select = (i: number) => {
   });
 };
 
-const groupLabels = {
-  services: "Services",
-  guides: "Guides",
-  legal: "Legal",
-} as const;
+const groupLabels = computed(() => ({
+  services: t("info_ui.group_services"),
+  guides: t("info_ui.group_guides"),
+  legal: t("info_ui.group_legal"),
+}));
 
-const groupLabel = computed(() => groupLabels[props.page.group]);
+const groupLabel = computed(() => groupLabels.value[props.page.group]);
 
 const crumbs = computed(() => [
-  { label: "Index", to: "/" },
+  { label: t("info_ui.index"), to: "/" },
   { label: groupLabel.value },
   { label: props.page.title },
 ]);

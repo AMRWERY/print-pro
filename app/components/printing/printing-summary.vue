@@ -1,6 +1,8 @@
 <template>
   <section class="card-compact" aria-labelledby="cost-title">
-    <h2 id="cost-title" class="eyebrow mb-3 text-mute">Itemised cost</h2>
+    <h2 id="cost-title" class="eyebrow mb-3 text-mute">
+      {{ t("printing_ui.itemised_cost") }}
+    </h2>
 
     <TransitionGroup name="row" tag="ul" class="space-y-2 text-sm">
       <li
@@ -21,7 +23,7 @@
     <div
       class="mt-4 flex items-end justify-between gap-3 border-t border-line pt-4"
     >
-      <span class="meta uppercase tracking-wider">Total</span>
+      <span class="meta uppercase tracking-wider">{{ t("printing_ui.total") }}</span>
       <span
         class="font-display text-3xl font-bold text-paper"
         aria-live="polite"
@@ -29,7 +31,7 @@
       >
     </div>
     <p class="mt-1 text-end font-mono text-2xs text-mute">
-      {{ money.format(price.unit) }} per print before discounts and fees
+      {{ t("printing_ui.per_print_note", { price: money.format(price.unit) }) }}
     </p>
 
     <p
@@ -74,8 +76,7 @@
         class="mt-0.5 shrink-0 text-cyan"
         aria-hidden="true"
       />
-      Every order is checked by a technician before it is printed, and we email
-      you if a file needs attention.
+      {{ t("printing_ui.technician_note") }}
     </p>
   </section>
 </template>
@@ -98,7 +99,7 @@ const blocked = computed(() => {
   const l = Number(config.customL);
   return w >= 4 && w <= 44 && l >= 4 && l <= 200
     ? ""
-    : "Enter a valid custom width and length in step 2 to continue.";
+    : t("printing_ui.custom_size_blocked");
 });
 </script>
 

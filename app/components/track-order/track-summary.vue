@@ -19,10 +19,11 @@
             />{{ status.label }}
           </p>
           <h2 class="font-display text-3xl sm:text-4xl">
-            Order #{{ order.id }}
+            {{ t("track_ui.order_number", { id: order.id }) }}
           </h2>
           <p class="text-sm text-mute">
-            Destination: <span class="text-paper">{{ destination }}</span>
+            {{ t("track_ui.destination") }}
+            <span class="text-paper">{{ destination }}</span>
           </p>
         </div>
         <div class="flex flex-wrap gap-2">
@@ -50,29 +51,36 @@
         class="grid gap-px overflow-hidden rounded-card border border-line bg-line text-sm sm:grid-cols-2 lg:grid-cols-4"
       >
         <div class="bg-surface p-3">
-          <dt class="eyebrow">Delivery method</dt>
+          <dt class="eyebrow">{{ t("order_ui.delivery_method") }}</dt>
           <dd class="mt-1 font-medium">{{ order.delivery.label }}</dd>
         </div>
         <div class="bg-surface p-3">
           <dt class="eyebrow">
             {{
               order.delivery.id === "pickup"
-                ? "Ready for pickup"
-                : "Estimated handover"
+                ? t("order_ui.ready_for_pickup")
+                : t("track_ui.estimated_handover")
             }}
           </dt>
           <dd class="mt-1 font-mono text-accent">{{ formatWhen(handover) }}</dd>
         </div>
         <div class="bg-surface p-3">
-          <dt class="eyebrow">Items</dt>
+          <dt class="eyebrow">{{ t("track_ui.items") }}</dt>
           <dd class="mt-1 font-medium">
-            {{ order.amounts.units }}
-            {{ order.amounts.units === 1 ? "unit" : "units" }} ·
+            {{
+              t(
+                order.amounts.units === 1
+                  ? "track_ui.unit_count"
+                  : "track_ui.units_count",
+                { n: order.amounts.units },
+              )
+            }}
+            ·
             {{ money.format(order.amounts.total) }}
           </dd>
         </div>
         <div class="bg-surface p-3">
-          <dt class="eyebrow">Tracking PIN</dt>
+          <dt class="eyebrow">{{ t("order_ui.tracking_pin") }}</dt>
           <dd class="mt-1 font-mono">{{ order.pin }}</dd>
         </div>
       </dl>

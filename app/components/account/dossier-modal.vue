@@ -29,7 +29,7 @@
             <LazyVButton
               variant="plain"
               class="rounded-control p-1 text-mute transition hover:bg-raised hover:text-paper"
-              aria-label="Close modal"
+              :aria-label="t('acct_ui.close_modal')"
               @click="$emit('close')"
             >
               <Icon name="lucide:x" size="18" />

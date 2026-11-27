@@ -2,8 +2,8 @@
   <auth-shell>
     <template #aside>
       <auth-aside
-        eyebrow="Form 1984-PrintPro"
-        tag="Business account"
+        :eyebrow="t('auth_ui.register_eyebrow')"
+        :tag="t('auth_ui.business_account')"
         :title="t('auth.create_your_account')"
         :body="t('auth.register_your_business_school_or_home_office_to_order_printers_photocopiers_ink_and_toner_with_tracked_delivery')"
         icon="lucide:printer"
@@ -21,8 +21,8 @@
         ]"
         :stats="[
           { label: t('auth.genuine_supplies'), value: '100%' },
-          { label: t('auth.dispatch'), value: 'Same day' },
-          { label: t('auth.transit'), value: 'Insured' },
+          { label: t('auth.dispatch'), value: t('auth_ui.same_day') },
+          { label: t('auth.transit'), value: t('auth_ui.insured') },
         ]"
       />
     </template>
@@ -57,7 +57,7 @@
             required
             rules="required"
             autocomplete="name"
-            placeholder="e.g. Elena Rostova"
+            :placeholder="t('auth_ui.name_placeholder')"
           />
 
           <LazyVInput
@@ -67,7 +67,7 @@
             required
             rules="required"
             autocomplete="organization"
-            placeholder="e.g. Delta Architects"
+            :placeholder="t('auth_ui.company_placeholder')"
             />
             
             <LazyVInput
@@ -80,7 +80,7 @@
             rules="required|email"
             autocomplete="email"
             inputmode="email"
-            placeholder="name@company.com"
+            :placeholder="t('auth_ui.email_placeholder')"
           />
         </fieldset>
 
@@ -140,7 +140,7 @@
           <LazyVCheckboxInput
             v-model="form.terms"
             name="terms"
-            :rules="mustAccept('Accept the terms to create your account.')"
+            :rules="mustAccept(t('auth_ui.accept_terms'))"
           >
             {{ t("auth.agree_to_the") }}
             <LazyVButton variant="tertiary" to="/" class="!text-accent">{{
@@ -234,9 +234,8 @@ const submit = async () => {
   if (!created.ok) {
     exists.value = created.reason === "exists";
     error.value = exists.value
-      ? "An account with that email already exists."
-      : created.message ||
-        "We couldn't create the account. Check your details and try again.";
+      ? t("auth_ui.account_exists")
+      : created.message || t("auth_ui.create_failed");
     loading.value = false;
     return;
   }
@@ -247,8 +246,8 @@ const submit = async () => {
 };
 
 useSeoMeta({
-  title: "Create Account",
-  description: "Create a PrintPro account.",
+  title: () => t("auth_ui.register_seo_title"),
+  description: () => t("auth_ui.register_seo_description"),
   robots: "noindex",
 });
 </script>

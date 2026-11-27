@@ -37,7 +37,7 @@
         variant="tertiary"
         v-if="done && !current"
         class="text-sm underline-offset-4 hover:underline"
-        :aria-label="`Edit ${title}`"
+        :aria-label="t('common_ui.edit_title', { title })"
         @click="state.edit(n)"
       >
         {{ t("btn.edit") }}

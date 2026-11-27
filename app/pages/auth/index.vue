@@ -2,16 +2,16 @@
   <auth-shell>
     <template #aside>
       <auth-aside
-        eyebrow="Your account"
-        tag="Orders, delivery and service"
+        :eyebrow="t('auth.your_account')"
+        :tag="t('auth_ui.aside_tag')"
         :title="
           t('auth.track_orders_reorder_supplies_and_manage_your_machines')
         "
         icon="lucide:printer"
         :stats="[
-          { label: t('auth.orders'), value: 'Tracked' },
-          { label: t('auth.supplies'), value: 'Genuine' },
-          { label: t('auth.service'), value: 'On site' },
+          { label: t('auth.orders'), value: t('auth_ui.tracked') },
+          { label: t('auth.supplies'), value: t('auth_ui.genuine') },
+          { label: t('auth.service'), value: t('auth_ui.on_site') },
         ]"
       />
     </template>
@@ -145,7 +145,7 @@
           >
             {{
               lockedFor > 0
-                ? `${t("btn.try_again_in")} ${lockedFor}s`
+                ? `${t("btn.try_again_in")} ${t("auth_ui.seconds_short", { n: lockedFor })}`
                 : t("btn.sign_in")
             }}
           </LazyVButton>
@@ -185,8 +185,8 @@ const redirect = computed(() => safeRedirect(route.query.redirect));
 
 const notice = computed(() => {
   if (route.query.reset)
-    return "Password updated. Sign in with your new password.";
-  if (route.query.registered) return "Account created. Sign in to continue.";
+    return t("auth_ui.password_updated_notice");
+  if (route.query.registered) return t("auth_ui.account_created_notice");
   return "";
 });
 
@@ -228,16 +228,15 @@ const submit = async () => {
   } else if (result.reason === "locked") {
     lockedFor.value = result.retryInSeconds;
     resume();
-    error.value = "Too many attempts. Wait a moment before trying again.";
+    error.value = t("auth_ui.too_many_attempts");
   } else {
-    error.value =
-      "That email and password don't match. Check them and try again, or reset your password.";
+    error.value = t("auth_ui.invalid_credentials");
   }
 };
 
 useSeoMeta({
-  title: "Sign In",
-  description: "Sign in to your PrintPro account.",
+  title: () => t("auth_ui.signin_seo_title"),
+  description: () => t("auth_ui.signin_seo_description"),
   robots: "noindex",
 });
 </script>

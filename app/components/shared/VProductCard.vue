@@ -25,7 +25,7 @@
       <media-placeholder
         v-else
         :icon="product.icon"
-        :label="`${product.name} product image`"
+        :label="t('common_ui.product_image', { name: product.name })"
         class="h-40 sm:h-44"
       />
 
@@ -87,7 +87,7 @@
         <p class="eyebrow">{{ product.brand }}</p>
         <p
           class="flex items-center gap-1 font-mono text-xs"
-          :aria-label="`Rated ${product.rating} out of 5 from ${product.reviews} reviews`"
+          :aria-label="t('common_ui.rated_summary', { rating: product.rating, reviews: product.reviews })"
         >
           <Icon
             name="material-symbols-light:kid-star-sharp"
@@ -110,7 +110,7 @@
       </h3>
       <p class="text-sm text-mute">{{ product.blurb }}</p>
 
-      <ul class="flex flex-wrap gap-1.5" aria-label="Key specifications">
+      <ul class="flex flex-wrap gap-1.5" :aria-label="t('common_ui.key_specifications')">
         <li v-for="s in product.specs" :key="s" class="chip">{{ s }}</li>
       </ul>
 
@@ -119,7 +119,7 @@
       >
         <div>
           <p v-if="product.lease" class="meta">
-            Lease from {{ money.format(product.lease) }}/mo
+            {{ t("common_ui.lease_from", { price: money.format(product.lease) }) }}
           </p>
           <p class="font-display text-2xl font-semibold">
             {{ money.format(product.price) }}
@@ -176,9 +176,9 @@ const { start } = useTimeoutFn(
 const acquire = async () => {
   await simulateRequest();
   cart.add(props.product.id, props.product.price);
-  toast.success("Added to cart", {
+  toast.success(t("common_ui.added_to_cart"), {
     description: props.product.name,
-    action: { label: "View cart", to: "/cart" },
+    action: { label: t("common_ui.view_cart"), to: "/cart" },
   });
   added.value = true;
   start();

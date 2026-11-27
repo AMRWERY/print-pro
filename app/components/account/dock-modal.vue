@@ -21,14 +21,14 @@
                 id="dock-modal-title"
                 class="font-mono text-sm font-bold tracking-wider text-paper"
               >
-                {{ dock ? "Edit delivery address" : "Add delivery address" }}
+                {{ dock ? t("acct_ui.edit_delivery_address") : t("acct_ui.add_delivery_address") }}
               </h2>
             </div>
 
             <LazyVButton
               variant="icon"
               icon="lucide:x"
-              aria-label="Close dialog"
+              :aria-label="t('acct_ui.close_dialog')"
               @click="$emit('close')"
             />
           </div>
@@ -45,7 +45,7 @@
               :label="t('inputs.address_name')"
               required
               rules="required"
-              placeholder="e.g. Head office"
+              :placeholder="t('acct_ui.ph_address_name')"
             />
 
             <LazyVTextarea
@@ -57,10 +57,10 @@
               :rules="
                 minLengthText(
                   10,
-                  'Enter the full street, city and postal code the courier should deliver to.',
+                  t('acct_ui.address_too_short'),
                 )
               "
-              placeholder="Street, building, floor, city, postal code"
+              :placeholder="t('acct_ui.ph_address')"
             />
 
             <div class="grid gap-3 sm:grid-cols-2">
@@ -76,7 +76,7 @@
                 name="dock-agent"
                 :label="t('inputs.contact_person')"
                 optional
-                placeholder="e.g. Mona, reception"
+                :placeholder="t('acct_ui.ph_contact_person')"
               />
             </div>
 
@@ -85,7 +85,7 @@
               name="dock-climate"
               :label="t('inputs.delivery_instructions')"
               optional
-              placeholder="e.g. Use the loading bay at the rear"
+              :placeholder="t('acct_ui.ph_delivery_instructions')"
             />
 
             <LazyVCheckboxInput
@@ -119,15 +119,15 @@ const props = defineProps<{ open: boolean; dock?: ReceivingDock | null }>();
 
 const emit = defineEmits<{ close: []; saved: [dock: ReceivingDock] }>();
 
-const clearances = [
-  { value: "WEEKDAYS 08:00-17:00", label: "Weekdays 08:00 – 17:00" },
-  { value: "24/7 RECEPTION", label: "24/7 reception" },
-  { value: "BY APPOINTMENT", label: "By appointment" },
-];
+const clearances = computed(() => [
+  { value: "WEEKDAYS 08:00-17:00", label: t("acct_ui.hours_weekdays") },
+  { value: "24/7 RECEPTION", label: t("acct_ui.hours_24_7") },
+  { value: "BY APPOINTMENT", label: t("acct_ui.hours_by_appointment") },
+]);
 
 const name = ref("");
 const address = ref("");
-const securityClearance = ref(clearances[0]!.value);
+const securityClearance = ref(clearances.value[0]!.value);
 const bondedAgent = ref("");
 const climateSpecs = ref("");
 const primary = ref(false);
@@ -144,7 +144,7 @@ watch(
     const d = props.dock;
     name.value = d?.name ?? "";
     address.value = d?.address ?? "";
-    securityClearance.value = d?.securityClearance ?? clearances[0]!.value;
+    securityClearance.value = d?.securityClearance ?? clearances.value[0]!.value;
     bondedAgent.value = d?.bondedAgent ?? "";
     climateSpecs.value = d?.climateSpecs ?? "";
     primary.value = d?.isPrimary ?? false;

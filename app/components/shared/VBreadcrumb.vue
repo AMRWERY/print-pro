@@ -1,5 +1,5 @@
 <template>
-  <nav aria-label="Breadcrumb">
+  <nav :aria-label="t('common_ui.breadcrumb')">
     <ol
       class="flex flex-wrap items-center gap-2 meta tracking-wider"
     >
@@ -33,6 +33,8 @@
 // `to` is locale-aware, so pass plain paths like "/products".
 
 import type { BreadcrumbItem } from "~/types/VBreadcrumb";
+
+const { t } = useI18n();
 
 defineProps<{ items: BreadcrumbItem[] }>();
 </script>

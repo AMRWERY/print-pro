@@ -6,8 +6,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="docs-title"
-        eyebrow="Downloads"
-        title="Drivers, manuals & specification sheets"
+        :eyebrow="t('product_ui.downloads')"
+        :title="t('product_ui.downloads_title')"
       >
         <LazyVButton variant="secondary">
           <Icon
@@ -39,7 +39,7 @@
               <span
                 class="mt-1 inline-flex items-center gap-1 font-mono text-xs tracking-wider text-accent"
               >
-                Download
+                {{ t("product_ui.download") }}
                 <Icon
                   name="lucide:arrow-down"
                   size="12"

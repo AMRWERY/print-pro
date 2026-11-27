@@ -2,13 +2,13 @@
   <div
     class="inline-flex items-center rounded-control border border-line"
     role="group"
-    :aria-label="label"
+    :aria-label="labelText"
   >
     <LazyVButton
       variant="plain"
       class="grid h-9 w-9 place-items-center transition-colors duration-200 hover:text-accent disabled:opacity-40"
       :disabled="modelValue <= min"
-      :aria-label="`Decrease ${label}`"
+      :aria-label="t('common_ui.decrease_label', { label: labelText })"
       @click="set(modelValue - 1)"
     >
       <Icon name="lucide:minus" size="14" aria-hidden="true" />
@@ -19,7 +19,7 @@
       type="number"
       lazy
       variant="bare"
-      :label="label"
+      :label="labelText"
       hide-label
       inputmode="numeric"
       :min="min"
@@ -32,7 +32,7 @@
       variant="plain"
       class="grid h-9 w-9 place-items-center transition-colors duration-200 hover:text-accent disabled:opacity-40"
       :disabled="modelValue >= max"
-      :aria-label="`Increase ${label}`"
+      :aria-label="t('common_ui.increase_label', { label: labelText })"
       @click="set(modelValue + 1)"
     >
       <Icon name="lucide:plus" size="14" aria-hidden="true" />
@@ -48,10 +48,13 @@ const props = withDefaults(
     max?: number;
     label?: string;
   }>(),
-  { min: 1, max: 99, label: "Quantity" },
+  { min: 1, max: 99 },
 );
 
 const emit = defineEmits<{ "update:modelValue": [value: number] }>();
+
+const { t } = useI18n();
+const labelText = computed(() => props.label ?? t("inputs.quantity"));
 
 const set = (n: number, e?: Event) => {
   const next = Math.min(

@@ -27,7 +27,7 @@
             <LazyVButton
               variant="icon"
               icon="lucide:x"
-              aria-label="Close dialog"
+              :aria-label="t('common_ui.close_dialog')"
               @click="$emit('close')"
             />
           </div>
@@ -60,7 +60,7 @@
                 required
                 :min="earliest"
                 :is-date-disabled="isWeekend"
-                hint="Monday to Friday"
+                :hint="t('home_ui.monday_to_friday')"
                 rules="required"
               />
 
@@ -99,7 +99,7 @@
               :label="t('inputs.anything_we_should_prepare')"
               optional
               rows="3"
-              placeholder="Models you are comparing, a print size, or a problem you are seeing"
+              :placeholder="t('home_ui.notes_placeholder')"
             />
 
             <div class="flex items-center justify-end gap-3 pt-2">
@@ -131,12 +131,12 @@ const props = defineProps<{ open: boolean }>();
 
 const emit = defineEmits<{ close: [] }>();
 
-const topics = [
-  { value: "gear", label: "Choosing a printer or photocopier" },
-  { value: "supplies", label: "Finding the right ink or toner" },
-  { value: "service", label: "Maintenance, repairs or a service contract" },
-  { value: "setup", label: "Setting up or troubleshooting a machine" },
-];
+const topics = computed(() => [
+  { value: "gear", label: t("home_ui.topic_gear") },
+  { value: "supplies", label: t("home_ui.topic_supplies") },
+  { value: "service", label: t("home_ui.topic_service") },
+  { value: "setup", label: t("home_ui.topic_setup") },
+]);
 
 const slots = [
   { value: "09:00", label: "09:00 – 09:30" },
@@ -146,7 +146,7 @@ const slots = [
   { value: "16:30", label: "16:30 – 17:00" },
 ];
 
-const topic = ref(topics[0]!.value);
+const topic = ref(topics.value[0]!.value);
 const slot = ref(slots[0]!.value);
 const date = ref("");
 const name = ref("");
@@ -195,8 +195,12 @@ const submitBooking = async () => {
     day: "numeric",
     month: "short",
   });
-  toast.success("Session booked", {
-    description: `${when} at ${slot.value}. A confirmation is on its way to ${email.value}.`,
+  toast.success(t("home_ui.session_booked"), {
+    description: t("home_ui.session_booked_description", {
+      when,
+      slot: slot.value,
+      email: email.value,
+    }),
   });
   notes.value = "";
   emit("close");

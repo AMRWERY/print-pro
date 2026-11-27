@@ -26,7 +26,7 @@
       <media-placeholder
         v-else
         :icon="product.icon"
-        :label="`${product.name} product image`"
+        :label="t('wishlist_ui.product_image', { name: product.name })"
         size="64"
         class="h-44"
         :class="list && 'sm:h-full sm:min-h-44'"
@@ -55,7 +55,9 @@
         <p class="eyebrow">{{ product.brand }}</p>
         <p
           class="flex items-center gap-1 font-mono text-xs"
-          :aria-label="`Rated ${product.rating} out of 5 from ${product.reviews} audits`"
+          :aria-label="
+            t('wishlist_ui.rated', { rating: product.rating, n: product.reviews })
+          "
         >
           <Icon
             name="material-symbols-light:kid-star-sharp"
@@ -77,7 +79,7 @@
       </h3>
 
       <p class="text-sm text-mute">{{ product.blurb }}</p>
-      <ul class="flex flex-wrap gap-1.5" aria-label="Key specifications">
+      <ul class="flex flex-wrap gap-1.5" :aria-label="t('cart_ui.key_specs')">
         <li v-for="s in product.specs" :key="s" class="chip">{{ s }}</li>
       </ul>
 
@@ -89,7 +91,7 @@
             {{ money.format(product.price) }}
           </p>
           <p v-if="product.lease" class="text-end meta">
-            Lease: {{ money.format(product.lease) }} / mo
+            {{ t("compare_ui.lease_per_month", { price: money.format(product.lease) }) }}
           </p>
         </div>
 
@@ -119,7 +121,7 @@
           <LazyVButton
             variant="icon"
             v-if="!readonly"
-            :aria-label="`Remove ${product.name} from registry`"
+            :aria-label="t('wishlist_ui.remove_from_registry', { name: product.name })"
             @click="emit('remove')"
           >
             <Icon name="lucide:trash-2" size="16" aria-hidden="true" />

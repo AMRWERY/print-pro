@@ -1,5 +1,5 @@
 <template>
-  <footer class="card p-6 meta space-y-6" aria-label="Support and policies">
+  <footer class="card p-6 meta space-y-6" :aria-label="t('acct_ui.support_and_policies')">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <div
         v-for="sec in sections"

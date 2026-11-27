@@ -1,8 +1,8 @@
 <template>
-  <LazyVStepper :n="1" title="Contact & delivery address" :summary="summary">
+  <LazyVStepper :n="1" :title="t('checkout_ui.address_title')" :summary="summary">
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <fieldset class="grid gap-4 sm:grid-cols-2">
-        <legend class="eyebrow mb-3 sm:col-span-2">Contact</legend>
+        <legend class="eyebrow mb-3 sm:col-span-2">{{ t("checkout_ui.contact") }}</legend>
         <LazyVInput
           v-model="f.email"
           name="email"
@@ -10,7 +10,7 @@
           type="email"
           required
           :rules="emailRule"
-          hint="Your order confirmation is sent here."
+          :hint="t('checkout_ui.email_hint')"
           autocomplete="email"
           inputmode="email"
         />
@@ -22,14 +22,14 @@
           type="tel"
           required
           :rules="phoneRule"
-          hint="Used by the carrier for delivery."
+          :hint="t('checkout_ui.phone_hint')"
           autocomplete="tel"
           inputmode="tel"
         />
       </fieldset>
 
       <fieldset class="grid gap-4 sm:grid-cols-2">
-        <legend class="eyebrow mb-3 sm:col-span-2">Delivery address</legend>
+        <legend class="eyebrow mb-3 sm:col-span-2">{{ t("inputs.delivery_address") }}</legend>
         <LazyVInput
           v-model="f.fullName"
           name="fullName"
@@ -89,7 +89,7 @@
           name="postal"
           :label="t('inputs.postal_zip_code')"
           required
-          :rules="minLengthText(3, 'Enter the postal or ZIP code.')"
+          :rules="minLengthText(3, t('checkout_ui.postal_error'))"
           autocomplete="postal-code"
         />
 

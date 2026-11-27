@@ -8,7 +8,7 @@
     >
       {{ label }}
       <span v-if="required" class="text-accent" aria-hidden="true">*</span>
-      <span v-else-if="optional" class="font-normal text-mute">(optional)</span>
+      <span v-else-if="optional" class="font-normal text-mute">{{ t("common_ui.optional_hint") }}</span>
     </label>
 
     <select
@@ -56,6 +56,7 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
 /**
  * A select, with the same vee-validate behaviour as <LazyVInput>.
  *

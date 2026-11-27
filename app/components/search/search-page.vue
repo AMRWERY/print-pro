@@ -7,22 +7,29 @@
 
       <div class="space-y-1" aria-live="polite">
         <h1 class="font-display text-2xl sm:text-3xl">
-          <template v-if="catalog.filters.query">Results for “{{ catalog.filters.query }}”</template>
-          <template v-else>Search the catalog</template>
+          <template v-if="catalog.filters.query">{{ t("search_ui.results_for", { query: catalog.filters.query }) }}</template>
+          <template v-else>{{ t("inputs.search_the_catalog") }}</template>
         </h1>
         <p class="meta">
-          {{ catalog.total }} {{ catalog.total === 1 ? "item" : "items" }} indexed
+          {{
+            t(
+              catalog.total === 1
+                ? "search_ui.item_indexed"
+                : "search_ui.items_indexed",
+              { n: catalog.total },
+            )
+          }}
         </p>
       </div>
 
       <div class="gap-8 lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
-        <aside class="hidden lg:block" aria-label="Filters">
+        <aside class="hidden lg:block" :aria-label="t('search_ui.filters')">
           <div class="card-compact sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto">
             <catalog-filters hide-query />
           </div>
         </aside>
 
-        <section id="catalog-results" class="scroll-mt-28 space-y-4" aria-label="Search results">
+        <section id="catalog-results" class="scroll-mt-28 space-y-4" :aria-label="t('search_ui.search_results')">
           <catalog-toolbar @open-filters="filtersOpen = true" />
         
           <active-filters />
@@ -33,7 +40,7 @@
             v-model:page="catalog.page"
             v-model:per-page="catalog.perPage"
             :total="catalog.total"
-            item-label="indexed items"
+            :item-label="t('search_ui.indexed_items')"
             scroll-to="#catalog-results"
           />
         </section>
@@ -53,11 +60,13 @@ import type { CatalogProduct } from "~/types/catalog";
 
 const props = defineProps<{ products: CatalogProduct[] }>();
 
-const crumbs = [
-  { label: "Index", to: "/" },
-  { label: "Products", to: "/products" },
-  { label: "Search" },
-];
+const { t } = useI18n();
+
+const crumbs = computed(() => [
+  { label: t("info_ui.index"), to: "/" },
+  { label: t("search_ui.products"), to: "/products" },
+  { label: t("btn.search") },
+]);
 
 const route = useRoute();
 const router = useRouter();
@@ -90,8 +99,11 @@ watch(
 );
 
 useSeoMeta({
-  title: () => (catalog.filters.query ? `“${catalog.filters.query}” — Search` : "Search"),
-  description: "Search printers, photocopiers, ink and toner.",
+  title: () =>
+    catalog.filters.query
+      ? t("search_ui.seo_title_query", { query: catalog.filters.query })
+      : t("btn.search"),
+  description: () => t("search_ui.seo_description"),
   robots: "noindex",
 });
 </script>

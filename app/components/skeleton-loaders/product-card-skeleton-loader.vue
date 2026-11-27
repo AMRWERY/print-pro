@@ -3,7 +3,7 @@
     v-if="count > 1"
     class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
     aria-busy="true"
-    aria-label="Loading products"
+    :aria-label="t('skeleton_ui.loading_products')"
   >
     <li v-for="n in count" :key="n" class="flex">
       <product-card-skeleton-loader class="w-full" />
@@ -25,6 +25,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 /**
  * Placeholder for VProductCard. `count` > 1 renders a responsive grid of them
  * (the 4-up product grid); a single card has no wrapper so it can sit inside

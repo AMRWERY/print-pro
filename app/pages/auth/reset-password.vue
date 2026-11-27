@@ -5,7 +5,7 @@
         v-if="!ready"
         class="space-y-3"
         aria-busy="true"
-        aria-label="Checking your link"
+        :aria-label="t('auth_ui.checking_link')"
       >
         <LazyVSkeletonLoader variant="line" class="!h-8 w-2/3" />
 
@@ -184,16 +184,15 @@ const submit = async () => {
   loading.value = false;
 
   if (!done.ok) {
-    error.value =
-      "This link has expired or was already used. Request a new one.";
+    error.value = t("auth_ui.link_used");
     return;
   }
   await navigateTo({ path: localePath("/auth"), query: { reset: "1" } });
 };
 
 useSeoMeta({
-  title: "New Password",
-  description: "Set a new password for your account.",
+  title: () => t("auth_ui.reset_seo_title"),
+  description: () => t("auth_ui.reset_seo_description"),
   robots: "noindex",
 });
 </script>

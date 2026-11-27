@@ -2,12 +2,12 @@
   <printing-section
     id="dimensions"
     step="02"
-    title="Size, Quantity and Paper"
-    stage="Stage 2/5"
+    :title="t('printing_ui.dimensions_title')"
+    :stage="t('printing_ui.stage_of', { n: 2, total: 5 })"
   >
     <div class="grid gap-6 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-end">
       <div>
-        <p class="eyebrow mb-2 text-mute">Number of copies</p>
+        <p class="eyebrow mb-2 text-mute">{{ t("inputs.number_of_copies") }}</p>
         <LazyVQuantityStepper
           v-model="config.copies"
           :max="99"
@@ -24,20 +24,20 @@
           aria-hidden="true"
         />
         <span>
-          <strong class="text-paper">Volume tiers:</strong> 5–9 copies get 10%
-          off, 10+ copies get 18% off.
-          <span v-if="rate" class="text-success"
-            >Your {{ Math.round(rate * 100) }}% discount is applied.</span
-          >
+          <strong class="text-paper">{{ t("printing_ui.volume_tiers") }}</strong>
+          {{ t("printing_ui.volume_tiers_body") }}
+          <span v-if="rate" class="text-success">{{
+            t("printing_ui.discount_applied", { n: Math.round(rate * 100) })
+          }}</span>
         </span>
       </p>
     </div>
 
     <div class="mt-6">
-      <p class="eyebrow mb-3 text-mute">Print size</p>
+      <p class="eyebrow mb-3 text-mute">{{ t("printing_ui.print_size") }}</p>
       <printing-choice
         v-model="config.size"
-        label="Print size"
+        :label="t('printing_ui.print_size')"
         columns="sm:grid-cols-2 xl:grid-cols-3"
         :options="options"
       >
@@ -64,7 +64,7 @@
           :label="t('inputs.width_inches')"
           required
           :rules="widthRule"
-          :hint="`Up to ${CUSTOM_MAX_WIDTH} inches (roll width).`"
+          :hint="t('printing_ui.width_hint', { max: CUSTOM_MAX_WIDTH })"
         />
 
         <LazyVInput
@@ -74,7 +74,7 @@
           :label="t('inputs.length_inches')"
           required
           :rules="lengthRule"
-          hint="Up to 200 inches."
+          :hint="t('printing_ui.length_hint')"
         />
       </div>
     </div>
@@ -98,25 +98,27 @@ const money = useMoney();
 
 const rate = computed(() => volumeRate(config.copies));
 
-const options = sizes.map((s) => ({
-  value: s.value,
-  label: s.label,
-  note: s.note,
-  priceLabel:
-    s.value === "custom"
-      ? `${money.format(CUSTOM_PER_SQFT)} / sq ft`
-      : money.format(s.price),
-}));
+const options = computed(() =>
+  sizes.map((s) => ({
+    value: s.value,
+    label: s.label,
+    note: s.note,
+    priceLabel:
+      s.value === "custom"
+        ? t("printing_ui.per_sq_ft", { price: money.format(CUSTOM_PER_SQFT) })
+        : money.format(s.price),
+  })),
+);
 
 const widthRule = (v: unknown) => {
   const n = Number(v);
   return n >= 4 && n <= CUSTOM_MAX_WIDTH
     ? true
-    : `Enter a width between 4 and ${CUSTOM_MAX_WIDTH} inches.`;
+    : t("printing_ui.width_error", { max: CUSTOM_MAX_WIDTH });
 };
 
 const lengthRule = (v: unknown) => {
   const n = Number(v);
-  return n >= 4 && n <= 200 ? true : "Enter a length between 4 and 200 inches.";
+  return n >= 4 && n <= 200 ? true : t("printing_ui.length_error");
 };
 </script>

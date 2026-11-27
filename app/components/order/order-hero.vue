@@ -18,21 +18,27 @@
             <span
               class="h-2 w-2 rounded-full bg-success"
               aria-hidden="true"
-            />Order confirmed
+            />{{ t("order_ui.order_confirmed") }}
           </p>
           <h1
             ref="heading"
             tabindex="-1"
             class="text-3xl focus:outline-none sm:text-5xl"
           >
-            Order confirmed
+            {{ t("order_ui.order_confirmed") }}
           </h1>
-          <p class="max-w-2xl text-sm text-mute sm:text-base">
-            Order <span class="font-mono text-paper">#{{ order.id }}</span> has
-            been placed and queued for checking and packing. A confirmation is
-            on its way to <span class="text-paper">{{ order.email }}</span
-            >.
-          </p>
+          <i18n-t
+            keypath="order_ui.hero_body"
+            tag="p"
+            class="max-w-2xl text-sm text-mute sm:text-base"
+          >
+            <template #id
+              ><span class="font-mono text-paper">#{{ order.id }}</span></template
+            >
+            <template #email
+              ><span class="text-paper">{{ order.email }}</span></template
+            >
+          </i18n-t>
         </div>
       </div>
 
@@ -40,7 +46,7 @@
         class="grid gap-px overflow-hidden rounded-card border border-line bg-line text-sm"
       >
         <div class="bg-surface p-3">
-          <dt class="eyebrow">Payment</dt>
+          <dt class="eyebrow">{{ t("order_ui.payment") }}</dt>
           <dd class="mt-0.5 flex items-center gap-1.5">
             <Icon
               :name="paid ? 'lucide:circle-check' : 'lucide:clock'"
@@ -50,8 +56,8 @@
             />
             {{
               paid
-                ? `Paid · card ending ${order.payment.last4}`
-                : `Awaiting ${order.payment.label} transfer`
+                ? t("order_ui.paid_card_ending", { last4: order.payment.last4 })
+                : t("order_ui.awaiting_transfer", { label: order.payment.label })
             }}
           </dd>
         </div>
@@ -59,8 +65,8 @@
           <dt class="eyebrow">
             {{
               order.delivery.id === "pickup"
-                ? "Ready for pickup"
-                : "Est. handover"
+                ? t("order_ui.ready_for_pickup")
+                : t("order_ui.est_handover")
             }}
           </dt>
           <dd class="mt-0.5 font-mono text-accent">
@@ -68,7 +74,7 @@
           </dd>
         </div>
         <div class="bg-surface p-3">
-          <dt class="eyebrow">Tracking PIN</dt>
+          <dt class="eyebrow">{{ t("order_ui.tracking_pin") }}</dt>
           <dd class="mt-0.5 font-mono">{{ order.pin }}</dd>
         </div>
       </dl>

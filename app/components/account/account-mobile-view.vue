@@ -25,7 +25,7 @@
         <LazyVButton
           variant="plain"
           class="relative text-mute hover:text-paper"
-          aria-label="Notifications"
+          :aria-label="t('acct_ui.notifications')"
           @click="showNotifications = !showNotifications"
         >
           <Icon name="lucide:bell" size="18" />
@@ -44,7 +44,7 @@
     <div
       class="grid grid-cols-3 gap-1 rounded-control border border-line bg-surface p-1 font-mono text-xs font-semibold"
       role="tablist"
-      aria-label="Mobile sections"
+      :aria-label="t('acct_ui.mobile_sections')"
     >
       <LazyVButton
         variant="plain"
@@ -235,7 +235,7 @@
         >
           <img
             src="/img/prod-01.png"
-            alt="Photocopier"
+            :alt="t('acct_ui.alt_photocopier')"
             class="h-8 w-8 object-contain"
           />
           <span class="font-mono text-2xs text-paper">Kopira Pro A3 35</span>
@@ -245,7 +245,7 @@
         >
           <img
             src="/img/prod-03.png"
-            alt="Toner"
+            :alt="t('acct_ui.alt_toner')"
             class="h-8 w-8 object-contain"
           />
           <span class="font-mono text-2xs text-paper">Kopira Toner...</span>

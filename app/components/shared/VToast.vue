@@ -1,7 +1,7 @@
 <template>
   <section
     class="pointer-events-none fixed inset-x-4 bottom-20 z-[70] flex flex-col items-end gap-2 sm:inset-x-auto sm:end-4 sm:w-96 lg:bottom-6 lg:end-6"
-    aria-label="Notifications"
+    :aria-label="tr('common_ui.notifications')"
   >
     <TransitionGroup
       name="toast"
@@ -49,7 +49,7 @@
           <LazyVButton
             variant="plain"
             class="-me-1 -mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-control text-mute transition-colors duration-200 hover:text-paper"
-            aria-label="Dismiss notification"
+            :aria-label="tr('common_ui.dismiss_notification')"
             @click="dismiss(t.id)"
           >
             <Icon name="lucide:x" size="14" aria-hidden="true" />
@@ -80,6 +80,7 @@ import type { Toast } from "~/types/shared/VToast";
  */
 
 const { toasts, dismiss } = useToast();
+const { t: tr } = useI18n();
 
 const look = {
   neutral: {

@@ -3,8 +3,8 @@
     <div class="container-page space-y-6">
       <section-heading
         id="compat-title"
-        eyebrow="Compatibility"
-        :title="heading ?? 'Compatible with'"
+        :eyebrow="t('product_ui.compatibility')"
+        :title="heading ?? t('product_ui.compatible_with')"
       />
 
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -30,5 +30,7 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 defineProps<{ items: string[]; yieldNote?: string; heading?: string }>();
 </script>

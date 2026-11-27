@@ -8,7 +8,7 @@
       hide-label
       icon="lucide:search"
       autocomplete="off"
-      placeholder="Search printers, photocopiers, ink, toner…"
+      :placeholder="t('search_ui.search_placeholder')"
       input-class="!pe-4"
     />
   </form>

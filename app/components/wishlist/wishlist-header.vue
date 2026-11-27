@@ -3,13 +3,13 @@
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div class="space-y-3">
         <p class="eyebrow-accent">
-          <span class="pip" aria-hidden="true" />Wishlist · saved products
+          <span class="pip" aria-hidden="true" />{{ t("wishlist_ui.eyebrow") }}
         </p>
-        <h1 class="max-w-3xl text-4xl sm:text-5xl">Your wishlist</h1>
+        <h1 class="max-w-3xl text-4xl sm:text-5xl">
+          {{ t("wishlist_ui.title") }}
+        </h1>
         <p class="max-w-2xl text-sm text-mute sm:text-base">
-          Printers, photocopiers and supplies you saved for later. Group them by
-          location, share the list with your team and move everything to the
-          cart when you are ready.
+          {{ t("wishlist_ui.description") }}
         </p>
       </div>
     </div>
@@ -19,7 +19,7 @@
     >
       <div class="bg-surface p-4">
         <dt class="eyebrow flex items-center justify-between">
-          Active registry
+          {{ t("wishlist_ui.active_registry") }}
           <Icon name="lucide:folder-open" size="14" aria-hidden="true" />
         </dt>
         <dd class="mt-1">
@@ -34,19 +34,19 @@
             @update:model-value="(v) => emit('update:name', String(v ?? ''))"
           />
         </dd>
-        <dd class="meta">ID: REG-{{ registryId }}</dd>
+        <dd class="meta">{{ t("wishlist_ui.registry_id", { id: registryId }) }}</dd>
       </div>
       <div class="bg-surface p-4">
-        <dt class="eyebrow">Estimated asset total</dt>
+        <dt class="eyebrow">{{ t("wishlist_ui.estimated_total") }}</dt>
         <dd class="mt-1 font-display text-2xl" aria-live="polite">
           {{ money.format(total) }}
-          <span class="meta">EGP</span>
+          <span class="meta">{{ t("cart_ui.egp") }}</span>
         </dd>
-        <dd class="meta">Excl. VAT</dd>
+        <dd class="meta">{{ t("wishlist_ui.excl_vat") }}</dd>
       </div>
       <div class="bg-surface p-4">
         <dt class="eyebrow flex items-center justify-between">
-          Availability
+          {{ t("catalog_ui.availability") }}
           <Icon
             name="lucide:circle-check"
             size="14"
@@ -55,9 +55,12 @@
           />
         </dt>
         <dd class="mt-1 font-display text-2xl">
-          {{ ready }} / {{ count }} <span class="text-base">Ready</span>
+          {{ ready }} / {{ count }}
+          <span class="text-base">{{ t("wishlist_ui.ready") }}</span>
         </dd>
-        <dd class="meta">{{ ready }}/{{ count }} items in stock</dd>
+        <dd class="meta">
+          {{ t("wishlist_ui.items_in_stock", { ready, count }) }}
+        </dd>
       </div>
     </dl>
 
@@ -97,19 +100,22 @@
         :disabled="!count"
         @click="confirmNew = true"
       >
-        <Icon name="lucide:plus" size="16" aria-hidden="true" />New registry
+        <Icon name="lucide:plus" size="16" aria-hidden="true" />{{
+          t("wishlist_ui.new_registry")
+        }}
       </LazyVButton>
       <span
         v-else
         class="flex items-center gap-2 rounded-control border border-accent/40 bg-accent-soft py-1 pe-1 ps-3 text-sm"
         role="alert"
       >
-        Clear this registry and start over?
+        {{ t("wishlist_ui.clear_registry_confirm") }}
         <LazyVButton variant="primary" size="sm" @click="startNew">
           {{ t("btn.yes_clear") }}
         </LazyVButton>
 
         <LazyVButton variant="secondary" size="sm" @click="confirmNew = false">
+          {{ t("btn.cancel") }}
         </LazyVButton>
       </span>
     </div>

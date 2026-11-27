@@ -23,7 +23,7 @@
           class="icon-wiggle"
           aria-hidden="true"
         />
-        Support +1 (800) 412-5866
+        {{ t("layout_ui.support_phone", { phone: "+1 (800) 412-5866" }) }}
       </a>
     </div>
   </div>
@@ -31,4 +31,6 @@
 
 <script lang="ts" setup>
 import { promoItems } from "~/data/home";
+
+const { t } = useI18n();
 </script>

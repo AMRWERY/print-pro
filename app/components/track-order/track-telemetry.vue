@@ -10,11 +10,11 @@
           size="20"
           class="text-accent"
           aria-hidden="true"
-        />Shipment details
+        />{{ t("track_ui.shipment_details") }}
       </h2>
       <span
         class="rounded-control border border-yellow/40 bg-yellow-soft px-2 py-0.5 font-mono text-xs text-yellow"
-        >Demo data</span
+        >{{ t("track_ui.demo_data") }}</span
       >
     </header>
 
@@ -34,8 +34,7 @@
     </dl>
 
     <p class="mt-3 text-xs text-mute">
-      These details are simulated for the demo. Once a courier feed is
-      connected, live parcel scans will appear here.
+      {{ t("track_ui.demo_note") }}
     </p>
   </section>
 </template>
@@ -44,34 +43,36 @@
 import { demoTelemetry } from "~/data/tracking";
 import type { Order } from "~/types/order";
 
+const { t } = useI18n();
+
 const props = defineProps<{ order: Order }>();
 
 const readings = computed(() => {
-  const t = demoTelemetry(props.order);
+  const tel = demoTelemetry(props.order);
   return [
     {
-      label: "Parcels",
-      value: String(t.parcels),
-      unit: t.parcels === 1 ? "parcel" : "parcels",
-      note: "All accounted for",
+      label: t("track_ui.parcels"),
+      value: String(tel.parcels),
+      unit: tel.parcels === 1 ? t("track_ui.parcel") : t("track_ui.parcels_unit"),
+      note: t("track_ui.all_accounted_for"),
     },
     {
-      label: "Weight",
-      value: String(t.weightKg),
-      unit: "kg",
-      note: "Matches your order",
+      label: t("track_ui.weight"),
+      value: String(tel.weightKg),
+      unit: t("track_ui.kg"),
+      note: t("track_ui.matches_your_order"),
     },
     {
-      label: "Signature",
-      value: t.signature ? "Required" : "Not needed",
+      label: t("track_ui.signature"),
+      value: tel.signature ? t("track_ui.required") : t("track_ui.not_needed"),
       unit: "",
-      note: "On delivery",
+      note: t("track_ui.on_delivery"),
     },
     {
-      label: "Insurance",
-      value: String(t.insuredPct),
+      label: t("track_ui.insurance"),
+      value: String(tel.insuredPct),
       unit: "%",
-      note: "Covered in transit",
+      note: t("track_ui.covered_in_transit"),
     },
   ];
 });

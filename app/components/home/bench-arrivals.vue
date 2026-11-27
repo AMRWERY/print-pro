@@ -3,8 +3,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="arrivals-title"
-        eyebrow="New and back in stock"
-        title="Latest arrivals"
+        :eyebrow="t('home_ui.new_and_back_in_stock')"
+        :title="t('home_ui.latest_arrivals')"
       >
         <LazyVButton
           variant="tertiary"
@@ -30,7 +30,7 @@
               :icon="a.icon"
               :src="a.image"
               :alt="a.imageAlt"
-              :label="`${a.name} image`"
+              :label="t('home_ui.item_image', { name: a.name })"
               size="56"
               class="aspect-[16/9]"
             />

@@ -21,7 +21,7 @@
         label-class="eyebrow mb-1 block"
         inputmode="numeric"
         min="0"
-        placeholder="Any"
+        :placeholder="t('catalog_ui.any')"
         input-class="font-mono"
       />
     </div>

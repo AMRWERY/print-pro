@@ -10,8 +10,9 @@
         role="status"
       >
         <p class="flex items-center gap-2">
-          <Icon name="lucide:share-2" size="16" aria-hidden="true" />You're
-          viewing a shared wishlist ({{ items.length }} items).
+          <Icon name="lucide:share-2" size="16" aria-hidden="true" />{{
+            t("wishlist_ui.shared_banner", { n: items.length })
+          }}
         </p>
         <div class="flex gap-2">
           <LazyVButton variant="primary" size="sm" @click="saveShared">{{
@@ -43,12 +44,12 @@
       <LazyVEmptyState
         v-if="!items.length"
         icon="lucide:bookmark-plus"
-        eyebrow="WISHLIST :: EMPTY"
-        tag="0 BOOKMARKS"
-        caption="EMPTY"
-        :meta="['SAVED: 0', 'LOCATIONS: NONE']"
-        title="Your wishlist is empty"
-        description="Tap the heart on any product to save it here. Group items by location, share the list with your team and move everything to the cart when you are ready."
+        :eyebrow="t('wishlist_ui.empty_eyebrow')"
+        :tag="t('wishlist_ui.empty_tag')"
+        :caption="t('wishlist_ui.empty_caption')"
+        :meta="[t('wishlist_ui.empty_meta_saved'), t('wishlist_ui.empty_meta_locations')]"
+        :title="t('wishlist_ui.empty_title')"
+        :description="t('wishlist_ui.empty_description')"
       >
         <LazyVButton variant="primary" to="/products">{{
           t("btn.browse_the_catalog")
@@ -98,7 +99,7 @@
           v-if="!shown.length"
           class="rounded-card border border-line bg-raised p-4 text-sm text-mute"
         >
-          Nothing in this category.
+          {{ t("wishlist_ui.nothing_in_category") }}
           <LazyVButton
             variant="plain"
             class="text-accent hover:underline"
@@ -111,7 +112,7 @@
 
     <section
       class="border-t border-line py-12"
-      aria-label="Registry assurances"
+      :aria-label="t('wishlist_ui.assurances')"
     >
       <div class="container-page">
         <icon-feature-row :items="wishlistAssurances" />
@@ -134,11 +135,11 @@ const router = useRouter();
 const wl = useWishlistStore();
 const cart = useCartStore();
 
-const crumbs = [
-  { label: "Index", to: "/" },
-  { label: "Products", to: "/products" },
-  { label: "Wishlist" },
-];
+const crumbs = computed(() => [
+  { label: t("catalog_ui.index"), to: "/" },
+  { label: t("catalog_ui.products"), to: "/products" },
+  { label: t("wishlist_ui.wishlist") },
+]);
 
 // ?items=a,b,c opens someone else's wishlist read-only.
 const shared = computed(() => {
@@ -176,7 +177,7 @@ const categoryStore = useCategoriesStore();
 void categoryStore.ensure();
 const categoryOf = (p: DetailedProduct) => {
   const key = (p as { category?: string }).category;
-  return key ? categoryStore.label(key) : "Other";
+  return key ? categoryStore.label(key) : t("wishlist_ui.other");
 };
 
 const categories = computed(() => {
@@ -184,7 +185,7 @@ const categories = computed(() => {
   for (const p of items.value)
     counts.set(categoryOf(p), (counts.get(categoryOf(p)) ?? 0) + 1);
   return [
-    { key: "all", label: "All", count: items.value.length },
+    { key: "all", label: t("btn.all"), count: items.value.length },
     ...[...counts.entries()].map(([label, count]) => ({
       key: label,
       label,
@@ -244,12 +245,12 @@ const moveOne = (p: DetailedProduct) => {
   cart.add(p.id, p.price);
   if (!shared.value) {
     wl.remove([p.id]);
-    say(`${p.name} moved to cart.`);
+    say(t("wishlist_ui.moved_to_cart", { name: p.name }));
   }
 };
 const removeOne = (p: DetailedProduct) => {
   wl.remove([p.id]);
-  say(`${p.name} removed from registry.`);
+  say(t("wishlist_ui.removed_from_registry", { name: p.name }));
 };
 const moveSelected = () => {
   const picked = selectedItems.value;
@@ -257,13 +258,19 @@ const moveSelected = () => {
   for (const p of picked) cart.add(p.id, p.price);
   if (!shared.value) wl.remove(picked.map((p) => p.id));
   say(
-    `${picked.length} ${picked.length === 1 ? "item" : "items"} moved to cart.`,
+    picked.length === 1
+      ? t("wishlist_ui.items_moved_one", { n: picked.length })
+      : t("wishlist_ui.items_moved_other", { n: picked.length }),
   );
 };
 const batchRemove = () => {
   const picked = selectedItems.value;
   wl.remove(picked.map((p) => p.id));
-  say(`${picked.length} ${picked.length === 1 ? "item" : "items"} removed.`);
+  say(
+    picked.length === 1
+      ? t("wishlist_ui.items_removed_one", { n: picked.length })
+      : t("wishlist_ui.items_removed_other", { n: picked.length }),
+  );
 };
 
 const { copy, copied } = useClipboard({ copiedDuring: 2000 });
@@ -283,9 +290,8 @@ const loadSample = () => {
 };
 
 useSeoMeta({
-  title: "Wishlist",
-  description:
-    "Your saved products: share the list, group items by location and move them to the cart.",
+  title: t("wishlist_ui.wishlist"),
+  description: t("wishlist_ui.seo_description"),
   robots: "noindex",
 });
 </script>

@@ -7,20 +7,22 @@
     <header class="mb-6 flex flex-wrap items-end justify-between gap-3">
       <div>
         <p class="eyebrow flex items-center gap-2">
-          <span class="pip" aria-hidden="true" />Mission routing
+          <span class="pip" aria-hidden="true" />{{ t("order_ui.mission_routing") }}
         </p>
         <h2 id="timeline-title" class="font-display text-2xl">
-          Order progress
+          {{ t("order_ui.order_progress") }}
         </h2>
       </div>
       <p
         class="rounded-control border border-line px-3 py-1.5 font-mono text-xs"
       >
-        <span class="text-mute">{{
-          order.delivery.id === "pickup"
-            ? "Ready for pickup:"
-            : "Guaranteed handover:"
-        }}</span>
+        <span class="text-mute"
+          >{{
+            order.delivery.id === "pickup"
+              ? t("order_ui.ready_for_pickup")
+              : t("order_ui.guaranteed_handover")
+          }}:</span
+        >
         <span class="text-accent">{{ formatWhen(handover, false) }}</span>
       </p>
     </header>
@@ -56,11 +58,11 @@
           :class="s.status === 'current' && 'text-accent'"
         >
           <template v-if="s.when"
-            >{{ s.status === "done" ? "Completed" : "Est." }}
+            >{{ s.status === "done" ? t("order_ui.completed") : t("order_ui.est") }}
             {{ formatWhen(s.when) }}</template
           >
 
-          <template v-else>In progress</template>
+          <template v-else>{{ t("order_ui.in_progress") }}</template>
         </p>
       </li>
     </ol>
@@ -72,6 +74,8 @@ import { estimatedHandover, formatWhen, orderTimeline } from "~/data/order";
 import type { StepStatus } from "~/data/order";
 import type { Order } from "~/types/order";
 
+const { t } = useI18n();
+
 const props = defineProps<{ order: Order }>();
 
 const steps = computed(() => orderTimeline(props.order));
@@ -79,11 +83,11 @@ const steps = computed(() => orderTimeline(props.order));
 const handover = computed(() => estimatedHandover(props.order));
 
 // Status is always icon + words + colour, never colour alone.
-const label: Record<StepStatus, string> = {
-  done: "Completed",
-  current: "In progress",
-  queued: "Queued",
-};
+const label = computed<Record<StepStatus, string>>(() => ({
+  done: t("order_ui.completed"),
+  current: t("order_ui.in_progress"),
+  queued: t("order_ui.queued"),
+}));
 
 const icon: Record<StepStatus, string> = {
   done: "lucide:circle-check",

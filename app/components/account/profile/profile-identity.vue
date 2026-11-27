@@ -15,10 +15,10 @@
           id="identity-title"
           class="font-display text-lg font-bold text-paper"
         >
-          Account details
+          {{ t("acct_profile.account_details") }}
         </h2>
         <p class="text-xs text-mute">
-          How you appear on orders, invoices and service reports.
+          {{ t("acct_profile.account_details_desc") }}
         </p>
       </div>
     </header>
@@ -58,7 +58,7 @@
         optional
         autocomplete="tel"
         :rules="phoneOptional"
-        hint="Used by the courier for delivery."
+        :hint="t('acct_profile.phone_hint')"
       />
 
       <LazyVInput
@@ -67,7 +67,7 @@
         type="email"
         :label="t('inputs.email')"
         disabled
-        hint="Your sign-in email can't be changed here."
+        :hint="t('acct_profile.email_hint')"
         class="sm:col-span-2"
       />
 

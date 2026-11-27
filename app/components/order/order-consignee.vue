@@ -9,12 +9,12 @@
         size="20"
         class="text-accent"
         aria-hidden="true"
-      />Delivery details
+      />{{ t("order_ui.delivery_details") }}
     </h2>
 
     <dl class="space-y-4 text-sm">
       <div class="space-y-1 card p-3">
-        <dt class="eyebrow">Recipient</dt>
+        <dt class="eyebrow">{{ t("order_ui.recipient") }}</dt>
         <dd class="font-medium">{{ order.name }}</dd>
         <dd v-if="order.company" class="text-mute">{{ order.company }}</dd>
         <dd class="meta">
@@ -34,7 +34,7 @@
       </div>
 
       <div class="space-y-1 card p-3">
-        <dt class="eyebrow">Delivery method</dt>
+        <dt class="eyebrow">{{ t("order_ui.delivery_method") }}</dt>
         <dd class="flex items-center gap-1.5 font-medium">
           <Icon
             name="lucide:shield-check"
@@ -50,7 +50,7 @@
         v-if="order.notes"
         class="space-y-1 card p-3"
       >
-        <dt class="eyebrow">Delivery notes</dt>
+        <dt class="eyebrow">{{ t("inputs.delivery_notes") }}</dt>
         <dd class="text-xs text-mute">{{ order.notes }}</dd>
       </div>
     </dl>
@@ -60,6 +60,8 @@
 <script lang="ts" setup>
 import { countryName } from "~/data/order";
 import type { Order } from "~/types/order";
+
+const { t } = useI18n();
 
 defineProps<{ order: Order }>();
 </script>

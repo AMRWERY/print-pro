@@ -28,7 +28,7 @@
             <LazyVButton
               variant="icon"
               ref="closeBtn"
-              aria-label="Close cart"
+              :aria-label="t('cart_ui.close_cart')"
               @click="close"
             >
               <Icon name="lucide:x" size="18" aria-hidden="true" />
@@ -42,9 +42,9 @@
             as="p"
             class="flex-1"
             icon="lucide:shopping-cart"
-            caption="0 UNITS"
-            title="Your cart is empty"
-            description="Add printers, photocopiers or supplies from the catalog to start an order."
+            :caption="t('cart_ui.empty_caption')"
+            :title="t('cart_ui.empty_title')"
+            :description="t('cart_ui.empty_description')"
           >
             <LazyVButton variant="primary" to="/products" @click="close">{{
               t("btn.browse_the_catalog")
@@ -54,7 +54,7 @@
           <template v-else>
             <ul
               class="flex-1 divide-y divide-line overflow-y-auto"
-              aria-label="Items in your cart"
+              :aria-label="t('cart_ui.items_in_cart')"
             >
               <li v-for="e in visible" :key="e.line.key" class="flex gap-3 p-4">
                 <div
@@ -72,7 +72,7 @@
                   <media-placeholder
                     v-else
                     :icon="e.product.icon"
-                    :label="`${e.product.name} image`"
+                    :label="t('cart_ui.product_image', { name: e.product.name })"
                     size="32"
                     class="h-full w-full"
                   />
@@ -100,7 +100,7 @@
                     <LazyVButton
                       variant="icon"
                       class="h-8 w-8 shrink-0"
-                      :aria-label="`Remove ${e.product.name} from cart`"
+                      :aria-label="t('cart_ui.remove_from_cart', { name: e.product.name })"
                       @click="cart.remove([e.line.key])"
                     >
                       <Icon
@@ -141,7 +141,7 @@
                   :aria-valuenow="Math.round(progress)"
                   aria-valuemin="0"
                   aria-valuemax="100"
-                  aria-label="Progress toward free freight"
+                  :aria-label="t('cart_ui.free_freight_progress')"
                 >
                   <div
                     class="h-full rounded-full bg-accent transition-[width] duration-300"

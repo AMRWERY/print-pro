@@ -1,5 +1,5 @@
 <template>
-  <section class="space-y-3 card-compact" aria-label="Filter orders">
+  <section class="space-y-3 card-compact" :aria-label="t('inputs.filter_orders')">
     <div class="grid gap-3 md:grid-cols-[minmax(0,1fr)_180px_220px]">
       <LazyVInput
         v-model="search"
@@ -8,7 +8,7 @@
         :label="t('inputs.search_orders')"
         hide-label
         icon="lucide:search"
-        placeholder="Search by order #, item or waybill"
+        :placeholder="t('acct_orders.search_placeholder')"
       />
 
       <LazyVSelectInput
@@ -32,7 +32,7 @@
       <div
         class="flex flex-wrap gap-1.5"
         role="group"
-        aria-label="Order status"
+        :aria-label="t('acct_orders.order_status')"
       >
         <LazyVButton
           v-for="t in tabs"

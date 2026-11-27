@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed inset-x-0 bottom-0 z-40 flex items-stretch justify-around border-t border-line bg-ink/95 py-1 font-mono text-2xs font-semibold backdrop-blur lg:hidden"
-    aria-label="Account navigation"
+    :aria-label="t('acct_ui.account_navigation')"
   >
     <LazyVButton
       v-for="item in items"
@@ -29,6 +29,7 @@
 <script lang="ts" setup>
 import { accountNav, isAccountNavActive } from "~/data/account-nav";
 
+const { t } = useI18n();
 const route = useRoute();
 
 // The phone bar has four slots; "Addresses" lives on the Settings page there.

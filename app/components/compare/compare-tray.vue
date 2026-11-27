@@ -12,7 +12,11 @@
         aria-hidden="true"
       />
       <p class="text-sm">
-        <span class="font-medium">{{ store.ids.length }}</span> to compare
+        <i18n-t keypath="compare_ui.to_compare" tag="span">
+          <template #count>
+            <span class="font-medium">{{ store.ids.length }}</span>
+          </template>
+        </i18n-t>
       </p>
       <LazyVButton
         variant="primary"
@@ -24,7 +28,7 @@
       <LazyVButton
         variant="icon"
         size="sm"
-        aria-label="Clear comparison list"
+        :aria-label="t('compare_ui.clear_list')"
         @click="store.clear()"
       >
         <Icon name="lucide:x" size="14" aria-hidden="true" />

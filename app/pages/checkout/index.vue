@@ -3,10 +3,10 @@
     <LazyVEmptyState
       v-if="!entries.length"
       icon="lucide:shopping-cart"
-      eyebrow="CHECKOUT :: EMPTY"
-      tag="0 UNITS"
-      title="There's nothing to check out"
-      description="Your cart is empty. Add products from the catalog, then come back here to place the order."
+      :eyebrow="t('checkout_ui.empty_eyebrow')"
+      :tag="t('cart_ui.empty_caption')"
+      :title="t('checkout_ui.empty_title')"
+      :description="t('checkout_ui.empty_description')"
     >
       <LazyVButton variant="primary" to="/products">{{
         t("btn.browse_the_catalog")
@@ -20,7 +20,7 @@
     <template v-else>
       <div class="mb-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
-          <h1 class="font-display text-3xl">Checkout</h1>
+          <h1 class="font-display text-3xl">{{ t("checkout_ui.title") }}</h1>
           <LazyVButton
             variant="tertiary"
             to="/cart"
@@ -245,8 +245,8 @@ const place = async () => {
 };
 
 useSeoMeta({
-  title: "Secure Checkout",
-  description: "Complete your order.",
+  title: t("btn.secure_checkout"),
+  description: t("checkout_ui.seo_description"),
   robots: "noindex",
 });
 </script>

@@ -8,7 +8,7 @@
       >
         <div
           role="group"
-          aria-label="Filter featured products"
+          :aria-label="t('home_ui.filter_featured_products')"
           class="flex flex-wrap gap-2"
         >
           <LazyVButton

@@ -6,13 +6,17 @@
         size="20"
         class="text-accent"
         aria-hidden="true"
-      />Customer support
+      />{{ t("order_ui.customer_support") }}
     </h2>
-    <p class="text-sm text-mute">
-      A technician is assigned to order
-      <span class="font-mono text-paper">#{{ orderId }}</span> until it arrives
-      and is installed.
-    </p>
+    <i18n-t
+      keypath="order_ui.support_body"
+      tag="p"
+      class="text-sm text-mute"
+    >
+      <template #id
+        ><span class="font-mono text-paper">#{{ orderId }}</span></template
+      >
+    </i18n-t>
 
     <ul class="space-y-2">
       <li v-for="r in rows" :key="r.label">
@@ -49,28 +53,30 @@ import { orderSupport } from "~/data/order";
 
 defineProps<{ orderId: string }>();
 
-const rows = [
+const { t } = useI18n();
+
+const rows = computed(() => [
   {
-    label: "Support hotline",
+    label: t("order_ui.support_hotline"),
     value: orderSupport.phone,
     href: orderSupport.phoneHref,
     icon: "lucide:phone",
     end: "lucide:chevron-right",
   },
   {
-    label: "Dispatch desk",
+    label: t("order_ui.dispatch_desk"),
     value: orderSupport.email,
     href: `mailto:${orderSupport.email}`,
     icon: "lucide:mail",
     end: "lucide:chevron-right",
   },
   {
-    label: "Delivery note",
-    value: "Order document (.pdf)",
+    label: t("order_ui.delivery_note"),
+    value: t("order_ui.order_document"),
     href: undefined,
     icon: "lucide:badge-check",
     end: "lucide:download",
     action: () => window.print(),
   },
-];
+]);
 </script>

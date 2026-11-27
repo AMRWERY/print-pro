@@ -3,7 +3,7 @@
   <nav
     class="sticky z-30 -mx-4 border-y border-line bg-ink/90 px-4 backdrop-blur sm:mx-0 sm:rounded-card sm:border"
     :style="{ top: `${stickyTop}px` }"
-    aria-label="Configuration steps"
+    :aria-label="t('printing_ui.config_steps')"
   >
     <ol class="flex gap-1 overflow-x-auto py-2 [scrollbar-width:none]">
       <li v-for="(s, i) in steps" :key="s.id" class="shrink-0 lg:flex-1">
@@ -59,17 +59,17 @@ const { t } = useI18n();
 const { file } = usePrintConfig();
 const reduce = usePreferredReducedMotion();
 
-const steps = [
-  { id: "upload", label: "Upload", hint: t("btn.file_check") },
-  { id: "dimensions", label: "Size & paper", hint: t("btn.size_paper") },
-  { id: "engine", label: "Colour & sides", hint: t("btn.colour_sides") },
+const steps = computed(() => [
+  { id: "upload", label: t("printing_ui.step_upload"), hint: t("btn.file_check") },
+  { id: "dimensions", label: t("printing_ui.step_size_paper"), hint: t("btn.size_paper") },
+  { id: "engine", label: t("printing_ui.step_colour_sides"), hint: t("btn.colour_sides") },
   {
     id: "finishing",
-    label: "Binding & finishing",
+    label: t("printing_ui.step_binding_finishing"),
     hint: t("btn.binding_finishing"),
   },
-  { id: "fulfilment", label: "Delivery", hint: t("btn.courier_pickup") },
-];
+  { id: "fulfilment", label: t("printing_ui.step_delivery"), hint: t("btn.courier_pickup") },
+]);
 
 const active = ref("upload");
 
@@ -111,7 +111,7 @@ onMounted(() => {
     },
     { rootMargin: "-25% 0px -65% 0px" },
   );
-  for (const s of steps) {
+  for (const s of steps.value) {
     const el = document.getElementById(s.id);
     if (el) io.observe(el);
   }

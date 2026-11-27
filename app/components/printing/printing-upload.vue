@@ -2,15 +2,15 @@
   <printing-section
     id="upload"
     step="01"
-    title="Upload and File Check"
-    stage="Stage 1/5"
+    :title="t('printing_ui.upload_title')"
+    :stage="t('printing_ui.stage_of', { n: 1, total: 5 })"
   >
     <LazyVFileUpload
       ref="uploader"
       :title="t('inputs.drag_file_here')"
-      drop-title="Drop your file"
-      :description="`or browse your computer. Supports PDF, TIFF, PSD, JPEG and PNG up to ${MAX_FILE_MB} MB. For sharp prints use 300 dpi at the final size.`"
-      hint="Demo build: your file is checked in this browser and isn’t uploaded anywhere."
+      :drop-title="t('printing_ui.drop_file')"
+      :description="t('printing_ui.upload_description', { max: MAX_FILE_MB })"
+      :hint="t('printing_ui.upload_hint')"
       :accept="FILE_ACCEPT"
       :max-size-mb="MAX_FILE_MB"
       :loading="checking"
@@ -30,7 +30,7 @@
             <img
               v-if="previewUrl"
               :src="previewUrl"
-              alt="Thumbnail of your uploaded file"
+              :alt="t('printing_ui.thumbnail_alt')"
               class="h-full w-full object-cover"
             />
             <Icon
@@ -49,7 +49,9 @@
               {{ sizeText
               }}<template v-if="pixels">
                 · {{ pixels.w }} × {{ pixels.h }} px</template
-              ><template v-if="dpi"> · {{ dpi }} ppi at this size</template>
+              ><template v-if="dpi">
+                · {{ t("printing_ui.ppi_at_size", { n: dpi }) }}</template
+              >
             </p>
             <p
               class="flex items-center gap-1.5 text-sm font-semibold"

@@ -7,7 +7,7 @@
       <LazyVButton
         variant="icon"
         class="lg:hidden"
-        aria-label="Open menu"
+        :aria-label="t('layout_ui.open_menu')"
         aria-haspopup="dialog"
         @click="menuOpen = true"
       >
@@ -29,7 +29,7 @@
           variant="icon"
           to="/wishlist"
           class="relative hidden lg:inline-flex"
-          :aria-label="`Wishlist, ${wishlist.ids.length} saved`"
+          :aria-label="t('layout_ui.wishlist_summary', { count: wishlist.ids.length })"
           active-class="!border-accent !text-accent"
         >
           <Icon
@@ -52,7 +52,7 @@
           aria-haspopup="dialog"
           @click="openCart"
           class="hidden h-10 !px-3 lg:inline-flex"
-          :aria-label="`Cart, ${cart.count} items, ${money.format(cart.total)}`"
+          :aria-label="t('layout_ui.cart_summary', { count: cart.count, total: money.format(cart.total) })"
         >
           <span class="relative">
             <Icon
@@ -90,6 +90,7 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
 const cart = useCartStore();
 const wishlist = useWishlistStore();
 const money = useMoney();

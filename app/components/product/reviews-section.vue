@@ -7,8 +7,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="reviews-title"
-        eyebrow="Customer evidence"
-        title="Customer ratings & reviews"
+        :eyebrow="t('product_ui.customer_evidence')"
+        :title="t('product_ui.reviews_title')"
       />
 
       <div class="grid gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
@@ -18,11 +18,15 @@
               <span class="font-display text-5xl font-semibold">{{
                 count ? score.toFixed(2) : "–"
               }}</span>
-              <span class="pb-1 meta">out of 5</span>
+              <span class="pb-1 meta">{{ t("product_ui.out_of_5") }}</span>
             </p>
             <p
               class="flex"
-              :aria-label="`${count ? score.toFixed(2) : 0} out of 5 stars`"
+              :aria-label="
+                t('product_ui.score_of_5_stars', {
+                  score: count ? score.toFixed(2) : 0,
+                })
+              "
             >
               <Icon
                 v-for="n in 5"
@@ -38,9 +42,13 @@
               />
             </p>
             <p class="meta">
-              {{ count }} {{ count === 1 ? "review" : "reviews" }}
+              {{
+                t(count === 1 ? "product_ui.review_one" : "product_ui.review_many", {
+                  count,
+                })
+              }}
             </p>
-            <ul v-if="count" class="space-y-1.5" aria-label="Rating breakdown">
+            <ul v-if="count" class="space-y-1.5" :aria-label="t('product_ui.rating_breakdown')">
               <li
                 v-for="(n, i) in distribution"
                 :key="i"
@@ -89,7 +97,7 @@
               <p
                 v-if="r.rating"
                 class="flex"
-                :aria-label="`${r.rating} out of 5 stars`"
+                :aria-label="t('product_ui.score_of_5_stars', { score: r.rating })"
               >
                 <Icon
                   v-for="n in 5"
@@ -108,8 +116,8 @@
 
         <LazyVEmptyState
           v-else
-          title="No reviews yet"
-          description="Be the first to rate this product and help other customers decide."
+          :title="t('product_ui.no_reviews_title')"
+          :description="t('product_ui.no_reviews_description')"
         />
       </div>
     </div>
@@ -118,6 +126,8 @@
 
 <script lang="ts" setup>
 import type { ReviewSummary } from "~/types/product";
+
+const { t } = useI18n();
 
 const props = defineProps<{ productId: string; reviews?: ReviewSummary }>();
 

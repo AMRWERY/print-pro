@@ -4,7 +4,7 @@
       v-if="visible"
       variant="icon"
       class="fixed bottom-24 end-6 z-30 h-11 w-11 bg-surface/90 shadow-lg shadow-black/20 backdrop-blur"
-      aria-label="Back to top"
+      :aria-label="t('common_ui.back_to_top')"
       @click="toTop"
     >
       <Icon
@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
 const { y } = useWindowScroll();
 
 const visible = computed(() => y.value > 600);

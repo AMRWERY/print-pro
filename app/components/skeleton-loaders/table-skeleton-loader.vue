@@ -1,5 +1,5 @@
 <template>
-  <div class="card overflow-hidden" aria-busy="true" aria-label="Loading table">
+  <div class="card overflow-hidden" aria-busy="true" :aria-label="t('skeleton_ui.loading_table')">
     <div
       class="flex items-center gap-4 border-b border-line bg-raised/50 px-4 py-3"
     >
@@ -25,6 +25,8 @@
 </template>
 
 <script lang="ts" setup>
+const { t } = useI18n();
+
 // Placeholder for data tables: a header row plus `rows` body rows of `cols` cells.
 withDefaults(defineProps<{ rows?: number; cols?: number }>(), {
   rows: 5,

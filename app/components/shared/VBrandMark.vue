@@ -2,7 +2,7 @@
   <nuxt-link-locale
     to="/"
     class="flex items-center gap-2.5"
-    aria-label="PrintPro — home"
+    :aria-label="t('common_ui.brand_home')"
   >
     <span
       class="grid h-9 w-9 place-items-center rounded-control bg-accent text-onaccent"
@@ -15,12 +15,12 @@
         >Print<span class="text-accent">Pro</span></span
       >
       <span class="block meta tracking-widest"
-        >Printers &amp; Copiers</span
+        >{{ t("common_ui.brand_tagline") }}</span
       >
     </span>
   </nuxt-link-locale>
 </template>
 
 <script lang="ts" setup>
-
+const { t } = useI18n();
 </script>

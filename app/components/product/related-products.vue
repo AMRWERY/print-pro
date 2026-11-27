@@ -3,8 +3,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="related-title"
-        eyebrow="Recommended pairings"
-        title="Related products & supplies"
+        :eyebrow="t('product_ui.recommended_pairings')"
+        :title="t('product_ui.related_title')"
       >
         <LazyVButton
           variant="tertiary"

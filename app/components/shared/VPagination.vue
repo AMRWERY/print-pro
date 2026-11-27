@@ -1,22 +1,32 @@
+
 <template>
   <nav
     v-if="total > 0"
-    :aria-label="label"
+    :aria-label="label ?? t('common_ui.pagination')"
     class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-6"
   >
-    <p class="meta" aria-live="polite">
-      Displaying
-      <span class="text-paper">{{ rangeStart }}–{{ rangeEnd }}</span> of
-      <span class="text-paper">{{ total }}</span> {{ itemLabel }}
-    </p>
+    <i18n-t
+      keypath="common_ui.pagination_displaying"
+      tag="p"
+      class="meta"
+      aria-live="polite"
+    >
+      <template #range
+        ><span class="text-paper">{{ rangeStart }}–{{ rangeEnd }}</span></template
+      >
+      <template #total
+        ><span class="text-paper">{{ total }}</span></template
+      >
+      <template #items>{{ itemLabel ?? t("common_ui.verified_items") }}</template>
+    </i18n-t>
 
     <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
       <div
         class="flex items-center gap-2"
         role="group"
-        aria-label="Items per page"
+        :aria-label="t('common_ui.items_per_page')"
       >
-        <span class="eyebrow">Show</span>
+        <span class="eyebrow">{{ t("btn.show") }}</span>
         <LazyVButton
           variant="plain"
           v-for="n in perPageOptions"
@@ -66,7 +76,7 @@
                 : 'border-line text-mute hover:border-mute hover:text-paper'
             "
             :aria-current="p === page ? 'page' : undefined"
-            :aria-label="`Page ${p}`"
+            :aria-label="t('common_ui.page_n', { n: p })"
             @click="go(p)"
           >
             {{ p }}
@@ -80,7 +90,7 @@
             :disabled="page >= pageCount"
             @click="go(page + 1)"
           >
-            {{ t("btn.Next") }}
+            {{ t("btn.next") }}
             <Icon
               name="lucide:chevron-right"
               size="14"
@@ -123,8 +133,6 @@ const props = withDefaults(
     showPerPage: false,
     perPageOptions: () => [12, 24, 48],
     siblings: 1,
-    itemLabel: "verified items",
-    label: "Pagination",
   },
 );
 

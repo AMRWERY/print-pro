@@ -48,7 +48,7 @@
               <media-placeholder
                 v-else
                 :icon="p.icon"
-                :label="`${p.name} image`"
+                :label="t('cart_ui.product_image', { name: p.name })"
                 size="28"
                 class="h-full w-full"
               />
@@ -75,7 +75,7 @@
             <LazyVButton
               variant="icon"
               size="sm"
-              :aria-label="`Remove ${p.name} from saved items`"
+              :aria-label="t('cart_ui.remove_from_saved', { name: p.name })"
               @click="emit('remove', p.id)"
             >
               <Icon name="lucide:x" size="14" aria-hidden="true" />

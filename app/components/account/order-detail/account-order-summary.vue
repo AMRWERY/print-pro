@@ -2,47 +2,47 @@
   <aside class="space-y-4">
     <section class="card p-5" aria-labelledby="sum-title">
       <h2 id="sum-title" class="eyebrow mb-4 flex items-center gap-2 text-mute">
-        <Icon name="lucide:receipt" size="14" aria-hidden="true" />Order summary
+        <Icon name="lucide:receipt" size="14" aria-hidden="true" />{{ t("btn.order_summary") }}
       </h2>
       <dl class="space-y-2 text-sm">
         <template v-if="source">
           <div class="flex justify-between">
-            <dt class="text-mute">Subtotal</dt>
+            <dt class="text-mute">{{ t("acct_orders.subtotal") }}</dt>
             <dd class="font-mono">
               {{ money.format(source.amounts.subtotal) }}
             </dd>
           </div>
           <div v-if="source.amounts.volume" class="flex justify-between">
-            <dt class="text-mute">Volume discount</dt>
+            <dt class="text-mute">{{ t("acct_orders.volume_discount") }}</dt>
             <dd class="font-mono text-success">
               −{{ money.format(source.amounts.volume) }}
             </dd>
           </div>
           <div v-if="source.amounts.voucher" class="flex justify-between">
             <dt class="text-mute">
-              {{ source.amounts.voucherLabel || "Voucher" }}
+              {{ source.amounts.voucherLabel || t("acct_orders.voucher") }}
             </dt>
             <dd class="font-mono text-success">
               −{{ money.format(source.amounts.voucher) }}
             </dd>
           </div>
           <div class="flex justify-between">
-            <dt class="text-mute">Shipping</dt>
+            <dt class="text-mute">{{ t("acct_orders.shipping") }}</dt>
             <dd class="font-mono">
               {{
                 source.amounts.shipping
                   ? money.format(source.amounts.shipping)
-                  : "Free"
+                  : t("acct_orders.free")
               }}
             </dd>
           </div>
           <div class="flex justify-between">
-            <dt class="text-mute">Tax</dt>
+            <dt class="text-mute">{{ t("acct_orders.tax") }}</dt>
             <dd class="font-mono">{{ money.format(source.amounts.tax) }}</dd>
           </div>
         </template>
         <div class="flex justify-between border-t border-line pt-3 text-base">
-          <dt class="font-semibold">Total</dt>
+          <dt class="font-semibold">{{ t("acct_orders.col_total") }}</dt>
           <dd class="title-md">{{ money.format(order.amount) }}</dd>
         </div>
       </dl>
@@ -53,7 +53,7 @@
         id="deliv-title"
         class="eyebrow mb-3 flex items-center gap-2 text-mute"
       >
-        <Icon name="lucide:map-pin" size="14" aria-hidden="true" />Delivery
+        <Icon name="lucide:map-pin" size="14" aria-hidden="true" />{{ t("acct_orders.delivery") }}
       </h2>
       <template v-if="source">
         <address class="text-sm not-italic leading-relaxed text-paper">
@@ -74,7 +74,7 @@
       </template>
       <p v-else class="text-sm text-paper">
         {{
-          order.destination || order.dispatchedFrom || "Receiving port on file"
+          order.destination || order.dispatchedFrom || t("acct_orders.receiving_port_on_file")
         }}
       </p>
     </section>

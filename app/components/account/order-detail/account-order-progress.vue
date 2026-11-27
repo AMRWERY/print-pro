@@ -1,6 +1,6 @@
 <template>
   <section class="card p-5" aria-labelledby="progress-title">
-    <h2 id="progress-title" class="eyebrow mb-4 flex items-center gap-2 text-mute"><Icon name="lucide:route" size="14" aria-hidden="true" />Progress</h2>
+    <h2 id="progress-title" class="eyebrow mb-4 flex items-center gap-2 text-mute"><Icon name="lucide:route" size="14" aria-hidden="true" />{{ t("acct_orders.progress") }}</h2>
     <ol class="space-y-4">
       <li v-for="(s, i) in steps" :key="s.key" class="relative flex gap-3">
         <span v-if="i < steps.length - 1" class="absolute start-3 top-7 h-[calc(100%-1rem)] w-px" :class="s.status === 'done' ? 'bg-accent' : 'bg-line'" aria-hidden="true" />
@@ -11,10 +11,10 @@
         <div class="min-w-0 flex-1">
           <p class="text-sm font-semibold" :class="s.status === 'queued' ? 'text-mute' : 'text-paper'">
             {{ s.title }}
-            <span class="sr-only">— {{ s.status === 'done' ? 'completed' : s.status === 'current' ? 'in progress' : 'upcoming' }}</span>
+            <span class="sr-only">— {{ s.status === 'done' ? t('acct_orders.step_completed') : s.status === 'current' ? t('acct_orders.step_in_progress') : t('acct_orders.step_upcoming') }}</span>
           </p>
           <p class="text-xs text-mute">{{ s.body }}</p>
-          <p v-if="s.at" class="mt-0.5 font-mono text-2xs text-mute">{{ s.status === 'done' ? '' : 'Est. ' }}{{ formatWhen(s.at, false) }}</p>
+          <p v-if="s.at" class="mt-0.5 font-mono text-2xs text-mute">{{ s.status === 'done' ? '' : t('acct_orders.est') + ' ' }}{{ formatWhen(s.at, false) }}</p>
         </div>
       </li>
     </ol>
@@ -28,6 +28,7 @@ import { trackingStages } from "~/data/tracking";
 import type { RequisitionOrder } from "~/types/account";
 import type { Step } from "~/types/order";
 
+const { t } = useI18n();
 const props = defineProps<{ order: RequisitionOrder }>();
 
 const { sourceOrder, now } = useAccount();
@@ -40,10 +41,10 @@ const steps = computed<Step[]>(() => {
   const reached = { processing: 1, "in-transit": 2, delivered: 3, archived: 3, recalled: 1 }[props.order.status];
   const placed = orderDate(props.order);
   const defs = [
-    ["auth", "Order authorized", "Payment cleared and the order registered."],
-    ["qa", "Checked & tested", "Items checked against their specification and tested."],
-    ["transit", "In transit", props.order.dispatchedFrom ? `Dispatched from ${props.order.dispatchedFrom}.` : "Handed to the courier."],
-    ["done", props.order.status === "recalled" ? "Refunded" : "Delivered", props.order.status === "recalled" ? "Cancelled and refunded to the original method." : "Received and signed for."],
+    ["auth", t("acct_orders.stage_auth"), t("acct_orders.stage_auth_body")],
+    ["qa", t("acct_orders.stage_qa"), t("acct_orders.stage_qa_body")],
+    ["transit", t("account.in_transit"), props.order.dispatchedFrom ? t("acct_orders.stage_dispatched_from", { place: props.order.dispatchedFrom }) : t("acct_orders.stage_handed_to_courier")],
+    ["done", props.order.status === "recalled" ? t("account.refunded") : t("account.delivered"), props.order.status === "recalled" ? t("acct_orders.stage_refunded_body") : t("acct_orders.stage_delivered_body")],
   ] as const;
   return defs.map(([key, title, body], i) => ({
     key,

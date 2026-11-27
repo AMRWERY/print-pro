@@ -14,11 +14,10 @@
           size="18"
           class="text-accent"
           aria-hidden="true"
-        />Passkey &amp; password
+        />{{ t("acct_profile.security_title") }}
       </h2>
       <p class="text-xs text-mute">
-        Demo build: your password is hashed (PBKDF2) and stored only in this
-        browser.
+        {{ t("acct_profile.security_demo_note") }}
       </p>
     </header>
 
@@ -99,9 +98,9 @@ const { start: clearDone } = useTimeoutFn(() => (done.value = false), 4000, {
 // The store checks the real password; this rule just surfaces its answer next to the field.
 const currentRule = (v: unknown) =>
   !String(v ?? "")
-    ? "Enter your current password."
+    ? t("acct_profile.current_password_required")
     : wrong.value
-      ? "That isn’t your current password. Check it and try again."
+      ? t("acct_profile.current_password_wrong")
       : true;
 
 watch(current, () => (wrong.value = false));

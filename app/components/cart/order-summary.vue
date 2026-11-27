@@ -49,7 +49,7 @@
             totals.units
               ? totals.freight
                 ? money.format(totals.freight)
-                : "FREE"
+                : t("cart_ui.free")
               : "—"
           }}
         </dd>
@@ -69,7 +69,7 @@
         <span class="eyebrow !text-paper">{{ t("cart.total_payable") }}</span>
         <span class="font-display text-3xl font-semibold" aria-live="polite"
           >{{ money.format(totals.payable) }}
-          <span class="meta">EGP</span></span
+          <span class="meta">{{ t("cart_ui.egp") }}</span></span
         >
       </p>
       <p
@@ -138,8 +138,8 @@
           }}
           {{
             totals.voucherBelowMin
-              ? `· needs ${money.format(totals.voucher?.minSubtotal ?? 0)}+`
-              : "· applied"
+              ? `· ${t("cart_ui.voucher_needs", { amount: money.format(totals.voucher?.minSubtotal ?? 0) })}`
+              : `· ${t("cart_ui.voucher_applied")}`
           }}</span
         >
         <LazyVButton
@@ -177,8 +177,9 @@
         class="text-xs"
         :disabled="!totals.units"
       >
-        <Icon name="lucide:smartphone" size="14" aria-hidden="true" />Pay with
-        {{ t("btn.vodafone_cash_instapay") }}
+        <Icon name="lucide:smartphone" size="14" aria-hidden="true" />{{
+          t("cart_ui.pay_with", { method: t("btn.vodafone_cash_instapay") })
+        }}
       </LazyVButton>
 
       <p

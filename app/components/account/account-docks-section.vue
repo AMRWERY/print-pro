@@ -7,11 +7,11 @@
         <div class="flex items-center gap-2">
           <span class="h-2 w-2 rounded-full bg-cyan" aria-hidden="true" />
           <h2 id="docks-section-title" class="title-sm sm:text-lg">
-            {{ t("home.delivery_addresses") }}
+            {{ t("account.delivery_addresses") }}
           </h2>
         </div>
         <p class="mt-0.5 text-xs text-mute">
-          {{ t("home.where_your_orders_are_delivered") }}
+          {{ t("account.where_your_orders_are_delivered") }}
         </p>
       </div>
 
@@ -67,13 +67,13 @@
           class="flex flex-wrap items-center justify-between gap-2 border-t border-line/60 pt-2 font-mono text-1xs"
         >
           <span class="text-mute">
-            {{ t("home.receiving") }}
+            {{ t("account.receiving") }}
             <span class="text-paper font-semibold">{{
               dock.securityClearance
             }}</span>
           </span>
           <span class="text-cyan">
-            {{ t("home.hours") }} {{ dock.telemetry }}
+            {{ t("account.hours") }} {{ dock.telemetry }}
           </span>
         </div>
       </article>

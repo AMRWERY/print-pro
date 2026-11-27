@@ -1,12 +1,20 @@
 <template>
   <section class="card-roomy" aria-labelledby="items-title">
     <header class="mb-4 flex flex-wrap items-center justify-between gap-3">
-      <h2 id="items-title" class="font-display text-2xl">Allocated items</h2>
+      <h2 id="items-title" class="font-display text-2xl">
+        {{ t("order_ui.allocated_items") }}
+      </h2>
       <p
         class="rounded-control border border-line px-2.5 py-1 meta"
       >
-        {{ items.length }}
-        {{ items.length === 1 ? "line item" : "line items" }} verified
+        {{
+          t(
+            items.length === 1
+              ? "order_ui.line_item_verified"
+              : "order_ui.line_items_verified",
+            { n: items.length },
+          )
+        }}
       </p>
     </header>
 
@@ -30,7 +38,7 @@
           <media-placeholder
             v-else
             :icon="i.icon"
-            :label="`${i.name} image`"
+            :label="t('order_ui.item_image', { name: i.name })"
             size="36"
             class="h-full w-full"
           />
@@ -58,14 +66,15 @@
                 {{ money.format(i.qty * i.unitPrice) }}
               </p>
               <p class="meta">
-                Qty {{ i.qty
+                {{ t("order_ui.qty", { n: i.qty })
                 }}<span v-if="i.qty > 1">
-                  · {{ money.format(i.unitPrice) }} each</span
+                  ·
+                  {{ t("order_ui.each", { price: money.format(i.unitPrice) }) }}</span
                 >
               </p>
             </div>
           </div>
-          <ul class="flex flex-wrap gap-1.5" aria-label="Key specifications">
+          <ul class="flex flex-wrap gap-1.5" :aria-label="t('order_ui.key_specifications')">
             <li v-for="s in i.specs" :key="s" class="chip">{{ s }}</li>
           </ul>
         </div>
@@ -76,6 +85,8 @@
 
 <script lang="ts" setup>
 import type { OrderItem } from "~/types/order";
+
+const { t } = useI18n();
 
 defineProps<{ items: OrderItem[] }>();
 

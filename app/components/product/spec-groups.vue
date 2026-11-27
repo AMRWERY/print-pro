@@ -3,8 +3,8 @@
     <div class="container-page space-y-8">
       <section-heading
         id="spec-title"
-        eyebrow="Specification index"
-        title="Comprehensive engineering specifications"
+        :eyebrow="t('product_ui.spec_index')"
+        :title="t('product_ui.spec_title')"
       />
       <div class="grid gap-4 md:grid-cols-2">
         <article
@@ -34,6 +34,8 @@
 
 <script lang="ts" setup>
 import type { SpecGroup } from "~/types/product";
+
+const { t } = useI18n();
 
 defineProps<{ groups: SpecGroup[] }>();
 </script>

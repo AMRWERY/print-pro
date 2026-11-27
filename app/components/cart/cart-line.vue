@@ -27,7 +27,7 @@
         <media-placeholder
           v-else
           :icon="product.icon"
-          :label="`${product.name} image`"
+          :label="t('cart_ui.product_image', { name: product.name })"
           size="40"
           class="h-full w-full"
         />
@@ -60,7 +60,7 @@
       <p v-if="line.option" class="text-sm text-mute">
         <span class="eyebrow">{{ t("cart.config") }}</span> {{ line.option }}
       </p>
-      <ul class="flex flex-wrap gap-1.5" aria-label="Key specifications">
+      <ul class="flex flex-wrap gap-1.5" :aria-label="t('cart_ui.key_specs')">
         <li v-for="s in product.specs" :key="s" class="chip">{{ s }}</li>
       </ul>
 

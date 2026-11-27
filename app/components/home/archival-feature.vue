@@ -71,7 +71,7 @@ const { t } = useI18n();
 
 const specs = [
   { label: t("home.genuine"), value: "100 %" },
-  { label: t("home.dispatch"), value: "Same day" },
-  { label: t("home.returns"), value: "Easy" },
+  { label: t("home.dispatch"), value: t("home_ui.same_day") },
+  { label: t("home.returns"), value: t("home_ui.easy") },
 ];
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section
     class="border-b border-line bg-surface"
-    aria-label="Direct manufacturer partners"
+    :aria-label="t('home.direct_manufacturer_partners')"
   >
     <div
       v-reveal:fade
@@ -24,7 +24,7 @@
             :key="copy"
             class="flex shrink-0 items-center gap-10 pe-10 font-display text-base font-semibold tracking-wider text-mute"
             :aria-hidden="copy === 2 ? true : undefined"
-            :aria-label="copy === 1 ? 'Partners' : undefined"
+            :aria-label="copy === 1 ? t('home_ui.partners') : undefined"
           >
             <li
               v-for="(p, i) in loop"

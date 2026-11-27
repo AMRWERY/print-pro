@@ -6,7 +6,7 @@
     <LazyVButton
       variant="icon"
       class="absolute end-3 top-3 z-10 h-8 w-8 bg-ink/70 backdrop-blur"
-      :aria-label="`Remove ${product.name} from comparison`"
+      :aria-label="t('compare_ui.remove_from_comparison', { name: product.name })"
       @click="emit('remove')"
     >
       <Icon name="lucide:x" size="14" aria-hidden="true" />
@@ -26,7 +26,7 @@
       <media-placeholder
         v-else
         :icon="product.icon"
-        :label="`${product.name} image`"
+        :label="t('cart_ui.product_image', { name: product.name })"
         size="56"
         class="h-32"
       />
@@ -47,7 +47,12 @@
         class="text-yellow"
         aria-hidden="true"
       />
-      {{ product.rating.toFixed(2) }} ({{ product.reviews }} reviews)
+      {{
+        t("compare_ui.rating_reviews", {
+          rating: product.rating.toFixed(2),
+          n: product.reviews,
+        })
+      }}
     </p>
 
     <div>
@@ -55,7 +60,7 @@
         {{ money.format(product.price) }}
       </p>
       <p v-if="product.lease" class="meta">
-        Lease: {{ money.format(product.lease) }} / mo
+        {{ t("compare_ui.lease_per_month", { price: money.format(product.lease) }) }}
       </p>
     </div>
     <p>
@@ -134,9 +139,9 @@ const { start } = useTimeoutFn(() => (added.value = false), 1800, {
 const acquire = async () => {
   await simulateRequest();
   cart.add(props.product.id, props.product.price);
-  toast.success("Added to cart", {
+  toast.success(t("cart_ui.added_to_cart"), {
     description: props.product.name,
-    action: { label: "View cart", to: "/cart" },
+    action: { label: t("cart_ui.view_cart"), to: "/cart" },
   });
   added.value = true;
   start();

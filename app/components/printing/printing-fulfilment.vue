@@ -2,12 +2,12 @@
   <printing-section
     id="fulfilment"
     step="05"
-    title="Packaging and Delivery"
-    stage="Stage 5/5"
+    :title="t('printing_ui.fulfilment_title')"
+    :stage="t('printing_ui.stage_of', { n: 5, total: 5 })"
   >
     <printing-choice
       v-model="config.dispatch"
-      label="Fulfilment"
+      :label="t('printing_ui.fulfilment')"
       :options="dispatches"
     >
       <template #default="{ option }">
@@ -24,7 +24,7 @@
         >
           <span class="text-mute">{{ option.note }}</span>
           <span class="font-semibold text-paper">{{
-            option.price ? money.format(option.price) : "Free"
+            option.price ? money.format(option.price) : t("printing_ui.free")
           }}</span>
         </span>
       </template>
@@ -34,6 +34,8 @@
 
 <script lang="ts" setup>
 import { dispatches } from "~/data/printing";
+
+const { t } = useI18n();
 
 const { config } = usePrintConfig();
 

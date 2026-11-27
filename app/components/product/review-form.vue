@@ -5,11 +5,14 @@
     aria-labelledby="review-form-title"
     @submit.prevent="submit"
   >
-    <h3 id="review-form-title" class="text-lg">Rate this product</h3>
+    <h3 id="review-form-title" class="text-lg">
+      {{ t("product_ui.rate_this_product") }}
+    </h3>
 
     <fieldset class="space-y-1.5">
       <legend class="text-sm font-medium">
-        Your rating <span class="text-accent" aria-hidden="true">*</span>
+        {{ t("product_ui.your_rating") }}
+        <span class="text-accent" aria-hidden="true">*</span>
       </legend>
       <div class="flex w-fit gap-0.5" @mouseleave="hovered = 0">
         <label
@@ -24,7 +27,7 @@
             name="review-rating"
             class="sr-only"
             :value="n"
-            :aria-label="`${n} out of 5 stars`"
+            :aria-label="t('product_ui.n_of_5_stars', { n })"
             :aria-invalid="ratingError ? 'true' : undefined"
             :aria-describedby="ratingError ? 'review-rating-error' : undefined"
             @change="ratingError = ''"
@@ -74,7 +77,7 @@
       :label="t('inputs.headline')"
       optional
       maxlength="80"
-      placeholder="Sum up your experience"
+      :placeholder="t('product_ui.headline_placeholder')"
     />
 
     <LazyVTextarea
@@ -87,10 +90,10 @@
       :rules="
         minLengthText(
           10,
-          'Tell other customers a little more (at least 10 characters).',
+          t('product_ui.review_min_length'),
         )
       "
-      placeholder="What did you use it for, and how did it perform?"
+      :placeholder="t('product_ui.review_placeholder')"
     />
 
     <div class="flex justify-end">
@@ -131,7 +134,7 @@ watch(
 );
 
 const submit = async () => {
-  ratingError.value = rating.value ? "" : "Choose a star rating from 1 to 5.";
+  ratingError.value = rating.value ? "" : t("product_ui.rating_required");
   const result = await validate();
   if (!result.valid || ratingError.value) {
     await nextTick();
@@ -156,7 +159,7 @@ const submit = async () => {
   resetForm();
   await nextTick();
   author.value = name;
-  toast.success("Thanks, your review is live");
+  toast.success(t("product_ui.review_thanks"));
   emit("submitted");
 };
 </script>

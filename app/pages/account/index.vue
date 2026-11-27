@@ -15,11 +15,9 @@
             @initiate-calibration="openCalibrationModal = true"
             @book-cleanroom="openCleanroomModal = true"
             @request-courier="
-              showToast(
-                'Courier request sent. We will confirm the pick-up time by phone.',
-              )
+              showToast(t('acct_ui.courier_request_sent'))
             "
-            @view-vat-dossier="openDossier('VAT INVOICE SUMMARY // Q3')"
+            @view-vat-dossier="openDossier(t('acct_ui.doc_vat_summary'))"
           />
 
           <!-- 4 Stat Metric Cards -->
@@ -39,11 +37,11 @@
             <LazyVEmptyState
               v-if="showWelcome"
               icon="lucide:sparkles"
-              eyebrow="ACCOUNT :: NEW_CUSTOMER"
-              tag="0 ORDERS"
+              :eyebrow="t('acct_ui.welcome_eyebrow')"
+              :tag="t('acct_ui.welcome_tag')"
               tag-tone="success"
-              title="Welcome to PrintPro"
-              description="Your account is ready. Add a delivery address, save products for later, or place your first order for supplies."
+              :title="t('acct_ui.welcome_title')"
+              :description="t('acct_ui.welcome_desc')"
             >
               <LazyVButton
                 variant="primary"
@@ -62,10 +60,10 @@
               :orders="currentOrders"
               @open-telemetry="openTelemetry"
               @view-waybill="
-                openDossier(`DELIVERY NOTE // ${$event.waybill || $event.id}`)
+                openDossier(t('acct_ui.doc_delivery_note', { ref: $event.waybill || $event.id }))
               "
               @view-calibration-cert="
-                openDossier(`SERVICE REPORT // ${$event.id}`)
+                openDossier(t('acct_ui.doc_service_report', { ref: $event.id }))
               "
               @reorder-consumables="reorderItems($event)"
               @view-dossier="viewOrder($event)"
@@ -116,7 +114,7 @@
           @open-crate="openTelemetry($event)"
           @open-escrow="
             showToast(
-              `Account credit available: ${money.format(currentProfile.escrowAvailable)}`,
+              t('acct_ui.credit_available_toast', { amount: money.format(currentProfile.escrowAvailable) }),
             )
           "
           @open-telemetry="openTelemetry($event)"
@@ -194,7 +192,7 @@ const openCalibrationModal = ref(false);
 const openCleanroomModal = ref(false);
 const openDockModal = ref(false);
 const openDossierModal = ref(false);
-const dossierTitle = ref("ORDER DOCUMENT");
+const dossierTitle = ref(t("acct_ui.doc_order_document"));
 const selectedOrder = ref<RequisitionOrder | null>(null);
 const editingDock = ref<ReceivingDock | null>(null);
 
@@ -316,16 +314,16 @@ const onDockSaved = (dock: ReceivingDock) => {
   docks.save(dock);
   showToast(
     isNew
-      ? `Added delivery address: ${dock.name}`
-      : `Updated delivery address: ${dock.name}`,
+      ? t("acct_ui.dock_added", { name: dock.name })
+      : t("acct_ui.dock_updated", { name: dock.name }),
   );
 };
 
-const supplyLabel: Record<string, string> = {
-  toner: "toner",
-  ink: "ink",
-  drum: "drum unit",
-};
+const supplyLabel = computed<Record<string, string>>(() => ({
+  toner: t("acct_ui.supply_short_toner"),
+  ink: t("acct_ui.supply_short_ink"),
+  drum: t("acct_ui.supply_short_drum"),
+}));
 const modelLabel: Record<string, string> = {
   "corex-laser-210": "Corex Laser 210",
   "corex-laser-450c": "Corex Laser 450 Colour",
@@ -333,10 +331,10 @@ const modelLabel: Record<string, string> = {
   "printa-tank-500": "Printa Tank 500",
   "nordjet-lf-44": 'Nordjet Large-Format 44"',
 };
-const addressLabel: Record<string, string> = {
-  "head-office": "your head office",
-  branch: "your branch office",
-};
+const addressLabel = computed<Record<string, string>>(() => ({
+  "head-office": t("acct_ui.your_head_office"),
+  branch: t("acct_ui.your_branch_office"),
+}));
 
 const onCalibrationSubmitted = (details: {
   standard: string;
@@ -345,14 +343,14 @@ const onCalibrationSubmitted = (details: {
   station: string;
 }) => {
   showToast(
-    `Supplies order placed: ${details.tolerance} × ${supplyLabel[details.standard] ?? details.standard}`,
+    t("acct_ui.supplies_order_placed", { qty: details.tolerance, supply: supplyLabel.value[details.standard] ?? details.standard }),
   );
   auditLogs.value.unshift({
     id: `audit-${Date.now()}`,
-    title: "SUPPLIES ORDER PLACED",
-    timestamp: "JUST NOW",
-    summary: `Supplies for ${modelLabel[details.substrate] ?? details.substrate} ordered for delivery to ${addressLabel[details.station] ?? details.station}.`,
-    hash: `ORDER REF: PP-${Date.now().toString(16).slice(-5).toUpperCase()}`,
+    title: t("acct_ui.audit_supplies_title"),
+    timestamp: t("acct_ui.audit_just_now"),
+    summary: t("acct_ui.audit_supplies_summary", { model: modelLabel[details.substrate] ?? details.substrate, address: addressLabel.value[details.station] ?? details.station }),
+    hash: t("acct_ui.audit_order_ref", { ref: `PP-${Date.now().toString(16).slice(-5).toUpperCase()}` }),
     category: "qa",
     severity: "verified",
   });
@@ -364,19 +362,19 @@ const onCleanroomBooked = (details: {
   slot: string;
 }) => {
   showToast(
-    `Service visit booked at ${details.location} on ${details.date} (${details.slot})`,
+    t("acct_ui.visit_booked", { location: details.location, date: details.date, slot: details.slot }),
   );
 };
 
 // Cart integrations: items resolve through the shared product lookup
 const addToCartItem = (item: RegistryItem) => {
   cart.add(item.id, item.price);
-  showToast(`Added ${item.name} to your cart`);
+  showToast(t("acct_ui.added_to_cart", { name: item.name }));
 };
 
 const addCompanionItem = (prod: CompanionProduct) => {
   cart.add(prod.id, prod.price);
-  showToast(`Added ${prod.name} to your cart`);
+  showToast(t("acct_ui.added_to_cart", { name: prod.name }));
 };
 
 const reorderItems = (order: RequisitionOrder) => {
@@ -391,24 +389,23 @@ const reorderItems = (order: RequisitionOrder) => {
   }
   showToast(
     added
-      ? `Re-ordered items from ${order.id}`
-      : `Items from ${order.id} are no longer available`,
+      ? t("acct_ui.reordered", { id: order.id })
+      : t("acct_ui.reorder_unavailable", { id: order.id }),
   );
 };
 
-const crumbs = [
-  { label: "Account", to: "/account" },
-  { label: "Dashboard" },
-  { label: "Account dashboard" },
-];
+const crumbs = computed(() => [
+  { label: t("acct_ui.crumb_account"), to: "/account" },
+  { label: t("acct_ui.crumb_dashboard") },
+  { label: t("acct_ui.account_dashboard") },
+]);
 
 definePageMeta({
   layout: "account",
 });
 
 useSeoMeta({
-  title: "Account dashboard — PrintPro",
-  description:
-    "Your orders, delivery tracking, saved items and delivery addresses.",
+  title: () => `${t("acct_ui.account_dashboard")} — PrintPro`,
+  description: () => t("acct_ui.dashboard_seo_desc"),
 });
 </script>

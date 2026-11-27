@@ -6,7 +6,7 @@
         class="fixed inset-0 z-50 lg:hidden"
         role="dialog"
         aria-modal="true"
-        aria-label="Filter products"
+        :aria-label="t('catalog_ui.filter_products')"
       >
         <div class="modal-backdrop" @click="emit('close')" />
         <div
@@ -15,10 +15,10 @@
           <div
             class="flex items-center justify-between border-b border-line px-4 py-3"
           >
-            <h2 class="font-display text-xl">Filters</h2>
+            <h2 class="font-display text-xl">{{ t("btn.filters") }}</h2>
             <LazyVButton
               variant="icon"
-              aria-label="Close filters"
+              :aria-label="t('catalog_ui.close_filters')"
               @click="emit('close')"
             >
               <Icon name="lucide:x" size="18" aria-hidden="true" />

@@ -46,9 +46,11 @@
 
       <div class="space-y-2">
         <component :is="as" :id="titleId" class="title-md text-balance">{{
-          title
+          title ?? t("common_ui.empty_title")
         }}</component>
-        <p class="mx-auto max-w-sm text-sm text-mute">{{ description }}</p>
+        <p class="mx-auto max-w-sm text-sm text-mute">
+          {{ description ?? t("common_ui.empty_description") }}
+        </p>
       </div>
 
       <div
@@ -114,13 +116,12 @@ withDefaults(
   }>(),
   {
     icon: "lucide:search-x",
-    title: "No products match your filters",
-    description:
-      "Try removing a filter or widening the price range. Can’t find a specific model? Our team can source it.",
     tagTone: "neutral",
     as: "h2",
   },
 );
+
+const { t } = useI18n();
 
 const titleId = useId();
 

@@ -1,5 +1,5 @@
 <template>
-  <LazyVStepper :n="3" title="Payment" :summary="summary">
+  <LazyVStepper :n="3" :title="t('checkout_ui.payment')" :summary="summary">
     <form class="space-y-5" novalidate @submit.prevent="state.next()">
       <p class="callout" role="note">
         <Icon
@@ -8,12 +8,11 @@
           class="mt-0.5 shrink-0"
           aria-hidden="true"
         />
-        Demo checkout: no payment is processed and card details are never stored
-        or sent anywhere.
+        {{ t("checkout_ui.demo_notice") }}
       </p>
 
       <fieldset class="grid gap-2 sm:grid-cols-3">
-        <legend class="sr-only">Payment method</legend>
+        <legend class="sr-only">{{ t("checkout_ui.payment_method") }}</legend>
         <LazyVRadioInput
           v-for="m in paymentMethods"
           :key="m.id"
@@ -36,7 +35,7 @@
         v-if="state.form.payment === 'card'"
         class="grid gap-4 sm:grid-cols-2"
       >
-        <legend class="sr-only">Card details</legend>
+        <legend class="sr-only">{{ t("checkout_ui.card_details") }}</legend>
         <LazyVInput
           v-model="f.cardName"
           class="sm:col-span-2"
@@ -101,7 +100,7 @@
           class="flex flex-wrap items-center justify-between gap-3 rounded-control border border-line bg-surface p-3"
         >
           <div>
-            <p class="eyebrow">Send to this Vodafone Cash number</p>
+            <p class="eyebrow">{{ t("checkout_ui.send_to_vodafone") }}</p>
             <a
               :href="`tel:${VODAFONE_CASH_NUMBER}`"
               dir="ltr"
@@ -130,7 +129,7 @@
             :src="instapayQr"
             width="176"
             height="176"
-            alt="InstaPay QR code. Scan it with your banking app to pay."
+            :alt="t('checkout_ui.instapay_qr_alt')"
             class="h-44 w-44 shrink-0 rounded-control bg-white p-2"
           />
           <div
@@ -139,25 +138,26 @@
             aria-hidden="true"
           />
           <div class="space-y-2">
-            <p class="eyebrow">Scan with your InstaPay app</p>
+            <p class="eyebrow">{{ t("checkout_ui.scan_with_instapay") }}</p>
             <ol class="list-decimal space-y-1 ps-4">
-              <li>Open InstaPay or your bank's app and choose Scan QR.</li>
-              <li>Point the camera at this code and confirm the amount.</li>
-              <li>Place the order so we can match your transfer.</li>
+              <li>{{ t("checkout_ui.instapay_step_1") }}</li>
+              <li>{{ t("checkout_ui.instapay_step_2") }}</li>
+              <li>{{ t("checkout_ui.instapay_step_3") }}</li>
             </ol>
             <p class="text-xs">
-              Or send to
-              <span dir="ltr" class="font-mono text-paper">{{
-                INSTAPAY_ADDRESS
-              }}</span>
+              <i18n-t keypath="checkout_ui.or_send_to" tag="span">
+                <template #address>
+                  <span dir="ltr" class="font-mono text-paper">{{
+                    INSTAPAY_ADDRESS
+                  }}</span>
+                </template>
+              </i18n-t>
             </p>
           </div>
         </div>
 
         <p>
-          Place the order and we'll email you the transfer reference to quote.
-          Your items are reserved for 5 business days while we wait for the
-          transfer.
+          {{ t("checkout_ui.transfer_notice") }}
         </p>
       </div>
 
@@ -203,7 +203,9 @@ const method = computed(
 
 const summary = computed(() =>
   f.payment === "card"
-    ? `Card ending ${f.cardNumber.replace(/\D/g, "").slice(-4) || "••••"}`
+    ? t("checkout_ui.card_ending", {
+        digits: f.cardNumber.replace(/\D/g, "").slice(-4) || "••••",
+      })
     : method.value.label,
 );
 </script>

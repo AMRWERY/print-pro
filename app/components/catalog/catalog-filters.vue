@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex items-center justify-between pb-3">
-      <h2 class="eyebrow !text-paper">Filters</h2>
+      <h2 class="eyebrow !text-paper">{{ t("btn.filters") }}</h2>
       <LazyVButton
         variant="plain"
         v-if="catalog.chips.length"
@@ -22,11 +22,11 @@
       hide-label
       icon="lucide:search"
       autocomplete="off"
-      placeholder="Filter by name, model or SKU"
+      :placeholder="t('inputs.filter_by_name_model_or_sku')"
       input-class="truncate"
     />
 
-    <filter-group title="Categories">
+    <filter-group :title="t('catalog_ui.categories')">
       <filter-option
         v-for="c in catalog.categories"
         :key="c.key"
@@ -47,7 +47,7 @@
       />
     </filter-group>
 
-    <filter-group title="Brand">
+    <filter-group :title="t('catalog_ui.brand')">
       <filter-option
         v-for="b in visibleBrands"
         :key="b.name"
@@ -71,11 +71,11 @@
       </LazyVButton>
     </filter-group>
 
-    <filter-group title="Price (EGP)">
+    <filter-group :title="t('catalog_ui.price_egp')">
       <price-filter />
     </filter-group>
 
-    <filter-group title="Availability">
+    <filter-group :title="t('catalog_ui.availability')">
       <filter-option
         v-for="d in catalog.dispatches"
         :key="d.key"
@@ -86,7 +86,7 @@
       />
     </filter-group>
 
-    <filter-group title="Customer rating">
+    <filter-group :title="t('catalog_ui.customer_rating')">
       <div class="space-y-1">
         <LazyVRadioInput
           v-for="r in ratingOptions"
@@ -104,7 +104,7 @@
               class="text-yellow"
               aria-hidden="true"
             />
-            <span>{{ r }} &amp; up</span>
+            <span>{{ t("catalog_ui.rating_and_up", { n: r }) }}</span>
           </span>
         </LazyVRadioInput>
 
@@ -128,8 +128,7 @@
         class="mt-0.5 shrink-0 text-success"
         aria-hidden="true"
       />
-      Every machine is tested before dispatch and covered by the manufacturer
-      warranty.
+      {{ t("catalog_ui.tested_warranty_note") }}
     </p>
   </div>
 </template>

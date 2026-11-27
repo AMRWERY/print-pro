@@ -15,7 +15,7 @@
       v-if="!ready && route.query.order"
       class="space-y-4"
       aria-busy="true"
-      aria-label="Loading your order"
+      :aria-label="t('order_ui.loading_order')"
     >
       <LazyVSkeletonLoader class="h-40" />
 
@@ -46,9 +46,9 @@
     <LazyVEmptyState
       v-else-if="ready && !route.query.order"
       icon="lucide:package-search"
-      eyebrow="QUERY :: TRACKING_IDLE"
-      tag="AWAITING ID"
-      title="Enter an order number to start"
+      :eyebrow="t('track_ui.idle_eyebrow')"
+      :tag="t('track_ui.idle_tag')"
+      :title="t('track_ui.idle_title')"
       :description="t('orders.track_idle_description', 'Your order number and PIN are on the confirmation page. Orders placed in this tab also appear above.')"
     >
       <LazyVButton variant="primary" to="/products">{{
@@ -73,11 +73,11 @@ const router = useRouter();
 const orders = useOrderStore();
 const auth = useAuthStore();
 
-const crumbs = [
-  { label: "Index", to: "/" },
-  { label: "Orders", to: "/account/orders" },
-  { label: "Track order" },
-];
+const crumbs = computed(() => [
+  { label: t("track_ui.crumb_index"), to: "/" },
+  { label: t("track_ui.crumb_orders"), to: "/account/orders" },
+  { label: t("track_ui.crumb_track_order") },
+]);
 
 /** Why a lookup came back empty: the API being unreachable is not "no such order". */
 const notFoundMessage = () =>
@@ -136,8 +136,8 @@ onMounted(async () => {
 });
 
 useSeoMeta({
-  title: "Track Your Order",
-  description: "Check where your order is and what happens next.",
+  title: () => t("track_ui.seo_title"),
+  description: () => t("track_ui.seo_description"),
   robots: "noindex",
 });
 </script>
